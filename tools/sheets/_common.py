@@ -163,3 +163,70 @@ def si8271_cell(sh, ref, UX, UY, vin, cdec, r_on, r_off, gate, cvdd2, rail="15V_
     sh.junction(xf, YB)
     sh.pwr_flag(xf, YB + g(2), 180)       # switch node: GND2 of the high-side driver
     return u
+
+
+# --- shunt amplifier cell (sheet 4, x4) --------------------------------------------------------------
+def shunt_amp_cell(sh, ref, unit, UX, UY, pins, r_in, r_bias, c_bias, r_gnd, r_fb, c_fb, r_out, c_out,
+                   inp, out, bias="+2V5_BIAS"):
+    """One op-amp unit of the current measurements, as on PDF page 4, op-amp at (UX, UY);
+    pins = (+, -, output) pin numbers of the unit.
+
+    + node: r_in (pin 1; pin 2 = global label `inp`, the shunt signal), r_bias (pin 1) and c_bias
+    (pin 2) to `bias`. - node: r_gnd (pin 1; pin 2 GND), r_fb (pin 2) and c_fb (pin 2) to the
+    output. Output: r_out (pin 2) -> global label `out` with c_out (pin 1) to GND."""
+    u = sh.place(sym(ref), ref, UX, UY, unit=unit, value=sh_value(ref))
+    INP, INN, OUT = (u.pin(n) for n in pins)
+    xn = UX - g(10)                              # input node column (+ goes up, - goes down)
+    # + input
+    _, rl, rr = horiz2(sh, "R", r_in, UX - g(17), INP[1], sh_value(r_in), left=2)
+    sh.wire(rr, INP)
+    glabel_left(sh, inp, rl, 3)
+    YA, YC = UY - g(11), UY - g(18)              # r_bias row, c_bias row
+    xb = UX + g(9)
+    sh.wire((xn, INP[1]), (xn, YC))
+    sh.junction(xn, INP[1])
+    _, rl, rr = horiz2(sh, "R", r_bias, UX, YA, sh_value(r_bias), left=1)
+    sh.wire((xn, YA), rl)
+    sh.junction(xn, YA)
+    sh.wire(rr, (xb, YA), (UX + g(15), YA))
+    sh.junction(xb, YA)
+    power_at(sh, bias, (UX + g(15), YA), "right")
+    _, cl, cr = _hcap(sh, c_bias, UX, YC)
+    sh.wire((xn, YC), cl)
+    sh.wire(cr, (xb, YC), (xb, YA))
+    # - input and feedback
+    YF, YG = UY + g(11), UY + g(18)              # r_fb row, c_fb row
+    xo = UX + g(10)
+    sh.wire(INN, (xn, INN[1]), (xn, YG))
+    _, rl, rr = horiz2(sh, "R", r_gnd, UX - g(17), YF, sh_value(r_gnd), left=2)
+    sh.wire(rr, (xn, YF))
+    sh.junction(xn, YF)
+    sh.wire(rl, left(rl, 3))
+    power_at(sh, "GND", left(rl, 3), "left")
+    _, rl, rr = horiz2(sh, "R", r_fb, UX, YF, sh_value(r_fb), left=2)
+    sh.wire((xn, YF), rl)
+    sh.wire(rr, (xo, YF))
+    sh.junction(xo, YF)
+    _, cl, cr = _hcap(sh, c_fb, UX, YG)
+    sh.wire((xn, YG), cl)
+    sh.wire(cr, (xo, YG), (xo, OUT[1]))
+    sh.junction(xo, OUT[1])
+    # output filter
+    _, rl, rr = horiz2(sh, "R", r_out, UX + g(17), OUT[1], sh_value(r_out), left=2)
+    sh.wire(OUT, rl)
+    xq = UX + g(26)
+    sh.wire(rr, (xq, OUT[1]), (UX + g(29), OUT[1]))
+    sh.junction(xq, OUT[1])
+    sh.glabel(out, UX + g(29), OUT[1], 0)
+    _, ct, cb = vert2(sh, "C", c_out, xq, OUT[1] + g(7), sh_value(c_out), top=1)
+    sh.wire((xq, OUT[1]), ct)
+    sh.wire(cb, down(cb, 2))
+    power_at(sh, "GND", down(cb, 2), "down")
+    return u
+
+
+def _hcap(sh, ref, x, y):
+    """Horizontal capacitor with pin 2 on the left, reference above and value below the plates."""
+    fa = {0: 0, 90: 270, 180: 0, 270: 90}[_two_pin_rot("C", 2, "left")]
+    return horiz2(sh, "C", ref, x, y, sh_value(ref), left=2,
+                  ref_at=(x, y - 3.81, fa, None), value_at=(x, y + 3.81, fa, None))
