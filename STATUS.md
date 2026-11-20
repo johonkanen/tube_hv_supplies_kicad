@@ -9,7 +9,44 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 2 Footprints | **done** 2026-11-20 (Opus 5.5): 158/158 parts fit the IPC pads, worst residual 0.039 mm (pcbnew placement 0.039 mm); pin order checked (J1 numbering mirrored, finding 12; ADC1-3 finding 6 confirmed) |
 | 3 PCB | **done** 2026-11-20 (Opus 5.5, two sessions): board generated, Proteus copper 0 shorts / 0 orphans / 0 opens, check_board OK, make_pcb reproducible; pad sizes option A2 (user): Proteus pads on U1 U2 ADC1-3 DRV5 DRV6 J1, KiCad elsewhere → DRC 0 shorts / 0 clearance / 0 mask bridges / 0 unconnected / 0 parity, copper after zone fill 0 / 0 / 0 |
 | 4 Verification | **done** 2026-11-20 (Fable 5.2, fresh session), 1 pending user decision (J2 pads, decided in Phase 5): ipc356_diff OK (574 / 574 records, 113 nets 1:1); gerber round trip: all four layers equal to Proteus outside the pad shapes except one 0.73 mm² GND-plane web at J2 on In2.Cu (KiCad pads on J2), 0 uncovered draws / flashes, drills 247 = 247; PDF re-read vs IPC: no disagreement; both checks in check_all.sh and negative-tested |
+| After 5: net rename | **done** 2026-11-20 (Opus 5.5): user decision – `+2V5_BIAS` → `+1V0_BIAS` in the KiCad design through `NET_ALIASES` (finding 1); the Proteus files keep `+2V5_BIAS`; **ALL CHECKS PASSED** (18 steps). HV supplies v2 is not installed and will be redone: this conversion is the starting point for the redesign |
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5): user decisions applied – Proteus pads on J2 and on the TO-220s Q3 Q4 Q7 Q8 (1.524 × 2.54 rounded rectangle from the gerbers, drill 1.016), J1 / J2 all round, reference texts by `place_refdes`; round trip 0 other / 0 clearance (roundtrip_pending.py removed); new `check_proteus_pads.py`; DRC 0 errors except 20 accepted courtyards (30 violations); **ALL CHECKS PASSED** (18 steps). The board stays generated |
+
+**HV supplies v2 is not installed and will be redone anyway (user, 2026-11-20).** This conversion is
+only the starting point for the redesign; the findings below are input for it.
+
+## After Phase 5 – `+2V5_BIAS` renamed to `+1V0_BIAS` – done (Opus 5.5, 2026-11-20)
+
+User decision (finding 1). The circuit checked again: REF1 is `ISL21010CFH315Z-TK` (part map, PDF
+page 5), the 1.5 V version (ISL21010 ordering code `-15`). Its output (net #00194) feeds R74 220 R to the
+rail, R73 470 R to GND: 1.5 × 470 / 690 = **1.02 V** unloaded. The rail also feeds the four 6.8 k bias
+resistors R54 R59 R64 R69 (each 6.8 k + 330 R to a shunt at about 0 V, about 1.8 k together), which pull
+it to about 0.94 V. `+1V0_BIAS` (the coordinating session's name) fits; no other value is clearly better.
+
+Mechanism: the existing p2k key **`NET_ALIASES = {"+2V5_BIAS": "+1V0_BIAS"}`** in `p2k_config.py`
+(as `GND=POWER` → `GND` on other boards). `p2k ipc356` applies it when it parses the IPC, so the
+reference files (`reference/*`, `net_raw` keeps `+2V5_BIAS`) and every check that reads the IPC nets
+see `+1V0_BIAS`: check_symbols (power symbol name must be an IPC net name), compare_netlists,
+check_board, assign_nets, gerber_roundtrip (labels). ipc356_diff and DRC parity match nets by pad sets
+(names are not compared). `ipc356 --check` fails if the alias source is not in the IPC, if the target
+collides with an IPC net, or if reference/ is stale. No board-local mapping was needed.
+
+Changed: `p2k_config.py` (NET_ALIASES), `tools/gen_symbols.py` (SUPPLIES), `tools/sheets/_common.py`
+(bias default), `tools/sheets/sheet04.py` / `sheet05.py`; regenerated `reference/*`,
+`lib/tube_hv_supplies.kicad_sym`, sheets 4 and 5 (diff = the name only), the board (`tools/make_pcb.sh`;
+diff = the net name only), `reports/roundtrip/roundtrip.txt`, renders of sheets 4 and 5. Net
+`+1V0_BIAS` has the same 11 pins as IPC `+2V5_BIAS` (C22-1 C44-1 C45-1 C47-1 C48-1 R54-2 R59-2 R64-2
+R69-2 R73-1 R74-2) and 3 vias in every check.
+
+Negative tests (in place, restored with `git checkout`):
+
+| change | result |
+|---|---|
+| `NET_ALIASES = {}` | `ipc356 --check` FAIL (reference/ stale); after `p2k ipc356`: `check_symbols` FAIL "power symbol +1V0_BIAS is not an IPC net name"; compare_netlists only warns ("name hint: KiCad net +1V0_BIAS = IPC net +2V5_BIAS", p2k candidate 27); check_board, assign_nets, drc, ipc356_diff, round trip pass (pin-based) |
+| source typo `{"+2V5_BIA": ...}` | `ipc356 --check` FAIL "alias source net '+2V5_BIA' not in IPC" |
+| target typo `{...: "+1V0_BAIS"}` | `ipc356 --check` FAIL (stale); after regenerating: `check_symbols` FAIL "power symbol +1V0_BIAS is not an IPC net name" |
+| target collides `{...: "3V3"}` | `ipc356 --check` FAIL "alias target '3V3' collides", "net names not unique after aliasing" |
+| KiCad side typo `+1V0_BIA` in gen_symbols SUPPLIES | `gen_symbols --check` FAIL (out of date); after regenerating: `check_symbols` FAIL "power symbol +1V0_BIA is not an IPC net name" |
 
 ## Phase 5 – clean-up – done (Opus 5.5, 2026-11-20)
 
@@ -899,7 +936,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (Phase 5 done; 18 steps):
+`tools/check_all.sh`, 2026-11-20 (after the `+1V0_BIAS` rename; 18 steps):
 
 ```
 == KiCad environment
@@ -1017,6 +1054,9 @@ Reported, not fixed (PLAN.md section 5).
    1.5 x 470 / 690 = 1.02 V, not 2.5 V. So the net name, the part or the divider is stale. Not
    aliased: renaming the net is a user decision (tube_psu renamed its bias net to the real
    voltage, `+2V5_BIAS` -> `+1V65_BIAS`).
+   **Done (user decision 2026-11-20): renamed `+1V0_BIAS`** in the KiCad design through
+   `NET_ALIASES` (section "After Phase 5"); the Proteus IPC / gerbers keep `+2V5_BIAS`. The divider
+   is still the redesign's question (a 1.0 V rail from a 1.5 V reference).
 2. **15 V supply "Not yet complete":** PDF page 5 joins the gate drivers' `15V` label to
    `15V_boost` (J1-39/40) with the note "Not yet complete". The board is built with one net,
    `15V_BOOST`. Note for the redesign.
@@ -1206,8 +1246,21 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     candidate 21's gerber pads) directly.
 26. `place_refdes` puts 4 references (R52 R54 R69 R74) on the Fab layer only: dense 0402 groups. Accepted
     (user default); a smaller third size or placement over the part body could keep them on the silk.
+27. **`compare_netlists` only warns when a named net differs in name** ("name hint"): with the
+    `+2V5_BIAS` → `+1V0_BIAS` alias removed it still says OK (pins match); check_symbols catches it here
+    only because the net is a power symbol. A strict option (fail when a KiCad net that is not
+    auto-named matches an IPC net that is not `#00xxx` under another name) would guard renamed labels too.
+    (Candidate 1, the empty `Net aliases:` header, no longer shows on this board.)
 
 ## Decisions
+
+- **User decisions, 2026-11-20 (through the coordinating session), after Phase 5:**
+  1. **Rename `+2V5_BIAS` to `+1V0_BIAS`** (finding 1; REF1 1.5 V into R74 220 / R73 470 → about
+     1.02 V). Done in the KiCad design through `NET_ALIASES = {"+2V5_BIAS": "+1V0_BIAS"}`
+     (p2k_config.py, the existing p2k mechanism); the Proteus IPC / gerbers keep `+2V5_BIAS` and every
+     check still matches the net 1:1 by pins.
+  2. **HV supplies v2 is not installed and will be redone anyway; this conversion is only the starting
+     point for the redesign.**
 
 - **Phase 5 user decisions (user, 2026-11-20, through the coordinating session):**
   1. **J2: Proteus pads** (J2 in `PROTEUS_PADS`; the round trip is then clean); `tools/roundtrip_pending.py`
@@ -1269,6 +1322,7 @@ Shared-tool limitations met on this board, with the board-local workaround used.
   `N5V_OUT`). They can still be renamed before any Phase 1 sheet exists.
 - Sheet names chosen from the page content (no title blocks).
 - `NET_ALIASES` empty (no `=POWER` names; `+2V5_BIAS` kept until the user decides, finding 1).
+  (Superseded 2026-11-20: `{"+2V5_BIAS": "+1V0_BIAS"}`, user decision.)
 - **L1 / L3 drawn as off-board parts** (symbol `L_OFFBOARD`, excluded from the board and the
   netlist comparison) between their terminal pairs, as on page 1; the netlist stays equal to
   the IPC. Phase 2 lists them in `OFF_BOARD_PARTS`.

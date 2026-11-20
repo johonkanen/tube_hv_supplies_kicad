@@ -34,6 +34,12 @@ KiCad's gerbers equal the Proteus gerbers on all four copper layers and in the d
 pad shapes of the KiCad-pad parts. `tools/check_all.sh` prints ALL CHECKS PASSED (18 steps).
 The board is still generated: hand edits in KiCad start when the user stops the generation
 (STATUS.md "Phase 5"). Open, report-only: the design findings in STATUS.md.
+After Phase 5 the bias rail `+2V5_BIAS` was renamed `+1V0_BIAS` in the KiCad design (user decision:
+REF1 is the 1.5 V ISL21010 into a 220 / 470 divider, about 1.0 V); the Proteus files keep the old name
+and `p2k_config.NET_ALIASES` maps it for every check.
+
+**HV supplies v2 is not installed and will be redone anyway: this conversion is only the starting point
+for the redesign** (user, 2026-11-20).
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 
