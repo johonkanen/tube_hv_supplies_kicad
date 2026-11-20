@@ -21,13 +21,13 @@ board is in `p2k_config.py`.
 
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
-Phases 0-2 are done: schematic redrawn on 6 sheets (158 parts, netlist equal to the IPC, ERC
+Phases 0-3 are done: schematic redrawn on 6 sheets (158 parts, netlist equal to the IPC, ERC
 0 errors), footprints assigned (`lib/footprint_map.csv`, `lib/tube_hv_supplies.pretty`; every
-part fits the IPC pads within 0.05 mm). Phase 3 (PCB) is generated (`tools/make_pcb.sh`: 4 layers,
-pours on all layers, 141 vias; Proteus copper 0 shorts / 0 orphans / 0 opens, board 1.6 mm) and
-**waits for a user decision**: the KiCad pads of U1 U2 ADC1-ADC3 DRV5 DRV6 J1 collide with Proteus
-tracks; Proteus pads for those 8 parts? (STATUS.md "Phase 3 – pad sizes"). `tools/check_all.sh`
-passes except for that pending decision.
+part fits the IPC pads within 0.05 mm), PCB generated (`tools/make_pcb.sh`: 4 layers, pours on all
+layers, 141 vias, board 1.6 mm; Proteus copper 0 shorts / 0 orphans / 0 opens). Pad sizes: Proteus
+pads on U1 U2 ADC1-ADC3 DRV5 DRV6 J1 (user decision), KiCad pads elsewhere; DRC 0 errors apart from
+the accepted courtyard overlaps. `tools/check_all.sh` passes. Next: Phase 4, independent
+verification (gerber round trip, IPC-D-356A diff).
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 

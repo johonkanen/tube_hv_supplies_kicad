@@ -2064,7 +2064,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:SOT-23-6_ADC121C027_Proteus"
+		(property "Footprint" "tube_hv_supplies:SOT-23-6_ADC121C027_Proteus_ProteusPads"
 			(at 193.04 87.63 0)
 			(effects
 				(font
@@ -2145,7 +2145,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:SOT-23-6_ADC121C027_Proteus"
+		(property "Footprint" "tube_hv_supplies:SOT-23-6_ADC121C027_Proteus_ProteusPads"
 			(at 193.04 121.92 0)
 			(effects
 				(font
@@ -2226,7 +2226,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:SOT-23-6_ADC121C027_Proteus"
+		(property "Footprint" "tube_hv_supplies:SOT-23-6_ADC121C027_Proteus_ProteusPads"
 			(at 193.04 152.4 0)
 			(effects
 				(font

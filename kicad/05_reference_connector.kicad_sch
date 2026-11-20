@@ -2815,7 +2815,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_RowsSwapped"
+		(property "Footprint" "tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads"
 			(at 220.98 107.95 0)
 			(effects
 				(font

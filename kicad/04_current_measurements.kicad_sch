@@ -1135,7 +1135,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads"
 			(at 110.49 85.09 0)
 			(effects
 				(font
@@ -2256,7 +2256,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads"
 			(at 238.76 85.09 0)
 			(effects
 				(font
@@ -3377,7 +3377,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads"
 			(at 110.49 167.64 0)
 			(effects
 				(font
@@ -4518,7 +4518,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads"
 			(at 238.76 167.64 0)
 			(effects
 				(font
@@ -5657,7 +5657,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads"
 			(at 54.61 127 0)
 			(effects
 				(font

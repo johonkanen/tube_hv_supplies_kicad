@@ -18,7 +18,7 @@ tools/p2k/p2k/footprints.py. Pad numbers always equal the IPC pin ids.
 
 Pad sizes: p2k_config.py FOOTPRINT_PAD_SIZES = "kicad" (KiCad library pads and drills; the
 footprints built from the IPC pads - blade and wire terminals - and the KRL2012 shunt land
-pattern have the Proteus pads). tools/p2k check_footprints verifies every footprint against the
+pattern have the Proteus pads), except the PROTEUS_PADS parts (user decision A2, Phase 3). tools/p2k check_footprints verifies every footprint against the
 IPC pads (residual < 0.05 mm per pad) and reports the pad size / drill differences.
 """
 import os
@@ -29,6 +29,16 @@ sys.path.insert(0, os.path.join(ROOT, "tools", "p2k"))  # proteus2kicad
 from p2k import footprints  # noqa: E402
 
 P = "tube_hv_supplies:"
+
+# Phase 3 pad-size decision (user, 2026-11-20, option A2; STATUS.md "Phase 3 - pad sizes",
+# Decisions): these 8 parts get the Proteus pad sizes (and J1 the Proteus drill 0.558 mm) because
+# their KiCad pads short or come closer than 0.12 mm to the Proteus tracks (DRC with KiCad pads:
+# 3 shorts, 29 clearance, 3 solder-mask bridges, all at these parts). Every other part keeps the
+# KiCad pads. The rules with `refdes=PROTEUS_PADS` come before the general rule of their symbol;
+# p2k.footprints fails if a refdes listed here is taken by no such rule.
+PROTEUS_PADS = frozenset("""
+    U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1
+""".split())
 
 # (symbol, conditions, footprint, note). Conditions: n = pad count, tht, span (mm, +-0.02),
 # pad = (w, h) of the IPC pads, drill, package / device (lib/part_map.csv columns), refdes.
@@ -57,16 +67,21 @@ RULES = [
     ("D", dict(tht=False, span=4.10), P + "D_SMA_AC", "SMA (DIOM5025X231), pads A/C"),
     ("IKP08N65F5", dict(tht=True, span=5.08), "Package_TO_SOT_THT:TO-220-3_Vertical", "TO-220, 1=G 2=C 3=E"),
     ("ISL21010", dict(), P + "SOT-23_Proteus", "SOT-23, Proteus pad numbering (1 = JEDEC 3, 2 = JEDEC 1, 3 = JEDEC 2)"),
-    ("ADC121C027", dict(), P + "SOT-23-6_ADC121C027_Proteus",
-     "SOT-23-6, Proteus pin ids A1 A2 COM2 K2 K1 COM1 = pads 1-6, rows 2.65 mm apart"),
-    ("LMV324A", dict(), P + "TSSOP-14_4.4x5mm_P0.65mm_Proteus", "TSSOP-14, Proteus pad rows 5.85 mm apart"),
-    ("LT1014", dict(), P + "TSSOP-14_4.4x5mm_P0.65mm_Proteus", "TSSOP-14, Proteus pad rows 5.85 mm apart"),
+    ("ADC121C027", dict(refdes=PROTEUS_PADS), P + "SOT-23-6_ADC121C027_Proteus_ProteusPads",
+     "SOT-23-6, Proteus pin ids A1 A2 COM2 K2 K1 COM1 = pads 1-6, rows 2.65 mm apart, Proteus pad size"),
+    ("LMV324A", dict(refdes=PROTEUS_PADS), P + "TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads",
+     "TSSOP-14, Proteus pad rows 5.85 mm apart, Proteus pad size"),
+    ("LT1014", dict(refdes=PROTEUS_PADS), P + "TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads",
+     "TSSOP-14, Proteus pad rows 5.85 mm apart, Proteus pad size"),
+    ("SI8271", dict(refdes=PROTEUS_PADS), P + "SOIC-8_3.9x4.9mm_P1.27mm_Proteus_ProteusPads",
+     "SOIC-8, Proteus pad rows 5.5 mm apart, Proteus pad size"),
     ("SI8271", dict(), P + "SOIC-8_3.9x4.9mm_P1.27mm_Proteus", "SOIC-8, Proteus pad rows 5.5 mm apart"),
     # --- magnetics, connectors, terminals
     ("L", dict(tht=False, span=10.0), P + "L_Bourns_SRP1038C_10.0x10.0mm_Proteus",
      "Bourns SRP1038CC, Proteus pads 10.0 mm apart"),
-    ("HEADER_2X20_50MIL", dict(), P + "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped",
-     "2x20 1.27 mm header (IDC), Proteus numbering with the odd / even rows swapped, pins 37 / 38 N/C"),
+    ("HEADER_2X20_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads",
+     "2x20 1.27 mm header (IDC), Proteus numbering with the odd / even rows swapped, pins 37 / 38 N/C, "
+     "Proteus pad size"),
     ("HEADER_2X8_50MIL", dict(), "Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical", "2x8 1.27 mm header"),
     ("PIN", dict(n=2), P + "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm", "blade terminal, two holes both pad 1"),
     ("PIN", dict(n=1), P + "Terminal_1x1_D2.54mm_Drill1.524mm", "wire terminal of an off-board inductor, one hole"),
@@ -96,17 +111,22 @@ PROJECT = {
               "pad 3 = JEDEC pin 2; Proteus pad positions"),
     # ADC121C027 with the Proteus pin ids (diode-array style package names): JEDEC pads 1-6 =
     # A1 A2 COM2 K2 K1 COM1 (check_pin_order confirms; finding 6 for what that means)
-    "SOT-23-6_ADC121C027_Proteus": dict(
+    # Phase 3 pad decision (PROTEUS_PADS): `_ProteusPads` = ipc_sizes=True (Proteus pad size; the
+    # KiCad-pad specs of ADC1-3, U1 / U2 and J1 are no longer used and were dropped)
+    "SOT-23-6_ADC121C027_Proteus_ProteusPads": dict(
         base="Package_TO_SOT_SMD:SOT-23-6",
-        renumber={"1": "A1", "2": "A2", "3": "COM2", "4": "K2", "5": "K1", "6": "COM1"}, ipc="ADC1",
+        renumber={"1": "A1", "2": "A2", "3": "COM2", "4": "K2", "5": "K1", "6": "COM1"}, ipc="ADC1", ipc_sizes=True,
         descr="SOT-23-6 (ADC121C027), Proteus pin ids A1 A2 COM2 K2 K1 COM1 on pads 1-6, "
-              "Proteus pad positions (rows 2.65 mm apart)"),
-    "TSSOP-14_4.4x5mm_P0.65mm_Proteus": dict(
-        base="Package_SO:TSSOP-14_4.4x5mm_P0.65mm", ipc="U1",
-        descr="TSSOP-14, Proteus pad positions (rows 5.85 mm apart)"),
+              "Proteus pad positions (rows 2.65 mm apart); Proteus pad sizes"),
+    "TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads": dict(
+        base="Package_SO:TSSOP-14_4.4x5mm_P0.65mm", ipc="U1", ipc_sizes=True,
+        descr="TSSOP-14, Proteus pad positions (rows 5.85 mm apart); Proteus pad sizes"),
     "SOIC-8_3.9x4.9mm_P1.27mm_Proteus": dict(
         base="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", ipc="DRV1",
         descr="SOIC-8, Proteus pad positions (rows 5.5 mm apart)"),
+    "SOIC-8_3.9x4.9mm_P1.27mm_Proteus_ProteusPads": dict(
+        base="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", ipc="DRV5", ipc_sizes=True,
+        descr="SOIC-8, Proteus pad positions (rows 5.5 mm apart); Proteus pad sizes"),
     "L_Bourns_SRP1038C_10.0x10.0mm_Proteus": dict(
         base="Inductor_SMD:L_Bourns_SRP1038C_10.0x10.0mm", ipc="L2",
         descr="Bourns SRP1038C inductor, Proteus pad centres 10.0 mm apart"),
@@ -115,11 +135,11 @@ PROJECT = {
     # KiCad header fits only mirrored, i.e. as a bottom-side part, but J1 is on the top side by the
     # Proteus assembly / silk layers). Swapping the odd / even pad numbers gives the Proteus
     # pattern on the top side (STATUS.md "Phase 2 - pin order", finding 12).
-    "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped": dict(
+    "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads": dict(
         base="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical",
-        renumber={str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)},
+        renumber={str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)}, ipc="J1", ipc_sizes=True,
         descr="2x20 1.27 mm header, Proteus numbering: odd / even pad numbers swapped (pad 1 at KiCad's "
-              "pad 2 position, KiCad's pin-1 marking stays at the pad now numbered 2)"),
+              "pad 2 position, KiCad's pin-1 marking stays at the pad now numbered 2); Proteus pad sizes"),
     "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm": dict(
         ipc="B_P", descr="Blade wire terminal, two holes both pad 1"),
     "Terminal_1x1_D2.54mm_Drill1.524mm": dict(

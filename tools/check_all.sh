@@ -32,10 +32,9 @@ step "Pin order vs unmoved KiCad base footprints" python3 tools/check_pin_order.
 # Phase 3: PCB (build_pcb, gerber_to_tracks, assign_nets, pours_to_zones on all four layers)
 step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
 step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
-# pad-size decision open (STATUS.md "Phase 3 - pad sizes"): tools/drc_pending.py passes only the
-# recorded KiCad-pad conflicts; once decided, run p2k.assign_nets --check and p2k drc directly
-step "Board copper connectivity after zone fill" python3 tools/drc_pending.py copper
-step "DRC with schematic parity" python3 tools/drc_pending.py drc
+# pad sizes: KiCad pads except the PROTEUS_PADS parts of tools/gen_footprints.py (user decision A2)
+step "Board copper connectivity after zone fill" tools/p2k/bin/kipy -m p2k.assign_nets --check
+step "DRC with schematic parity" tools/p2k/bin/p2k drc
 
 echo
 pending=$(grep -c "PENDING USER DECISION" "$log")
