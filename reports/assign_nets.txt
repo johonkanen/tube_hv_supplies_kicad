@@ -40,7 +40,7 @@ items 2410, groups 225, shorts 0, orphans 36, opens 11
   open /01 Power stage/PREOUT: 3 groups [C7-1] [R26-2 R27-2 VPRE-1] [VPRE-1]
   open CURRENT_C3: 2 groups [C3-2 R61-2] [R75-2]
   open CURRENT_Q7: 2 groups [Q7-3 R71-2] [R29-2]
-  open GND: 51 groups [C2-2 R4-1] [C5-2 R46-1] [C7-2] [J1-33] [J1-34] [R30-1 R52-2] [C16-2 C21-2 C34-1 C8-2 R29-1 ...] [R57-2 R75-1] [C4-2] [B_N-1] [B_N-1] [R13-1] [R37-1] [GND_PRE-1] [GND_PRE-1] [GND_PWR-1] [GND_PWR-1] [R11-1 R2-1 U1-11] [R20-1] [R44-1] [C12-2] [C20-2] [C14-2 C41-2] [C18-2] [C22-2] [C36-1 C37-1 J2-5] [J2-6] [J2-9] [J2-10] [C35-1 J2-13] [J2-14] [J2-15 J2-16] [C9-2] [C10-2] [ADC1-A2 C29-1] [ADC2-A2 C28-1] [ADC2-K2] [ADC3-A2 C27-1] [C1-2] [C11-2] [C26-2] [C24-1 C38-2 DRV1-3] [C33-1 DRV2-3] [C23-2 DRV2-5] [C25-1 DRV5-3] [C31-2 C32-1 DRV6-3] [DRV6-5] [C39-2] [C40-2] [C42-2] [C43-2]
+  open GND: 51 groups [C2-2 R4-1] [C5-2 R46-1] [C7-2] [J1-34] [J1-33] [R30-1 R52-2] [C16-2 C21-2 C34-1 C8-2 R29-1 ...] [R57-2 R75-1] [C4-2] [B_N-1] [B_N-1] [R13-1] [R37-1] [GND_PRE-1] [GND_PRE-1] [GND_PWR-1] [GND_PWR-1] [R11-1 R2-1 U1-11] [R20-1] [R44-1] [C12-2] [C20-2] [C14-2 C41-2] [C18-2] [C22-2] [C36-1 C37-1 J2-5] [J2-6] [J2-9] [J2-10] [C35-1 J2-13] [J2-14] [J2-15 J2-16] [C9-2] [C10-2] [ADC1-A2 C29-1] [ADC2-A2 C28-1] [ADC2-K2] [ADC3-A2 C27-1] [C1-2] [C11-2] [C26-2] [C24-1 C38-2 DRV1-3] [C33-1 DRV2-3] [C23-2 DRV2-5] [C25-1 DRV5-3] [C31-2 C32-1 DRV6-3] [DRV6-5] [C39-2] [C40-2] [C42-2] [C43-2]
   open OUT1: 3 groups [C46-1 DRV1-5 Q3-3] [Q4-2] [L5-1]
   open OUT2: 2 groups [C30-1 DRV5-5 L11-1 Q8-3] [Q7-2]
   open UC3: 2 groups [C3-1 L12-1 L2-1] [R16-1]

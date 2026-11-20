@@ -5,9 +5,11 @@ C8 / C21, R74 -> +1V0_BIAS with R73 / C22 to GND, and the control-card ribbon co
 
 PDF: J1 pins 1-8 are labelled ADB0-ADB7 and tied to the *_meas nets by separate terminal links
 (lower left of the page); KiCad puts the IPC net names on the pins and keeps ADBn as small
-texts. The four current-measurement nets on J1-1/3/5/7 are renamed through NET_ALIASES
+texts. The four current-measurement nets on J1-2/4/6/8 (Proteus J1-1/3/5/7) are renamed through NET_ALIASES
 (STATUS.md "Design fixes 2026-11-20", finding 7). The link `15V - 15V_boost` ("Not yet complete") is one IPC net, 15V_BOOST: a text note.
-PDF `Gnd` (J1-34) = GND. J1 is drawn as in the PDF, pin 1 at the bottom (symbol mirrored)."""
+PDF `Gnd` (Proteus J1-34 = KiCad J1-33) = GND. J1 is drawn as in the PDF, pin 1 at the bottom (symbol
+mirrored). J1 has the standard header numbering (p2k_config.IPC_PIN_IDS, finding 12): KiCad pin k + 1 /
+k - 1 = Proteus pin k (odd / even), so each net is drawn on its KiCad pin, the same physical pad."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("05_reference_connector.kicad_sch")
@@ -54,20 +56,21 @@ for x in (RGND[0], xo, xb):
 sh.wire((RGND[0], GROW), (RGND[0], GROW + g(5)))
 power_at(sh, "GND", (RGND[0], GROW + g(5)), "down")
 
-# --- J1: control-card ribbon; (pin, IPC net, PDF alias or None) ----------------------------------
+# --- J1: control-card ribbon; (KiCad pin, IPC net, PDF alias or None) ------------------------------
+# Standard header numbering (p2k_config.IPC_PIN_IDS, finding 12): KiCad pin = Proteus pin + 1 (odd) /
+# - 1 (even); each net is on the same physical pad as in Proteus. The PDF draws the Proteus pin numbers.
 J1_PINS = [
-    (1, "CURRENT_Q4_MEAS", "ADB0"), (2, "V_A_MEAS", "ADB7"), (3, "CURRENT_Q7_MEAS", "ADB1"),
-    (4, "UIN_MEAS", "ADB6"), (5, "CURRENT_C6_MEAS", "ADB2"), (6, "UC3_MEAS", "ADB5"),
-    (7, "CURRENT_C3_MEAS", "ADB3"), (8, "U_OUT_MEAS", "ADB4"), (9, "ADASEL1_ISO", None),
-    (10, "ADASEL2_ISO", None), (11, "SCL", None), (12, "ADASEL0_ISO", None), (13, "CLK1_ISO", None),
-    (14, "CS1_ISO", None), (15, "PWM_TRANS2_ISO", None), (16, "PWM_TRANS1_ISO", None),
-    (17, "PWM_G4_ISO", None), (18, "PWM_TRANS3_ISO", None), (19, "PWM_G1_ISO", None),
-    (20, "PWM_G2_ISO", None), (21, "DAB_PWM_PRI_HI_ISO", None), (22, "PWM_G3_ISO", None),
-    (23, "ADCLK_DAB", None), (24, "DAB_PWM_PRI_LO_ISO", None), (25, "SDA", None),
-    (26, "PWM_TRANS4", None), (27, "PWM_TRANS6", None), (28, "DAB_PWM_HI_SEC", None),
-    (29, "G3_LO", None), (30, "G1_LO", None), (31, "G3_HI", None), (32, "G1_HI", None),
-    (33, "GND", None), (34, "GND", None), (35, "3V3", None), (36, "3V3", None),
-    (37, None, None), (38, None, None), (39, "15V_BOOST", None), (40, "15V_BOOST", None),
+    (1, "V_A_MEAS", "ADB7"), (2, "CURRENT_Q4_MEAS", "ADB0"), (3, "UIN_MEAS", "ADB6"),
+    (4, "CURRENT_Q7_MEAS", "ADB1"), (5, "UC3_MEAS", "ADB5"), (6, "CURRENT_C6_MEAS", "ADB2"),
+    (7, "U_OUT_MEAS", "ADB4"), (8, "CURRENT_C3_MEAS", "ADB3"), (9, "ADASEL2_ISO", None),
+    (10, "ADASEL1_ISO", None), (11, "ADASEL0_ISO", None), (12, "SCL", None), (13, "CS1_ISO", None),
+    (14, "CLK1_ISO", None), (15, "PWM_TRANS1_ISO", None), (16, "PWM_TRANS2_ISO", None),
+    (17, "PWM_TRANS3_ISO", None), (18, "PWM_G4_ISO", None), (19, "PWM_G2_ISO", None),
+    (20, "PWM_G1_ISO", None), (21, "PWM_G3_ISO", None), (22, "DAB_PWM_PRI_HI_ISO", None),
+    (23, "DAB_PWM_PRI_LO_ISO", None), (24, "ADCLK_DAB", None), (25, "PWM_TRANS4", None), (26, "SDA", None),
+    (27, "DAB_PWM_HI_SEC", None), (28, "PWM_TRANS6", None), (29, "G1_LO", None), (30, "G3_LO", None),
+    (31, "G1_HI", None), (32, "G3_HI", None), (33, "GND", None), (34, "GND", None), (35, "3V3", None),
+    (36, "3V3", None), (37, None, None), (38, None, None), (39, "15V_BOOST", None), (40, "15V_BOOST", None),
 ]
 GLOBAL = {"CURRENT_Q4_MEAS", "V_A_MEAS", "CURRENT_Q7_MEAS", "UIN_MEAS", "CURRENT_C6_MEAS", "UC3_MEAS",
           "CURRENT_C3_MEAS", "U_OUT_MEAS", "SCL", "SDA", "G3_LO", "G1_LO", "G3_HI", "G1_HI"}
@@ -104,14 +107,15 @@ NX, NY = P(104, 22)
 sh.text("PDF: link 15V - 15V_boost, \"Not yet complete\": one net, 15V_BOOST (IPC);", NX, NY)
 sh.text("the gate drivers' 15V (sheet 2) is 15V_BOOST.", NX, NY + g(2))
 NX, NY = P(30, 66)
-sh.text("PDF alias links (J1 pins 1-8 = ADB0-ADB7 in the PDF; Proteus names, see sheet 4):", NX, NY)
-for i, (a, n) in enumerate((("ADB0", "C2_current_meas  (J1-1)"), ("ADB1", "C3_current_meas  (J1-3)"),
-                            ("ADB2", "input_current_meas  (J1-5)"), ("ADB3", "C1_current_meas  (J1-7)"),
-                            ("ADB4", "U_out_meas  (J1-8)"), ("ADB5", "Uc3_meas  (J1-6)"),
-                            ("ADB6", "Uin_meas  (J1-4)"), ("ADB7", "V_A_meas  (J1-2)"))):
+sh.text("PDF alias links (Proteus J1 pins 1-8 = ADB0-ADB7 in the PDF; Proteus names, see sheet 4; KiCad pins):", NX, NY)
+for i, (a, n) in enumerate((("ADB0", "C2_current_meas  (J1-2)"), ("ADB1", "C3_current_meas  (J1-4)"),
+                            ("ADB2", "input_current_meas  (J1-6)"), ("ADB3", "C1_current_meas  (J1-8)"),
+                            ("ADB4", "U_out_meas  (J1-7)"), ("ADB5", "Uc3_meas  (J1-5)"),
+                            ("ADB6", "Uin_meas  (J1-3)"), ("ADB7", "V_A_meas  (J1-1)"))):
     sh.text(f"{a} = {n}", NX + g(2), NY + g(2 * (i + 1)))
 sh.text("Unused ribbon signals (*_ISO, PWM_TRANS4/6, DAB_*, ADCLK_DAB): label on the J1 pin only.", NX, NY + g(20))
-sh.text("PDF Gnd (J1-34) = GND.", NX, NY + g(22))
+sh.text("PDF Gnd (Proteus J1-34 = KiCad J1-33) = GND.", NX, NY + g(22))
+sh.text("J1 numbering: standard header (KiCad pin = Proteus pin + 1 / - 1, odd / even), same pads (finding 12).", NX, NY + g(24))
 
 sh.save()
 print("sheet05: written")

@@ -42,16 +42,21 @@ and `p2k_config.NET_ALIASES` maps it for every check.
 2026-11-20"):** the current-measurement nets are renamed to what they measure, through `NET_ALIASES`:
 `CURRENT_C3` / `CURRENT_C6` (the shunts R75 / R30 under the filter capacitors C3 / C6), `CURRENT_Q4` /
 `CURRENT_Q7` (the low-side emitter shunts R72 / R29), and the amplified signals on the control-card ribbon
-`CURRENT_Q4_MEAS` (J1-1), `CURRENT_Q7_MEAS` (J1-3), `CURRENT_C6_MEAS` (J1-5), `CURRENT_C3_MEAS` (J1-7)
+`CURRENT_Q4_MEAS` (Proteus J1-1), `CURRENT_Q7_MEAS` (J1-3), `CURRENT_C6_MEAS` (J1-5), `CURRENT_C3_MEAS` (J1-7)
 (Proteus: `C1_CURRENT`, `C3_CURRENT`, `CURRENT_L1`, `CURRENT_L3`, `C2_CURRENT_MEAS`, `C3_CURRENT_MEAS`,
 `INPUT_CURRENT_MEAS`, `C1_CURRENT_MEAS`). The dangling Proteus copper stubs are removed (finding 14).
 `tools/check_all.sh` prints ALL CHECKS PASSED (19 steps). Still to come: the ADC VA / VIN fix (finding 6, a
-hand edit after generation stops) and the J1 renumbering (finding 12, waits for a shared-tool key).
+hand edit after generation stops) and the J1 renumbering (finding 12; done 2026-11-20, below).
 
 **Shared-tool migration 2026-11-20 (STATUS.md "Shared-tool migration 2026-11-20"):** `tools/p2k` bumped
 to a9a286c; every board-local tool replaced by the shared proteus2kicad tools and config keys (`p2k erc`,
 `p2k check_pin_order` + `PIN_ORDER`, `p2k.check_pads` + `PROTEUS_PADS_CHECK`, `REMOVED_TRACKS` with a count,
-`p2k make_pcb`, `part_map.run`, the spec key `pads`, `FP_LIB_TABLE`); no strict-check opt-outs.
+`p2k make_pcb`, `part_map.run`, the spec key `pads`, `FP_LIB_TABLE`); no strict-check opt-outs. The ribbon
+header J1 now has the standard 2x20 numbering (`IPC_PIN_IDS`: Proteus pin k = KiCad pad k + 1 / k - 1, odd /
+even; finding 12, together with the control card's J11, so the cable still joins pad k to pad k): copper
+unchanged except the square pin-1 pad (user decision). The four current-measurement outputs are now J1-2 / 4
+/ 6 / 8. `tools/check_all.sh` prints ALL CHECKS PASSED (18 steps). Still to come: the ADC VA / VIN fix
+(finding 6, a hand edit after generation stops).
 
 **HV supplies v2 is not installed and will be redone anyway: this conversion is only the starting point
 for the redesign** (user, 2026-11-20).

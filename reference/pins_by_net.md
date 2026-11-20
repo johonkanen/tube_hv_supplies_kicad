@@ -69,29 +69,29 @@ usually test points or connections made through the ignored-by-IPC copper.
 | #00208 | 3 | 0 | J2-7 J2-8 R79-2 |
 | #00211 | 3 | 0 | J2-11 J2-12 R78-2 |
 | +1V0_BIAS | 11 | 3 | C22-1 C44-1 C45-1 C47-1 C48-1 R54-2 R59-2 R64-2 R69-2 R73-1 R74-2 |
-| ADASEL0_ISO | 1 | 0 | J1-12 |
-| ADASEL1_ISO | 1 | 0 | J1-9 |
-| ADASEL2_ISO | 1 | 0 | J1-10 |
-| ADCLK_DAB | 1 | 0 | J1-23 |
+| ADASEL0_ISO | 1 | 0 | J1-11 |
+| ADASEL1_ISO | 1 | 0 | J1-10 |
+| ADASEL2_ISO | 1 | 0 | J1-9 |
+| ADCLK_DAB | 1 | 0 | J1-24 |
 | B+ | 4 | 0 | B_P-1 C1-1 C11-1 L7-1 |
-| CLK1_ISO | 1 | 0 | J1-13 |
-| CS1_ISO | 1 | 0 | J1-14 |
+| CLK1_ISO | 1 | 0 | J1-14 |
+| CS1_ISO | 1 | 0 | J1-13 |
 | CURRENT_C3 | 3 | 3 | C3-2 R61-2 R75-2 |
-| CURRENT_C3_MEAS | 3 | 2 | C16-1 J1-7 R60-1 |
+| CURRENT_C3_MEAS | 3 | 2 | C16-1 J1-8 R60-1 |
 | CURRENT_C6 | 3 | 4 | C6-2 R30-2 R56-2 |
-| CURRENT_C6_MEAS | 3 | 0 | C14-1 J1-5 R55-1 |
+| CURRENT_C6_MEAS | 3 | 0 | C14-1 J1-6 R55-1 |
 | CURRENT_Q4 | 3 | 3 | Q4-3 R66-2 R72-2 |
-| CURRENT_Q4_MEAS | 3 | 0 | C18-1 J1-1 R65-1 |
+| CURRENT_Q4_MEAS | 3 | 0 | C18-1 J1-2 R65-1 |
 | CURRENT_Q7 | 3 | 1 | Q7-3 R29-2 R71-2 |
-| CURRENT_Q7_MEAS | 3 | 0 | C20-1 J1-3 R70-1 |
-| DAB_PWM_HI_SEC | 1 | 0 | J1-28 |
-| DAB_PWM_PRI_HI_ISO | 1 | 0 | J1-21 |
-| DAB_PWM_PRI_LO_ISO | 1 | 0 | J1-24 |
+| CURRENT_Q7_MEAS | 3 | 0 | C20-1 J1-4 R70-1 |
+| DAB_PWM_HI_SEC | 1 | 0 | J1-27 |
+| DAB_PWM_PRI_HI_ISO | 1 | 0 | J1-22 |
+| DAB_PWM_PRI_LO_ISO | 1 | 0 | J1-23 |
 | FLOATING | 1 | 0 | ADC3-K2 |
-| G1_HI | 2 | 0 | DRV1-1 J1-32 |
-| G1_LO | 2 | 2 | DRV2-1 J1-30 |
-| G3_HI | 2 | 3 | DRV5-1 J1-31 |
-| G3_LO | 2 | 3 | DRV6-1 J1-29 |
+| G1_HI | 2 | 0 | DRV1-1 J1-31 |
+| G1_LO | 2 | 2 | DRV2-1 J1-29 |
+| G3_HI | 2 | 3 | DRV5-1 J1-32 |
+| G3_LO | 2 | 3 | DRV6-1 J1-30 |
 | GND | 79 | 71 | ADC1-A2 ADC2-A2 ADC2-K2 ADC3-A2 B_N-1 C1-2 C2-2 C4-2 C5-2 C7-2 C8-2 C9-2 C10-2 C11-2 C12-2 C14-2 C16-2 C18-2 C20-2 C21-2 C22-2 C23-2 C24-1 C25-1 C26-2 C27-1 C28-1 C29-1 C31-2 C32-1 C33-1 C34-1 C35-1 C36-1 C37-1 C38-2 C39-2 C40-2 C41-2 C42-2 C43-2 DRV1-3 DRV2-3 DRV2-5 DRV5-3 DRV6-3 DRV6-5 GND_PRE-1 GND_PWR-1 J1-33 J1-34 J2-5 J2-6 J2-9 J2-10 J2-13 J2-14 J2-15 J2-16 R2-1 R4-1 R11-1 R13-1 R20-1 R29-1 R30-1 R37-1 R44-1 R46-1 R52-2 R57-2 R62-2 R67-2 R72-1 R73-2 R75-1 REF1-1 U1-11 U2-11 |
 | OUT1 | 5 | 0 | C46-1 DRV1-5 L5-1 Q3-3 Q4-2 |
 | OUT2 | 5 | 0 | C30-1 DRV5-5 L11-1 Q7-2 Q8-3 |
@@ -100,23 +100,23 @@ usually test points or connections made through the ignored-by-IPC copper.
 | PWM1_LO | 3 | 0 | Q4-1 R24-2 R25-2 |
 | PWM3_HI | 3 | 0 | Q8-1 R32-2 R33-2 |
 | PWM3_LO | 3 | 0 | Q7-1 R34-2 R35-2 |
-| PWM_G1_ISO | 1 | 0 | J1-19 |
-| PWM_G2_ISO | 1 | 0 | J1-20 |
-| PWM_G3_ISO | 1 | 0 | J1-22 |
-| PWM_G4_ISO | 1 | 0 | J1-17 |
-| PWM_TRANS1_ISO | 1 | 0 | J1-16 |
-| PWM_TRANS2_ISO | 1 | 0 | J1-15 |
-| PWM_TRANS3_ISO | 1 | 0 | J1-18 |
-| PWM_TRANS4 | 1 | 0 | J1-26 |
-| PWM_TRANS6 | 1 | 0 | J1-27 |
-| SCL | 5 | 1 | ADC1-K1 ADC2-K1 ADC3-K1 J1-11 R76-2 |
-| SDA | 5 | 1 | ADC1-COM1 ADC2-COM1 ADC3-COM1 J1-25 R77-2 |
+| PWM_G1_ISO | 1 | 0 | J1-20 |
+| PWM_G2_ISO | 1 | 0 | J1-19 |
+| PWM_G3_ISO | 1 | 0 | J1-21 |
+| PWM_G4_ISO | 1 | 0 | J1-18 |
+| PWM_TRANS1_ISO | 1 | 0 | J1-15 |
+| PWM_TRANS2_ISO | 1 | 0 | J1-16 |
+| PWM_TRANS3_ISO | 1 | 0 | J1-17 |
+| PWM_TRANS4 | 1 | 0 | J1-25 |
+| PWM_TRANS6 | 1 | 0 | J1-28 |
+| SCL | 5 | 1 | ADC1-K1 ADC2-K1 ADC3-K1 J1-12 R76-2 |
+| SDA | 5 | 1 | ADC1-COM1 ADC2-COM1 ADC3-COM1 J1-26 R77-2 |
 | UC3 | 4 | 0 | C3-1 L2-1 L12-1 R16-1 |
-| UC3_MEAS | 3 | 0 | C42-1 J1-6 R12-1 |
+| UC3_MEAS | 3 | 0 | C42-1 J1-5 R12-1 |
 | UC6 | 4 | 0 | C6-1 L4-2 R26-1 R27-1 |
 | UIN | 8 | 0 | C2-1 C9-1 C10-1 C26-1 L7-2 Q3-2 Q8-2 R7-1 |
-| UIN_MEAS | 3 | 0 | C39-1 J1-4 R3-1 |
+| UIN_MEAS | 3 | 0 | C39-1 J1-3 R3-1 |
 | U_OUT | 4 | 0 | C5-1 L4-1 L6-1 R49-1 |
-| U_OUT_MEAS | 3 | 0 | C41-1 J1-8 R45-1 |
+| U_OUT_MEAS | 3 | 0 | C41-1 J1-7 R45-1 |
 | V_A | 4 | 0 | C4-1 L2-2 R40-1 V_ANODE-1 |
-| V_A_MEAS | 3 | 0 | C40-1 J1-2 R36-1 |
+| V_A_MEAS | 3 | 0 | C40-1 J1-1 R36-1 |

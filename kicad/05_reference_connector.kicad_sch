@@ -2815,7 +2815,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads"
+		(property "Footprint" "tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_ProteusPads"
 			(at 220.98 107.95 0)
 			(effects
 				(font
@@ -2981,7 +2981,7 @@
 		)
 		(uuid "89fe0a51-d5e5-5c16-87e3-914277bfdee8")
 	)
-	(global_label "CURRENT_Q4_MEAS"
+	(global_label "V_A_MEAS"
 		(shape passive)
 		(at 205.74 133.35 180)
 		(fields_autoplaced yes)
@@ -3003,7 +3003,7 @@
 			)
 		)
 	)
-	(text "ADB0"
+	(text "ADB7"
 		(exclude_from_sim no)
 		(at 208.915 132.45 0)
 		(effects
@@ -3024,7 +3024,7 @@
 		)
 		(uuid "c3b473bb-a545-5c14-ac72-adab50171e18")
 	)
-	(global_label "V_A_MEAS"
+	(global_label "CURRENT_Q4_MEAS"
 		(shape passive)
 		(at 236.22 133.35 0)
 		(fields_autoplaced yes)
@@ -3046,7 +3046,7 @@
 			)
 		)
 	)
-	(text "ADB7"
+	(text "ADB0"
 		(exclude_from_sim no)
 		(at 229.489 132.45 0)
 		(effects
@@ -3067,7 +3067,7 @@
 		)
 		(uuid "7290d281-4da8-5543-a288-cdb4e6966aac")
 	)
-	(global_label "CURRENT_Q7_MEAS"
+	(global_label "UIN_MEAS"
 		(shape passive)
 		(at 205.74 130.81 180)
 		(fields_autoplaced yes)
@@ -3089,7 +3089,7 @@
 			)
 		)
 	)
-	(text "ADB1"
+	(text "ADB6"
 		(exclude_from_sim no)
 		(at 208.915 129.91 0)
 		(effects
@@ -3110,7 +3110,7 @@
 		)
 		(uuid "9ae2c90f-15d9-5de6-9723-f9553f80a04f")
 	)
-	(global_label "UIN_MEAS"
+	(global_label "CURRENT_Q7_MEAS"
 		(shape passive)
 		(at 236.22 130.81 0)
 		(fields_autoplaced yes)
@@ -3132,7 +3132,7 @@
 			)
 		)
 	)
-	(text "ADB6"
+	(text "ADB1"
 		(exclude_from_sim no)
 		(at 229.489 129.91 0)
 		(effects
@@ -3153,7 +3153,7 @@
 		)
 		(uuid "fb19dc2d-05a4-5ad4-a14e-ff14c4f428e5")
 	)
-	(global_label "CURRENT_C6_MEAS"
+	(global_label "UC3_MEAS"
 		(shape passive)
 		(at 205.74 128.27 180)
 		(fields_autoplaced yes)
@@ -3175,7 +3175,7 @@
 			)
 		)
 	)
-	(text "ADB2"
+	(text "ADB5"
 		(exclude_from_sim no)
 		(at 208.915 127.37 0)
 		(effects
@@ -3196,7 +3196,7 @@
 		)
 		(uuid "6ea7878b-279c-57d8-b906-ea50102a8c36")
 	)
-	(global_label "UC3_MEAS"
+	(global_label "CURRENT_C6_MEAS"
 		(shape passive)
 		(at 236.22 128.27 0)
 		(fields_autoplaced yes)
@@ -3218,7 +3218,7 @@
 			)
 		)
 	)
-	(text "ADB5"
+	(text "ADB2"
 		(exclude_from_sim no)
 		(at 229.489 127.37 0)
 		(effects
@@ -3239,7 +3239,7 @@
 		)
 		(uuid "572ca3fa-4e96-540e-b6e0-bb0089019858")
 	)
-	(global_label "CURRENT_C3_MEAS"
+	(global_label "U_OUT_MEAS"
 		(shape passive)
 		(at 205.74 125.73 180)
 		(fields_autoplaced yes)
@@ -3261,7 +3261,7 @@
 			)
 		)
 	)
-	(text "ADB3"
+	(text "ADB4"
 		(exclude_from_sim no)
 		(at 208.915 124.83 0)
 		(effects
@@ -3282,7 +3282,7 @@
 		)
 		(uuid "d6c001c1-1ffd-59a2-b2b8-9948304e9a6f")
 	)
-	(global_label "U_OUT_MEAS"
+	(global_label "CURRENT_C3_MEAS"
 		(shape passive)
 		(at 236.22 125.73 0)
 		(fields_autoplaced yes)
@@ -3304,7 +3304,7 @@
 			)
 		)
 	)
-	(text "ADB4"
+	(text "ADB3"
 		(exclude_from_sim no)
 		(at 229.489 124.83 0)
 		(effects
@@ -3325,7 +3325,7 @@
 		)
 		(uuid "b6740020-caa5-5008-a5de-ff8ae79a00f8")
 	)
-	(label "ADASEL1_ISO"
+	(label "ADASEL2_ISO"
 		(at 193.04 123.19 180)
 		(effects
 			(font
@@ -3345,7 +3345,7 @@
 		)
 		(uuid "7a1c6017-fee9-5d1b-b294-23a3545123c4")
 	)
-	(label "ADASEL2_ISO"
+	(label "ADASEL1_ISO"
 		(at 248.92 123.19 0)
 		(effects
 			(font
@@ -3357,7 +3357,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 120.65) (xy 205.74 120.65)
+			(xy 213.36 120.65) (xy 193.04 120.65)
 		)
 		(stroke
 			(width 0)
@@ -3365,31 +3365,19 @@
 		)
 		(uuid "d1570caf-7854-5c43-b340-b1611ee40d0a")
 	)
-	(global_label "SCL"
-		(shape passive)
-		(at 205.74 120.65 180)
-		(fields_autoplaced yes)
+	(label "ADASEL0_ISO"
+		(at 193.04 120.65 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
 		(uuid "52e9773a-17e9-5c08-b5c0-4ebab866ac58")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 205.74 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
 	)
 	(wire
 		(pts
-			(xy 228.6 120.65) (xy 248.92 120.65)
+			(xy 228.6 120.65) (xy 236.22 120.65)
 		)
 		(stroke
 			(width 0)
@@ -3397,15 +3385,27 @@
 		)
 		(uuid "31fa8a3f-6027-5d46-9d50-cd732eba3daa")
 	)
-	(label "ADASEL0_ISO"
-		(at 248.92 120.65 0)
+	(global_label "SCL"
+		(shape passive)
+		(at 236.22 120.65 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify left)
 		)
 		(uuid "9dedc3fb-398d-55c4-8fc3-92d72a8947c8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 236.22 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -3417,7 +3417,7 @@
 		)
 		(uuid "9c14e7f8-acbe-554e-abe6-7b6a3e810f6d")
 	)
-	(label "CLK1_ISO"
+	(label "CS1_ISO"
 		(at 193.04 118.11 180)
 		(effects
 			(font
@@ -3437,7 +3437,7 @@
 		)
 		(uuid "0fec2c3f-7406-5670-9546-9b4d2880d965")
 	)
-	(label "CS1_ISO"
+	(label "CLK1_ISO"
 		(at 248.92 118.11 0)
 		(effects
 			(font
@@ -3457,7 +3457,7 @@
 		)
 		(uuid "2358aedd-d88d-52e6-a987-274e9d156922")
 	)
-	(label "PWM_TRANS2_ISO"
+	(label "PWM_TRANS1_ISO"
 		(at 193.04 115.57 180)
 		(effects
 			(font
@@ -3477,7 +3477,7 @@
 		)
 		(uuid "bbbe831d-2584-563e-afd7-59477fef78b6")
 	)
-	(label "PWM_TRANS1_ISO"
+	(label "PWM_TRANS2_ISO"
 		(at 248.92 115.57 0)
 		(effects
 			(font
@@ -3497,7 +3497,7 @@
 		)
 		(uuid "60adcef5-1226-50c1-b14e-5bca60bec278")
 	)
-	(label "PWM_G4_ISO"
+	(label "PWM_TRANS3_ISO"
 		(at 193.04 113.03 180)
 		(effects
 			(font
@@ -3517,7 +3517,7 @@
 		)
 		(uuid "df07ab81-301e-51b8-bc2e-09aa1d10a071")
 	)
-	(label "PWM_TRANS3_ISO"
+	(label "PWM_G4_ISO"
 		(at 248.92 113.03 0)
 		(effects
 			(font
@@ -3537,7 +3537,7 @@
 		)
 		(uuid "3fd4d396-c30c-5cec-bc7c-44345b11dc2c")
 	)
-	(label "PWM_G1_ISO"
+	(label "PWM_G2_ISO"
 		(at 193.04 110.49 180)
 		(effects
 			(font
@@ -3557,7 +3557,7 @@
 		)
 		(uuid "e3ee395c-7135-566e-85da-c35f3fe2276a")
 	)
-	(label "PWM_G2_ISO"
+	(label "PWM_G1_ISO"
 		(at 248.92 110.49 0)
 		(effects
 			(font
@@ -3577,7 +3577,7 @@
 		)
 		(uuid "c5e91508-1733-512c-b624-7e810f1990fd")
 	)
-	(label "DAB_PWM_PRI_HI_ISO"
+	(label "PWM_G3_ISO"
 		(at 193.04 107.95 180)
 		(effects
 			(font
@@ -3597,7 +3597,7 @@
 		)
 		(uuid "d435855d-252f-5520-a58d-1a049f655e63")
 	)
-	(label "PWM_G3_ISO"
+	(label "DAB_PWM_PRI_HI_ISO"
 		(at 248.92 107.95 0)
 		(effects
 			(font
@@ -3617,7 +3617,7 @@
 		)
 		(uuid "04637351-2523-5d7e-9823-643d8ef82fe1")
 	)
-	(label "ADCLK_DAB"
+	(label "DAB_PWM_PRI_LO_ISO"
 		(at 193.04 105.41 180)
 		(effects
 			(font
@@ -3637,7 +3637,7 @@
 		)
 		(uuid "1208e975-e726-5e61-a82e-dc64917dbf21")
 	)
-	(label "DAB_PWM_PRI_LO_ISO"
+	(label "ADCLK_DAB"
 		(at 248.92 105.41 0)
 		(effects
 			(font
@@ -3649,7 +3649,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 102.87) (xy 205.74 102.87)
+			(xy 213.36 102.87) (xy 193.04 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3657,31 +3657,19 @@
 		)
 		(uuid "6784d58c-5198-5434-90ba-91f25bee898b")
 	)
-	(global_label "SDA"
-		(shape passive)
-		(at 205.74 102.87 180)
-		(fields_autoplaced yes)
+	(label "PWM_TRANS4"
+		(at 193.04 102.87 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
 		(uuid "bd165cf1-053f-59b0-8fd0-441c64354862")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 205.74 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
 	)
 	(wire
 		(pts
-			(xy 228.6 102.87) (xy 248.92 102.87)
+			(xy 228.6 102.87) (xy 236.22 102.87)
 		)
 		(stroke
 			(width 0)
@@ -3689,15 +3677,27 @@
 		)
 		(uuid "22552390-891a-548c-a846-6620be42387f")
 	)
-	(label "PWM_TRANS4"
-		(at 248.92 102.87 0)
+	(global_label "SDA"
+		(shape passive)
+		(at 236.22 102.87 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify left)
 		)
 		(uuid "fc9c9795-63b9-5057-88ec-f86aa396ee9f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 236.22 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -3709,7 +3709,7 @@
 		)
 		(uuid "6f0e3409-63c7-5ad1-95fc-23606884ee6a")
 	)
-	(label "PWM_TRANS6"
+	(label "DAB_PWM_HI_SEC"
 		(at 193.04 100.33 180)
 		(effects
 			(font
@@ -3729,7 +3729,7 @@
 		)
 		(uuid "826c27fb-41bd-5121-af26-00bbff7dae5c")
 	)
-	(label "DAB_PWM_HI_SEC"
+	(label "PWM_TRANS6"
 		(at 248.92 100.33 0)
 		(effects
 			(font
@@ -3749,7 +3749,7 @@
 		)
 		(uuid "5eb75aa3-aa6c-5700-ad32-fbe1baa6d6a5")
 	)
-	(global_label "G3_LO"
+	(global_label "G1_LO"
 		(shape passive)
 		(at 205.74 97.79 180)
 		(fields_autoplaced yes)
@@ -3781,7 +3781,7 @@
 		)
 		(uuid "82e2fc7b-fc33-5ce3-934b-f609d1bd3abb")
 	)
-	(global_label "G1_LO"
+	(global_label "G3_LO"
 		(shape passive)
 		(at 236.22 97.79 0)
 		(fields_autoplaced yes)
@@ -3813,7 +3813,7 @@
 		)
 		(uuid "0d50ac49-2e38-5c19-a458-06d3719414a1")
 	)
-	(global_label "G3_HI"
+	(global_label "G1_HI"
 		(shape passive)
 		(at 205.74 95.25 180)
 		(fields_autoplaced yes)
@@ -3845,7 +3845,7 @@
 		)
 		(uuid "f9ea3a1b-0d30-5932-b2d8-ae50ae964796")
 	)
-	(global_label "G1_HI"
+	(global_label "G3_HI"
 		(shape passive)
 		(at 236.22 95.25 0)
 		(fields_autoplaced yes)
@@ -4784,7 +4784,7 @@
 		)
 		(uuid "934d8aad-63fe-59b6-85e9-9fa01a7b4364")
 	)
-	(text "PDF alias links (J1 pins 1-8 = ADB0-ADB7 in the PDF; Proteus names, see sheet 4):"
+	(text "PDF alias links (Proteus J1 pins 1-8 = ADB0-ADB7 in the PDF; Proteus names, see sheet 4; KiCad pins):"
 		(exclude_from_sim no)
 		(at 88.9 121.92 0)
 		(effects
@@ -4795,7 +4795,7 @@
 		)
 		(uuid "95c36106-f0d5-5159-9f67-82c7d350b196")
 	)
-	(text "ADB0 = C2_current_meas  (J1-1)"
+	(text "ADB0 = C2_current_meas  (J1-2)"
 		(exclude_from_sim no)
 		(at 91.44 124.46 0)
 		(effects
@@ -4806,7 +4806,7 @@
 		)
 		(uuid "40f5a9f3-b5e5-56fc-ba75-2fb2cac19b87")
 	)
-	(text "ADB1 = C3_current_meas  (J1-3)"
+	(text "ADB1 = C3_current_meas  (J1-4)"
 		(exclude_from_sim no)
 		(at 91.44 127 0)
 		(effects
@@ -4817,7 +4817,7 @@
 		)
 		(uuid "ad10a46c-46d1-51be-86a1-2d0f643a8165")
 	)
-	(text "ADB2 = input_current_meas  (J1-5)"
+	(text "ADB2 = input_current_meas  (J1-6)"
 		(exclude_from_sim no)
 		(at 91.44 129.54 0)
 		(effects
@@ -4828,7 +4828,7 @@
 		)
 		(uuid "14db90e1-c4c9-5ebb-8ac0-7ebd8db76a5a")
 	)
-	(text "ADB3 = C1_current_meas  (J1-7)"
+	(text "ADB3 = C1_current_meas  (J1-8)"
 		(exclude_from_sim no)
 		(at 91.44 132.08 0)
 		(effects
@@ -4839,7 +4839,7 @@
 		)
 		(uuid "97978abd-a148-52aa-a1e2-5a08738ba3f8")
 	)
-	(text "ADB4 = U_out_meas  (J1-8)"
+	(text "ADB4 = U_out_meas  (J1-7)"
 		(exclude_from_sim no)
 		(at 91.44 134.62 0)
 		(effects
@@ -4850,7 +4850,7 @@
 		)
 		(uuid "07b500bc-ddcb-5255-9954-9af8a5945f71")
 	)
-	(text "ADB5 = Uc3_meas  (J1-6)"
+	(text "ADB5 = Uc3_meas  (J1-5)"
 		(exclude_from_sim no)
 		(at 91.44 137.16 0)
 		(effects
@@ -4861,7 +4861,7 @@
 		)
 		(uuid "a681bb3f-9b44-5b1e-8ec5-710d9bfdaedf")
 	)
-	(text "ADB6 = Uin_meas  (J1-4)"
+	(text "ADB6 = Uin_meas  (J1-3)"
 		(exclude_from_sim no)
 		(at 91.44 139.7 0)
 		(effects
@@ -4872,7 +4872,7 @@
 		)
 		(uuid "b42a0a67-d82f-5681-a5e9-be40bbb8576a")
 	)
-	(text "ADB7 = V_A_meas  (J1-2)"
+	(text "ADB7 = V_A_meas  (J1-1)"
 		(exclude_from_sim no)
 		(at 91.44 142.24 0)
 		(effects
@@ -4894,7 +4894,7 @@
 		)
 		(uuid "15ff6194-68a0-56f8-9b88-fa5eb7e2bb2e")
 	)
-	(text "PDF Gnd (J1-34) = GND."
+	(text "PDF Gnd (Proteus J1-34 = KiCad J1-33) = GND."
 		(exclude_from_sim no)
 		(at 88.9 149.86 0)
 		(effects
@@ -4904,6 +4904,17 @@
 			(justify left bottom)
 		)
 		(uuid "3cc65aa1-fc98-5671-9803-c207503500b3")
+	)
+	(text "J1 numbering: standard header (KiCad pin = Proteus pin + 1 / - 1, odd / even), same pads (finding 12)."
+		(exclude_from_sim no)
+		(at 88.9 152.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "406eaf58-42c7-520a-82ba-7ece55172a2e")
 	)
 	(embedded_fonts no)
 )

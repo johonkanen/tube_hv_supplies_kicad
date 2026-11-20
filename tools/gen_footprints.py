@@ -85,9 +85,9 @@ RULES = [
     # --- magnetics, connectors, terminals
     ("L", dict(tht=False, span=10.0), P + "L_Bourns_SRP1038C_10.0x10.0mm_Proteus",
      "Bourns SRP1038CC, Proteus pads 10.0 mm apart"),
-    ("HEADER_2X20_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads",
-     "2x20 1.27 mm header (IDC), Proteus numbering with the odd / even rows swapped, pins 37 / 38 N/C, "
-     "Proteus pad size"),
+    ("HEADER_2X20_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x20_P1.27mm_Vertical_ProteusPads",
+     "2x20 1.27 mm header (IDC), standard numbering (IPC_PIN_IDS), pins 37 / 38 N/C, Proteus pad size, "
+     "square pad 1"),
     ("HEADER_2X8_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x08_P1.27mm_Vertical_ProteusPads",
      "2x8 1.27 mm header, Proteus pad size and drill"),
     ("PIN", dict(n=2), P + "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm", "blade terminal, two holes both pad 1"),
@@ -137,20 +137,19 @@ PROJECT = {
     "L_Bourns_SRP1038C_10.0x10.0mm_Proteus": dict(
         base="Inductor_SMD:L_Bourns_SRP1038C_10.0x10.0mm", ipc="L2",
         descr="Bourns SRP1038C inductor, Proteus pad centres 10.0 mm apart"),
-    # J1: the Proteus IDC footprint is numbered as the mirror image of a standard header seen from
-    # the top (pin 2 where KiCad has pin 1's row neighbour on the other side; check_pin_order: the
-    # KiCad header fits only mirrored, i.e. as a bottom-side part, but J1 is on the top side by the
-    # Proteus assembly / silk layers). Swapping the odd / even pad numbers gives the Proteus
-    # pattern on the top side (STATUS.md "Phase 2 - pin order", finding 12).
-    "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads": dict(
-        base="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical",
-        renumber={str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)}, ipc="J1", ipc_sizes=True,
-        pads={"2": dict(shape="circle")},   # Phase 5 (user): round as in Proteus, no square pad on pad 2
-        descr="2x20 1.27 mm header, Proteus numbering: odd / even pad numbers swapped (pad 1 at KiCad's "
-              "pad 2 position, KiCad's pin-1 marking stays at the pad now numbered 2); Proteus pad sizes, "
-              "all pads round"),
+    # J1: the stock KiCad header; the IPC pins are renumbered to the standard numbering by
+    # p2k_config.IPC_PIN_IDS (Proteus numbered it as the mirror image, odd / even rows swapped;
+    # finding 12, user decision 2026-11-20). Proteus pad sizes and drill (round, 0.762 / 0.558); pad 1
+    # keeps KiCad's square pin-1 shape (user decision 2026-11-20: "square pin-1 pad on the real pin
+    # 1"; the only J1 pad whose copper differs from Proteus). Until 2026-11-20:
+    # `..._RowsSwapped_ProteusPads` with the swap as `renumber` and all pads round.
+    "PinHeader_2x20_P1.27mm_Vertical_ProteusPads": dict(
+        base="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical", ipc="J1", ipc_sizes=True,
+        pads={"1": dict(expect_shape="rect")},   # guard: the base's pin-1 pad is the square one
+        descr="2x20 1.27 mm header, standard numbering (p2k_config.IPC_PIN_IDS); Proteus pad sizes, "
+              "pads round except the square pad 1"),
     # Phase 5 (user, 2026-11-20): J2 with the Proteus pads (0.762 round, drill 0.558; pad 1 round too,
-    # as in Proteus and as J1 - KiCad's square pad 1 left 4 corners per layer in the round trip)
+    # as in Proteus - KiCad's square pad 1 left 4 corners per layer in the round trip)
     "PinHeader_2x08_P1.27mm_Vertical_ProteusPads": dict(
         base="Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical", ipc="J2", ipc_sizes=True,
         pads={"1": dict(shape="circle")},

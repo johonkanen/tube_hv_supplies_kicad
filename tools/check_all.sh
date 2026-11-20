@@ -41,8 +41,22 @@ step "IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)" tools/p2k/b
 step "Gerber round trip vs Proteus (copper XOR, coverage, drills)" tools/p2k/bin/p2k gerber_roundtrip --check
 # Phase 5: the pad decisions (round trip and ipc356_diff accept other pad shapes / larger drills)
 # pad sizes: KiCad pads except the PROTEUS_PADS_CHECK parts (user decisions A2 and Phase 5: + J2,
-# + Q3 Q4 Q7 Q8 with the gerber TO-220 pad, J1 all round)
-step "Proteus-pad parts: board pads = Proteus flashes and drills" tools/p2k/bin/kipy -m p2k.check_pads
+# + Q3 Q4 Q7 Q8 with the gerber TO-220 pad, J1 round except the square J1-1)
+# J1-1 is square since the J1 renumbering (user decision 2026-11-20: "square pin-1 pad on the real pin 1";
+# the Proteus flash is round). p2k.check_pads has no per-pad exception key (p2k candidate 30), so this
+# step accepts exactly the four J1-1 lines (square 0.762 pad vs the round 0.762 flash, one per copper
+# layer) and nothing else; a round J1-1 again (stale exception) or any other pad error fails.
+check_pads_j1() {
+    local out want got
+    out=$(tools/p2k/bin/kipy -m p2k.check_pads 2>&1); echo "$out"
+    want=$(for l in F.Cu In1.Cu In2.Cu B.Cu; do
+        echo "check_pads: J1-1 $l: board pad 0.762 x 0.762 mm, 0.581 mm^2; Proteus flash (C) 0.762 x 0.762 mm, 0.456 mm^2"; done)
+    got=$(echo "$out" | grep "^check_pads: " | grep -v " pad layers compared ")
+    echo "$out" | grep -q " pad layers compared with the Proteus flashes and drills: FAILED (4)$" && [ "$got" = "$want" ] \
+        || { echo "check_pads: expected exactly the 4 accepted J1-1 lines (square pin-1 pad)"; return 1; }
+    echo "check_pads: OK except the accepted square J1-1 (user decision 2026-11-20, 4 pad layers)"
+}
+step "Proteus-pad parts: board pads = Proteus flashes and drills (J1-1 square: accepted)" check_pads_j1
 
 echo
 pending=$(grep -c "PENDING USER DECISION" "$log")

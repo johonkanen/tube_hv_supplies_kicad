@@ -2,9 +2,9 @@ Gerber round trip: KiCad plot of kicad/tube_hv_supplies.kicad_pcb vs the Proteus
 raster 0.025 mm/px, tolerance 0.05 mm, clusters >= 0.01 mm^2 counted, positions in the IPC frame (mm, Y up)
 board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
 
-== F.Cu: Proteus copper 4040.7 mm^2, KiCad copper 4063.4 mm^2
-   raw XOR 46.69 mm^2; after 0.05 mm tolerance: only Proteus 3.89 mm^2, only KiCad 19.98 mm^2, 544 clusters (320 below 0.01 mm^2)
-   pad shape   224 clusters, 22.83 mm^2
+== F.Cu: Proteus copper 4040.7 mm^2, KiCad copper 4063.5 mm^2
+   raw XOR 46.80 mm^2; after 0.05 mm tolerance: only Proteus 3.89 mm^2, only KiCad 20.04 mm^2, 548 clusters (321 below 0.01 mm^2)
+   pad shape   227 clusters, 22.88 mm^2
    coverage: Proteus 2225 draws / 474 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 847 draws / 474 flashes, 0 not on Proteus copper (0 explained by pad shape)
    pad shape    72 clusters, only KiCad  18.46 mm^2, only Proteus   0.00 mm^2  Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder  (24 parts: R13 R14 R15 R16 R17 R18 ...)
    pad shape    71 clusters, only KiCad   0.00 mm^2, only Proteus   1.30 mm^2  tube_hv_supplies:R_0402_1005Metric_Proteus0.91  (29 parts: R1 R10 R11 R19 R2 R20 ...)
@@ -12,6 +12,7 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape    14 clusters, only KiCad   0.45 mm^2, only Proteus   0.51 mm^2  tube_hv_supplies:SOT-23_Proteus  (1 parts: REF1)
    pad shape    41 clusters, only KiCad   0.00 mm^2, only Proteus   0.52 mm^2  Capacitor_SMD:C_0603_1608Metric  (13 parts: C12 C13 C14 C15 C16 C17 ...)
    pad shape    24 clusters, only KiCad   0.00 mm^2, only Proteus   0.49 mm^2  Resistor_SMD:R_0603_1608Metric  (9 parts: R12 R3 R36 R45 R76 R77 ...)
+   pad shape     3 clusters, only KiCad   0.05 mm^2, only Proteus   0.00 mm^2  tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_ProteusPads  (1 parts: J1)
    pad shape     1 clusters, only KiCad   0.00 mm^2, only Proteus   0.03 mm^2  Capacitor_SMD:C_0402_1005Metric  (1 parts: C22)
    pad shape  only KiCad    1.064 mm^2 at ( -45.271,    1.895) 2.02x2.02 mm  near C2-2 (GND) 0.07 mm, via (GND) 11.17 mm
    pad shape  only KiCad    0.426 mm^2 at (   2.020,   25.931) 1.35x1.78 mm  near R14-2 (#00071) 0.18 mm, via (#00066) 6.48 mm
@@ -165,6 +166,9 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.018 mm^2 at ( -58.712,  -24.021) 0.53x0.08 mm  near R44-1 (GND) 0.38 mm, via (#00092) 0.95 mm
    pad shape  only Proteus  0.018 mm^2 at ( -52.621,  -24.413) 0.08x0.53 mm  near R20-2 (#00081) 0.38 mm, via (GND) 1.00 mm
    pad shape  only Proteus  0.018 mm^2 at ( -58.712,  -24.779) 0.53x0.08 mm  near R44-1 (GND) 0.38 mm, via (GND) 1.37 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.837,  -22.238) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 3.48 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.188,  -22.238) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.46 mm, via (GND) 3.55 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.188,  -22.913) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 2.89 mm
    pad shape  only Proteus  0.016 mm^2 at ( -78.484,   -4.423) 0.48x0.10 mm  near R71-1 (#00136) 0.39 mm, via (CURRENT_Q7) 1.66 mm
    pad shape  only Proteus  0.016 mm^2 at ( -86.752,   -8.591) 0.10x0.48 mm  near R67-1 (#00131) 0.39 mm, via (GND) 0.93 mm
    pad shape  only Proteus  0.016 mm^2 at (-117.542,  -12.577) 0.12x0.38 mm  near R80-2 (#00206) 0.53 mm, via (#00204) 3.32 mm
@@ -238,11 +242,12 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.010 mm^2 at ( -81.380,   -5.730) 0.23x0.10 mm  near R66-1 (#00127) 0.42 mm, via (CURRENT_Q4) 1.55 mm
    pad shape  only Proteus  0.010 mm^2 at ( -99.980,  -16.830) 0.08x0.30 mm  near R65-2 (#00124) 0.41 mm, via (GND) 2.24 mm
 
-== In1.Cu: Proteus copper 726.6 mm^2, KiCad copper 758.2 mm^2
-   raw XOR 31.75 mm^2; after 0.05 mm tolerance: only Proteus 0.00 mm^2, only KiCad 27.52 mm^2, 18 clusters (0 below 0.01 mm^2)
-   pad shape    18 clusters, 27.51 mm^2
+== In1.Cu: Proteus copper 726.6 mm^2, KiCad copper 758.3 mm^2
+   raw XOR 31.88 mm^2; after 0.05 mm tolerance: only Proteus 0.00 mm^2, only KiCad 27.59 mm^2, 22 clusters (0 below 0.01 mm^2)
+   pad shape    22 clusters, 27.58 mm^2
    coverage: Proteus 629 draws / 247 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 548 draws / 247 flashes, 0 not on Proteus copper (0 explained by pad shape)
    pad shape    18 clusters, only KiCad  27.51 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:CP_Radial_D10.0mm_P5.00mm  (9 parts: C1 C11 C2 C26 C3 C4 ...)
+   pad shape     4 clusters, only KiCad   0.07 mm^2, only Proteus   0.00 mm^2  tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_ProteusPads  (1 parts: J1)
    pad shape  only KiCad    1.946 mm^2 at ( -92.926,   18.074) 2.02x2.02 mm  near C1-1 (B+) 0.04 mm, via (#00136) 23.54 mm
    pad shape  only KiCad    1.946 mm^2 at ( -81.926,   18.074) 2.02x2.02 mm  near C11-1 (B+) 0.04 mm, via (#00136) 21.97 mm
    pad shape  only KiCad    1.946 mm^2 at ( -60.826,   18.074) 2.02x2.02 mm  near C26-1 (UIN) 0.04 mm, via (GND) 7.21 mm
@@ -261,11 +266,23 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (CURRENT_C6) 0.05 mm, via (CURRENT_C6) 3.70 mm
    pad shape  only KiCad    1.118 mm^2 at (  30.836,   -3.436) 2.02x2.02 mm  near C7-2 (GND) 0.05 mm, via (GND) 11.61 mm
    pad shape  only KiCad    1.059 mm^2 at (   2.498,    6.598) 2.02x2.02 mm  near C3-2 (CURRENT_C3) 0.00 mm, via (GND) 4.34 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.837,  -22.238) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 3.48 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.188,  -22.238) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.46 mm, via (GND) 3.55 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.837,  -22.913) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 2.80 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.188,  -22.913) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 2.89 mm
 
 == In2.Cu: Proteus copper 1951.9 mm^2, KiCad copper 1982.9 mm^2
-   raw XOR 33.82 mm^2; after 0.05 mm tolerance: only Proteus 0.00 mm^2, only KiCad 27.57 mm^2, 18 clusters (0 below 0.01 mm^2)
+   raw XOR 34.09 mm^2; after 0.05 mm tolerance: only Proteus 0.00 mm^2, only KiCad 27.59 mm^2, 26 clusters (8 below 0.01 mm^2)
    pad shape    18 clusters, 27.57 mm^2
-   coverage: Proteus 2015 draws / 247 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 40 draws / 247 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 2015 draws / 247 flashes, 0 not on KiCad copper (8 explained by clearance / pad shape); KiCad 40 draws / 247 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   explained Proteus draw Conductor 0.1524 mm at (-98.828, -22.094)  0 samples off copper, 8 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.986, -22.252)  0 samples off copper, 7 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.986, -22.888)  0 samples off copper, 7 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.828, -23.046)  0 samples off copper, 3 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.192, -23.046)  0 samples off copper, 4 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.034, -22.888)  0 samples off copper, 7 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.034, -22.252)  0 samples off copper, 7 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
+   explained Proteus draw Conductor 0.1524 mm at (-98.192, -22.094)  0 samples off copper, 9 in clearance/pad shape, of 19; near J1-1 (V_A_MEAS) 0.57 mm
    pad shape    18 clusters, only KiCad  27.57 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:CP_Radial_D10.0mm_P5.00mm  (9 parts: C1 C11 C2 C26 C3 C4 ...)
    pad shape  only KiCad    1.946 mm^2 at ( -92.926,   18.074) 2.02x2.02 mm  near C1-1 (B+) 0.04 mm, via (#00136) 23.54 mm
    pad shape  only KiCad    1.946 mm^2 at ( -81.926,   18.074) 2.02x2.02 mm  near C11-1 (B+) 0.04 mm, via (#00136) 21.97 mm
@@ -287,9 +304,9 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    1.118 mm^2 at (  30.836,   -3.436) 2.02x2.02 mm  near C7-2 (GND) 0.05 mm, via (GND) 11.61 mm
 
 == B.Cu: Proteus objects not compared (recorded deviations): 3 Conductor draws (REMOVED_TRACKS)
-== B.Cu: Proteus copper 1787.8 mm^2, KiCad copper 1832.6 mm^2
-   raw XOR 52.14 mm^2; after 0.05 mm tolerance: only Proteus 0.99 mm^2, only KiCad 36.02 mm^2, 250 clusters (111 below 0.01 mm^2)
-   pad shape   139 clusters, 36.55 mm^2
+== B.Cu: Proteus copper 1787.8 mm^2, KiCad copper 1832.7 mm^2
+   raw XOR 52.26 mm^2; after 0.05 mm tolerance: only Proteus 0.99 mm^2, only KiCad 36.07 mm^2, 254 clusters (112 below 0.01 mm^2)
+   pad shape   142 clusters, 36.60 mm^2
    coverage: Proteus 874 draws / 347 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 401 draws / 347 flashes, 0 not on Proteus copper (0 explained by pad shape)
    pad shape    15 clusters, only KiCad  22.56 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:CP_Radial_D10.0mm_P5.00mm  (9 parts: C1 C11 C2 C26 C3 C4 ...)
    pad shape    20 clusters, only KiCad   5.88 mm^2, only Proteus   0.00 mm^2  Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder  (8 parts: R22 R23 R24 R25 R32 R33 ...)
@@ -299,6 +316,7 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape    34 clusters, only KiCad   0.00 mm^2, only Proteus   0.43 mm^2  Capacitor_SMD:C_0603_1608Metric  (12 parts: C34 C35 C36 C37 C39 C40 ...)
    pad shape     9 clusters, only KiCad   0.31 mm^2, only Proteus   0.00 mm^2  Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder  (4 parts: C24 C25 C32 C33)
    pad shape     8 clusters, only KiCad   0.02 mm^2, only Proteus   0.10 mm^2  Resistor_SMD:R_1206_3216Metric  (2 parts: R21 R31)
+   pad shape     3 clusters, only KiCad   0.05 mm^2, only Proteus   0.00 mm^2  tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_ProteusPads  (1 parts: J1)
    pad shape  only KiCad    1.946 mm^2 at ( -92.926,   18.074) 2.02x2.02 mm  near C1-1 (B+) 0.04 mm, via (#00136) 23.54 mm
    pad shape  only KiCad    1.946 mm^2 at ( -81.926,   18.074) 2.02x2.02 mm  near C11-1 (B+) 0.04 mm, via (#00136) 21.97 mm
    pad shape  only KiCad    1.946 mm^2 at ( -60.826,   18.074) 2.02x2.02 mm  near C26-1 (UIN) 0.04 mm, via (GND) 7.21 mm
@@ -395,6 +413,9 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    0.019 mm^2 at ( -46.512,   -9.413) 0.78x0.03 mm  near D18-A (15V_BOOST) 1.14 mm, via (GND) 5.72 mm
    pad shape  only KiCad    0.019 mm^2 at ( -45.100,   -9.413) 0.75x0.03 mm  near D18-A (15V_BOOST) 1.13 mm, via (GND) 7.11 mm
    pad shape  only KiCad    0.019 mm^2 at ( -40.476,   -9.737) 0.05x0.40 mm  near D18-C (#00026) 1.35 mm, via (GND) 11.74 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.837,  -22.238) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 3.48 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.188,  -22.238) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.46 mm, via (GND) 3.55 mm
+   pad shape  only KiCad    0.018 mm^2 at ( -98.188,  -22.913) 0.18x0.18 mm  near J1-1 (V_A_MEAS) 0.47 mm, via (GND) 2.89 mm
    pad shape  only KiCad    0.016 mm^2 at ( -28.176,    9.387) 0.05x0.35 mm  near C43-1 (15V_BOOST) 1.33 mm, via (G3_LO) 7.25 mm
    pad shape  only Proteus  0.016 mm^2 at ( -85.579,   -2.065) 0.18x0.20 mm  near C48-1 (+1V0_BIAS) 0.60 mm, via (#00136) 2.22 mm
    pad shape  only Proteus  0.016 mm^2 at ( -81.079,   -2.065) 0.18x0.20 mm  near C44-2 (#00127) 0.60 mm, via (#00127) 1.94 mm

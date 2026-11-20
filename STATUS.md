@@ -12,11 +12,12 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | After 5: net rename | **done** 2026-11-20 (Opus 5.5): user decision – `+2V5_BIAS` → `+1V0_BIAS` in the KiCad design through `NET_ALIASES` (finding 1); the Proteus files keep `+2V5_BIAS`; **ALL CHECKS PASSED** (18 steps). HV supplies v2 is not installed and will be redone: this conversion is the starting point for the redesign |
 | Design fixes | **done** 2026-11-20 (Opus 5.5): user decisions – finding 7 current-measurement nets renamed to what they measure (8 nets, 4 of them on J1) through `NET_ALIASES`; finding 14 Proteus stubs removed (15V_BOOST stub by `REMOVED_TRACKS`, the two zero-length OUT1 draws by the board-local `tools/remove_dot_tracks.py`); README hole numbering = board H1-H4; make_pcb.sh --check step-failure bug fixed; new name-hint guard; **ALL CHECKS PASSED** (19 steps). Values unchanged |
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5): user decisions applied – Proteus pads on J2 and on the TO-220s Q3 Q4 Q7 Q8 (1.524 × 2.54 rounded rectangle from the gerbers, drill 1.016), J1 / J2 all round, reference texts by `place_refdes`; round trip 0 other / 0 clearance (roundtrip_pending.py removed); new `check_proteus_pads.py`; DRC 0 errors except 20 accepted courtyards (30 violations); **ALL CHECKS PASSED** (18 steps). The board stays generated |
+| Shared tools, J1 | **done** 2026-11-20 (Opus 5.5): `tools/p2k` → a9a286c; every board-local tool replaced by the shared tools / keys (D-R, D-I7 re-baselines; no strict opt-outs); J1 renumbered to the standard header numbering with `IPC_PIN_IDS` (finding 12, with the control card J11), square pad 1 (user); **ALL CHECKS PASSED** (18 steps) |
 
 **HV supplies v2 is not installed and will be redone anyway (user, 2026-11-20).** This conversion is
 only the starting point for the redesign; the findings below are input for it.
 
-## Shared-tool migration 2026-11-20 – in progress (Opus 5.5, 2026-11-20)
+## Shared-tool migration 2026-11-20 – done (Opus 5.5, 2026-11-20)
 
 Task: proteus2kicad `docs/CANDIDATES.md` section 7.4 (HV): bump `tools/p2k`, move the board-local tools to
 the shared keys, renumber the ribbon header J1 (finding 12, D-PIN). Each commit is proven from a clean
@@ -69,6 +70,96 @@ swapped: mirrored 0.000, expected unmirrored <= 0.01`; the OUT1 entry with count
 REMOVED_TRACKS: 2 listed, found 3 draws`, make_pcb FAILED at gerber_to_tracks; C1 (KiCad pads) added to
 `PROTEUS_PADS_CHECK` → check_pads FAILED (10); the `C1_CURRENT_MEAS` alias dropped → `ERROR: net name: KiCad
 net CURRENT_C3_MEAS = IPC net C1_CURRENT_MEAS (… strict check net_names)`.
+
+### Step 3 – J1 ribbon renumbering (finding 12, D-PIN; design commit)
+
+User decision 2026-11-20 (through the coordinating session): "ribbon: renumber the pads to standard at both
+ends, copper unchanged, square pin-1 pad on the real pin 1".
+
+- `p2k_config.IPC_PIN_IDS = {"J1": {str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)}}`: Proteus
+  pin k → KiCad pad k + 1 (odd k) / k − 1 (even k), applied by `p2k ipc356`, so every check sees the
+  standard numbering. Every net stays on the same physical pad (checked: Proteus pin k's net = KiCad pad
+  m's net for all 40 pins).
+- Footprint `PinHeader_2x20_P1.27mm_Vertical_ProteusPads` = the stock `Connector_PinHeader_1.27mm:
+  PinHeader_2x20_P1.27mm_Vertical`, `ipc="J1"`, `ipc_sizes=True` (Proteus 0.762 pads, drill 0.558), no
+  renumbering; replaces `…_RowsSwapped_ProteusPads` (deleted from `lib/tube_hv_supplies.pretty`). Pad 1
+  keeps KiCad's **square** pin-1 shape (`pads={"1": dict(expect_shape="rect")}` as a guard); pads 2-40
+  round as before.
+- Symbol `HEADER_2X20_50MIL` unchanged (standard: odd left, even right); sheet 5 draws each net on its
+  KiCad pin (the labels of each pin pair change sides; the ADB alias notes and the `Gnd` note name the
+  KiCad pins). `PIN_ORDER`: J1 entry = the stock footprint, unmirrored, residual 0.000, `polarity="1"`;
+  "J1 Proteus ids" = the old odd / even numbering must not fit on top any more (`mirror=None`).
+- Config comments naming J1 pins updated (`NET_ALIASES`: the four `*_MEAS` outputs on J1-2/4/6/8).
+  `EXPECTED_IPC` unchanged (N/C J1-37 / J1-38 swap names, still two N/C pads).
+- **Copper: unchanged except the J1-1 pad**, now square 0.762 × 0.762 (was round 0.762): the user's square
+  pin-1 pad. Board file sorted without UUIDs: only the pad shape, the footprint name / descr and the zone
+  fill polygons around J1-1 differ. Round trip: J1 adds 3 (F.Cu) / 4 (In1.Cu, In2.Cu, B.Cu) "pad shape"
+  clusters (the square corners, 0.018 mm² each, only KiCad); ipc356_diff OK (574 / 574 records); DRC
+  unchanged (0 errors besides the 20 accepted courtyards).
+- **Pad check exception:** `p2k.check_pads` has no per-pad exception key (p2k candidate 30), so
+  `tools/check_all.sh` (`check_pads_j1`) accepts exactly the four J1-1 lines (square 0.762 pad, 0.581 mm²,
+  vs the round flash, 0.456 mm², one per copper layer) and nothing else: J1 stays in `PROTEUS_PADS_CHECK`,
+  so J1-2..40 are still checked; a round J1-1 again (stale exception) fails.
+- Changed generated files: `reference/*` (J1 ids), `lib/footprint_map.csv`, the J1 footprint,
+  `kicad/05_reference_connector.kicad_sch`, `kicad/tube_hv_supplies.kicad_pcb` (J1 pad numbers / nets on the
+  same pads, item order, J1-1 shape), `reports/footprint_fit.csv`, `footprint_pads.csv`, `assign_nets.txt`
+  (J1-33 / J1-34 order in one line), `roundtrip/*` (the J1-1 corners); every check passes.
+
+Negative tests (in place, restored, full rebuild where the board is involved): J1-1 round again → check_pads
+OK → `check_pads_j1` "expected exactly the 4 accepted J1-1 lines" (stale exception fails); J1-2 square too
+→ check_pads FAILED (8) → fails; `IPC_PIN_IDS` removed → compare_netlists 44 errors (`net_names`, e.g. "KiCad
+net DAB_PWM_HI_SEC = IPC net PWM_TRANS6 (J1-27)"), check_pin_order "J1: mirrored 0.000, expected unmirrored"
+and "J1 Proteus ids: FITS on top (unexpected)".
+
+**J1 ↔ control card J11 (finding 12 here, control card finding 25):** the cable joins pad k to pad k. Both
+Proteus footprints have the same mirrored numbering, and the control card session renumbers J11 with the
+same `IPC_PIN_IDS` rule (other repo, not touched here), so after both renumberings KiCad J1 pad m still
+meets KiCad J11 pad m, pin for pin (Proteus pin k ↔ Proteus pin k before). Mapping (TC net names from its
+Proteus IPC at d2a4f66; the names differ by board, the pads pair up as listed):
+
+| Proteus pin (J1 = J11) | KiCad pad (J1 = J11) | HV J1 net | TC J11 net (Proteus IPC name) |
+|---|---|---|---|
+| 1 | 2 | CURRENT_Q4_MEAS | ADB0 |
+| 2 | 1 | V_A_MEAS | ADB7 |
+| 3 | 4 | CURRENT_Q7_MEAS | ADB1 |
+| 4 | 3 | UIN_MEAS | ADB6 |
+| 5 | 6 | CURRENT_C6_MEAS | ADB2 |
+| 6 | 5 | UC3_MEAS | ADB5 |
+| 7 | 8 | CURRENT_C3_MEAS | ADB3 |
+| 8 | 7 | U_OUT_MEAS | ADB4 |
+| 9 | 10 | ADASEL1_ISO | ADASEL1_ISO |
+| 10 | 9 | ADASEL2_ISO | ADASEL2_ISO |
+| 11 | 12 | SCL | SDATA1_ISO |
+| 12 | 11 | ADASEL0_ISO | ADASEL0_ISO |
+| 13 | 14 | CLK1_ISO | CLK1_ISO |
+| 14 | 13 | CS1_ISO | CS1_ISO |
+| 15 | 16 | PWM_TRANS2_ISO | PWM_TRANS2_ISO |
+| 16 | 15 | PWM_TRANS1_ISO | PWM_TRANS1_ISO |
+| 17 | 18 | PWM_G4_ISO | PWM_G4_ISO |
+| 18 | 17 | PWM_TRANS3_ISO | PWM_TRANS3_ISO |
+| 19 | 20 | PWM_G1_ISO | PWM_G1_ISO |
+| 20 | 19 | PWM_G2_ISO | PWM_G2_ISO |
+| 21 | 22 | DAB_PWM_PRI_HI_ISO | DAB_PWM_PRI_HI_ISO |
+| 22 | 21 | PWM_G3_ISO | PWM_G3_ISO |
+| 23 | 24 | ADCLK_DAB | ADCLK_DAB |
+| 24 | 23 | DAB_PWM_PRI_LO_ISO | DAB_PWM_PRI_LO_ISO |
+| 25 | 26 | SDA | MDATA_DAB |
+| 26 | 25 | PWM_TRANS4 | PWM_TRANS4 |
+| 27 | 28 | PWM_TRANS6 | PWM_TRANS6 |
+| 28 | 27 | DAB_PWM_HI_SEC | DAB_PWM_HI_SEC |
+| 29 | 30 | G3_LO | PWM_Q5 |
+| 30 | 29 | G1_LO | DAB_PWM_LO_SEC |
+| 31 | 32 | G3_HI | INU_ADCLK |
+| 32 | 31 | G1_HI | PWM_Q6 |
+| 33 | 34 | GND | GND |
+| 34 | 33 | GND | GND |
+| 35 | 36 | 3V3 | 3V3 |
+| 36 | 35 | 3V3 | 3V3 |
+| 37 | 38 | N/C | N/C |
+| 38 | 37 | N/C | N/C |
+| 39 | 40 | 15V_BOOST | 12V |
+| 40 | 39 | 15V_BOOST | 12V |
+
 
 ## Design fixes 2026-11-20 – findings 7 and 14, README holes – done (Opus 5.5, 2026-11-20)
 
@@ -1100,7 +1191,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (after the design fixes: finding 7 renames, finding 14 stubs; 19 steps):
+`tools/check_all.sh`, 2026-11-20 (after the shared-tool migration and the J1 renumbering, p2k a9a286c; 18 steps):
 
 ```
 == KiCad environment
@@ -1108,6 +1199,7 @@ pcbnew 10.0.7
 == IPC-D-356A parser self-check
 ipc356: nets=113, records=574, refdes_raw=159, tht_records=247, smd_records=327, smd_top=227, smd_bottom=100, nc_pads=2, vias=141, free_pads=0, holes=4, parts=158
 ipc356: OK
+ipc356: pin ids renamed (IPC_PIN_IDS): J1 1->2 2->1 3->4 4->3 5->6 6->5 7->8 8->7 9->10 10->9 11->12 12->11 13->14 14->13 15->16 16->15 17->18 18->17 19->20 20->19 21->22 22->21 23->24 24->23 25->26 26->25 27->28 28->27 29->30 30->29 31->32 32->31 33->34 34->33 35->36 36->35 37->38 38->37 39->40 40->39
 == Gerber X2 export vs IPC (pads, vias, drills, outline)
   14 gerbers, one SameCoordinates id
   Top Copper: Draw:Conductor 2221, Draw:Profile 4, Flash:ComponentPad 102, Flash:OtherPad,Unknown 4, Flash:SMDPad,CuDef 227, Flash:ViaPad 141, Region:- 118
@@ -1140,38 +1232,49 @@ gen_symbols: lib/tube_hv_supplies.kicad_sym up to date (20 symbols)
 symbols: 15 part types, 160 refdes, 4 power symbols
 symbols: OK
 == ERC
-erc: 0 errors, 21 warnings (reports/erc.rpt)
+erc: 0 errors, 21 warnings (2 ground_pin_not_ground, 19 isolated_pin_label) (reports/erc.rpt)
 == Netlist comparison vs IPC
-compare: parts 158/158 present, 0 missing, 0 extra; pins compared 423, wrong-net pins 0; IPC nets touched 115, complete 115
+compare: parts 158/158 present, 0 missing, 0 extra; pins compared 423, wrong-net pins 0; IPC nets touched 113, complete 113 (+ 2 N/C / no-net pins)
 compare: per sheet (drawn/total) 1:34/34 2:26/26 3:42/42 4:34/34 5:7/7 6:15/15
 compare: OK
-== KiCad net names = IPC names after NET_ALIASES (no name hints)
 == Footprint library, map and fp-lib-table up to date
+footprints: R_0402_1005Metric_Proteus0.91: fit on R1 unmirrored, largest pad move 0.053 mm (pad 2), limit 0.510 mm
+footprints: R_0508_1220Metric_KRL2012: fit on R29 unmirrored, largest pad move 0.087 mm (pad 2), limit 0.575 mm
+footprints: D_SMA_AC: fit on D2 mirrored, largest pad move 0.050 mm (pad C), limit 2.000 mm
+footprints: SOT-23_Proteus: fit on REF1 unmirrored, largest pad move 0.020 mm (pad 1), limit 0.950 mm
+footprints: SOT-23-6_ADC121C027_Proteus_ProteusPads: fit on ADC1 unmirrored, largest pad move 0.188 mm (pad COM2), limit 0.475 mm
+footprints: TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads: fit on U1 unmirrored, largest pad move 0.063 mm (pad 9), limit 0.325 mm
+footprints: SOIC-8_3.9x4.9mm_P1.27mm_Proteus: fit on DRV1 mirrored, largest pad move 0.275 mm (pad 8), limit 0.635 mm
+footprints: SOIC-8_3.9x4.9mm_P1.27mm_Proteus_ProteusPads: fit on DRV5 mirrored, largest pad move 0.275 mm (pad 8), limit 0.635 mm
+footprints: L_Bourns_SRP1038C_10.0x10.0mm_Proteus: fit on L2 unmirrored, largest pad move 0.525 mm (pad 1), limit 4.475 mm
+footprints: PinHeader_2x20_P1.27mm_Vertical_ProteusPads: fit on J1 unmirrored, largest pad move 0.000 mm (pad 23), limit 0.635 mm
+footprints: PinHeader_2x08_P1.27mm_Vertical_ProteusPads: fit on J2 unmirrored, largest pad move 0.000 mm (pad 16), limit 0.635 mm
+footprints: TO-220-3_Vertical_ProteusPads: fit on Q3 unmirrored, largest pad move 0.000 mm (pad 3), limit 1.270 mm
 gen_footprints: 158 parts, 23 footprints (15 project), up to date
 == Footprints vs IPC pad geometry (fit and pcbnew placement)
 check_footprints: pcbnew placement of 158 parts, worst pad offset 0.039 mm
 check_footprints: 158/158 parts fitted, 429 pads, 23 footprints, worst residual 0.039 mm (limit 0.05)
 check_footprints: OK
 == Pin order vs unmoved KiCad base footprints
-check            KiCad base (unmoved)                           unmirrored         mirrored  result
-REF1             SOT-23                                      0.020 @    90    1.890 @   270  unmirrored 0.020  (SOT-23 renumbered (1 = JEDEC 3): fits; Proteus 1.90 mm rows vs KiCad 1.875)
-REF1 plain       SOT-23                                      0.151 @ 329.8    2.263 @ 80.89  no fit on its side  (SOT-23 with JEDEC numbering: does not fit (> 0.1 mm, angle not snapped))
-ADC              SOT-23-6                                    0.188 @     0    1.909 @   180  unmirrored 0.188  (A1 A2 COM2 K2 K1 COM1 = JEDEC 1-6: fits (rows 2.65 vs KiCad 2.275 -> 0.1875))
-ADC datasheet    SOT-23-6                                    1.909 @     0    0.188 @   180  no fit on its side  (VA / VIN exchanged (COM2 on pad 1, A1 on pad 3, the datasheet wiring): fits only mirrored, i.e. not on a top-side part)
-SI8271           SOIC-8_3.9x4.9mm_P1.27mm                    3.820 @     0    0.275 @   180  mirrored 0.275  (bottom side, rows 5.5 vs 4.95)
-SI8271 Proteus pads SOIC-8_3.9x4.9mm_P1.27mm                    3.820 @     0    0.275 @   180  mirrored 0.275  (bottom side, rows 5.5 vs 4.95 (spec with the Proteus pad sizes))
-TSSOP-14         TSSOP-14_4.4x5mm_P0.65mm                    0.063 @    90    3.901 @   270  unmirrored 0.063  (rows 5.85 vs 5.725)
-J1 rows swapped  PinHeader_2x20_P1.27mm_Vertical             0.000 @    90    1.270 @    90  unmirrored 0.000  (odd / even swapped: fits on top)
-J1 KiCad         PinHeader_2x20_P1.27mm_Vertical             1.270 @    90    0.000 @    90  mirrored 0.000  (standard numbering fits only MIRRORED (bottom), but J1 is on top)
-J2               PinHeader_2x08_P1.27mm_Vertical             0.000 @   180    1.270 @   180  unmirrored 0.000  (standard numbering fits on top (spec with the Proteus pad sizes))
-TO-220           TO-220-3_Vertical                           0.000 @   180    0.000 @     0  unmirrored 0.000  (inline: marker by render (spec with the Proteus pads))
-SMA              D_SMA                                       0.050 @     0    0.050 @   180  mirrored 0.050  (two pads: band by render)
-CP               CP_Radial_D10.0mm_P5.00mm                   0.000 @   270    0.000 @    90  unmirrored 0.000  (two pads: '+' by render)
-check_pin_order: OK (results as recorded in STATUS.md)
+check                    base (unmoved)                                     unmirrored         mirrored  result
+REF1                     SOT-23                                          0.020 @    90    1.890 @   270  unmirrored 0.020  (SOT-23 renumbered (1 = JEDEC 3): fits; Proteus 1.90 mm rows vs KiCad 1.875)
+REF1 plain               SOT-23                                          0.151 @ 329.8    2.263 @ 80.89  no fit on top  (SOT-23 with JEDEC numbering: does not fit (> 0.1 mm, angle not snapped))
+ADC                      SOT-23-6                                        0.188 @     0    1.909 @   180  unmirrored 0.188  (A1 A2 COM2 K2 K1 COM1 = JEDEC 1-6: fits (rows 2.65 vs KiCad 2.275 -> 0.1875))
+ADC datasheet            SOT-23-6                                        1.909 @     0    0.188 @   180  no fit on top  (VA / VIN exchanged (COM2 on pad 1, A1 on pad 3, the datasheet wiring): fits only mirrored, i.e. not on a top-side part (finding 6))
+SI8271                   SOIC-8_3.9x4.9mm_P1.27mm                        3.820 @     0    0.275 @   180  mirrored 0.275  (bottom side, rows 5.5 vs 4.95)
+SI8271 Proteus pads      SOIC-8_3.9x4.9mm_P1.27mm                        3.820 @     0    0.275 @   180  mirrored 0.275  (bottom side, rows 5.5 vs 4.95 (spec with the Proteus pad sizes))
+TSSOP-14                 TSSOP-14_4.4x5mm_P0.65mm                        0.063 @    90    3.901 @   270  unmirrored 0.063  (rows 5.85 vs 5.725)
+J1                       polarity: base pad 1 (marked) = pin '1' (expected '1')
+J1                       PinHeader_2x20_P1.27mm_Vertical                 0.000 @    90    1.270 @    90  unmirrored 0.000  (standard numbering on the IPC_PIN_IDS pads: fits on top, pin 1 on the marked pad)
+J1 Proteus ids           PinHeader_2x20_P1.27mm_Vertical                 1.270 @    90    0.000 @    90  no fit on top  (the Proteus odd / even numbering does not fit on top any more (the IPC pins are renumbered, finding 12))
+J2                       PinHeader_2x08_P1.27mm_Vertical                 0.000 @   180    1.270 @   180  unmirrored 0.000  (standard numbering fits on top (spec with the Proteus pad sizes))
+TO-220                   TO-220-3_Vertical                               0.000 @   180    0.000 @     0  unmirrored 0.000  (inline: marker by render (spec with the Proteus pads))
+SMA                      D_SMA                                           0.050 @     0    0.050 @   180  mirrored 0.050  (two pads: band by render)
+CP                       CP_Radial_D10.0mm_P5.00mm                       0.000 @   270    0.000 @    90  unmirrored 0.000  (two pads: '+' by render)
+check_pin_order: OK (13 checks as recorded)
 == PCB rebuilt from schematic + gerbers, up to date
 build_pcb: 158 footprints placed (2 excluded from board), 4 mounting holes, 115 nets, 4 outline segments
-gerber_to_tracks: 1838 tracks, 141 vias (IPC 141), 21 pour outlines on User.1-4; removed as recorded: 1 tracks (REMOVED_TRACKS), 0 vias (REMOVED_VIAS)
-remove_dot_tracks: 2 zero-length tracks deleted (1 entries, REMOVED_DOT_TRACKS)
+gerber_to_tracks: 1836 tracks, 141 vias (IPC 141), 21 pour outlines on User.1-4; removed as recorded: 3 tracks (REMOVED_TRACKS), 0 vias (REMOVED_VIAS)
 assign_nets: stage A (no pours): 225 groups, 0 shorts, 36 orphans, 11 opens
 assign_nets: stage B (with pours): 119 groups, 0 shorts, 0 orphans, 0 opens
 pours_to_zones: 21 pours -> 21 zones; 24 holes closed by the stroke, 259 holes kept
@@ -1180,6 +1283,7 @@ make_pcb: board rebuilt from scratch, byte-identical
 == Board pads, holes, vias vs IPC (position, size, nets 1:1)
 check_board: 162 footprints, 429 pads, worst pad offset 0.039 mm (limit 0.05), 113 IPC nets mapped 1:1, 4 mounting holes
 check_board: 1836 tracks, 141 vias, 21 zones
+check_board: 1977 track / via nets in the board file = their copper group's net (track_nets)
 check_board: OK
 == Board copper connectivity after zone fill
 assign_nets: after zone fill: 119 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
@@ -1195,17 +1299,24 @@ ipc356_diff: Proteus 574 records, KiCad 574; matched 574 (429 pads incl. 2 N/C, 
 ipc356_diff: 113 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
 ipc356_diff: KiCad drill larger (footprint kept): 18x 0.812->1.001
 ipc356_diff: pads with another size in KiCad (info): C 96, D 4, DRV 16, L 6, Q 12, R 150, REF 3
+ipc356_diff: 2 unconnected-(...) nets, one record each (nc_joined)
 ipc356_diff: OK
 == Gerber round trip vs Proteus (copper XOR, coverage, drills)
-roundtrip: F.Cu   XOR   46.69 mm^2, beyond 0.05 mm: only Proteus   3.89, only KiCad  19.98 mm^2; clusters >= 0.01 mm^2: 224 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: In1.Cu XOR   31.75 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.52 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: In2.Cu XOR   33.82 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.57 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: B.Cu   XOR   52.14 mm^2, beyond 0.05 mm: only Proteus   0.99, only KiCad  36.02 mm^2; clusters >= 0.01 mm^2: 139 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: Proteus objects not compared (recorded deviations, all layers): 1 Conductor draws (REMOVED_TRACKS)
+roundtrip: F.Cu   XOR   46.80 mm^2, beyond 0.05 mm: only Proteus   3.89, only KiCad  20.04 mm^2; clusters >= 0.01 mm^2: 227 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In1.Cu XOR   31.88 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.59 mm^2; clusters >= 0.01 mm^2: 22 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In2.Cu XOR   34.09 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.59 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: B.Cu   XOR   52.26 mm^2, beyond 0.05 mm: only Proteus   0.99, only KiCad  36.07 mm^2; clusters >= 0.01 mm^2: 142 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: Proteus objects not compared (recorded deviations, all layers): 3 Conductor draws (REMOVED_TRACKS)
 roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: counts (roundtrip_counts): KiCad track draws / flashes per layer F.Cu 847 / 474, In1.Cu 548 / 247, In2.Cu 40 / 247, B.Cu 401 / 347: tracks as gerber_to_tracks builds them, flashes = Proteus
 roundtrip: OK
-== Proteus-pad parts: board pads = Proteus flashes and drills
-check_proteus_pads: 13 parts, 130 pads, 334 pad layers compared with the Proteus flashes and drills: OK
+== Proteus-pad parts: board pads = Proteus flashes and drills (J1-1 square: accepted)
+check_pads: J1-1 F.Cu: board pad 0.762 x 0.762 mm, 0.581 mm^2; Proteus flash (C) 0.762 x 0.762 mm, 0.456 mm^2
+check_pads: J1-1 In1.Cu: board pad 0.762 x 0.762 mm, 0.581 mm^2; Proteus flash (C) 0.762 x 0.762 mm, 0.456 mm^2
+check_pads: J1-1 In2.Cu: board pad 0.762 x 0.762 mm, 0.581 mm^2; Proteus flash (C) 0.762 x 0.762 mm, 0.456 mm^2
+check_pads: J1-1 B.Cu: board pad 0.762 x 0.762 mm, 0.581 mm^2; Proteus flash (C) 0.762 x 0.762 mm, 0.456 mm^2
+check_pads: 13 parts, 130 pads, 334 pad layers compared with the Proteus flashes and drills: FAILED (4)
+check_pads: OK except the accepted square J1-1 (user decision 2026-11-20, 4 pad layers)
 
 ALL CHECKS PASSED
 ```
@@ -1288,6 +1399,9 @@ Reported, not fixed (PLAN.md section 5). Since 2026-11-20 the user has findings 
     mirrored footprint (then the two swaps cancel). Reproduced: KiCad footprint
     `PinHeader_2x20_P1.27mm_Vertical_RowsSwapped` (KiCad's pin-1 corner mark lands at the pad
     numbered 2). Check the control card footprint / the built cable; a redesign item.
+    **Done (user decision 2026-11-20, D-PIN): renumbered to the standard header numbering** through
+    `IPC_PIN_IDS` (copper unchanged except the square pin-1 pad on the real pin 1), together with the
+    control card's J11; section "Shared-tool migration 2026-11-20", step 3 (pin mapping there).
 
 13. **Copper clearances of 0.127 mm (5 mil) (Phase 3, note for the redesign):** the Proteus copper
     has 52 different-net pairs closer than 0.14 mm, the smallest 0.1265 mm (track–via, track–track on
@@ -1462,8 +1576,23 @@ Shared-tool limitations met on this board, with the board-local workaround used.
 29. **make_pcb.sh template:** `run ... || {...}` disables `set -e` inside `run()`; chain the steps with `&&`
     (fixed here, preamp, PI/FX). Worth fixing in the playbook's make_pcb template / other boards.
    **Solved in p2k a9a286c** (`p2k make_pcb`; make_pcb.sh is the one-liner).
+30. **`p2k.check_pads` has no per-pad exception** (2026-11-20, J1 renumbering): the user's square J1-1 pad
+    (the Proteus flash is round) fails the area check on 4 layers, and the only ways out are dropping J1
+    from `PROTEUS_PADS_CHECK` (loses J1-2..40) or raising `CHECK_PADS_AREA_TOL` (loses every pad). Board
+    workaround: `check_pads_j1()` in `tools/check_all.sh` accepts exactly the four J1-1 lines. A key such as
+    `CHECK_PADS_ACCEPTED = {"J1-1": reason}` (stale entry fails) would replace it.
+
 
 ## Decisions
+
+- **User decision 2026-11-20 (through the coordinating session): "ribbon: renumber the pads to standard at
+  both ends, copper unchanged, square pin-1 pad on the real pin 1".** J1 gets `IPC_PIN_IDS` (Proteus pin k →
+  KiCad pad k ± 1) and the stock header footprint; the new pad 1 is square, the one J1 pad whose copper
+  differs from Proteus (reverses the Phase 5 "J1 all round" for that pad only); J1-1 is the recorded
+  exception of the pad check. Finding 12 done (section "Shared-tool migration 2026-11-20").
+- User decisions D-R, D-Z, D-I7 (p2k CANDIDATES.md "Decisions", 2026-11-20): the `reference/*.md` report-text
+  re-baseline, strict checks on by default, and the REMOVED_TRACKS migration re-baseline (board item order,
+  assign_nets orphan order, 2 round-trip lines), applied in the shared-tool migration.
 
 - **User decision 2026-11-20 (through the coordinating session): the current-measurement nets are
   named after the switch (`CURRENT_Q4`, `CURRENT_Q7` and their `_MEAS` outputs), not the inductor,

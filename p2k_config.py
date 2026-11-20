@@ -73,11 +73,20 @@ NET_ALIASES = {
     "C3_CURRENT": "CURRENT_C6",              # R30: current of C6 (bridge 2 second-stage capacitor, UC6)
     "CURRENT_L1": "CURRENT_Q4",              # R72: Q4 emitter (bridge 1 low side)
     "CURRENT_L3": "CURRENT_Q7",              # R29: Q7 emitter (bridge 2 low side)
-    "C1_CURRENT_MEAS": "CURRENT_C3_MEAS",    # U2:B out, J1-7
-    "INPUT_CURRENT_MEAS": "CURRENT_C6_MEAS", # U2:A out, J1-5
-    "C2_CURRENT_MEAS": "CURRENT_Q4_MEAS",    # U2:C out, J1-1
-    "C3_CURRENT_MEAS": "CURRENT_Q7_MEAS",    # U2:D out, J1-3
+    "C1_CURRENT_MEAS": "CURRENT_C3_MEAS",    # U2:B out, J1-8 (Proteus J1-7)
+    "INPUT_CURRENT_MEAS": "CURRENT_C6_MEAS", # U2:A out, J1-6 (Proteus J1-5)
+    "C2_CURRENT_MEAS": "CURRENT_Q4_MEAS",    # U2:C out, J1-2 (Proteus J1-1)
+    "C3_CURRENT_MEAS": "CURRENT_Q7_MEAS",    # U2:D out, J1-4 (Proteus J1-3)
 }
+
+# Ribbon header J1 (finding 12; user decision 2026-11-20, D-PIN: "renumber the pads to standard at both
+# ends, copper unchanged, square pin-1 pad on the real pin 1"): Proteus numbers J1 as the mirror image of
+# a standard top-view 2x20 header (odd / even rows swapped). Proteus pin k -> KiCad pad k + 1 (odd k) /
+# k - 1 (even k), so J1 is the stock KiCad header with the standard numbering and every net stays on the
+# same physical pad. The control card's J11 (other repo) is renumbered the same way, so the cable still
+# joins pad k to pad k (STATUS.md "Shared-tool migration 2026-11-20", J1 / J11 table). p2k ipc356 applies
+# it when it parses the IPC, so every check sees the KiCad pad numbers.
+IPC_PIN_IDS = {"J1": {str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)}}
 
 # Blank-refdes records: a net and one of these drills = via (0.5/0.3 x139, 1.016/0.381 x2),
 # no net = hole (4 plated 3.0 mm mounting holes, 6.35 mm ring on every copper layer, no net).
@@ -96,7 +105,7 @@ EXPECTED_IPC = {
     "smd_records": 327,
     "smd_top": 227,
     "smd_bottom": 100,
-    "nc_pads": 2,         # J1-37, J1-38
+    "nc_pads": 2,         # J1-37, J1-38 (Proteus J1-38, J1-37 after IPC_PIN_IDS)
     "vias": 141,
     "free_pads": 0,
     "holes": 4,
@@ -201,11 +210,11 @@ PIN_ORDER = [
          note="bottom side, rows 5.5 vs 4.95 (spec with the Proteus pad sizes)"),
     dict(name="TSSOP-14", refs="U1 U2", spec="TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads", mirror=False, res=0.07,
          note="rows 5.85 vs 5.725"),
-    dict(name="J1 rows swapped", refs="J1", spec="PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads",
-         mirror=False, res=0.01, note="odd / even swapped: fits on top"),
-    dict(name="J1 KiCad", refs="J1", footprint="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical",
-         mirror=True, res=0.01, render=False,
-         note="standard numbering fits only MIRRORED (bottom), but J1 is on top (finding 12)"),
+    dict(name="J1", refs="J1", spec="PinHeader_2x20_P1.27mm_Vertical_ProteusPads", mirror=False, res=0.01,
+         polarity="1", note="standard numbering on the IPC_PIN_IDS pads: fits on top, pin 1 on the marked pad"),
+    dict(name="J1 Proteus ids", refs="J1", footprint="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical",
+         renumber={str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)}, mirror=None, render=False,
+         note="the Proteus odd / even numbering does not fit on top any more (the IPC pins are renumbered, finding 12)"),
     dict(name="J2", refs="J2", spec="PinHeader_2x08_P1.27mm_Vertical_ProteusPads", mirror=False, res=0.01,
          note="standard numbering fits on top (spec with the Proteus pad sizes)"),
     dict(name="TO-220", refs="Q3 Q4 Q7 Q8", spec="TO-220-3_Vertical_ProteusPads", mirror=False, res=0.01,
@@ -217,7 +226,8 @@ PIN_ORDER = [
 
 # --- Pad decisions (Phase 5, p2k check_pads) -------------------------------------------------
 # The parts that must have exactly the Proteus pads (gerber flash bbox / area, drill) on the board:
-# user decisions A2 (Phase 3) + J2, Q3 Q4 Q7 Q8 and J1 all round (Phase 5, 2026-11-20). Written out
+# user decisions A2 (Phase 3) + J2, Q3 Q4 Q7 Q8 and J1 round (Phase 5, 2026-11-20) except J1-1, square since
+# the J1 renumbering (user decision 2026-11-20; check_all.sh accepts exactly the J1-1 area). Written out
 # independently of tools/gen_footprints.py PROTEUS_PADS (the two must agree; a part taken out of the
 # footprint rules fails here).
 PROTEUS_PADS_CHECK = "U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 J2 Q3 Q4 Q7 Q8".split()
