@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sheet 5 - Reference and connector (PDF page 5): the reference REF1 (ISL21010) from 3V3 with
-C8 / C21, R74 -> +2V5_BIAS with R73 / C22 to GND, and the control-card ribbon connector J1
+C8 / C21, R74 -> +1V0_BIAS with R73 / C22 to GND, and the control-card ribbon connector J1
 (2x20, 1.27 mm).
 
 PDF: J1 pins 1-8 are labelled ADB0-ADB7 and tied to the *_meas nets by separate terminal links
@@ -11,7 +11,7 @@ from _common import *  # noqa: F401,F403
 
 sh = sheet("05_reference_connector.kicad_sch")
 
-# --- REF1: reference, 3V3 -> R74 -> +2V5_BIAS ----------------------------------------------------
+# --- REF1: reference, 3V3 -> R74 -> +1V0_BIAS ----------------------------------------------------
 ref = sh.place(sym("REF1"), "REF1", *P(38, 30), value=sh_value("REF1"))
 VIN, VOUT, RGND = ref.pin(2), ref.pin(3), ref.pin(1)
 Y = VIN[1]
@@ -31,16 +31,16 @@ sh.wire((xo, Y), ct)
 sh.wire(cb, (xo, GROW))
 _, rl, rr = horiz2(sh, "R", "R74", xo + g(8), Y, sh_value("R74"), left=1)     # pin 1 = VOUT
 sh.wire((xo, Y), rl)
-xb = xo + g(16)                                    # +2V5_BIAS node
+xb = xo + g(16)                                    # +1V0_BIAS node
 sh.wire(rr, (xb, Y))
 sh.junction(xb, Y)
 sh.wire((xb, Y), (xb, Y - g(6)))
-power_at(sh, "+2V5_BIAS", (xb, Y - g(6)), "up")
-_, rt, rb = vert2(sh, "R", "R73", xb, Y + g(8), sh_value("R73"), top=1)       # pin 1 = +2V5_BIAS
+power_at(sh, "+1V0_BIAS", (xb, Y - g(6)), "up")
+_, rt, rb = vert2(sh, "R", "R73", xb, Y + g(8), sh_value("R73"), top=1)       # pin 1 = +1V0_BIAS
 sh.wire((xb, Y), rt)
 sh.wire(rb, (xb, GROW))
 xc = xb + g(9)
-_, ct, cb = vert2(sh, "C", "C22", xc, Y + g(8), sh_value("C22"), top=1)       # pin 1 = +2V5_BIAS
+_, ct, cb = vert2(sh, "C", "C22", xc, Y + g(8), sh_value("C22"), top=1)       # pin 1 = +1V0_BIAS
 sh.wire((xb, Y), (xc, Y), ct)
 sh.junction(xc, Y)
 sh.wire((xc, Y), (xc, Y - g(4)))

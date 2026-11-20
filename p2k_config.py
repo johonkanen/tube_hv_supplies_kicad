@@ -19,7 +19,7 @@ SHEETS = [
     (2, "Gate drivers", "02_gate_drivers.kicad_sch"),                    # DRV1/DRV2/DRV5/DRV6 Si8271, bootstrap D18/D2
     (3, "Voltage measurements", "03_voltage_measurements.kicad_sch"),    # U1 LMV324A dividers: UIN, UC3, V_A, U_OUT
     (4, "Current measurements", "04_current_measurements.kicad_sch"),    # U2 LT1014 shunt amplifiers
-    (5, "Reference and connector", "05_reference_connector.kicad_sch"),  # REF1 +2V5_BIAS, J1 40-pin ribbon
+    (5, "Reference and connector", "05_reference_connector.kicad_sch"),  # REF1 +1V0_BIAS, J1 40-pin ribbon
     (6, "ADC", "06_adc.kicad_sch"),                                      # J2 16-pin, ADC1-3 ADC121C027
 ]
 SCH_TITLE = "Tube HV supplies"
@@ -54,8 +54,13 @@ KICAD_REFDES = {
 }
 
 # No Proteus power-net suffixes (=POWER) in this export: GND, 3V3, 15V_BOOST are plain
-# names. No renames (the +2V5_BIAS name question is a finding, STATUS.md).
-NET_ALIASES = {}
+# names. One rename (user decision 2026-11-20, finding 1): REF1 is ISL21010CFH315Z (1.5 V) into
+# R74 220 / R73 470, so the rail is about 1.0 V; the Proteus IPC and gerbers keep +2V5_BIAS.
+# p2k ipc356 applies this map when it parses the IPC, so every check that reads the IPC nets
+# (reference/, compare_netlists, check_symbols, check_board, assign_nets, gerber_roundtrip
+# labels) sees +1V0_BIAS; ipc356_diff matches nets by pad sets. ipc356 --check fails if the
+# source name is not in the IPC or the target collides with an IPC net.
+NET_ALIASES = {"+2V5_BIAS": "+1V0_BIAS"}
 
 # Blank-refdes records: a net and one of these drills = via (0.5/0.3 x139, 1.016/0.381 x2),
 # no net = hole (4 plated 3.0 mm mounting holes, 6.35 mm ring on every copper layer, no net).

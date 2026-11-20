@@ -568,7 +568,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_hv_supplies:+2V5_BIAS"
+		(symbol "tube_hv_supplies:+1V0_BIAS"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -593,7 +593,7 @@
 					)
 				)
 			)
-			(property "Value" "+2V5_BIAS"
+			(property "Value" "+1V0_BIAS"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -625,7 +625,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+			(property "Description" "Power symbol for net \"+1V0_BIAS\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -647,7 +647,7 @@
 					)
 				)
 			)
-			(symbol "+2V5_BIAS_0_1"
+			(symbol "+1V0_BIAS_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -685,7 +685,7 @@
 					)
 				)
 			)
-			(symbol "+2V5_BIAS_1_1"
+			(symbol "+1V0_BIAS_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -2345,7 +2345,7 @@
 		(uuid "141cf873-d64a-52a1-852c-9aed2d392127")
 	)
 	(symbol
-		(lib_id "tube_hv_supplies:+2V5_BIAS")
+		(lib_id "tube_hv_supplies:+1V0_BIAS")
 		(at 134.62 68.58 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2362,7 +2362,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+2V5_BIAS"
+		(property "Value" "+1V0_BIAS"
 			(at 134.62 65.024 0)
 			(effects
 				(font
@@ -2388,7 +2388,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"+2V5_BIAS\" (IPC net name)"
+		(property "Description" "Power symbol for net \"+1V0_BIAS\" (IPC net name)"
 			(at 134.62 68.58 0)
 			(effects
 				(font

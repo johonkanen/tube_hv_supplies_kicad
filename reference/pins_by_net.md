@@ -68,7 +68,7 @@ usually test points or connections made through the ignored-by-IPC copper.
 | #00206 | 3 | 0 | J2-3 J2-4 R80-2 |
 | #00208 | 3 | 0 | J2-7 J2-8 R79-2 |
 | #00211 | 3 | 0 | J2-11 J2-12 R78-2 |
-| +2V5_BIAS | 11 | 3 | C22-1 C44-1 C45-1 C47-1 C48-1 R54-2 R59-2 R64-2 R69-2 R73-1 R74-2 |
+| +1V0_BIAS | 11 | 3 | C22-1 C44-1 C45-1 C47-1 C48-1 R54-2 R59-2 R64-2 R69-2 R73-1 R74-2 |
 | ADASEL0_ISO | 1 | 0 | J1-12 |
 | ADASEL1_ISO | 1 | 0 | J1-9 |
 | ADASEL2_ISO | 1 | 0 | J1-10 |

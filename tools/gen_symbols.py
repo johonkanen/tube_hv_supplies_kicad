@@ -17,7 +17,7 @@ Box symbols:
   HEADER_2X20_50MIL (J1), HEADER_2X8_50MIL (J2)   odd pins left, even right
 Off-board (drawn in the PDF, no pads; excluded from the board): L_OFFBOARD (L1, L3, 3 mH).
 Power symbols for the four rails drawn with power symbols (transcription rules): GND, 3V3,
-15V_BOOST, +2V5_BIAS (IPC spelling; the +2V5_BIAS name is an open user decision, finding 1).
+15V_BOOST, +1V0_BIAS (IPC +2V5_BIAS renamed through p2k_config.NET_ALIASES, user decision 2026-11-20, finding 1).
 
 Run:  tools/gen_symbols.py           (needs the AppImage mount for the std libs)
       tools/gen_symbols.py --check   (fail if lib/tube_hv_supplies.kicad_sym is not up to date)
@@ -30,7 +30,7 @@ from p2k.symgen import *  # noqa: E402,F401,F403
 from p2k.symgen import run  # noqa: E402
 
 GROUNDS = ["GND"]
-SUPPLIES = ["3V3", "15V_BOOST", "+2V5_BIAS"]
+SUPPLIES = ["3V3", "15V_BOOST", "+1V0_BIAS"]
 
 
 def quad_opamp(name, desc):

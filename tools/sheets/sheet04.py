@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sheet 4 - Current measurements (PDF page 4): U2 (LT1014, units A-D) as four shunt
-amplifiers. Each unit: shunt signal -> 330R -> + input, biased to +2V5_BIAS through 6.8k / 20p;
+amplifiers. Each unit: shunt signal -> 330R -> + input, biased to +1V0_BIAS through 6.8k / 20p;
 - input 330R to GND with 6.8k / 20p feedback (gain 6.8k / 330R); output through 100R / 100p to
 the control card (J1, sheet 5). U2's supply pins (unit 5: 4 = 3V3, 11 = GND) are drawn once,
 with C34; the PDF repeats them on every unit.
@@ -40,7 +40,7 @@ sh.junction(VN[0], YB)
 NX, NY = P(4, 132)
 sh.text("Net names = IPC (PDF: C3_current, input_current_meas, ...). They do not match what is measured (STATUS.md finding 7):", NX, NY)
 sh.text("U2:A C3_CURRENT -> INPUT_CURRENT_MEAS, U2:C CURRENT_L1 -> C2_CURRENT_MEAS, U2:D CURRENT_L3 -> C3_CURRENT_MEAS.", NX, NY + g(2))
-sh.text("U2 supply pins 4 / 11 drawn once (the PDF repeats them on every unit). PWR_FLAGs of 3V3, GND, +2V5_BIAS: sheet 5.", NX, NY + g(4))
+sh.text("U2 supply pins 4 / 11 drawn once (the PDF repeats them on every unit). PWR_FLAGs of 3V3, GND, +1V0_BIAS: sheet 5.", NX, NY + g(4))
 
 sh.save()
 print("sheet04: written")

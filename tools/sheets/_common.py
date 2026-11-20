@@ -167,7 +167,7 @@ def si8271_cell(sh, ref, UX, UY, vin, cdec, r_on, r_off, gate, cvdd2, rail="15V_
 
 # --- shunt amplifier cell (sheet 4, x4) --------------------------------------------------------------
 def shunt_amp_cell(sh, ref, unit, UX, UY, pins, r_in, r_bias, c_bias, r_gnd, r_fb, c_fb, r_out, c_out,
-                   inp, out, bias="+2V5_BIAS"):
+                   inp, out, bias="+1V0_BIAS"):
     """One op-amp unit of the current measurements, as on PDF page 4, op-amp at (UX, UY);
     pins = (+, -, output) pin numbers of the unit.
 
