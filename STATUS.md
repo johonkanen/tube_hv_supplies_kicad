@@ -8,8 +8,209 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 1 Schematic | **done** 2026-11-20 (preparation Opus 5.5; transcription Fable 5.2): 158/158 parts, 0 wrong-net pins, every IPC net complete, ERC 0 errors / 21 explained warnings |
 | 2 Footprints | **done** 2026-11-20 (Opus 5.5): 158/158 parts fit the IPC pads, worst residual 0.039 mm (pcbnew placement 0.039 mm); pin order checked (J1 numbering mirrored, finding 12; ADC1-3 finding 6 confirmed) |
 | 3 PCB | **done** 2026-11-20 (Opus 5.5, two sessions): board generated, Proteus copper 0 shorts / 0 orphans / 0 opens, check_board OK, make_pcb reproducible; pad sizes option A2 (user): Proteus pads on U1 U2 ADC1-3 DRV5 DRV6 J1, KiCad elsewhere → DRC 0 shorts / 0 clearance / 0 mask bridges / 0 unconnected / 0 parity, copper after zone fill 0 / 0 / 0 |
-| 4 Verification | not started |
+| 4 Verification | **done** 2026-11-20 (Fable 5.2, fresh session), **1 pending user decision (J2 pads)**: ipc356_diff OK (574 / 574 records, 113 nets 1:1); gerber round trip: all four layers equal to Proteus outside the pad shapes except one 0.73 mm² GND-plane web at J2 on In2.Cu (KiCad pads on J2), 0 uncovered draws / flashes, drills 247 = 247; PDF re-read vs IPC: no disagreement; both checks in check_all.sh and negative-tested |
 | 5 Clean-up | not started |
+
+## Phase 4 – independent verification – done, 1 pending user decision (Fable 5.2, 2026-11-20, fresh session)
+
+The reviewer did not build the board. Verified state first: `tools/check_all.sh` printed the Phase 3
+handoff output (15 steps, ALL CHECKS PASSED; compare 158/158, 0 wrong-net pins; ERC 0 / 21; worst fit
+0.039 mm; make_pcb byte-identical; copper after zone fill 119 / 0 / 0 / 0; DRC OK). Then the two
+Phase 4 checks were run, added to `tools/check_all.sh` (17 steps) and negative-tested, the PDF was read
+again independently against the IPC, and the generating scripts and every earlier finding reviewed.
+`tools/p2k` untouched (pin c5682dd); no config key was needed (`STACKED_VIAS` 0, no `DRILL_SMALLER`,
+no `DRILL_EXCELLON`, `ROUNDTRIP` at the defaults, as tube_psu).
+
+**Result: the KiCad board is the Proteus board** (pads, vias, holes, nets, drills, tracks, pours on all
+four layers) **except one 0.73 mm² piece of GND plane between four J2 pins on In2.Cu**, which the zone
+fill drops because J2 has the larger KiCad pads. It connects nothing. Fixing it means Proteus pads on
+J2, which changes the pad decision A2 → **pending user decision** ("Phase 4 – J2" below).
+
+### IPC-D-356 diff (`p2k ipc356_diff`, ≈ 5 s): OK
+
+Proteus 574 records, KiCad 574, **all 574 matched**: 429 pads (2 N/C: J1-37, J1-38), 141 vias, 4 holes;
+worst position offset 0.040 mm (limit 0.05); side, THT / SMD and plating equal everywhere; **113 Proteus
+nets ↔ 113 KiCad nets 1:1, 0 mismatches**; no stacked via records. Differences, all explained:
+
+- KiCad drill larger (KiCad library footprint kept): 16 × 0.558 → 0.65 (J2), 18 × 0.812 → 1.0 (C1-C7 C11
+  C26; KiCad's file writes 1.001, 0.0001 inch units), 12 × 1.016 → 1.1 (Q3 Q4 Q7 Q8). **No KiCad drill is
+  smaller.**
+- Pads with another size than the IPC (info): C 96 (all 48 capacitors), D 4, DRV 16 (DRV1 DRV2), J 16
+  (J2), L 6, Q 12, R 150 (75 resistors: all but the four KRL2012 shunts), REF 3: every part outside
+  `PROTEUS_PADS`, the IPC-built terminals and the shunts, as the Phase 2 pad table says. The eight
+  `PROTEUS_PADS` parts (U1 U2 ADC1-3 DRV5 DRV6 J1) are not in the list: their pads are the IPC size.
+
+### Gerber round trip (`p2k gerber_roundtrip --check`, ≈ 16 s, `reports/roundtrip/`)
+
+| Layer | Proteus Cu | KiCad Cu | raw XOR | only Proteus > 0.05 | only KiCad > 0.05 | clusters ≥ 0.01 mm² | uncovered draws / flashes |
+|---|---|---|---|---|---|---|---|
+| F.Cu | 4040.7 mm² | 4069.0 mm² | 58.43 mm² | 6.29 mm² | 25.74 mm² | 268 pad shape | 0 / 0 |
+| In1.Cu | 726.6 | 759.0 | 51.84 | 8.02 | 34.68 | 78 pad shape | 0 / 0 |
+| In2.Cu | 1951.9 | 1975.3 | 56.90 | 11.20 | 31.71 | 67 pad shape, 7 clearance, **1 other** | 0 / 0 (132 Proteus pour-edge strokes explained) |
+| B.Cu | 1787.9 | 1833.3 | 72.68 | 9.27 | 43.24 | 206 pad shape | 0 / 0 |
+
+Outside the pad shapes and the J2 corner of In2.Cu, the KiCad copper (1839 tracks, 141 vias, the 21
+filled zones with their 259 clearance / thermal holes and the Proteus spoke tracks) is the Proteus
+copper to within 0.05 mm on all four layers, and the centre line of every Proteus draw (5746) and flash
+(1315) lies on KiCad copper and vice versa. No `zone fill` cluster (no Proteus copper thinner than the
+0.15 mm zone minimum width).
+
+- **pad shape** (619 clusters; KiCad pad larger / another shape than Proteus; per footprint in
+  `reports/roundtrip/roundtrip.txt`): CP_Radial_D10 C1-C7 C11 C26 (2.0 vs 1.524 round, pad 1 a rounded
+  square: 22.6–27.6 mm² only KiCad on In1 / In2 / B), R_1206 HandSolder (18.5 F / 5.9 B), TO-220 Q3 Q4 Q7 Q8
+  (both ways, see "Review" 1), J2 (1.0 vs 0.762, pad 1 square: 3.3–3.6 per layer), C_1206 HandSolder 4.4,
+  DRV1 DRV2 SOIC-8 1.7, D_SMA 1.2, REF1 SOT-23 (both ways, 0.5), C_0603 HandSolder 0.3; only Proteus
+  (KiCad pad smaller): R_0402 1.3, C_0603 0.5 + 0.4, R_0603 0.5, R_1206 (R21 R31) 0.1, C_0402 0.03;
+  J1: 3–4 corners of 0.018 mm² per layer at the pad numbered 2 (KiCad's square pin-1 pad, "Review" 3).
+  No pad-shape cluster at U1 U2 ADC1-3 DRV5 DRV6 and none at the terminals, shunts or mounting holes:
+  those pads are the Proteus pads.
+- **clearance** (7 clusters, 0.26 mm², all on In2.Cu at J2): the GND plane pulled back 0.12 mm from J2's
+  larger KiCad pads (pins 2, 4, 7, 8, 11, 12). The 132 "explained" Proteus strokes are the pour-edge
+  strokes of the clearance holes of J2's eight non-GND pins (124) and of J1-2 (8: KiCad's square pad).
+- **other, 1 cluster: In2.Cu, only Proteus, 0.734 mm² at (-119.726, -13.557)** – "Phase 4 – J2".
+
+Drills: plated **Proteus 247 = KiCad 247**, 0 mismatches (139 × 0.3 and 2 × 0.381 vias, 40 × 0.5588 →
+0.558 J1, 12 × 1.4, 4 × 1.524, 4 × 3.0 equal; larger KiCad drills 16 × 0.5588 → 0.65, 18 × 0.8128 → 1.0,
+12 × 1.016 → 1.1, as in the IPC diff); no non-plated file on either side.
+
+### Phase 4 – J2 (PENDING USER DECISION)
+
+On In2.Cu (the GND plane) Proteus leaves a web of copper between the clearance holes of the four pins
+J2-1, J2-2 (3V3), J2-3, J2-4 (#00206, the R80 / ADC3 input). J2 kept the KiCad pads in decision A2
+(1.0 mm, pad 1 square; Proteus 0.762 mm round), so KiCad's clearance holes are 0.24 mm wider: the necks
+between neighbouring holes close (1.27 mm pitch − 1.0 − 2 × 0.12 = 0.03 mm, under the 0.15 mm zone
+minimum width), the web in the middle of the four pins becomes an island and the zone fill drops it
+(0.734 mm² with the rings around the four holes). **Nothing connects there**: no pad or via of GND is
+inside, the copper check after zone fill has 0 opens, DRC is clean. This is the case the playbook
+warns of ("a larger KiCad pad can also make the zone fill drop Proteus copper without any DRC error");
+the Phase 3 DRC could not see it.
+
+- Tested on a scratch copy (deleted): **J2 added to `PROTEUS_PADS`** (rule
+  `("HEADER_2X8_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x08_P1.27mm_Vertical_ProteusPads", …)`
+  and a spec `base=…PinHeader_2x08_P1.27mm_Vertical, ipc="J2", ipc_sizes=True`; gen_footprints, the six
+  sheets, check_footprints, make_pcb) → `gerber_roundtrip`: **OK, 0 other, 0 clearance** clusters on all
+  layers; ipc356_diff OK (the 16 × 0.558 → 0.65 drills are gone: J2 gets the Proteus drill); copper 119 /
+  0 / 0 / 0; DRC unchanged (226 violations, 20 accepted courtyards). This is J2 of the Phase 3 option B.
+- Until the user decides, **`tools/roundtrip_pending.py`** (after the Phase 3 `drc_pending.py`) runs
+  `p2k gerber_roundtrip --check` and passes exactly this cluster (In2.Cu, only Proteus, within 0.1 mm of
+  the recorded position, area 0.734 ± 0.05 mm², nearest pad of J2, 0 uncovered draws / flashes, 0 drill
+  mismatches) as `PENDING USER DECISION`; anything else fails. `tools/check_all.sh` then prints
+  "ALL CHECKS PASSED, EXCEPT 1 PENDING USER DECISION(S)". After the decision: J2 into `PROTEUS_PADS` (or
+  the cluster accepted for good), remove the wrapper, check_all runs `p2k gerber_roundtrip --check`.
+
+### PDF read again, independently of the sheet scripts (all six pages, every pin)
+
+Each page of `source/schematic_pdf/hi_voltage_suppliesv2.PDF` (200 / 300 dpi renders) was read wire by
+wire into a pin → net list without looking at the KiCad sheets and compared with
+`reference/ipc356_pads.json`: **no disagreement on any page.**
+
+- Page 6 (ADC), every pin: J2 1 / 2 3V3, 3 / 4 → R80, 5 / 6 GND, 7 / 8 → R79, 9 / 10 GND, 11 / 12 → R78,
+  13-16 GND (the wires of 11, 7 and 3 loop around the header to the junction of their even neighbour);
+  ADC1-3 COM2 (VIN) on 3V3, A1 (VA) on R78 / C35, R79 / C36, R80 / C37, A2 GND, K1 on the scl column,
+  COM1 on the sda column, K2 (ADR0) 3V3 / GND / `floating`; R76 3V3–scl, R77 3V3–sda; C27-C29 3V3–GND.
+- Page 5, all 40 J1 pins with the ADB0-ADB7 alias table (1 C2_current_meas, 2 V_A_meas, 3 C3_current_meas,
+  4 Uin_meas, 5 input_current_meas, 6 Uc3_meas, 7 C1_current_meas, 8 U_out_meas; 37 / 38 stubs without a
+  terminal), REF1 with C8, C21, R74, R73, C22.
+- Page 2, the four SI8271 cells: all 8 pins of each driver, D18 / D2, R21 / R31, the bootstrap capacitors
+  C46 / C30 (VDD2 to GND2 = OUT1 / OUT2), C23 / C31, C38 / C43, C24 C25 C32 C33; 15R on OUT+ and 8R on
+  OUT− of every driver (R23 R25 R32 R35 are the 8R resistors, printed below their symbols); the G1_HI /
+  G3_HI wires cross the 15V and 3V3 columns without a junction.
+- Pages 3 and 4, all four amplifier cells each (dividers, feedback, input and output networks, supply
+  pins 4 / 11, C12, C34); page 1, every part (rails, both half-bridges, the L5 / L12 / L11 / L6 terminal
+  wires, C3 / C6 returning through R75 / R30, R26 ∥ R27, `Input_current` on the GND rail).
+- Values of all 160 parts in the KiCad sheets = `lib/part_map.csv` = the values read from the PDF.
+
+Independent of `compare_netlists`, a pcbnew script (scratch) compared the net of every board pad with
+the IPC: 429 pads, 113 nets 1:1, 0 mismatches, N/C pads on `unconnected-(…)`, worst offset 0.039 mm.
+
+### Review of the generators and the easy-to-get-wrong places
+
+Read: `p2k_config.py`, `tools/gen_footprints.py`, `tools/make_pcb.sh`, `tools/check_all.sh`,
+`tools/erc.sh`, the sheet scripts (no exclusions besides `L_OFFBOARD`; the only no-connect flags are
+J1-37 / 38; no `no_connect` pin type anywhere). Board spot-checks (pcbnew, scratch script):
+
+- **Thermal reliefs**: all 21 zones have solid pad connection (clearance 0.12, min width 0.15); the
+  Proteus thermals are its clear holes + spoke tracks, reproduced (round trip: every Proteus draw
+  covered). Negative test: thermal reliefs on the In2.Cu zone → 16 uncovered spokes / many clusters.
+- **Non-conductor graphics**: none on the Proteus copper layers (check_sources lists only Conductor
+  and Profile draws); the board has 0 graphics on copper layers and 0 tracks / vias without a net.
+- **Mounting holes H1-H4**: one plated pad each, drill 3.0, 6.35 mm on all copper layers, no net, at the
+  four IPC hole records; in the round trip their flashes match on all four layers. (README's "Mechanical
+  baseline" numbers the holes in another order than the board refdes: README H2 / H3 / H4 = board H3 /
+  H4 / H2. Cosmetic.)
+- **38 bottom-side parts**: the board's bottom list equals the IPC bottom SMD list exactly (C23 C24 C25,
+  C30-C48, D2 D18, DRV1 DRV2 DRV5 DRV6, R21-R25, R31-R35); a part
+  flipped to the wrong side fails ipc356_diff (negative test).
+- **Multi-pad pins**: the six blade terminals have two pads numbered 1 on one net each (B+, GND, V_A,
+  GND, GND, PREOUT), L5 / L6 / L11 / L12 one pad (OUT1, U_OUT, OUT2, UC3).
+- **KRL2012 shunts R29 R30 R72 R75**: 0.35 × 2.0 pads (Proteus), pad 1 GND, pad 2 CURRENT_L3 / C3_CURRENT /
+  CURRENT_L1 / C1_CURRENT; two-terminal parts (no Kelvin pads): the sense nets leave from pad 2.
+- **Single-pin nets**: 21 one-pad nets on the board (the 18 unused J1 signals, FLOATING, J1-37 / 38
+  unconnected) carry no track, via or zone.
+- **J1 numbering (finding 12)**: checked from the pads and the Proteus layers: pin 1 (-98.51, -21.30),
+  pin 2 below it (-98.51, -22.57), pin 3 to the right; J2 has the opposite handedness (= KiCad's). The
+  Proteus **Top** Assembly has the J1 outline with its pin-1 dot at pin 1 and the Top Silk the text "J1";
+  nothing of J1 on the bottom layers. Confirmed: a top-side part with mirrored numbering.
+
+Review findings (conversion; for Phase 5 decisions):
+
+1. **The Proteus TO-220 pads are 1.524 × 2.54 mm rounded rectangles, not 1.524 round** (gerber aperture
+   macro `PPAD010` on all four layers of Q3 Q4 Q7 Q8; the IPC records only 1.524 × 1.524). A scratch
+   script compared every IPC pad size with its gerber flash: these 12 pads are the only ones that
+   differ. The Phase 2 pad table is corrected. Consequences: (a) the KiCad pad (1.905 × 2.0) is wider
+   and shorter, so the round trip has pad-shape clusters both ways (only Proteus 2.4–10.1 mm² per layer:
+   the 0.27 mm pad ends); (b) **the gap between neighbouring TO-220 pads is 0.635 mm with the KiCad
+   pads, 1.016 mm in Proteus**, and pad 2 is the collector on UIN / OUT1 / OUT2 (the HV bus) next to the
+   gate and emitter pads; (c) `ipc_sizes=True` would give 1.524 round pads here, not the Proteus pads
+   (p2k candidate 21). User decision for Phase 5 (Proteus pads on Q3 Q4 Q7 Q8 for the HV spacing).
+2. **J2 on In2.Cu** – above (pending).
+3. **J1's square pad sits on the pad numbered 2** (KiCad's pin-1 pad after the odd / even swap; Proteus
+   pads are all round, its pin-1 dot is at pad 1): 4 corners of 0.018 mm² per layer and a square
+   clearance hole in the In2.Cu plane. Cosmetic copper, but a misleading pin-1 mark on the board;
+   Phase 5 candidate (round pad, or the square on pad 1), together with finding 12.
+4. The larger KiCad pads on HV nets (C1-C7 C11 C26 2.0 vs 1.524; Q above) reduce Proteus' copper
+   spacing by up to 0.24 mm per pad. DRC (0.12 mm) and the round trip (no clearance cluster at these
+   parts: no pour had to pull back) are clean; noted for the pad-size decision of an HV board.
+
+### Earlier findings: confirmed / refuted
+
+| Finding | Verdict |
+|---|---|
+| 1 `+2V5_BIAS` name | **Confirmed** as a question: PDF page 5 has REF1 `ISL21010CFH315Z-TK`, R74 220, R73 470 → about 1.02 V if the part is the 1.5 V version. User decision (net name). |
+| 2 15 V "Not yet complete" | Confirmed (page 5 note; one net 15V_BOOST in the IPC). |
+| 3 Board thickness | Answered by the user (1.6 mm); board file 1.6 mm, 4 copper layers. |
+| 4 No title blocks | Confirmed. |
+| 5 Dates | Confirmed (PDF 2026-09-19, gerbers `CreationDate` 2026-11-19); PDF = IPC on every page (above). |
+| 6 ADC VA / VIN | **Confirmed, also against the TI datasheet** (ADC121C021/027, pin table: ADC121C027 SOT VA 1, GND 2, VIN 3, ADR0 4, SCL 5, SDA 6): the board has the filtered input on pad 1 (VA) and 3V3 on pad 3 (VIN) on all three ADCs. PDF, IPC, KiCad agree. Open (redesign). |
+| 7 Current-measurement names | Confirmed from pages 1 and 4 (`Input_current` on the GND rail; C3_current → input_current_meas, CURRENT_L1 → C2_current_meas, CURRENT_L3 → C3_current_meas). Open. |
+| 8 LT1014 at 3.3 V | Confirmed as drawn (U2 `LT1014`, pins 4 / 11 on 3V3 / GND). Open. |
+| 9 Devices vs values | Not re-derived from ROOT.DSN; the values agree with the PDF and the pinouts with the IPC nets. |
+| 10 Voltage range | Confirmed (3 × 1M, 15k: 1 / 200). |
+| 11 R26 ∥ R27 | Confirmed as drawn; intended (user). |
+| 12 J1 mirrored numbering | **Confirmed** (above). Open. |
+| 13 0.127 mm clearances | Consistent: DRC with clearance 0.12 has 0 clearance errors on the Proteus copper; not re-measured. Open (note). |
+| 14 Copper stubs | Confirmed (DRC: 2 track_dangling). Phase 5. |
+| Phase 2 pad table, "Q3 Q4 Q7 Q8 1.524 round" | **Refuted**: 1.524 × 2.54 (review finding 1). |
+| Phase 2 / 3 "KiCad pads on J2 change nothing" | True for DRC, **not for the copper**: the In2.Cu plane web (pending). |
+
+### Negative tests (scratch copies `build/tmp/neg_*`, `P2K_BOARD`, board file changed with pcbnew, deleted)
+
+| Change | ipc356_diff | gerber round trip (through `roundtrip_pending.py`) |
+|---|---|---|
+| F.Cu SCL track moved 0.3 mm | OK (does not look at tracks) | **FAILED**: 2 more `other` clusters, 2 uncovered draws |
+| In1.Cu track deleted | OK | **FAILED**: `other` only Proteus 0.939 mm², 1 uncovered draw |
+| R76-2 net SCL → SDA | **FAILED**: "pad R76-2: Proteus net SCL …, KiCad net SDA" (nets not 1:1) | pending only (no copper change) |
+| J1-37 (N/C) → GND | **FAILED**: "pad J1-37: N/C in Proteus, KiCad net GND" | pending only |
+| R1 moved 0.1 mm | **FAILED**: "R1-1: nearest KiCad record 0.100 mm away" (×2) | pending only (0.1 mm of an 0402 pad is inside the pad-shape class) |
+| R1 flipped to the bottom | **FAILED**: "pad R1-1: side Proteus top, KiCad bottom" | pending only: **the missing pads count as pad shape** (p2k candidate 20) |
+| GND via deleted | **FAILED**: "Proteus via at (-78.498, -9.384): nearest KiCad record 3.769 mm" | **FAILED**: 4 more `other`, 2 uncovered, 1 drill mismatch |
+| J1 drills 0.558 → 0.5 | **FAILED**: "pad J1-n: drill Proteus 0.558, KiCad 0.5004 is smaller" (every J1 pad) | **FAILED**: "drill at …: Proteus 0.5588 mm, KiCad 0.5 mm is smaller" (every J1 pad) |
+| B.Cu UC3 zone deleted | OK | **FAILED**: `other` only Proteus 38.9 mm², 14 uncovered |
+| In2.Cu zone with thermal reliefs, refilled | OK | **FAILED**: 16 uncovered, many `other`; the J2 cluster changes (0.835 mm²) and is no longer the recorded one |
+| J2 with the Proteus pads (scratch rebuild) | OK | plain `gerber_roundtrip --check` **OK** (the wrapper then says to remove itself) |
+
+The two checks cover each other: nets, positions, sides and drills by the IPC diff, copper by the round
+trip. `reports/roundtrip/` (report + four overlays) is committed; two runs give identical files.
 
 ## Phase 3 – PCB – done (Opus 5.5, 2026-11-20)
 
@@ -241,7 +442,7 @@ IPC size → KiCad size as listed in the files, not rotated):
 | Parts | Proteus pad | KiCad pad | Proteus drill | KiCad drill |
 |---|---|---|---|---|
 | C1-C7 C11 C26 | 1.524 round | 2.0 (pad 1 rounded square) | 0.812 | **1.0** (larger) |
-| Q3 Q4 Q7 Q8 | 1.524 round | 1.905 x 2.0 | 1.016 | **1.1** (larger) |
+| Q3 Q4 Q7 Q8 | **1.524 x 2.54 rounded rectangle** (gerber macro; the IPC says 1.524 x 1.524 – corrected in Phase 4, review finding 1) | 1.905 x 2.0 (wider, shorter) | 1.016 | **1.1** (larger) |
 | J1, J2 | 0.762 round | 1.0 (J1: Proteus 0.762 since Phase 3) | 0.558 | **0.65** (larger; J1: 0.558 since Phase 3); KiCad pads leave 0.27 mm between pads at 1.27 mm pitch (Proteus 0.508) |
 | B_P B_N V_ANODE GND_PRE GND_PWR VPRE, L5 L6 L11 L12 | 2.0 / 2.54 | same | 1.4 / 1.524 | same |
 | R29 R30 R72 R75 | 0.35 x 2.0 | same | | |
@@ -616,7 +817,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (Phase 3 done, pad decision A2 applied):
+`tools/check_all.sh`, 2026-11-20 (Phase 4 done; 17 steps; the J2 pad question pending):
 
 ```
 == KiCad environment
@@ -705,8 +906,24 @@ drc:     90 warning  silk_over_copper
 drc:      3 warning  silk_edge_clearance
 drc:      2 warning  track_dangling
 drc: OK
+== IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)
+ipc356_diff: Proteus 574 records, KiCad 574; matched 574 (429 pads incl. 2 N/C, 141 vias, 4 holes), worst position offset 0.040 mm (limit 0.05)
+ipc356_diff: 113 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
+ipc356_diff: KiCad drill larger (footprint kept): 16x 0.558->0.65, 18x 0.812->1.001, 12x 1.016->1.1
+ipc356_diff: pads with another size in KiCad (info): C 96, D 4, DRV 16, J 16, L 6, Q 12, R 150, REF 3
+ipc356_diff: OK
+== Gerber round trip vs Proteus (copper XOR, coverage, drills)
+roundtrip: F.Cu   XOR   58.43 mm^2, beyond 0.05 mm: only Proteus   6.29, only KiCad  25.74 mm^2; clusters >= 0.01 mm^2: 268 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In1.Cu XOR   51.84 mm^2, beyond 0.05 mm: only Proteus   8.02, only KiCad  34.68 mm^2; clusters >= 0.01 mm^2: 78 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In2.Cu XOR   56.90 mm^2, beyond 0.05 mm: only Proteus  11.20, only KiCad  31.71 mm^2; clusters >= 0.01 mm^2: 67 pad shape, 7 clearance, 1 other; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: B.Cu   XOR   72.68 mm^2, beyond 0.05 mm: only Proteus   9.27, only KiCad  43.24 mm^2; clusters >= 0.01 mm^2: 206 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: In2.Cu OTHER only Proteus 0.734 mm^2 at (-119.726, -13.557) near J2-3 (#00206) 0.89 mm, via (#00204) 5.29 mm
+roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: FAILED (1 unexplained clusters, 0 draws/flashes without copper in the other set, 0 drill mismatches)
+roundtrip_pending: PENDING USER DECISION: 1 cluster, the In2.Cu GND web between J2-1..4 (0.734 mm^2) dropped by the zone fill around J2's KiCad pads; J2 with the Proteus pads clears it (STATUS.md Phase 4 - J2)
 
-ALL CHECKS PASSED
+ALL CHECKS PASSED, EXCEPT 1 PENDING USER DECISION(S):
+  roundtrip_pending: PENDING USER DECISION: 1 cluster, the In2.Cu GND web between J2-1..4 (0.734 mm^2) dropped by the zone fill around J2's KiCad pads; J2 with the Proteus pads clears it (STATUS.md Phase 4 - J2)
 ```
 
 ## Findings about the original design
@@ -789,6 +1006,14 @@ Reported, not fixed (PLAN.md section 5).
     (-32.852, -11.537) and a dangling 0.9 mm 15V_BOOST stub on B.Cu (-73.6 → -72.7, y -20.2) (IPC
     coordinates); KiCad DRC `track_dangling` warnings, copper as drawn.
 
+15. **TO-220 pads (Q3 Q4 Q7 Q8) are 1.524 × 2.54 mm in the Proteus copper; the IPC-D-356A file says
+    1.524 × 1.524** (Phase 4): the gerber flashes are an aperture macro (rounded rectangle), the IPC
+    records only the width. The only pads of the board whose IPC size differs from the gerber. The KiCad
+    footprint's pads (1.905 × 2.0) leave 0.635 mm between the collector pad (UIN / OUT1 / OUT2) and its
+    neighbours, Proteus 1.016 mm. Pad-size decision for Phase 5 ("Phase 4 – review" 1).
+16. **J2 on the In2.Cu GND plane** (Phase 4): with the KiCad pads on J2 the plane loses the 0.73 mm² web
+    between J2-1..4 (connects nothing). Pending user decision ("Phase 4 – J2").
+
 ## p2k candidates
 
 Shared-tool limitations met on this board, with the board-local workaround used.
@@ -869,7 +1094,30 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     re-runs the DRC on the whole candidate set; a shared tool could measure every pad-to-track gap
     itself (as measure_gaps does for the Proteus copper).
 
+20. **`gerber_roundtrip` classifies a missing or extra pad as `pad shape`** (Phase 4 negative test: R1
+    flipped to the bottom → no `other` cluster, no uncovered flash; the pads lie inside the XOR of the two
+    pad sets). ipc356_diff and check_board catch it; the round trip could require every pad flash of one
+    set to overlap a pad flash of the other.
+21. **Proteus pad sizes are taken from the IPC** (`reports/footprint_pads.csv`, `ipc_sizes=True`, the
+    "pads with another size" list of ipc356_diff), which is wrong for pads flashed with an aperture macro
+    (TO-220 here: IPC 1.524 × 1.524, gerber 1.524 × 2.54 rounded rectangle). The shared tools could take
+    size and shape from the gerber flash at the pad position (check_sources could compare the two).
+22. **A pending-decision mode for `gerber_roundtrip`** (as candidate 16 for drc / assign_nets):
+    board-local `tools/roundtrip_pending.py` passes exactly one recorded `other` cluster. The tool could
+    also classify a Proteus copper island that is enclosed by clearance areas of larger KiCad pads (the J2
+    web: bounded on all sides by the `clearance` mask) as `clearance` or as its own category.
+23. `ipc_sizes=True` keeps the KiCad pad **shape** (J1: the square pin-1 pad, on the pad numbered 2 after
+    the odd / even swap; Proteus pads are round). A `shape=` / `ipc_shapes=` option would reproduce the
+    Proteus pads fully.
+
 ## Decisions
+
+- **Phase 4 (agent, 2026-11-20):** the one `other` cluster of the round trip (J2, In2.Cu) is **not** fixed
+  by changing the pad decision A2; `tools/roundtrip_pending.py` passes exactly that cluster as a pending
+  user decision and `tools/check_all.sh` reports it. No Phase 4 config key was needed (`ROUNDTRIP`
+  defaults, `STACKED_VIAS` 0, no `DRILL_SMALLER`). `reports/roundtrip/` is committed (as tube_psu).
+- **Open user decisions after Phase 4:** J2 pads (Proteus pads → round trip clean; tested); TO-220 pads
+  (finding 15); J1 square pad on pad 2 (review 3); findings 1, 6, 7, 8, 10, 12, 13, 14 as before.
 
 - **Phase 2 footprints (agent, 2026-11-20):** KiCad library footprints where their pads land
   within 0.05 mm; otherwise derived project footprints with the pad centres on the Proteus

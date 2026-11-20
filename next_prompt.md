@@ -3,55 +3,63 @@
 Ready-to-paste prompt for the next agent session. Replaced at the end of every session.
 
 ```
-Convert the Proteus board in /home/jari/dev/tube_hv_supplies_kicad to KiCad 10: Phase 4,
-independent verification (preferably Fable, a fresh reader who did not build the board). Phases 0-3
-are done: schematic (158 parts, compare 158/158, 0 wrong-net pins, ERC 0 / 21 explained warnings),
-footprints (158/158 fit, worst 0.039 mm), PCB (tools/make_pcb.sh: build_pcb, gerber_to_tracks,
-assign_nets, pours_to_zones; 1839 tracks, 141 vias, 21 zones, 4 layers, 1.6 mm; copper after zone
-fill 119 groups 0 shorts / 0 orphans / 0 opens; DRC 0 errors except 20 accepted courtyards_overlap).
-Pad sizes: user decision A2 - Proteus pads on exactly U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1
-(PROTEUS_PADS in tools/gen_footprints.py), KiCad pads everywhere else.
+Convert the Proteus board in /home/jari/dev/tube_hv_supplies_kicad to KiCad 10: Phase 5, clean-up
+(user decisions first). Phases 0-4 are done: schematic (158 parts, compare 158/158, 0 wrong-net pins,
+ERC 0 / 21 explained warnings), footprints (158/158 fit, worst 0.039 mm), PCB (tools/make_pcb.sh;
+1839 tracks, 141 vias, 21 zones, 4 layers, 1.6 mm; copper after zone fill 119 groups 0 / 0 / 0; DRC 0
+errors except 20 accepted courtyards_overlap), Phase 4 verification by a fresh reader (ipc356_diff OK:
+574 / 574 records, 113 nets 1:1; gerber round trip: all four copper layers and the 247 drills equal to
+Proteus outside the pad shapes, 0 uncovered draws / flashes, except ONE 'other' cluster - the In2.Cu
+GND-plane web between J2-1..4, 0.734 mm^2, dropped because J2 has the larger KiCad pads; it connects
+nothing). tools/roundtrip_pending.py passes exactly that cluster as a pending user decision.
 
-Read, in this order: PLAN.md, STATUS.md (phase table, "Phase 3" - steps, design rules, pad sizes
-(decided), remaining DRC items, negative tests -, "Phase 2" pad-size table, findings, p2k
-candidates, decisions), tools/p2k/CONVERSION_PLAYBOOK.md (sections 1, 3 "Phase 4" and 5),
-tools/p2k/README.md (gerber_roundtrip, ipc356_diff and their config keys STACKED_VIAS,
-DRILL_SMALLER, DRILL_EXCELLON, ROUNDTRIP). Reference (read only): ~/dev/tube_psu_kicad (finished
-conversion: STATUS.md Phase 4, p2k_config.py ROUNDTRIP / DRILL_* keys, tools/check_all.sh).
+Read, in this order: PLAN.md, STATUS.md (phase table, "Phase 4" - J2 (pending), review findings 1-4,
+earlier findings table, negative tests -, "Phase 3" pad sizes and remaining DRC items, findings,
+p2k candidates, decisions), tools/p2k/CONVERSION_PLAYBOOK.md (sections 1, 3 "Phase 5" and 5),
+tools/p2k/README.md (place_refdes, REFDES_PLACEMENT, REMOVED_TRACKS, NONCONDUCTOR_LAYERS). Reference
+(read only): ~/dev/tube_psu_kicad (finished conversion: STATUS.md Phase 5, p2k_config.py, tools/ -
+silk bodies, place_refdes as the last make_pcb step, check_values, the LCSC / BOM step).
 
-Start with tools/check_all.sh; it must print "ALL CHECKS PASSED" (15 steps; compare 158/158, 0
-wrong-net pins; ERC 0 / 21; check_footprints worst 0.039 mm; check_pin_order OK; make_pcb
-byte-identical; check_board OK; assign_nets after zone fill 119 / 0 / 0 / 0; drc OK).
+Start with tools/check_all.sh; it must print "ALL CHECKS PASSED, EXCEPT 1 PENDING USER DECISION(S)"
+(17 steps; compare 158/158, 0 wrong-net pins; ERC 0 / 21; check_footprints worst 0.039 mm;
+check_pin_order OK; make_pcb byte-identical; check_board OK; assign_nets after zone fill 119 / 0 / 0 / 0;
+drc OK; ipc356_diff OK; round trip 619 pad shape / 7 clearance / 1 other = the pending J2 cluster).
 
-Then:
-1. `tools/p2k/bin/p2k ipc356_diff`: kicad-cli IPC-D-356A export vs the Proteus file (every pad / via /
-   hole within 0.05 mm, same side, THT / SMD, nets 1:1 by pad sets, N/C equal). Explain every
-   difference; config keys only where the tool already has one (STACKED_VIAS etc.).
-2. `tools/p2k/bin/p2k gerber_roundtrip` (then `--check`): KiCad gerbers + drill vs the Proteus set
-   per copper layer, clusters classified (pad shape / clearance / zone fill / other), centre-line
-   coverage both ways, drills. Expected differences: KiCad pad shapes on every part outside
-   PROTEUS_PADS (Phase 2 pad table: larger pads and, for C1-C7 C11 C26 / Q3 Q4 Q7 Q8 / J2, larger
-   drills - no KiCad drill is smaller), zone fill / clearance. Every "other" cluster or uncovered
-   draw / flash is a finding to explain (or a real conversion error to fix in the generators).
-   Use ROUNDTRIP config keys only as tube_psu does, each justified in STATUS.md.
-3. Add both checks to tools/check_all.sh (Phase 4 steps) and make them pass.
-4. Review as a fresh reader: the generating scripts (tools/gen_footprints.py, make_pcb.sh,
-   p2k_config.py, the sheet scripts), spot-check the easy-to-get-wrong places (thermal reliefs,
-   floating non-conductor graphics, mounting holes H1-H4, the 38 bottom-side parts, multi-pad pins
-   such as the blade terminals, the KRL2012 shunts R29 R30 R72 R75, single-pin nets, J1's mirrored
-   numbering), confirm or refute every earlier finding in STATUS.md.
-5. Negative-test every new check on a scratch copy (P2K_BOARD in build/tmp): e.g. move a track,
-   change a net, shift a pad 0.1 mm, drop a via -> the new check fails.
+Ask the user first (one list, with the recommendation; do nothing that changes pads or copper before
+the answers):
+1. J2 pads (PENDING): Proteus pads on J2 (add J2 to PROTEUS_PADS in tools/gen_footprints.py with a
+   refdes rule and a PinHeader_2x08_P1.27mm_Vertical_ProteusPads spec, ipc_sizes=True; tested in
+   Phase 4: round trip clean, 0 other / 0 clearance, DRC unchanged) - recommended - or keep the KiCad
+   pads and accept the cluster for good. Either way remove tools/roundtrip_pending.py afterwards
+   (check_all.sh then runs `tools/p2k/bin/p2k gerber_roundtrip --check`; if the cluster is accepted,
+   record it in STATUS.md and keep a board-local acceptance, p2k candidate 22).
+2. TO-220 pads Q3 Q4 Q7 Q8 (finding 15): Proteus 1.524 x 2.54 rounded rectangle (1.016 mm between
+   pads; the collector is on the HV bus) vs KiCad 1.905 x 2.0 (0.635 mm). The IPC size (1.524 x 1.524)
+   is wrong for these pads, so ipc_sizes=True does not reproduce them: a Proteus-pad variant needs an
+   explicit pad size / shape in the project footprint (board-local, p2k candidates 21 / 23).
+3. J1: the square pad is on the pad numbered 2 (Phase 4 review 3) - round pad, or leave; and the
+   mirrored numbering itself (finding 12) stays a redesign question.
+4. Other pad sizes: Proteus pads on more parts, or keep KiCad pads (Phase 2 pad table; C1-C7 C11 C26
+   2.0 vs 1.524 on HV nets).
+5. Silk: footprint body graphics vs the Proteus silk, reference positions (p2k place_refdes as the last
+   make_pcb step, as tube_psu), the silk DRC warnings (111 / 90 / 3).
+6. Dangling Proteus copper (finding 14; REMOVED_TRACKS): the two zero-length OUT1 draws and the 0.9 mm
+   15V_BOOST stub on B.Cu.
+7. LCSC / BOM fields as tube_psu.
+8. Net name +2V5_BIAS (finding 1).
 
-Still open and reported only (don't change without asking): the +2V5_BIAS net name (finding 1);
-finding 6 (ADC VA / VIN); finding 12 (J1 mirrored numbering); findings 7, 8, 10, 13, 14.
+Then implement the answers in the generators (never by hand in kicad/ or lib/), re-run the sheets /
+check_footprints / make_pcb as needed, tools/check_all.sh, update the accepted DRC counts, and
+negative-test anything new on a scratch copy (P2K_BOARD in build/tmp).
+
+Still open and reported only (don't change without asking): finding 6 (ADC VA / VIN, confirmed
+against the datasheet), finding 12 (J1 mirrored numbering), findings 7, 8, 10, 13.
 
 Rules (PLAN.md section 5): don't change tools/p2k or its pin (c5682dd); board-local workarounds in
 tools/, noted in STATUS.md "p2k candidates"; don't touch other repos; report design findings,
-don't fix them; never use the no_connect pin type; temporary files in build/tmp; never run the
-KiCad AppImage with --version (use tools/p2k/bin/kipy and tools/p2k/bin/kicad-cli). At the end:
-STATUS.md updated (phase table, Phase 4 section, last check output, findings, p2k candidates,
-decisions), README status, next_prompt.md replaced with the prompt for Phase 5 (clean-up: user
-decisions first - silk, refdes placement, dangling tracks, LCSC / BOM as tube_psu), commit and push
-(git push origin main).
+don't fix them; never use the no_connect pin type; temporary files in build/tmp (don't name a scratch
+script after a stdlib module); never run the KiCad AppImage with --version (use tools/p2k/bin/kipy and
+tools/p2k/bin/kicad-cli). At the end: STATUS.md updated (phase table, Phase 5 section, last check
+output, findings, p2k candidates, decisions), README status, next_prompt.md replaced, commit and
+push (git push origin main).
 ```
