@@ -5,11 +5,58 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | Phase | State |
 |---|---|
 | 0 Skeleton and inventory | **done** 2026-11-20 (Opus 5.5) |
-| 1 Schematic | preparation **done** 2026-11-20 (Opus 5.5); next: transcription, sheets 5 and 6 (`next_prompt.md`) |
+| 1 Schematic | preparation **done** 2026-11-20 (Opus 5.5); transcription: sheets 5 and 6 **done** 2026-11-20 (Fable 5.2), 22/158 parts; next: sheets 2 and 4 (`next_prompt.md`) |
 | 2 Footprints | not started |
 | 3 PCB | not started |
 | 4 Verification | not started |
 | 5 Clean-up | not started |
+
+## Phase 1 transcription – in progress
+
+| Sheet | Script | Parts | compare (`--sheet N`) | ERC | Session |
+|---|---|---|---|---|---|
+| 5 Reference and connector | `tools/sheets/sheet05.py` | 7/7 | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
+| 6 ADC | `tools/sheets/sheet06.py` | 15/15 | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
+| 2 Gate drivers | | 0/26 | | | next |
+| 4 Current measurements | | 0/34 | | | next |
+| 3 Voltage measurements | | 0/42 | | | |
+| 1 Power stage | | 0/34 | | | |
+
+Whole project after sheets 5 and 6: 22/158 parts, 109 pins compared, 0 wrong-net pins, 46 IPC
+nets touched, 30 complete. Both scripts were run twice: byte-identical files. Renders in
+`reports/render/` (compared with `build/tmp/pdf/hi-5.png`, `hi-6.png`).
+
+**ERC: 0 errors, 31 warnings**, all `isolated_pin_label` ("label connected to only one pin"):
+
+- 18 permanent: the local labels of the unused J1 ribbon signals (single-pin nets in the IPC:
+  the `*_ISO` signals, PWM_TRANS4 / PWM_TRANS6, DAB_*, ADCLK_DAB).
+- 1 permanent: `FLOATING` on ADC3-K2 (ADR0 left open; single-pin net in the IPC).
+- 12 temporary: the J1 global labels whose other end is on a sheet not drawn yet: G1_HI, G1_LO,
+  G3_HI, G3_LO (sheet 2), INPUT_CURRENT_MEAS, C1_CURRENT_MEAS, C2_CURRENT_MEAS, C3_CURRENT_MEAS
+  (sheet 4), UIN_MEAS, UC3_MEAS, V_A_MEAS, U_OUT_MEAS (sheet 3). They go away with those sheets
+  (SCL / SDA already did, with sheet 6). Expected at the end of Phase 1: 19 warnings.
+
+How the sheets were drawn:
+
+- **Sheet 5**: REF1 block as the PDF (3V3 → VIN with C8; VOUT node #00194 with C21; R74 →
+  +2V5_BIAS with R73 and C22 to GND). **J1 with pin 1 at the bottom, as in the PDF** (the box
+  symbol has pin 1 at the top, so it is placed with `place_mirrored(axis="x")`); every pin has
+  its IPC net: power symbols on 33-36 (GND, 3V3) and 39/40 (15V_BOOST), global labels on the 14
+  multi-sheet nets, local labels on the 18 unused signals, no-connect flags on 37 / 38. The
+  PDF's ADB0-ADB7 are small texts at pins 1-8 plus a text table of the alias links; the
+  `15V – 15V_boost` "Not yet complete" link is a text note. PWR_FLAGs of 3V3, GND and
+  15V_BOOST in one group below J1.
+- **`+2V5_BIAS` needs a PWR_FLAG after all** (the preparation notes said it would not): the
+  power symbol's own pin is a power input, and the net is fed only through R74 (passive), so
+  ERC reported `power_pin_not_driven` on it. One PWR_FLAG on the +2V5_BIAS node on sheet 5 (as
+  tube_psu does for its bias rail).
+- **Sheet 6**: wired as the PDF, including its routing of the J2 pin pairs (11/12 → R78, 7/8 →
+  R79, 3/4 → R80, the GND buses on both sides of the header, 1/2 on 3V3); J2 mirrored like J1
+  (pin 1 at the bottom). ADC1-ADC3 with **VIN (COM2) on 3V3 and VA (A1) on the filtered input**
+  (finding 6, reproduced), ADR0 on 3V3 / GND / FLOATING, SCL and SDA as global labels with the
+  pull-ups R76 / R77; C27-C29 between 3V3 and GND. The ADC symbol has its rows 2.54 mm apart
+  (the PDF 5.08 mm), so the pin wires are closer together than in the PDF; the topology is the
+  same.
 
 ## Phase 1 preparation – done (Opus 5.5, 2026-11-20)
 
@@ -109,8 +156,9 @@ driven by R76 / J1 in the full sheet).
   `gnd`, `Gnd` (J1-34) → GND; `15V` (page 2) and `15V_boost` → 15V_BOOST (the page 5 link
   `15V — 15V_boost` "Not yet complete" becomes a text note). Use `flagged_power` (power symbol
   + PWR_FLAG) once per rail where ERC reports an undriven power pin: GND, 3V3 (sheet 5 or 6,
-  where they enter on J1), 15V_BOOST (sheet 5, J1-39/40). +2V5_BIAS has no power-input pin
-  (REF1 VOUT drives it through R74), so it needs no flag.
+  where they enter on J1), 15V_BOOST (sheet 5, J1-39/40): all three are on sheet 5 (done), so
+  the other sheets use plain `power_at`. +2V5_BIAS has its PWR_FLAG on sheet 5 too (found in
+  transcription: the power symbol's pin is a power input and R74 is passive).
 - **Floating driver nodes**: the high-side drivers' VDD2 (bootstrap nodes #00021 = DRV1-8 /
   C46 / R21, #00036 = DRV5-8 / C30 / R31) and GND2 (OUT1 = DRV1-5, OUT2 = DRV5-5) are power
   inputs fed by passives only: put one PWR_FLAG on each of these four nets (as tube_psu's
@@ -222,7 +270,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (end of Phase 1 preparation):
+`tools/check_all.sh`, 2026-11-20 (after sheets 5 and 6):
 
 ```
 == KiCad environment
@@ -262,11 +310,11 @@ gen_symbols: lib/tube_hv_supplies.kicad_sym up to date (20 symbols)
 symbols: 15 part types, 160 refdes, 4 power symbols
 symbols: OK
 == ERC
-erc: 0 errors, 0 warnings (reports/erc.rpt)
+erc: 0 errors, 31 warnings (reports/erc.rpt)
 == Netlist comparison vs IPC
-compare: parts 0/158 present, 158 missing, 0 extra; pins compared 0, wrong-net pins 0; IPC nets touched 0, complete 0
-compare: per sheet (drawn/total) 1:0/34 2:0/26 3:0/42 4:0/34 5:0/7 6:0/15
-WARNING: missing parts (158): (see --verbose or --sheet N)
+compare: parts 22/158 present, 136 missing, 0 extra; pins compared 109, wrong-net pins 0; IPC nets touched 46, complete 30
+compare: per sheet (drawn/total) 1:0/34 2:0/26 3:0/42 4:0/34 5:7/7 6:15/15
+WARNING: missing parts (136): (see --verbose or --sheet N)
 compare: OK
 
 ALL CHECKS PASSED
@@ -337,7 +385,10 @@ Shared-tool limitations met on this board, with the board-local workaround used.
    draws over the circle in KiCad 10.0.7): `term()` in `tools/sheets/_common.py`, copied from
    tube_power_amp (their candidates 3 and 7).
 5. **`p2k.sch_builder.Sheet.place` cannot mirror**: `place_mirrored()` in `_common.py`, copied
-   from tube_power_amp (their candidate 6); not used yet on this board.
+   from tube_power_amp (their candidate 6); used for J1 and J2 (pin 1 at the bottom, as the
+   PDF draws them). `symgen.header` could also take a `bottom_up=` option. The mirrored box is
+   not symmetric about its origin, so the sheet script passes `ref_at` / `value_at` (the
+   library value position lands inside the box).
 6. **Part-map generator** is the tube_power_amp script plus `dsn_devices()` and a value-based
    symbol choice (`SYMBOL_BY_VALUE`, two op-amps with the same Proteus device): a shared
    `p2k.part_map` would serve all boards (tube_power_amp candidate 5).
@@ -361,3 +412,9 @@ Shared-tool limitations met on this board, with the board-local workaround used.
 - ADC121C027 VA and ADR0 are passive pins (finding 6, FLOATING net); everything else keeps the
   datasheet pin types.
 - Device and package columns of the part map come from ROOT.DSN (p2k candidate 3).
+- J1 and J2 are drawn with pin 1 at the bottom (mirrored symbol), as in the PDF.
+- PWR_FLAGs: 3V3, GND, 15V_BOOST (they enter on J1) and +2V5_BIAS (fed through R74), all on
+  sheet 5.
+- J1: global labels on short wires, local labels (unused signals) on longer wires, so the
+  label texts stay clear of the global label boxes; ADB0-ADB7 only as texts.
+- `reports/render/*.png` (sheet renders) are committed, as in tube_psu.
