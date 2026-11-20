@@ -123,6 +123,8 @@ OUTLINE_RECT = (-122.6, -28.26, 170.085, 56.485)  # x, y, width, height
 # the footprints built from the IPC pads - terminals - and the KRL2012 shunt land pattern have the
 # Proteus pads). Changing it is a user decision (Phase 3 DRC; STATUS.md "Phase 2 - pad sizes").
 FOOTPRINT_PAD_SIZES = "kicad"
+# kicad/fp-lib-table (the project footprint library) is written / checked by p2k.footprints.run.
+FP_LIB_TABLE = True
 # Parts drawn in the PDF without a layout part (no IPC pads): no footprint.
 OFF_BOARD_PARTS = {
     "L1": "off board: 3 mH inductor (OUT1 -> UC3), wired to the L5 / L12 terminals",
@@ -141,7 +143,7 @@ HOLE_VALUE = "MountingHole_3.0mm"
 # F.Cu 0.035 / prepreg 0.2104 / In1.Cu 0.0152 / core 1.065 / In2.Cu 0.0152 / prepreg 0.2104 /
 # B.Cu 0.035 = 1.586 mm + 2 x ~0.01 mm solder resist = 1.6 mm.
 PCB_THICKNESS = 1.6
-# Design rules from the Proteus copper as built (STATUS.md "Phase 3", tools/measure_gaps.py), mm.
+# Design rules from the Proteus copper as built (STATUS.md "Phase 3", `kipy -m p2k.measure_gaps`), mm.
 PCB_RULES = dict(
     min_track=0.15,       # thinnest conductor draw 0.1524 (6 mil)
     min_via=0.5,          # vias 0.5/0.3 (139) and 1.016/0.381 (2)
@@ -164,20 +166,58 @@ DRC_ACCEPTED = {
 # Proteus copper deliberately not built (user decision 2026-11-20, finding 14; reverses the Phase 5
 # keep decision). IPC frame, {(layer, x1, y1, x2, y2): reason} (p2k gerber_to_tracks; accepted by
 # check_board, ipc356_diff, gerber_roundtrip).
+# The two zero-length OUT1 draws are one 1e-5 mm segment drawn in both directions: one entry with the
+# count 2 matches both (p2k I7; until 2026-11-20 the board-local tools/remove_dot_tracks.py and its
+# REMOVED_DOT_TRACKS key; migration re-baseline accepted by the user, decision D-I7). They lie inside
+# the two 0.762 mm OUT1 tracks that meet there, so the copper is unchanged.
 REMOVED_TRACKS = {
     ("B.Cu", -73.6, -20.2, -72.7, -20.2): "15V_BOOST: dangling 0.9 mm stub, 0.762 mm wide (finding 14)",
-}
-# Board-local (tools/remove_dot_tracks.py, make_pcb.sh step 2b), not a p2k key: the two zero-length
-# OUT1 draws of finding 14 are the same segment drawn in both directions (1e-5 mm long), so one
-# REMOVED_TRACKS key matches both and gerber_to_tracks rejects the duplicate match ("found 2 draws");
-# two keys can't tell them apart either. {(layer, x, y): (count, reason)}, IPC frame: exactly `count`
-# tracks shorter than 0.001 mm at (x, y) are deleted after gerber_to_tracks (they lie inside the two
-# 0.762 mm OUT1 tracks that meet there, so the copper is unchanged). p2k candidate: a count for
-# REMOVED_TRACKS (or dedupe reversed duplicate draws); then this moves to REMOVED_TRACKS.
-REMOVED_DOT_TRACKS = {
-    ("B.Cu", -32.85196, -11.53736): (2, "OUT1: two zero-length draws (both directions) inside the OUT1 track junction (finding 14)"),
+    ("B.Cu", -32.85196, -11.53736, -32.85196, -11.53737): (
+        "OUT1: two zero-length draws (both directions) inside the OUT1 track junction (finding 14)", 2),
 }
 
-# Strict checks (p2k D-Z: every id of board.STRICT_DEFAULT is on). Temporary exception until the D-I7
-# migration (tools/remove_dot_tracks.py removes the two OUT1 dot draws after gerber_to_tracks).
-STRICT_CHECKS_OFF = {"roundtrip_counts": "B.Cu 401 vs 403 until the D-I7 migration"}
+# --- Pin order (Phase 2, p2k check_pin_order) ----------------------------------------------
+# The UNMOVED KiCad base footprints with the Proteus renumbering fitted onto the IPC pads (STATUS.md
+# "Phase 2 - pin order"); `spec=` takes base + renumbering from tools/gen_footprints.py PROJECT, so a
+# wrong renumbering there fails here although p2k.footprints.derive moves the pads onto the IPC
+# positions. Two-pad / inline patterns fit both ways (body markers by --render); dual-row SMD
+# packages are symmetric under 180 deg (the nets decide pin 1, Phase 1). mirror=None = "does not fit
+# on top" (unmirrored residual > 0.1 mm).
+PIN_ORDER = [
+    dict(name="REF1", refs="REF1", spec="SOT-23_Proteus", mirror=False, res=0.03,
+         note="SOT-23 renumbered (1 = JEDEC 3): fits; Proteus 1.90 mm rows vs KiCad 1.875"),
+    dict(name="REF1 plain", refs="REF1", footprint="Package_TO_SOT_SMD:SOT-23", mirror=None,
+         note="SOT-23 with JEDEC numbering: does not fit (> 0.1 mm, angle not snapped)"),
+    dict(name="ADC", refs="ADC1 ADC2 ADC3", spec="SOT-23-6_ADC121C027_Proteus_ProteusPads", mirror=False, res=0.19,
+         note="A1 A2 COM2 K2 K1 COM1 = JEDEC 1-6: fits (rows 2.65 vs KiCad 2.275 -> 0.1875)"),
+    dict(name="ADC datasheet", refs="ADC1 ADC2 ADC3", footprint="Package_TO_SOT_SMD:SOT-23-6",
+         renumber={"1": "COM2", "2": "A2", "3": "A1", "4": "COM1", "5": "K1", "6": "K2"}, mirror=None,
+         note="VA / VIN exchanged (COM2 on pad 1, A1 on pad 3, the datasheet wiring): fits only mirrored, "
+              "i.e. not on a top-side part (finding 6)"),
+    dict(name="SI8271", refs="DRV1 DRV2", spec="SOIC-8_3.9x4.9mm_P1.27mm_Proteus", mirror=True, res=0.28,
+         note="bottom side, rows 5.5 vs 4.95"),
+    dict(name="SI8271 Proteus pads", refs="DRV5 DRV6", spec="SOIC-8_3.9x4.9mm_P1.27mm_Proteus_ProteusPads",
+         mirror=True, res=0.28, render=False,
+         note="bottom side, rows 5.5 vs 4.95 (spec with the Proteus pad sizes)"),
+    dict(name="TSSOP-14", refs="U1 U2", spec="TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads", mirror=False, res=0.07,
+         note="rows 5.85 vs 5.725"),
+    dict(name="J1 rows swapped", refs="J1", spec="PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads",
+         mirror=False, res=0.01, note="odd / even swapped: fits on top"),
+    dict(name="J1 KiCad", refs="J1", footprint="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical",
+         mirror=True, res=0.01, render=False,
+         note="standard numbering fits only MIRRORED (bottom), but J1 is on top (finding 12)"),
+    dict(name="J2", refs="J2", spec="PinHeader_2x08_P1.27mm_Vertical_ProteusPads", mirror=False, res=0.01,
+         note="standard numbering fits on top (spec with the Proteus pad sizes)"),
+    dict(name="TO-220", refs="Q3 Q4 Q7 Q8", spec="TO-220-3_Vertical_ProteusPads", mirror=False, res=0.01,
+         note="inline: marker by render (spec with the Proteus pads)"),
+    dict(name="SMA", refs="D2 D18", spec="D_SMA_AC", mirror=True, res=0.051, note="two pads: band by render"),
+    dict(name="CP", refs="C1 C2 C3 C4 C5 C6 C7 C11 C26", footprint="Capacitor_THT:CP_Radial_D10.0mm_P5.00mm",
+         mirror=False, res=0.01, note="two pads: '+' by render"),
+]
+
+# --- Pad decisions (Phase 5, p2k check_pads) -------------------------------------------------
+# The parts that must have exactly the Proteus pads (gerber flash bbox / area, drill) on the board:
+# user decisions A2 (Phase 3) + J2, Q3 Q4 Q7 Q8 and J1 all round (Phase 5, 2026-11-20). Written out
+# independently of tools/gen_footprints.py PROTEUS_PADS (the two must agree; a part taken out of the
+# footprint rules fails here).
+PROTEUS_PADS_CHECK = "U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 J2 Q3 Q4 Q7 Q8".split()

@@ -34,6 +34,42 @@ clone with `~/dev/proteus2kicad/tools/regress.sh <pin> tube_hv_supplies_kicad` (
   dot draws after gerber_to_tracks. Removed in step 2 (D-I7).
 - Every other generated file byte-identical; `tools/check_all.sh` ALL CHECKS PASSED.
 
+### Step 2 – migration to the shared tools (D-I7 re-baseline)
+
+Every board-local tool deleted or reduced to data, each with the shared tool / key that replaces it:
+
+| Board-local (deleted / changed) | Shared replacement (p2k a9a286c) |
+|---|---|
+| `tools/make_part_map.py` (generator, `dsn_devices()`) | data only, `part_map.run(SPEC)`: `LAYOUT="dsn"`, `"LT1014": None` + `SYMBOL_BY_VALUE`, `OFF_BOARD` 2-tuples, `FIELDS` with `off_board`, `COMMENT` |
+| `_common.place_mirrored` | `Sheet.place(..., 0, mirror="x")` (J1, J2) |
+| `_common.term()` | `sheetkit.terminal(..., symbol=sym(ref), value=sh_value(ref), justify="away")` (10 terminals, sheet 1) |
+| `_common._hcap()`, the `si8271_cell` capacitor texts | `horiz2(..., text_gap=3.81)` |
+| `tools/erc.sh` | `p2k erc` (no keys) |
+| check_all grep guard `WARNING: name hint` | strict `net_names` (on by default) |
+| gen_footprints `fp_lib_table()` | `FP_LIB_TABLE = True` |
+| gen_footprints `_derive_pads` (monkeypatch) | spec key `pads` (same semantics). The hand-written `_ProteusPads` specs stay (F8 `PROTEUS_PADS` would not reproduce their names); `PROTEUS_PADS` stays a module variable of gen_footprints.py, not the config key |
+| `tools/check_pin_order.py` | `p2k check_pin_order` + `PIN_ORDER` (13 entries, `spec=`, two `mirror=None`) |
+| `tools/check_proteus_pads.py` | `kipy -m p2k.check_pads` + `PROTEUS_PADS_CHECK` (its `DECIDED` list) |
+| `tools/remove_dot_tracks.py` + `REMOVED_DOT_TRACKS` + make_pcb step 2b | `REMOVED_TRACKS[("B.Cu", -32.85196, -11.53736, -32.85196, -11.53737)] = ("OUT1: …", 2)` |
+| `tools/make_pcb.sh` (35 lines) | one-liner `exec tools/p2k/bin/p2k make_pcb "$@"` (default `PCB_STEPS`) |
+| `tools/measure_gaps.py` | `tools/p2k/bin/kipy -m p2k.measure_gaps` |
+
+`STRICT_CHECKS_OFF` removed: **no strict opt-outs** (B.Cu 401 / 401 draws, `roundtrip_counts` passes).
+
+Generated files: all byte-identical except the **D-I7** accepted re-baseline (user decision, p2k
+CANDIDATES.md "Decisions"): `kicad/tube_hv_supplies.kicad_pcb` (item order / UUIDs: 1256 lines changed;
+sorted without the UUIDs identical, i.e. the same copper), `reports/assign_nets.txt` (the order of the 36
+stage-A orphan via lines only), `reports/roundtrip/roundtrip.txt` (2 lines: "3 Conductor draws
+(REMOVED_TRACKS)" on B.Cu, Proteus 874 draws instead of 876 - the dot draws are now recorded deviations on
+both sides).
+
+Negative tests (in place, restored): ADC renumbering with A1 / COM2 exchanged → `check_pin_order: ERROR ADC:
+unmirrored 1.909, expected unmirrored <= 0.19`; J1 without the rows-swapped renumbering → `ERROR J1 rows
+swapped: mirrored 0.000, expected unmirrored <= 0.01`; the OUT1 entry with count 1 → `gerber_to_tracks: ERROR
+REMOVED_TRACKS: 2 listed, found 3 draws`, make_pcb FAILED at gerber_to_tracks; C1 (KiCad pads) added to
+`PROTEUS_PADS_CHECK` → check_pads FAILED (10); the `C1_CURRENT_MEAS` alias dropped → `ERROR: net name: KiCad
+net CURRENT_C3_MEAS = IPC net C1_CURRENT_MEAS (… strict check net_names)`.
+
 ## Design fixes 2026-11-20 – findings 7 and 14, README holes – done (Opus 5.5, 2026-11-20)
 
 User decisions (Decisions, first entry): fix design findings in the KiCad design but leave every
@@ -1279,9 +1315,11 @@ Shared-tool limitations met on this board, with the board-local workaround used.
 
 1. `ipc356`: the `pin_nets_by_component.md` header prints `Net aliases: .` when `NET_ALIASES` is
    empty. Print "none" instead (cosmetic).
+   **Solved in p2k a9a286c** (batch R, I3).
 2. `ipc356`: `pins_by_net.md` lists a two-hole terminal pin twice (`B_P-1 B_P-1`, pin count 5 for
    B+), because it counts records, not distinct pins. Distinct `(refdes, pin)` would read better
    (cosmetic; tube_psu has the same).
+   **Solved in p2k a9a286c** (batch R, I5; D-R re-baseline in step 1).
 3. **`p2k.pdsprj.lyt_parts` finds no part record in this ROOT.LYT** (Proteus 8.12 SP2): there
    are no `EID` / `EID_A` markers. The records here read `<package> <refdes> PS "Vector Font"
    "PART REFERENCE" <value> PS "Vector Font" "PART VALUE" <pin nets...>`, with stray binary
@@ -1290,53 +1328,67 @@ Shared-tool limitations met on this board, with the board-local workaround used.
    ROOT.DSN component record (device = first string after `COMPONENT VALUE`, package =
    `{PACKAGE=...}` property). The shared tool would need: a `dsn_devices` reader (this one), and
    a binary (length-prefixed) reader for this LYT record format.
+   **Solved in p2k a9a286c** (`pdsprj.dsn_devices`, `part_map` `LAYOUT="dsn"`).
 4. **`p2k.sheetkit.terminal` hard-codes value "PIN"** (and its left/right text justification
    draws over the circle in KiCad 10.0.7): `term()` in `tools/sheets/_common.py`, copied from
    tube_power_amp (their candidates 3 and 7).
+   **Solved in p2k a9a286c** (`terminal(symbol=, value=, justify="away")`).
 5. **`p2k.sch_builder.Sheet.place` cannot mirror**: `place_mirrored()` in `_common.py`, copied
    from tube_power_amp (their candidate 6); used for J1 and J2 (pin 1 at the bottom, as the
    PDF draws them). `symgen.header` could also take a `bottom_up=` option. The mirrored box is
    not symmetric about its origin, so the sheet script passes `ref_at` / `value_at` (the
    library value position lands inside the box).
+   **Solved in p2k a9a286c** (`place(mirror=)`).
 6. **Part-map generator** is the tube_power_amp script plus `dsn_devices()` and a value-based
    symbol choice (`SYMBOL_BY_VALUE`, two op-amps with the same Proteus device): a shared
    `p2k.part_map` would serve all boards (tube_power_amp candidate 5).
+   **Solved in p2k a9a286c** (`part_map.run`).
 7. `symgen.box` pin length is fixed at 2.54 mm: four-character pin numbers (`COM1`, `COM2` of
    the ADC121C027) overlap the body outline in the render (cosmetic). A `pin_length=` option
    would fix it.
+   Solved in p2k a9a286c (`box(pin_length=)`); **not migrated**: it changes the symbol library (cosmetic, not an accepted re-baseline); a redesign / later choice.
 8. `Sheet.place` puts the reference / value of a **horizontal two-pin part** 2.54 mm above /
    below the centre line (or both on one side with `text=`). That fits a resistor, but a
    horizontal capacitor's plates are about 2 mm high, so the texts lie on them. Workaround:
    `ref_at` / `value_at` at ±3.81 mm in `_common.py` (`_hcap()`, `si8271_cell()`). The shared
    tool could take the offset from the symbol's body height.
+   **Solved in p2k a9a286c** (`place(text_gap=)`).
 
 9. `compare_netlists` prints "IPC nets touched 115, complete 115" on a board with 113 nets: the
    two N/C pads (J1-37 / 38) count as one group each. Printing "113 nets + 2 N/C pads" would
    read better (cosmetic).
+   **Solved in p2k a9a286c** (C6: "IPC nets touched 113, complete 113 (+ 2 N/C / no-net pins)").
+
 10. The `SEND` / `SEND1` refdes sort crash of `compare_netlists` (reported by the FX-loop
     board) **does not occur here**: every refdes prefix of this board is either always
     numbered or never; no wrapper needed.
 11. `p2k.footprints.run` does not write the project `kicad/fp-lib-table`: `fp_lib_table()` in
     `tools/gen_footprints.py` (copied from tube_power_amp, their candidate).
+   **Solved in p2k a9a286c** (`FP_LIB_TABLE`).
 12. **`p2k.footprints.derive` moves the base pads onto the IPC positions however far they are**
     (negative test T3: A1 / COM2 exchanged in the ADC renumbering → the derived footprint still
     fits, check_footprints passes). The shared tool should fit the unmoved, renumbered base first
     and fail (or need an explicit `allow_move=` limit) when a pad moves more than a fraction of
     the pitch (e.g. > 0.5 mm); the board-local guard is `tools/check_pin_order.py`, which takes
     base + renumber from `gen_footprints.PROJECT`.
+   **Solved in p2k a9a286c** (spec `max_move`, strict `derive_max_move` on by default; and `p2k check_pin_order`).
 13. `p2k.check_footprints` accepts a THT part that fits only mirrored (bottom) with a note (J1
     with the plain KiCad header, T4). It could compare with the Proteus assembly / silk layer
     the part is drawn on, or need a config list of bottom THT parts.
+   **Solved in p2k a9a286c** (`BOTTOM_THT`, opt-in by key presence; not set: no bottom THT part here; strict `derive_max_move` already fails a derived THT part that fits only mirrored).
 14. `tools/check_pin_order.py` is board-local here and on tube_power_amp (with the tie rule for
     symmetric two-pad / inline patterns and `--render` over the Proteus silk / assembly of the
     part's side): a shared `p2k.check_pin_order` with the CHECKS table in the board repo.
+   **Solved in p2k a9a286c** (`p2k check_pin_order`, `PIN_ORDER`; board script deleted).
 
 15. **`tools/measure_gaps.py` copied unchanged a third time** (tube_psu, tube_pi_fxloop, here): a
     shared `p2k.measure_gaps` would do.
+   **Solved in p2k a9a286c** (`p2k.measure_gaps`; board script deleted).
 16. **A pending-decision mode for `p2k drc` and `p2k.assign_nets --check`:** board-local
     `tools/drc_pending.py` (as tube_pi_fxloop's; removed after the decision, in git history d1c551a)
     passed exactly the recorded conflicts while the pad decision was open. A config key (e.g. `DRC_PENDING = {refdes: reason}` with expected counts) and
     a "PENDING" exit state in the shared tools would replace the per-board wrappers.
+   **Solved in p2k a9a286c** (`PENDING`; nothing pending here).
 17. **Testing Proteus pads on a refdes set:** board-local `tools/pad_option_test.sh` (removed after the
     decision, in git history d1c551a) patched
     `refdes=` rules and `<footprint>_ProteusPads` specs (`ipc_sizes=True`) into a scratch copy of
@@ -1344,45 +1396,55 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     this (derived Proteus-pad variants for the named parts only), so the decision is one config line.
     Applied by hand here: `PROTEUS_PADS`, four `refdes=` rules and four `_ProteusPads` specs (≈ 40 lines
     in gen_footprints.py, plus the renamed specs in check_pin_order.py).
+   Solved in p2k a9a286c (`PROTEUS_PADS`, F8); **not migrated**: the hand-written `_ProteusPads` specs have other names / descr / `ipc` refdes (F8 would not reproduce them byte for byte).
 18. **A changed track net is caught only by the byte compare** (negative test T1, as tube_power_amp):
     pcbnew re-derives track nets on load, so check_board, assign_nets --check and DRC do not see it.
     check_board could read the track nets from the file (s-expression) and compare them with the
     assign_nets groups.
+   **Solved in p2k a9a286c** (strict `track_nets`, on by default).
 19. KiCad's DRC reports one violation per track against its closest pad, so a conflict can hide
     behind a neighbour (ADC2 showed only after ADC3 had the Proteus pads): `pad_option_test.sh`
     re-runs the DRC on the whole candidate set; a shared tool could measure every pad-to-track gap
     itself (as measure_gaps does for the Proteus copper).
+   Documented in the playbook (G3); per-pad gaps not implemented in p2k (B11 option, low priority).
 
 20. **`gerber_roundtrip` classifies a missing or extra pad as `pad shape`** (Phase 4 negative test: R1
     flipped to the bottom → no `other` cluster, no uncovered flash; the pads lie inside the XOR of the two
     pad sets). ipc356_diff and check_board catch it; the round trip could require every pad flash of one
     set to overlap a pad flash of the other.
+   Solved in p2k a9a286c as the opt-in strict id `roundtrip_pad_match`; **not enabled** (it fails on the KiCad library pad sizes on every board, D-Z).
 21. **Proteus pad sizes are taken from the IPC** (`reports/footprint_pads.csv`, `ipc_sizes=True`, the
     "pads with another size" list of ipc356_diff), which is wrong for pads flashed with an aperture macro
     (TO-220 here: IPC 1.524 × 1.524, gerber 1.524 × 2.54 rounded rectangle). The shared tools could take
     size and shape from the gerber flash at the pad position (check_sources could compare the two).
     **Phase 5 workaround:** `TO-220-3_Vertical_ProteusPads` sets the gerber pad through the `pads` key (25).
+   Not in p2k (F9, low priority); the spec key `pads` (25) covers the TO-220.
 22. **A pending-decision mode for `gerber_roundtrip`** (as candidate 16 for drc / assign_nets):
     board-local `tools/roundtrip_pending.py` passes exactly one recorded `other` cluster. The tool could
     also classify a Proteus copper island that is enclosed by clearance areas of larger KiCad pads (the J2
     web: bounded on all sides by the `clearance` mask) as `clearance` or as its own category. (The wrapper
     was removed in Phase 5 after the J2 decision; in git history d666593.)
+   **Solved in p2k a9a286c** (`PENDING`, gerber_roundtrip in `PENDING_TOOLS`); the enclosed-island class is X6 (not done).
 23. `ipc_sizes=True` keeps the KiCad pad **shape** (J1: the square pin-1 pad, on the pad numbered 2 after
     the odd / even swap; Proteus pads are round). A `shape=` / `ipc_shapes=` option would reproduce the
     Proteus pads fully. **Phase 5 workaround:** the board-local spec key `pads` (below, 25) sets J1 pad 2
     and J2 pad 1 round.
+   **Solved in p2k a9a286c** (spec key `pads`).
 
 24. **A check that the Proteus-pad parts really have the Proteus pads** (Phase 5): board-local
     `tools/check_proteus_pads.py` compares each board pad (pcbnew polygon) with the gerber flash and drill at
     its position. Without it, a KiCad pad, a turned pad, a larger drill or a square pin-1 pad on a decided
     part passes every shared check (negative tests). A shared `p2k.check_pads` with a `PROTEUS_PADS` config key
     (candidate 17) would cover every board.
+   **Solved in p2k a9a286c** (`p2k.check_pads`, `PROTEUS_PADS_CHECK`; board script deleted).
 25. **Pad shape / size / drill per pad in a derived spec** (Phase 5): board-local spec key `pads` = {pad
     number or `*`: dict(shape=, size=, rratio=, drill=)} applied by a wrapper around `p2k.footprints.derive`
     in `tools/gen_footprints.py` (monkeypatched module function). The shared tool could take this key (or
     candidate 21's gerber pads) directly.
+   **Solved in p2k a9a286c** (spec key `pads`; the board wrapper deleted).
 26. `place_refdes` puts 4 references (R52 R54 R69 R74) on the Fab layer only: dense 0402 groups. Accepted
     (user default); a smaller third size or placement over the part body could keep them on the silk.
+   Not changed (p2k X4: accepted by the user).
 27. **`compare_netlists` only warns when a named net differs in name** ("name hint"): with the
     `+2V5_BIAS` → `+1V0_BIAS` alias removed it still says OK (pins match); check_symbols catches it here
     only because the net is a power symbol. A strict option (fail when a KiCad net that is not
@@ -1390,13 +1452,16 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     (Candidate 1, the empty `Net aliases:` header, no longer shows on this board.)
     **2026-11-20:** with the finding 7 label renames this gap is real (a dropped alias passed every check);
     board-local guard in check_all.sh: fail on `WARNING: name hint`.
+   **Solved in p2k a9a286c** (strict `net_names`; the check_all grep guard removed).
 28. **`REMOVED_TRACKS` can't remove a segment that Proteus drew twice** (2026-11-20, finding 14): the two
     zero-length OUT1 draws are one segment in both directions; one key matches both and gerber_to_tracks
     rejects the duplicate match, two keys can't be told apart. A count in the value (`(reason, n)`) or
     "a key matches all identical draws" would do; board-local `tools/remove_dot_tracks.py` +
     `REMOVED_DOT_TRACKS` until then (then move the entry to REMOVED_TRACKS and drop the script).
+   **Solved in p2k a9a286c** (`(reason, n)`; D-I7; `remove_dot_tracks.py` deleted).
 29. **make_pcb.sh template:** `run ... || {...}` disables `set -e` inside `run()`; chain the steps with `&&`
     (fixed here, preamp, PI/FX). Worth fixing in the playbook's make_pcb template / other boards.
+   **Solved in p2k a9a286c** (`p2k make_pcb`; make_pcb.sh is the one-liner).
 
 ## Decisions
 

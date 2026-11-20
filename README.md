@@ -48,6 +48,11 @@ and `p2k_config.NET_ALIASES` maps it for every check.
 `tools/check_all.sh` prints ALL CHECKS PASSED (19 steps). Still to come: the ADC VA / VIN fix (finding 6, a
 hand edit after generation stops) and the J1 renumbering (finding 12, waits for a shared-tool key).
 
+**Shared-tool migration 2026-11-20 (STATUS.md "Shared-tool migration 2026-11-20"):** `tools/p2k` bumped
+to a9a286c; every board-local tool replaced by the shared proteus2kicad tools and config keys (`p2k erc`,
+`p2k check_pin_order` + `PIN_ORDER`, `p2k.check_pads` + `PROTEUS_PADS_CHECK`, `REMOVED_TRACKS` with a count,
+`p2k make_pcb`, `part_map.run`, the spec key `pads`, `FP_LIB_TABLE`); no strict-check opt-outs.
+
 **HV supplies v2 is not installed and will be redone anyway: this conversion is only the starting point
 for the redesign** (user, 2026-11-20).
 
@@ -87,13 +92,11 @@ reference/      tables derived from the IPC netlist (p2k ipc356; generated, don'
 lib/            part_map.csv and the project symbol library (generated)
 kicad/          KiCad project: root sheet + 6 sub-sheets (one per PDF page)
 tools/p2k/       proteus2kicad (submodule)
-tools/make_part_map.py, tools/gen_symbols.py  generators of lib/ (--check)
+tools/make_part_map.py, tools/gen_symbols.py  data for the lib/ generators (p2k part_map, symgen; --check)
 tools/sheets/   one transcription script per sheet (_common.py: board helpers)
-tools/erc.sh    ERC of the schematic
-tools/gen_footprints.py, tools/make_pcb.sh  footprints and the board (generated, --check)
-tools/check_proteus_pads.py  pads of the Proteus-pad parts vs the Proteus gerber flashes (Phase 5)
-tools/remove_dot_tracks.py   make_pcb step 2b: the zero-length Proteus draws REMOVED_TRACKS can't express (finding 14)
+tools/gen_footprints.py  footprint RULES / PROJECT specs (p2k footprints; --check)
+tools/make_pcb.sh  the board: `exec tools/p2k/bin/p2k make_pcb` (generated, --check)
 reports/roundtrip/  round-trip report and overlays (KiCad gerbers vs Proteus)
 tools/check_all.sh  every verification step (run at the start and end of a session)
-p2k_config.py   board configuration for the tools
+p2k_config.py   board configuration for the shared tools (incl. PIN_ORDER, PROTEUS_PADS_CHECK, REMOVED_TRACKS)
 ```

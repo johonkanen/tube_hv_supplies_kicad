@@ -22,8 +22,8 @@ def Yg(y):
 
 # --- J2: ADC input header ------------------------------------------------------------------------
 JX, JY = P(24, 64)
-j2 = place_mirrored(sh, sym("J2"), "J2", JX, JY, axis="x", value=sh_value("J2"),
-                    ref_at=(JX - g(4), JY - g(9.5), 0, "left"), value_at=(JX - g(4), JY + g(11.5), 0, "left"))
+j2 = sh.place(sym("J2"), "J2", JX, JY, 0, mirror="x", value=sh_value("J2"),
+             ref_at=(JX - g(4), JY - g(9.5), 0, "left"), value_at=(JX - g(4), JY + g(11.5), 0, "left"))
 pin = {n: j2.pin(n) for n in range(1, 17)}
 LX, RX_ = pin[1][0], pin[2][0]
 # GND: odd pins 5, 9, 13, 15 on a bus left of the header, even pins 6, 10, 14, 16 on one right of it

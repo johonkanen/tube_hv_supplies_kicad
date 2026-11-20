@@ -73,8 +73,8 @@ GLOBAL = {"CURRENT_Q4_MEAS", "V_A_MEAS", "CURRENT_Q7_MEAS", "UIN_MEAS", "CURRENT
           "CURRENT_C3_MEAS", "U_OUT_MEAS", "SCL", "SDA", "G3_LO", "G1_LO", "G3_HI", "G1_HI"}
 POWER = {"GND", "3V3", "15V_BOOST"}
 JX, JY = P(134, 55)
-j1 = place_mirrored(sh, sym("J1"), "J1", JX, JY, axis="x", value=sh_value("J1"),
-                    ref_at=(JX - g(4), JY - g(21.5), 0, "left"), value_at=(JX - g(4), JY + g(23.5), 0, "left"))
+j1 = sh.place(sym("J1"), "J1", JX, JY, 0, mirror="x", value=sh_value("J1"),
+             ref_at=(JX - g(4), JY - g(21.5), 0, "left"), value_at=(JX - g(4), JY + g(23.5), 0, "left"))
 for pin, net, alias in J1_PINS:
     p = j1.pin(pin)
     side = "left" if pin % 2 else "right"

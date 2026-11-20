@@ -50,9 +50,9 @@ sh.wire(l7r, P(145, YT))
 sh.wire(P(11, YB), P(193, YB))
 
 # --- input: B+ / B- terminals, C1, C11 (B+), C26, C2, C10, C9 (UIN) -------------------------------
-term(sh, "B_P", *P(11, 24), "up")
+terminal(sh, "B_P", *P(11, 24), "up", symbol=sym("B_P"), value=sh_value("B_P"), justify="away")
 sh.wire(P(11, 24), P(11, YT))
-term(sh, "B_N", *P(11, 97), "down")
+terminal(sh, "B_N", *P(11, 97), "down", symbol=sym("B_N"), value=sh_value("B_N"), justify="away")
 sh.wire(P(11, 97), P(11, YB))
 for ref, x, y, kw in (("C1", 11, 58, {}), ("C11", 21, 58, {}), ("C26", 38, 58, {}), ("C2", 49, 58, {}),
                       ("C10", 55, 70, {"text": "left"}), ("C9", 60, 58, {})):
@@ -94,7 +94,7 @@ node(83, YT)
 half_bridge("Q8", "Q7", 145, "PWM3_HI", "PWM3_LO", 130, 135, 100, 107, "R29", "CURRENT_Q7", 154, 110)
 
 # --- OUT1 -> L1 (off-board, L5 - L12) -> UC3 -> L2 -> V_A -----------------------------------------
-term(sh, "L5", *P(70, 19), "up")
+terminal(sh, "L5", *P(70, 19), "up", symbol=sym("L5"), value=sh_value("L5"), justify="away")
 sh.wire(P(70, 19), P(70, 32), P(76, 32))
 sh.glabel("OUT1", *P(76, 32), 0)
 sh.wire(P(73, 32), P(73, YM), P(83, YM))             # crosses the UIN rail and the Q3 gate wire
@@ -106,7 +106,7 @@ sh.wire(r, P(100, YM))
 node(100, YM)
 sh.wire(P(100, YM), P(100, 7))                       # PDF Uc3; crosses the UIN rail
 gl_up("UC3", 100, 7)
-term(sh, "L12", *P(105, 19), "up")
+terminal(sh, "L12", *P(105, 19), "up", symbol=sym("L12"), value=sh_value("L12"), justify="away")
 sh.wire(P(105, 19), P(105, 43), P(100, 43))
 node(100, 43)
 t, b = vcap("C3", 100, 66)                           # C3: + = UC3, - = CURRENT_C3 (shunt R75)
@@ -123,7 +123,7 @@ l, r = hpart("L2", 110, YM)                          # L2: 1 = UC3, 2 = V_A
 sh.wire(P(100, YM), l)
 sh.wire(r, P(128, YM), P(128, 7))                    # PDF V_a; crosses the UIN rail
 gl_up("V_A", 128, 7)
-term(sh, "V_ANODE", *P(119, 27), "up")
+terminal(sh, "V_ANODE", *P(119, 27), "up", symbol=sym("V_ANODE"), value=sh_value("V_ANODE"), justify="away")
 sh.wire(P(119, 27), P(119, YM))
 node(119, YM)
 t, b = vcap("C4", 119, 66)
@@ -132,7 +132,7 @@ sh.wire(b, P(119, YB))
 node(119, YB)
 
 # --- OUT2 -> L3 (off-board, L11 - L6) -> U_OUT -> L4 -> UC6 -> R26 || R27 -> PREOUT ---------------
-term(sh, "L11", *P(133, 21), "up")
+terminal(sh, "L11", *P(133, 21), "up", symbol=sym("L11"), value=sh_value("L11"), justify="away")
 sh.wire(P(133, 21), P(133, YM), P(145, YM))          # crosses the UIN rail and the Q8 gate wire
 sh.wire(P(133, 30), P(136, 30))
 node(133, 30)
@@ -144,7 +144,7 @@ sh.wire(r, P(162, YM))
 node(162, YM)
 sh.wire(P(162, YM), P(162, 7))                       # PDF U_out
 gl_up("U_OUT", 162, 7)
-term(sh, "L6", *P(171, 21), "up")
+terminal(sh, "L6", *P(171, 21), "up", symbol=sym("L6"), value=sh_value("L6"), justify="away")
 sh.wire(P(171, 21), P(171, 44), P(162, 44))
 node(162, 44)
 t, b = vcap("C5", 162, 66)
@@ -169,9 +169,9 @@ node(179, YB)
 sh.wire(P(179, 72), P(168, 72), P(168, 117))
 node(179, 72)
 gl_down("CURRENT_C6", 168, 117)
-term(sh, "GND_PRE", *P(179, 99), "down")
+terminal(sh, "GND_PRE", *P(179, 99), "down", symbol=sym("GND_PRE"), value=sh_value("GND_PRE"), justify="away")
 sh.wire(P(179, 99), P(179, YB))
-term(sh, "VPRE", *P(193, 25), "up")
+terminal(sh, "VPRE", *P(193, 25), "up", symbol=sym("VPRE"), value=sh_value("VPRE"), justify="away")
 sh.wire(P(193, 25), P(193, YM))
 sh.label("PREOUT", *P(193, 40), 0)
 sh.wire(r27, P(193, 51))
@@ -181,7 +181,7 @@ node(193, YM)
 t, b = vcap("C7", 193, 66)
 sh.wire(P(193, YM), t)
 sh.wire(b, P(193, YB))
-term(sh, "GND_PWR", *P(193, 99), "down")
+terminal(sh, "GND_PWR", *P(193, 99), "down", symbol=sym("GND_PWR"), value=sh_value("GND_PWR"), justify="away")
 sh.wire(P(193, 99), P(193, YB))
 
 # --- notes ----------------------------------------------------------------------------------------

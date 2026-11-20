@@ -22,28 +22,27 @@ step "Gerber X2 export vs IPC (pads, vias, drills, outline)" tools/p2k/bin/p2k c
 step "Part map up to date" python3 tools/make_part_map.py --check
 step "Symbol library up to date" python3 tools/gen_symbols.py --check
 step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
-step "ERC" tools/erc.sh
+step "ERC" tools/p2k/bin/p2k erc
 # all 6 sheets drawn: every part must be present (no --allow-missing)
 step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
-# compare_netlists only warns when a KiCad net is an IPC net under another name (p2k candidate 27):
-# with the NET_ALIASES renames (+1V0_BIAS, the finding 7 current nets) a missing / typo'd alias must fail
-step "KiCad net names = IPC names after NET_ALIASES (no name hints)" bash -c '! grep "WARNING: name hint" build/tmp/check_all.log'
+# strict net_names (on by default, p2k D-Z): a KiCad net that is an IPC net under another name fails,
+# so a missing / typo'd NET_ALIASES entry (+1V0_BIAS, the finding 7 current nets) fails here
 # Phase 2: footprints
 step "Footprint library, map and fp-lib-table up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry (fit and pcbnew placement)" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
-step "Pin order vs unmoved KiCad base footprints" python3 tools/check_pin_order.py
+step "Pin order vs unmoved KiCad base footprints" tools/p2k/bin/p2k check_pin_order
 # Phase 3: PCB (build_pcb, gerber_to_tracks, assign_nets, pours_to_zones on all four layers)
 step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
 step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
-# pad sizes: KiCad pads except the PROTEUS_PADS parts of tools/gen_footprints.py (user decisions A2
-# and Phase 5: + J2, + Q3 Q4 Q7 Q8 with the gerber TO-220 pad, J1 all round)
 step "Board copper connectivity after zone fill" tools/p2k/bin/kipy -m p2k.assign_nets --check
 step "DRC with schematic parity" tools/p2k/bin/p2k drc
 # Phase 4: the finished board against the Proteus CADCAM files (independent of the generators)
 step "IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)" tools/p2k/bin/p2k ipc356_diff
 step "Gerber round trip vs Proteus (copper XOR, coverage, drills)" tools/p2k/bin/p2k gerber_roundtrip --check
 # Phase 5: the pad decisions (round trip and ipc356_diff accept other pad shapes / larger drills)
-step "Proteus-pad parts: board pads = Proteus flashes and drills" tools/p2k/bin/kipy tools/check_proteus_pads.py
+# pad sizes: KiCad pads except the PROTEUS_PADS_CHECK parts (user decisions A2 and Phase 5: + J2,
+# + Q3 Q4 Q7 Q8 with the gerber TO-220 pad, J1 all round)
+step "Proteus-pad parts: board pads = Proteus flashes and drills" tools/p2k/bin/kipy -m p2k.check_pads
 
 echo
 pending=$(grep -c "PENDING USER DECISION" "$log")

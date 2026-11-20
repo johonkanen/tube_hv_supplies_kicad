@@ -286,11 +286,11 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (CURRENT_C6) 0.05 mm, via (CURRENT_C6) 3.70 mm
    pad shape  only KiCad    1.118 mm^2 at (  30.836,   -3.436) 2.02x2.02 mm  near C7-2 (GND) 0.05 mm, via (GND) 11.61 mm
 
-== B.Cu: Proteus objects not compared (recorded deviations): 1 Conductor draws (REMOVED_TRACKS)
+== B.Cu: Proteus objects not compared (recorded deviations): 3 Conductor draws (REMOVED_TRACKS)
 == B.Cu: Proteus copper 1787.8 mm^2, KiCad copper 1832.6 mm^2
    raw XOR 52.14 mm^2; after 0.05 mm tolerance: only Proteus 0.99 mm^2, only KiCad 36.02 mm^2, 250 clusters (111 below 0.01 mm^2)
    pad shape   139 clusters, 36.55 mm^2
-   coverage: Proteus 876 draws / 347 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 401 draws / 347 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 874 draws / 347 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 401 draws / 347 flashes, 0 not on Proteus copper (0 explained by pad shape)
    pad shape    15 clusters, only KiCad  22.56 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:CP_Radial_D10.0mm_P5.00mm  (9 parts: C1 C11 C2 C26 C3 C4 ...)
    pad shape    20 clusters, only KiCad   5.88 mm^2, only Proteus   0.00 mm^2  Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder  (8 parts: R22 R23 R24 R25 R32 R33 ...)
    pad shape    15 clusters, only KiCad   4.35 mm^2, only Proteus   0.00 mm^2  Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder  (6 parts: C23 C30 C31 C38 C43 C46)

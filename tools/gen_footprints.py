@@ -7,8 +7,7 @@ Writes (through the shared generator tools/p2k/p2k/footprints.py)
   lib/tube_hv_supplies.pretty/   project footprints: derived from KiCad library footprints (pads
                                  renumbered to the Proteus ids, pad centres moved onto the Proteus
                                  positions) or built from the IPC-D-356A pads where KiCad has nothing
-  kicad/fp-lib-table             registers the project library (board-local: footprints.run does
-                                 not write it; STATUS.md "p2k candidates")
+  kicad/fp-lib-table             registers the project library (p2k_config.FP_LIB_TABLE)
 
 Usage: python3 tools/gen_footprints.py [--check]      (needs the KiCad AppImage mount)
 
@@ -41,7 +40,7 @@ P = "tube_hv_supplies:"
 # between J2-1..4, STATUS.md "Phase 4 - J2") and + Q3 Q4 Q7 Q8 (the Proteus TO-220 pads keep the
 # 1.016 mm copper gap between the HV collector pad and its neighbours; finding 15). The TO-220 pad
 # shape is not in the IPC (1.524 x 1.524 there), so that spec takes it from the gerber flash via the
-# board-local `pads` key (PAD_OVERRIDE below), not from ipc_sizes.
+# spec key `pads` (p2k.footprints), not from ipc_sizes.
 PROTEUS_PADS = frozenset("""
     U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 J2 Q3 Q4 Q7 Q8
 """.split())
@@ -159,7 +158,7 @@ PROJECT = {
     # Phase 5 (user, 2026-11-20): TO-220 with the Proteus pads as flashed in all four copper gerbers
     # (aperture macro PPAD010: 1.524 x 2.54 mm rounded rectangle, corner radius 0.3048 = ratio 0.2,
     # long axis across the pin row on all 12 pads of Q3 Q4 Q7 Q8) and the Proteus drill 1.016. The IPC
-    # records 1.524 x 1.524 (finding 15), so not ipc_sizes: the board-local `pads` key sets them.
+    # records 1.524 x 1.524 (finding 15), so not ipc_sizes: the spec key `pads` sets them.
     "TO-220-3_Vertical_ProteusPads": dict(
         base="Package_TO_SOT_THT:TO-220-3_Vertical", ipc="Q3",
         pads={"*": dict(shape="roundrect", size=(1.524, 2.54), rratio=0.2, drill=1.016)},
@@ -174,66 +173,5 @@ PROJECT = {
         descr="Plated 3.0 mm mounting hole with a 6.35 mm pad on all copper layers, no net"),
 }
 
-# Board-local spec key `pads` (p2k candidates 21 / 23: p2k.footprints takes pad sizes only from the
-# IPC and keeps the KiCad pad shape): {pad number or "*": dict(shape=, size=(w, h), rratio=, drill=)}
-# applied to the derived footprint, sizes in the footprint frame (the pad's rotation is kept).
-_derive = footprints.derive
-
-
-def _derive_pads(name, spec, ipc):
-    node = _derive(name, spec, ipc)
-    over = spec.get("pads")
-    if not over:
-        return node
-    from p2k import sexpr
-    from p2k.sexpr import Sym
-    seen = set()
-    for pad in sexpr.find_all(node, "pad"):
-        o = over.get(str(pad[1]), over.get("*"))
-        if o is None:
-            continue
-        seen.add(str(pad[1]) if str(pad[1]) in over else "*")
-        if "shape" in o:
-            pad[3] = Sym(o["shape"])
-        if "size" in o:
-            sexpr.find(pad, "size")[1:] = list(o["size"])
-        if "drill" in o:
-            sexpr.find(pad, "drill")[1:] = [o["drill"]]
-        pad[:] = [c for c in pad if not (isinstance(c, list) and c and c[0] in ("roundrect_rratio", "chamfer_ratio", "chamfer"))]
-        if o.get("shape") == "roundrect":
-            pad.append([Sym("roundrect_rratio"), o["rratio"]])
-    missing = set(over) - seen
-    if missing:
-        raise SystemExit(f"gen_footprints: {name}: `pads` names pads the footprint does not have: {sorted(missing)}")
-    return node
-
-
-footprints.derive = _derive_pads
-
-FP_LIB_TABLE = """(fp_lib_table
-\t(version 7)
-\t(lib (name "tube_hv_supplies")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_hv_supplies.pretty")(options "")(descr "Project footprints, pad numbers = IPC pin ids (tools/gen_footprints.py)"))
-)
-"""
-
-
-def fp_lib_table(check):
-    path = os.path.join(ROOT, "kicad", "fp-lib-table")
-    cur = open(path).read() if os.path.exists(path) else None
-    if cur == FP_LIB_TABLE:
-        return True
-    if check:
-        print("gen_footprints: out of date: kicad/fp-lib-table")
-        return False
-    with open(path, "w") as f:
-        f.write(FP_LIB_TABLE)
-    print("gen_footprints: wrote kicad/fp-lib-table")
-    return True
-
-
 if __name__ == "__main__":
-    ok = fp_lib_table("--check" in sys.argv[1:])
-    try:
-        footprints.run(RULES, PROJECT)
-    except SystemExit as e:
-        sys.exit(e.code if ok else 1)
+    footprints.run(RULES, PROJECT)
