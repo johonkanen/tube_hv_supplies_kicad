@@ -10,6 +10,6366 @@
 		(rev "rev A (as built)")
 		(comment 1 "Redrawn from Proteus hi_voltage_suppliesv2")
 	)
-	(lib_symbols)
+	(lib_symbols
+		(symbol "tube_hv_supplies:LMV324A"
+			(pin_names
+				(offset 0.127)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "LMV324A"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.27 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 1.27 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Quad op-amp TSSOP-14 (LMV324A), standard quad pinout; unit 5 = supply"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "quad opamp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOIC*3.9x8.7mm*P1.27mm* DIP*W7.62mm* TSSOP*4.4x5mm*P0.65mm* SSOP*5.3x6.2mm*P0.65mm* MSOP*3x3mm*P0.5mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LMV324A_1_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LMV324A_2_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LMV324A_3_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LMV324A_4_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LMV324A_5_1"
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "tube_hv_supplies:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "tube_hv_supplies:GND"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "tube_hv_supplies:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "tube_hv_supplies:3V3"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "3V3"
+				(at 0 3.556 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol for net \"3V3\" (IPC net name)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "3V3_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "3V3_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:LMV324A")
+		(at 116.84 102.87 0)
+		(unit 3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "510f1749-44e3-5d2a-a6c6-07c7f74cb503")
+		(property "Reference" "U1"
+			(at 116.84 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV324A"
+			(at 116.84 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 115.57 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 118.11 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad op-amp TSSOP-14 (LMV324A), standard quad pinout; unit 5 = supply"
+			(at 116.84 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "8"
+			(uuid "ad318ce4-a30c-5be8-86d0-20caf76f381c")
+		)
+		(pin "9"
+			(uuid "05bf59cc-b739-5b5b-89da-0df46df0253a")
+		)
+		(pin "10"
+			(uuid "eea5e6ad-807e-5a03-a670-4f3f055815f9")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "U1")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 76.2 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "51790255-b4a3-5f6f-b84a-b86cad2c1d02")
+		(property "Reference" "R4"
+			(at 79.84 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 79.84 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.422 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 76.2 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "096b6bde-a4fc-50fc-9132-d9cb1ecd4ad2")
+		)
+		(pin "2"
+			(uuid "bdfcc14a-274d-5a38-9a00-90c8f91d7c85")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 76.2 77.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "995e6091-8f2e-5d0e-837b-1b7e376a5d86")
+		(property "Reference" "R5"
+			(at 79.84 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 79.84 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.422 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 76.2 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3d9b0254-b55a-5f32-b566-dff09321c4cc")
+		)
+		(pin "2"
+			(uuid "3d934921-cef2-5737-ba13-6e1534547664")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 76.2 67.31) (xy 76.2 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f453cb7f-512a-54cb-bf07-4e17bd126183")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 76.2 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "35e0de9a-c63a-5999-af7c-dc530eb0a818")
+		(property "Reference" "R6"
+			(at 79.84 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 79.84 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.422 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 76.2 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc8e75e2-65f2-54ac-bcdc-70c92f1b82c2")
+		)
+		(pin "2"
+			(uuid "7c47eb06-a4b5-56aa-ba24-0c0eca07768c")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 76.2 81.28) (xy 76.2 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11d3d469-0a49-59c3-a128-2a44cd54a13e")
+	)
+	(wire
+		(pts
+			(xy 76.2 59.69) (xy 76.2 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96b1196e-4ce0-5150-b447-c36585e03ddc")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 76.2 54.61 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c5368b10-bcea-53c5-9ebd-08ee2f7a9179")
+		(property "Reference" "#PWR001"
+			(at 76.2 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 76.2 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 76.2 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 76.2 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ec46c28d-8077-59e1-9f5e-4557e4e5adc0")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 76.2 96.52) (xy 76.2 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c867077-9737-5635-a26c-765cec63796a")
+	)
+	(wire
+		(pts
+			(xy 76.2 105.41) (xy 109.22 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "784141ee-d93c-5dbb-b5a3-df112c35a59b")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 90.17 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0a871057-1cd6-574f-ac0d-31dc648f62f7")
+		(property "Reference" "R7"
+			(at 93.81 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 93.81 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 88.392 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 90.17 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1f879ab5-dc95-5b8b-a3de-e78ae17fcf46")
+		)
+		(pin "2"
+			(uuid "8a50ab61-2258-5f6b-a598-511c74223fcb")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 90.17 77.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7d6db70f-68c5-5953-82b9-dc41dc22f93a")
+		(property "Reference" "R8"
+			(at 93.81 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 93.81 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 88.392 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 90.17 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e8c81e57-90f1-518f-8b2b-a207f071c076")
+		)
+		(pin "2"
+			(uuid "e60a06ba-3f1f-50be-a9b7-94e537cf8692")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 90.17 67.31) (xy 90.17 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be643738-d843-5258-aef7-699e94de3426")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 90.17 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "843a7c52-c12b-5e81-9d42-a1920b96380b")
+		(property "Reference" "R9"
+			(at 93.81 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 93.81 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 88.392 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 90.17 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "863a1615-308b-56c9-9921-a6bfe57b0c48")
+		)
+		(pin "2"
+			(uuid "8757cc1f-661a-5ee6-b79a-4ff591c56eb0")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 90.17 81.28) (xy 90.17 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb39543e-ad0e-5a33-bc64-572ef00fcb69")
+	)
+	(wire
+		(pts
+			(xy 90.17 59.69) (xy 90.17 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f503b105-901f-5a2d-a504-19926aa26e13")
+	)
+	(global_label "UIN"
+		(shape passive)
+		(at 90.17 54.61 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bc57a54f-bcb3-5488-91ed-5e85817fa1b1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 90.17 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 90.17 96.52) (xy 90.17 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d948999d-2b77-5f0f-a936-b2b757b0015a")
+	)
+	(wire
+		(pts
+			(xy 90.17 100.33) (xy 109.22 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "410e9912-5e9e-5f38-a071-8f0fe2543164")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 105.41 78.74 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "276ac9ec-91a9-59e5-94f5-fd35acb77b37")
+		(property "Reference" "R2"
+			(at 105.41 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 105.41 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.41 76.962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 105.41 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f8dd62b6-df74-5840-8166-9269272febe6")
+		)
+		(pin "2"
+			(uuid "a660682b-fd1c-5564-96d2-d452765dc2a4")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 97.79 100.33) (xy 97.79 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad7ba115-d690-5725-8145-9f5bf366bbce")
+	)
+	(wire
+		(pts
+			(xy 97.79 78.74) (xy 101.6 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "863577e7-9da8-59d2-8a3a-571363d2adb1")
+	)
+	(wire
+		(pts
+			(xy 101.6 78.74) (xy 101.6 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ece94acc-f609-5df6-9a3b-34fd98353c4a")
+	)
+	(junction
+		(at 97.79 100.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1f36863d-c9b5-537c-9af3-4efb3e6daf86")
+	)
+	(wire
+		(pts
+			(xy 109.22 78.74) (xy 124.46 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a337cf44-44e6-5162-b6dd-46eaed750ac5")
+	)
+	(wire
+		(pts
+			(xy 124.46 78.74) (xy 124.46 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d67316f9-481d-5d8e-99ca-40f9bde54285")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 124.46 78.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b0e32ae5-bd0a-50c8-b569-8842e4ad190e")
+		(property "Reference" "#PWR002"
+			(at 130.81 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 127.76 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 124.46 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cd11b21c-d5a1-5fb0-83ef-5806eff528c7")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR002")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 105.41 115.57 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e8ba722e-f1ec-5cf1-877f-d1f34a660b42")
+		(property "Reference" "R1"
+			(at 105.41 113.03 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 105.41 118.11 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.41 113.792 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 105.41 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a447e1f3-ba53-596d-bb0a-508a21409b3c")
+		)
+		(pin "2"
+			(uuid "7b922b51-77fa-5d76-a4e1-1d68b7bf3dd6")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 97.79 105.41) (xy 97.79 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbe30940-4434-59bb-b0c3-b1d5785f1009")
+	)
+	(wire
+		(pts
+			(xy 97.79 115.57) (xy 101.6 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab247328-5cec-57d4-b321-bc8f26a741c4")
+	)
+	(wire
+		(pts
+			(xy 101.6 115.57) (xy 101.6 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06329c12-fad5-57ae-a889-82aadbc364ea")
+	)
+	(junction
+		(at 97.79 105.41)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5196a2d6-c750-59f4-8136-7374a03f97af")
+	)
+	(wire
+		(pts
+			(xy 109.22 115.57) (xy 129.54 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba8ac0fb-f62d-5e2a-b6f0-7ed9cd191496")
+	)
+	(wire
+		(pts
+			(xy 129.54 115.57) (xy 129.54 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cbd25e4-b2c7-5f69-9345-0a31b3fe9d29")
+	)
+	(wire
+		(pts
+			(xy 129.54 115.57) (xy 129.54 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e07abfd-f10f-59db-9ca8-716cdad0551c")
+	)
+	(junction
+		(at 129.54 102.87)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3c0655d8-0a4d-50f7-abaa-c32f6d056a44")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 138.43 102.87 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "adf2de3f-ee24-5368-9818-dad2cf7be814")
+		(property "Reference" "R3"
+			(at 138.43 100.33 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100R"
+			(at 138.43 105.41 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 138.43 101.092 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 138.43 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 138.43 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d1ea699f-1865-5e76-b146-e32e33fe7f74")
+		)
+		(pin "2"
+			(uuid "91b46cf8-c52d-5801-a5fd-8d8f6c004041")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 124.46 102.87) (xy 134.62 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a56f1abd-d335-55b2-9260-66907dcb56fb")
+	)
+	(wire
+		(pts
+			(xy 142.24 102.87) (xy 147.32 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1dbc4644-199c-5078-8cb8-b88e3427939c")
+	)
+	(wire
+		(pts
+			(xy 147.32 102.87) (xy 154.94 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cac09139-20bb-5d35-91fe-50b42e16fc1f")
+	)
+	(junction
+		(at 147.32 102.87)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c84ecdaa-91ed-5e76-b7a2-1b9e69663b21")
+	)
+	(global_label "UIN_MEAS"
+		(shape passive)
+		(at 154.94 102.87 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "79795461-98f9-5c2e-8d1d-c25f1a8a21e9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 154.94 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:C")
+		(at 147.32 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3f8992ed-a05c-554f-a9f8-d6b84672d7a3")
+		(property "Reference" "C39"
+			(at 151.51 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 152.06 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 148.2852 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 147.32 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8526c891-4b7a-5414-9f26-aef2db8fa71a")
+		)
+		(pin "2"
+			(uuid "eb4be065-f7f1-5d69-9270-1ce2098fa2b9")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "C39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 147.32 102.87) (xy 147.32 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed92c4ec-2b20-58eb-a8fa-8afb1825099f")
+	)
+	(wire
+		(pts
+			(xy 147.32 119.38) (xy 147.32 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8043635-f61c-5fd0-b702-fc356316aa6e")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 147.32 121.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "14419900-439b-566e-ad7e-44a4cea51d87")
+		(property "Reference" "#PWR003"
+			(at 147.32 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 147.32 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 147.32 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 147.32 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7b3b4d5-2476-58cd-9150-d4723790271c")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR003")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:LMV324A")
+		(at 233.68 106.68 0)
+		(unit 4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "62129a62-7501-51ab-80e2-48aecb1e9d93")
+		(property "Reference" "U1"
+			(at 233.68 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV324A"
+			(at 233.68 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 232.41 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 234.95 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad op-amp TSSOP-14 (LMV324A), standard quad pinout; unit 5 = supply"
+			(at 233.68 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "12"
+			(uuid "09ac40f4-7c5f-5f35-a1c4-4f6b82ade44d")
+		)
+		(pin "13"
+			(uuid "05086841-ce40-578b-9c5e-fcee1d4f16a0")
+		)
+		(pin "14"
+			(uuid "41220a45-81f2-5b5c-b085-960ea6850a9b")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "U1")
+					(unit 4)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 193.04 67.31 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f54549dc-b0e6-5ae2-a2da-e4994f963f74")
+		(property "Reference" "R13"
+			(at 197.23 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 196.68 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 191.262 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 193.04 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "44f6d2b9-730b-5735-8f69-23175409af94")
+		)
+		(pin "2"
+			(uuid "9f29029c-b224-5261-8d73-082caa7319ac")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 193.04 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2a81df07-6299-5f70-a5d8-8f4b481167fb")
+		(property "Reference" "R14"
+			(at 197.23 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 196.68 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 191.262 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 193.04 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fc0f6918-e3fd-5d61-90fa-749befd4c695")
+		)
+		(pin "2"
+			(uuid "c5677125-39d2-5bdb-a899-6a61baf4a5d7")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 193.04 71.12) (xy 193.04 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a1cd272-7995-5ada-a70d-7288d5e8991c")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 193.04 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "25078ffb-8af8-5bbf-92a3-2b9d48d9d02f")
+		(property "Reference" "R15"
+			(at 197.23 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 196.68 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 191.262 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 193.04 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "20deacd9-8651-5316-8a7e-787bd9b72e75")
+		)
+		(pin "2"
+			(uuid "859d568a-4b32-505e-8a57-41bf6d104a93")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 193.04 85.09) (xy 193.04 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "903fc49e-c112-5f94-b380-5a281973e0c7")
+	)
+	(wire
+		(pts
+			(xy 193.04 63.5) (xy 193.04 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb851048-605f-5506-8015-43962d6f3d17")
+	)
+	(wire
+		(pts
+			(xy 193.04 63.5) (xy 193.04 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85f42fe4-abee-5161-8e8a-127111c1093c")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 193.04 58.42 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e7e4ee3b-f651-58c9-904b-ba1fe3726880")
+		(property "Reference" "#PWR004"
+			(at 193.04 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 193.04 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 193.04 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 193.04 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b03559e-13ce-506e-95c4-83c32cb93560")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR004")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 193.04 100.33) (xy 193.04 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b185888-e056-5139-ac1f-f994afb1550c")
+	)
+	(wire
+		(pts
+			(xy 193.04 100.33) (xy 193.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f474b506-ee97-50be-9e81-0388dbd48929")
+	)
+	(wire
+		(pts
+			(xy 193.04 109.22) (xy 226.06 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76a9ccba-2201-5bb7-9e70-eb9439a34c42")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 207.01 67.31 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dbdc7203-9983-5299-a75b-8bd45077d788")
+		(property "Reference" "R16"
+			(at 211.2 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 210.65 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.232 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 207.01 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 207.01 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b00b8871-9857-594c-b766-64e99f59b4f9")
+		)
+		(pin "2"
+			(uuid "096df14b-1adf-538c-8fd6-4027b5e9784e")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 207.01 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4ec69dec-8865-5edf-af80-6be37d7e69c8")
+		(property "Reference" "R17"
+			(at 211.2 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 210.65 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.232 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 207.01 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 207.01 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4575de4c-fb66-5f7b-850f-dff04e943ed9")
+		)
+		(pin "2"
+			(uuid "10d96ec5-f49d-56eb-bf2a-672a8f594d5a")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 207.01 71.12) (xy 207.01 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd939173-878e-5f30-a279-827097666700")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 207.01 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1cb68660-29b1-5da3-9d9a-86fdee63204b")
+		(property "Reference" "R18"
+			(at 211.2 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 210.65 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.232 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 207.01 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 207.01 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "76e4a422-6e37-5d33-a3c6-6386305a74bf")
+		)
+		(pin "2"
+			(uuid "bb9cd08c-2ebc-5ac9-80e4-d84f2402f864")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 207.01 85.09) (xy 207.01 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19943096-d5f6-5e64-ac8a-c7a79f5240fb")
+	)
+	(wire
+		(pts
+			(xy 207.01 63.5) (xy 207.01 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a1531d1-0b5e-50d1-b5cb-5e11b521c4a2")
+	)
+	(global_label "UC3"
+		(shape passive)
+		(at 207.01 58.42 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6994e1e9-4233-594d-8de7-9393fe8e83cf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 207.01 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 207.01 100.33) (xy 207.01 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0fe6e506-fa6f-5bf4-9582-6e21e6a65ccf")
+	)
+	(wire
+		(pts
+			(xy 207.01 104.14) (xy 226.06 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09ab48e8-86e5-5268-aab9-a99cfa7c3ccb")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 222.25 82.55 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "efe1ee98-53d9-57b9-bfc2-901f90df13d0")
+		(property "Reference" "R11"
+			(at 222.25 80.01 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 222.25 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 222.25 80.772 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 222.25 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 222.25 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8b3dae47-1d60-5c2e-a0c0-3358e3b9da1e")
+		)
+		(pin "2"
+			(uuid "dc59a066-38b9-5c20-b5f0-eba75c374916")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 214.63 104.14) (xy 214.63 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f882ef4-1857-555f-9439-391be8021b2f")
+	)
+	(wire
+		(pts
+			(xy 214.63 82.55) (xy 218.44 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8ec83b0-48c7-5ce0-b8be-ad34e4942b6c")
+	)
+	(wire
+		(pts
+			(xy 218.44 82.55) (xy 218.44 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b8293c9-912f-506f-a008-c6f3c56bf8e0")
+	)
+	(junction
+		(at 214.63 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2d400d8d-cddc-5e1f-8117-894db4d3f008")
+	)
+	(wire
+		(pts
+			(xy 226.06 82.55) (xy 241.3 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1e2e157-93ad-52ea-bf4a-c6232abee826")
+	)
+	(wire
+		(pts
+			(xy 241.3 82.55) (xy 241.3 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3702b5b-95d7-5fee-a3ce-aab67e56aa12")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 241.3 82.55 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "12a648be-e6aa-5bfc-bfe6-98ad833223c4")
+		(property "Reference" "#PWR005"
+			(at 247.65 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 244.6 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 241.3 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 241.3 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 241.3 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "05c23f0c-a3e5-52cf-b4e0-8e21a8f5d402")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR005")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 222.25 119.38 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "26f8a32a-26fe-53b3-b022-28a951d9c01a")
+		(property "Reference" "R10"
+			(at 222.25 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 222.25 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 222.25 117.602 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 222.25 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 222.25 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3c826e0a-7ed4-5064-92f8-31e152a358be")
+		)
+		(pin "2"
+			(uuid "195dc7e2-ff89-5204-9f45-68e9254fc8bb")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 214.63 109.22) (xy 214.63 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b59245c4-5b8f-583a-b414-6e9cba2445e1")
+	)
+	(wire
+		(pts
+			(xy 214.63 119.38) (xy 218.44 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f361766-276c-5dd7-9ae0-55ac967f873e")
+	)
+	(wire
+		(pts
+			(xy 218.44 119.38) (xy 218.44 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b33d6f29-63d3-5823-a4eb-f4234a16c60e")
+	)
+	(junction
+		(at 214.63 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "219074f3-15c7-555c-becf-ef6343934e78")
+	)
+	(wire
+		(pts
+			(xy 226.06 119.38) (xy 246.38 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7738b640-7274-56e3-922c-adca9dc9ce56")
+	)
+	(wire
+		(pts
+			(xy 246.38 119.38) (xy 246.38 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d343d9f-fa33-5cfd-a642-101e011aca50")
+	)
+	(wire
+		(pts
+			(xy 246.38 119.38) (xy 246.38 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "faeaa3cd-1e2f-547b-be67-8a70d0878e8c")
+	)
+	(junction
+		(at 246.38 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "00a5efc3-ec84-5289-9caf-5ca4fcd38249")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 255.27 106.68 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f15ea44b-b1b4-51f4-9195-509514d68dbd")
+		(property "Reference" "R12"
+			(at 255.27 104.14 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100R"
+			(at 255.27 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 255.27 104.902 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 255.27 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 255.27 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c646fc09-3120-58f3-96be-7a1ddd203f56")
+		)
+		(pin "2"
+			(uuid "ff9d331f-3ee1-53f1-9ec2-bacee2e6afbf")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 241.3 106.68) (xy 251.46 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1238262a-dce9-5ab9-91d1-937659116aa1")
+	)
+	(wire
+		(pts
+			(xy 259.08 106.68) (xy 264.16 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22cb8350-111c-5f72-84bb-ac232b0ee0d8")
+	)
+	(wire
+		(pts
+			(xy 264.16 106.68) (xy 271.78 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa78c5af-6631-5143-9ece-2f1e1d37030c")
+	)
+	(junction
+		(at 264.16 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e95cfb32-a866-56b9-8f74-a7991efe20e1")
+	)
+	(global_label "UC3_MEAS"
+		(shape passive)
+		(at 271.78 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8d04f0f6-06e1-5926-9cb1-9b9780a41122")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 271.78 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:C")
+		(at 264.16 119.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f13bc2c5-86f0-516e-9271-f6d7a308dac6")
+		(property "Reference" "C42"
+			(at 268.35 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 268.9 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 265.1252 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 264.16 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 264.16 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "194eef5e-27fe-5385-8030-b5caaa36051e")
+		)
+		(pin "2"
+			(uuid "1736ee3b-1ab6-589b-bd85-c8c67c9df5bb")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "C42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 264.16 106.68) (xy 264.16 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "52943514-5fc6-5342-8450-868ff96d6276")
+	)
+	(wire
+		(pts
+			(xy 264.16 123.19) (xy 264.16 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc6658b2-4611-5a54-b7df-b41c06ad3f0f")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 264.16 125.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d2c1fca1-36f0-53e3-a068-725cfc8f81a6")
+		(property "Reference" "#PWR006"
+			(at 264.16 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 264.16 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 264.16 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 264.16 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 264.16 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8e864830-42c8-5850-85f7-fb4f3d1e417b")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR006")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:LMV324A")
+		(at 111.76 186.69 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "98714aeb-d9a0-5840-a793-0e236885cd3f")
+		(property "Reference" "U1"
+			(at 111.76 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV324A"
+			(at 111.76 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 110.49 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad op-amp TSSOP-14 (LMV324A), standard quad pinout; unit 5 = supply"
+			(at 111.76 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "4cdaf5c4-8b23-54b3-b5a5-f8bbd93aa636")
+		)
+		(pin "6"
+			(uuid "05b4f4a0-e94d-5067-961a-a3360c0c6be2")
+		)
+		(pin "7"
+			(uuid "88ce16e9-91b1-5a68-8823-af17dd55cdd9")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "U1")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 71.12 147.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "124b3e58-3225-53aa-b0dc-fcc8606f1ceb")
+		(property "Reference" "R37"
+			(at 75.31 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 74.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 69.342 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 71.12 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "877ae2bd-309a-58fc-9c90-2f83f977f71e")
+		)
+		(pin "2"
+			(uuid "06c5f3f9-93db-577e-99a5-83f4e78c0650")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 71.12 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "950e47c7-5746-5878-b414-471bc35ce8e1")
+		(property "Reference" "R38"
+			(at 75.31 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 74.76 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 69.342 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 71.12 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d124b7f0-21c8-54ce-af97-bc4d9c933488")
+		)
+		(pin "2"
+			(uuid "9e8f1256-6608-5437-9550-f8d2d7af4fbc")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 71.12 151.13) (xy 71.12 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be88c47c-0c2e-5866-8ff3-00a845109a7e")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 71.12 176.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "53c5f022-d833-5eb3-9e2c-909633c80492")
+		(property "Reference" "R39"
+			(at 75.31 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 74.76 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 69.342 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 71.12 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "607369aa-8510-538f-8aaa-3cbc7bf0d9f8")
+		)
+		(pin "2"
+			(uuid "59be49bf-3a99-591b-a805-8ae42b879f7a")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 71.12 165.1) (xy 71.12 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a19392c0-2c1e-5878-9f4d-8bbea0419d0d")
+	)
+	(wire
+		(pts
+			(xy 71.12 143.51) (xy 71.12 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a8868577-7edd-57fd-a4b1-a017abc2e48d")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 71.12 138.43 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1c3c247e-0d45-5fb5-93a9-25fc0c66a53a")
+		(property "Reference" "#PWR007"
+			(at 71.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 71.12 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 71.12 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c47bf3ee-db90-5642-b28d-0b82d02e7987")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR007")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 71.12 180.34) (xy 71.12 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4749a83-5bf5-50bb-a603-98aef4c27119")
+	)
+	(wire
+		(pts
+			(xy 71.12 189.23) (xy 104.14 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6852bc8d-7eb3-51de-b977-1cd37fc25dc2")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 85.09 147.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5d3dd552-a863-5c6a-a8c4-afda21a2466a")
+		(property "Reference" "R40"
+			(at 89.28 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 88.73 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.312 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 85.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 85.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1a6e0d8e-a373-593a-a890-6c5b119ba1ba")
+		)
+		(pin "2"
+			(uuid "c1d7781e-fa26-576e-aa9e-54f4ab16637a")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R40")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 85.09 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c935be18-db42-5538-92c4-e9bdbbdfea90")
+		(property "Reference" "R41"
+			(at 89.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 88.73 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.312 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 85.09 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 85.09 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d182dfcf-8dfb-50a2-a02f-2ce2bd4f4fc9")
+		)
+		(pin "2"
+			(uuid "1f0c2132-77f5-5cd9-bb5f-5b640caeb3b8")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 85.09 151.13) (xy 85.09 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6277005-2522-5b80-93de-786e6a97c03f")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 85.09 176.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e9eb27aa-e593-5158-86f1-8370f4805ec8")
+		(property "Reference" "R42"
+			(at 89.28 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 88.73 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.312 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 85.09 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 85.09 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "32f8b4f4-ae2c-5114-909d-6ca4b578569a")
+		)
+		(pin "2"
+			(uuid "4f29ec2e-a1c8-507b-af83-7b1b4d8509cd")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 85.09 165.1) (xy 85.09 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2956b94c-96d7-5004-a10c-5d14d6c88717")
+	)
+	(wire
+		(pts
+			(xy 85.09 143.51) (xy 85.09 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3844632e-9d13-5de1-b525-813db346e77f")
+	)
+	(global_label "V_A"
+		(shape passive)
+		(at 85.09 138.43 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "abb6c9ca-cf0c-520c-a38f-1dbf91185429")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 85.09 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 85.09 180.34) (xy 85.09 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06432c4d-97f6-5cff-98f7-da954993897d")
+	)
+	(wire
+		(pts
+			(xy 85.09 184.15) (xy 104.14 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f590c81f-d111-58dc-9716-028cb04e5d10")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 100.33 162.56 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0576926b-e628-51ae-8453-9c0419d601b7")
+		(property "Reference" "R20"
+			(at 100.33 160.02 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 100.33 165.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 100.33 160.782 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 100.33 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1626c333-d780-578d-ad5c-b2b81b93cb93")
+		)
+		(pin "2"
+			(uuid "2d99a76f-be22-5c17-86d7-e4b21a87362d")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 92.71 184.15) (xy 92.71 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d22fcafe-e186-50ff-b831-ec2234dcf1bc")
+	)
+	(wire
+		(pts
+			(xy 92.71 162.56) (xy 96.52 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c898772f-e768-554f-bd21-fbf614e15433")
+	)
+	(junction
+		(at 92.71 184.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "50cbf369-1ee9-5932-b89c-cc8102a359de")
+	)
+	(wire
+		(pts
+			(xy 104.14 162.56) (xy 119.38 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4265cb6-a367-5eeb-b83b-1f1b4ffbf0a4")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 119.38 162.56 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "859f5c46-51ee-55fa-b270-a9c100d606a9")
+		(property "Reference" "#PWR008"
+			(at 125.73 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 122.68 162.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 119.38 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 119.38 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "691745dd-abcb-56c9-b739-8aa31d07ca65")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR008")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 100.33 199.39 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "411f8460-bf6c-54a1-bc2a-b52c2a7d8b64")
+		(property "Reference" "R19"
+			(at 100.33 196.85 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 100.33 201.93 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 100.33 197.612 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 100.33 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "69bdb115-059c-51bd-ac35-8d97cc148f99")
+		)
+		(pin "2"
+			(uuid "215abe56-c51a-57d0-b44b-56eaf7d98d6c")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 92.71 189.23) (xy 92.71 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22e7d040-3eea-58e3-8c51-c6698622f446")
+	)
+	(wire
+		(pts
+			(xy 92.71 199.39) (xy 96.52 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e0cfca4-6e69-53a6-a5f9-eb4abae0718b")
+	)
+	(junction
+		(at 92.71 189.23)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9e9824b2-5961-579c-aceb-54762638731a")
+	)
+	(wire
+		(pts
+			(xy 104.14 199.39) (xy 124.46 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "58f7d424-5dca-5cb6-af18-b032b911fa1b")
+	)
+	(wire
+		(pts
+			(xy 124.46 199.39) (xy 124.46 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0acf4d96-dc18-5e9b-8b07-1d86ce2223d4")
+	)
+	(junction
+		(at 124.46 186.69)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fb217689-9763-5316-b2cb-ca8e24855740")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 133.35 186.69 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4dc85d8b-e8c2-50cf-8278-f0bd57846475")
+		(property "Reference" "R36"
+			(at 133.35 184.15 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100R"
+			(at 133.35 189.23 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 133.35 184.912 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 133.35 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 133.35 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7a873a16-6a2b-558b-a3d0-08f307519d79")
+		)
+		(pin "2"
+			(uuid "1b24592a-368e-520f-a530-0a991f2cfd46")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 119.38 186.69) (xy 129.54 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8408029-421a-5ba0-914a-bf3be3847253")
+	)
+	(wire
+		(pts
+			(xy 137.16 186.69) (xy 142.24 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "679c5c79-182c-5281-a720-1b4198638ea8")
+	)
+	(wire
+		(pts
+			(xy 142.24 186.69) (xy 149.86 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9180cce-b497-559c-bd28-260734f9ec05")
+	)
+	(junction
+		(at 142.24 186.69)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "511d5fba-d60e-53d9-a0f2-7052f1c72dba")
+	)
+	(global_label "V_A_MEAS"
+		(shape passive)
+		(at 149.86 186.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2606251c-e286-5e0a-9128-dab8201c2212")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 149.86 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:C")
+		(at 142.24 199.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b3d46430-945f-5d82-ace8-6d6d84211bc5")
+		(property "Reference" "C40"
+			(at 146.43 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 146.98 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.2052 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.24 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 142.24 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b563074f-c16d-5b46-a8f7-18111e4eb893")
+		)
+		(pin "2"
+			(uuid "719eb986-d533-5e62-813d-a19432b57007")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "C40")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 142.24 186.69) (xy 142.24 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5a639ab-a632-59b9-841f-ce295077decb")
+	)
+	(wire
+		(pts
+			(xy 142.24 203.2) (xy 142.24 205.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be31355d-f063-5948-a681-c0ad9f0ae1e1")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 142.24 205.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "385baa10-626a-50de-974e-41b6498f218f")
+		(property "Reference" "#PWR009"
+			(at 142.24 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 142.24 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 142.24 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.24 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 142.24 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5c204331-91a9-5e40-b46b-75582d028d66")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR009")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:LMV324A")
+		(at 228.6 187.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1240f4dc-78aa-584f-875b-f8c245c86f93")
+		(property "Reference" "U1"
+			(at 228.6 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV324A"
+			(at 228.6 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 229.87 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad op-amp TSSOP-14 (LMV324A), standard quad pinout; unit 5 = supply"
+			(at 228.6 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2f2de4a6-3d4e-506d-8ac6-9fd192ea7026")
+		)
+		(pin "2"
+			(uuid "ebe9e2fa-553e-5d88-a8f8-0b7effe716a6")
+		)
+		(pin "3"
+			(uuid "a4eeaa8a-b0e8-5835-a46b-fc0a620e396a")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 187.96 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f55577e-261e-5037-9132-221413c8cbb3")
+		(property "Reference" "R46"
+			(at 192.15 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 191.6 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.182 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 187.96 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e9f62b46-ffe9-546f-9e41-a9f6bfd30e7f")
+		)
+		(pin "2"
+			(uuid "348769ab-ddd7-5f81-bbf4-28cb02da455b")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R46")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 187.96 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "883fb1e3-596b-5261-8f84-9ac2bbd09d80")
+		(property "Reference" "R47"
+			(at 192.15 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 191.6 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.182 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 187.96 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fa09096f-b59a-5ebe-b13d-c8db0c26148a")
+		)
+		(pin "2"
+			(uuid "a81181f2-3f4f-512e-ac6a-51b414c61884")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R47")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 187.96 152.4) (xy 187.96 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70d4edc5-b02c-503e-8d92-5fc98ef2b1cf")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 187.96 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "36b2777b-99cf-591c-b56b-88d18ebf216f")
+		(property "Reference" "R48"
+			(at 192.15 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 191.6 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.182 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 187.96 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3999af68-e921-55fa-82a6-bceaffc6e640")
+		)
+		(pin "2"
+			(uuid "492abd47-c8a5-530e-bb70-67acfdbae80e")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 187.96 166.37) (xy 187.96 173.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e2cef60-de9d-531e-8b7f-27f79b45c4a7")
+	)
+	(wire
+		(pts
+			(xy 187.96 144.78) (xy 187.96 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "745145cd-ad93-5234-aaaa-51126204d700")
+	)
+	(wire
+		(pts
+			(xy 187.96 144.78) (xy 187.96 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5b95519-11be-592d-ab9f-006afe24dde9")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 187.96 139.7 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "77bd23d3-cfa3-5b17-9175-dcd0693157fd")
+		(property "Reference" "#PWR010"
+			(at 187.96 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 187.96 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 187.96 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 187.96 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4b9e6017-0f6a-558d-a96b-5fbc2252b3e1")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 187.96 181.61) (xy 187.96 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "541da8d5-2c36-557e-b0ec-50fcf69bdf79")
+	)
+	(wire
+		(pts
+			(xy 187.96 181.61) (xy 187.96 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1073bd30-dd34-531b-9243-c36e113a0ec7")
+	)
+	(wire
+		(pts
+			(xy 187.96 190.5) (xy 220.98 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b89289ca-a504-5095-9058-87657cc3416c")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 201.93 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5b5eea96-7744-518e-bd1b-2719fefa8a27")
+		(property "Reference" "R49"
+			(at 206.12 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 205.57 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 200.152 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 201.93 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 201.93 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aa84d6a5-8ef2-5cc8-9be9-4df1c57a1230")
+		)
+		(pin "2"
+			(uuid "d6e445de-6c8b-573b-a3ec-91dcb35db438")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 201.93 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ae144970-439f-535a-8bc1-0bbbde93859a")
+		(property "Reference" "R50"
+			(at 206.12 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 205.57 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 200.152 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 201.93 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 201.93 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ede22b1a-bc43-5c4f-8bef-459c312e0d96")
+		)
+		(pin "2"
+			(uuid "e7b0b826-8f4f-5313-8af8-42af9e872154")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 201.93 152.4) (xy 201.93 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e8074b2-2e8d-5929-9d34-514028862dc4")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 201.93 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "92583ecb-ab6b-583f-820b-e7c329655bab")
+		(property "Reference" "R51"
+			(at 206.12 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 205.57 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 200.152 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 201.93 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 201.93 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b4534a9c-ba8f-5c32-9cef-d8fb4dc64edd")
+		)
+		(pin "2"
+			(uuid "5aae6320-fb69-53af-a144-adc911c92aa7")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R51")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 201.93 166.37) (xy 201.93 173.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f9831fb-f656-5d6a-8a7e-016057e8df4f")
+	)
+	(wire
+		(pts
+			(xy 201.93 144.78) (xy 201.93 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e48701b-91a4-5353-85c7-e5e553bfe592")
+	)
+	(global_label "U_OUT"
+		(shape passive)
+		(at 201.93 139.7 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5be9c069-c3be-58d5-8c68-bcc45e842ba0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 201.93 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 201.93 181.61) (xy 201.93 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff01d389-e354-5587-9136-49574a1aef6f")
+	)
+	(wire
+		(pts
+			(xy 201.93 185.42) (xy 220.98 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffbb32e4-c3e7-5a50-8232-39cb418ba526")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 217.17 163.83 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9f5931bc-d4e9-5621-b836-98aed2c3ac91")
+		(property "Reference" "R44"
+			(at 217.17 161.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 217.17 166.37 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 162.052 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 217.17 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4feab648-edd4-59b6-bc9a-df7fb232c786")
+		)
+		(pin "2"
+			(uuid "4b9781ab-04d9-580d-a40c-041c6fc8f135")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R44")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 209.55 185.42) (xy 209.55 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b05ed7e3-9e23-53eb-873c-a377db501a48")
+	)
+	(wire
+		(pts
+			(xy 209.55 163.83) (xy 213.36 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca49173b-2b70-5483-87bc-d88e719e3ed0")
+	)
+	(junction
+		(at 209.55 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5de4cc55-8cec-550f-9aba-ed20a35585c8")
+	)
+	(wire
+		(pts
+			(xy 220.98 163.83) (xy 236.22 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dca5a4bc-728f-5bc2-957f-bae5b7c340c8")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 236.22 163.83 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3d43b538-b8e5-513f-81a2-122dfd60dcab")
+		(property "Reference" "#PWR011"
+			(at 242.57 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 239.52 163.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 236.22 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 236.22 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 236.22 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "93f10ff6-cf93-5d46-827b-38fb40828760")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 217.17 200.66 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2c7e8403-fe85-56f4-8de7-af0a8cb3d6b2")
+		(property "Reference" "R43"
+			(at 217.17 198.12 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15k"
+			(at 217.17 203.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 198.882 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 217.17 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "55a255f5-870d-54ce-9582-343ce6bbcbae")
+		)
+		(pin "2"
+			(uuid "bb5dcedf-310a-5974-adad-fab4ac16d646")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 209.55 190.5) (xy 209.55 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4051589d-eab8-52e0-8f64-57493f81b1c7")
+	)
+	(wire
+		(pts
+			(xy 209.55 200.66) (xy 213.36 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a48a8184-7c1d-5e89-8dbe-ded4929a00d7")
+	)
+	(junction
+		(at 209.55 190.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c1f29cda-9ef7-55e2-881a-9edd6bb2ed42")
+	)
+	(wire
+		(pts
+			(xy 220.98 200.66) (xy 241.3 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e24ef84b-f37f-587d-8064-a66ce2c51df8")
+	)
+	(wire
+		(pts
+			(xy 241.3 200.66) (xy 241.3 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c02002e-6ea2-5d1d-bfd2-a1c9d3d4f7e9")
+	)
+	(junction
+		(at 241.3 187.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "824f51c3-d867-54c4-a7a6-4768033dad47")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:R")
+		(at 250.19 187.96 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c2d4b696-d2a1-559e-b1d3-0176f6e151fe")
+		(property "Reference" "R45"
+			(at 250.19 185.42 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100R"
+			(at 250.19 190.5 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 250.19 186.182 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 250.19 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 250.19 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5058cf86-6d69-5000-9c58-62b439fa8f12")
+		)
+		(pin "2"
+			(uuid "3bfc3c6b-b602-52a0-9169-c9166cfc6a35")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "R45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 236.22 187.96) (xy 246.38 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ab394bd-7f20-5d9c-99a7-030510ccc655")
+	)
+	(wire
+		(pts
+			(xy 254 187.96) (xy 259.08 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a27e926-1bc5-5ecc-9803-3c833af745f1")
+	)
+	(wire
+		(pts
+			(xy 259.08 187.96) (xy 266.7 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "409cd484-fe75-5d93-8a61-64c525f4e42a")
+	)
+	(junction
+		(at 259.08 187.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "061ce0b9-07a6-5b30-bb07-6adf503f8516")
+	)
+	(global_label "U_OUT_MEAS"
+		(shape passive)
+		(at 266.7 187.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f963a31d-1480-5313-9dc1-77906b5fd65e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 266.7 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:C")
+		(at 259.08 200.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "48a0d811-d810-59be-8ed0-7d3979e0c9c4")
+		(property "Reference" "C41"
+			(at 263.27 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 263.82 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 260.0452 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 259.08 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 259.08 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "59289c3c-34fa-5d1a-b1a3-da45e52a39e4")
+		)
+		(pin "2"
+			(uuid "c058e984-4188-5552-ac56-befa856cb879")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "C41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 259.08 187.96) (xy 259.08 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d9e1003-7008-5fad-b3cd-03297fc27202")
+	)
+	(wire
+		(pts
+			(xy 259.08 204.47) (xy 259.08 207.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ce05bb0-77a3-50a3-a05c-83f209a39e1f")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 259.08 207.01 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5a89e55a-bca2-56eb-ac41-2042a3c18872")
+		(property "Reference" "#PWR012"
+			(at 259.08 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 259.08 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 259.08 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 259.08 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 259.08 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "670e9250-9d50-5dcf-81d9-6e2ca1a952e4")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:LMV324A")
+		(at 30.48 129.54 0)
+		(unit 5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "49b1ac7e-dedf-5ab6-800c-a44b0b67608c")
+		(property "Reference" "U1"
+			(at 34.12 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LMV324A"
+			(at 36.87 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 29.21 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 31.75 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad op-amp TSSOP-14 (LMV324A), standard quad pinout; unit 5 = supply"
+			(at 30.48 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "4a8473a4-49f9-5829-a847-97b1fe8828ce")
+		)
+		(pin "11"
+			(uuid "555a5b20-f777-5b0a-adab-f4b30faa7eb7")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "U1")
+					(unit 5)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 27.94 121.92) (xy 27.94 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be226e96-55e9-59da-82f7-bb7585b32aa2")
+	)
+	(wire
+		(pts
+			(xy 27.94 119.38) (xy 27.94 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2beedcd4-9af8-592e-b439-3c4645c33445")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:3V3")
+		(at 27.94 116.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0242764a-77f4-5781-9d6d-0f54650b93d0")
+		(property "Reference" "#PWR013"
+			(at 27.94 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3V3"
+			(at 27.94 113.284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 27.94 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 27.94 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"3V3\" (IPC net name)"
+			(at 27.94 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "48d6909d-82ed-5f27-bc9d-42ea625c648d")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 27.94 137.16) (xy 27.94 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "701e71fa-85fe-50b4-ba66-b49ecbd01a12")
+	)
+	(wire
+		(pts
+			(xy 27.94 139.7) (xy 27.94 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac3b1fad-b85a-5952-8209-a47d94563339")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:GND")
+		(at 27.94 142.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ef4475c2-d4c8-5987-ac67-4f0c8b3bd0cf")
+		(property "Reference" "#PWR014"
+			(at 27.94 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 27.94 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 27.94 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 27.94 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 27.94 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "67181ae2-e5c7-5ff8-8dfe-1868eb47f7fd")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies:C")
+		(at 45.72 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5ec2edda-ff04-535d-8a2d-b816d2d8a9f4")
+		(property "Reference" "C12"
+			(at 49.91 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2u2"
+			(at 49.91 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 46.6852 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 45.72 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4d9df226-1db5-534e-8102-f83dd6f33060")
+		)
+		(pin "2"
+			(uuid "69542131-c1a3-5590-a03e-29abf8690be2")
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af/80cffea8-9c61-4239-ae42-8e80dd6cd6af"
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 27.94 119.38) (xy 45.72 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "446e991b-1b30-55b0-a0e0-edcd4e97f26f")
+	)
+	(wire
+		(pts
+			(xy 45.72 119.38) (xy 45.72 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e1ad669-5930-5ad0-80d1-cf26249e89d6")
+	)
+	(junction
+		(at 27.94 119.38)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "27b56515-8e35-5def-ba77-7b17fd36d1ea")
+	)
+	(wire
+		(pts
+			(xy 27.94 139.7) (xy 45.72 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "083dced8-92a9-5369-b21d-028cdf946bd1")
+	)
+	(wire
+		(pts
+			(xy 45.72 139.7) (xy 45.72 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3c2ab5a-9a82-5457-b239-3961a47edc88")
+	)
+	(junction
+		(at 27.94 139.7)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2614c192-2a77-5498-b29a-dcac18f74219")
+	)
+	(text "Net names = IPC (PDF: Uin_meas, Uc3_meas, V_A_meas, U_out_meas; gnd = GND). UIN, UC3, V_A, U_OUT: sheet 1; *_MEAS: J1, sheet 5."
+		(exclude_from_sim no)
+		(at 55.88 218.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7ca1a5a3-810f-5c48-9e9f-08fa8e828a15")
+	)
+	(text "U1 supply pins 4 / 11 drawn once (the PDF repeats them on every unit; C12 is drawn at U1:A there). PWR_FLAGs of 3V3, GND: sheet 5."
+		(exclude_from_sim no)
+		(at 55.88 220.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "18766f33-313c-5084-85d7-dfb3828eaf18")
+	)
 	(embedded_fonts no)
 )

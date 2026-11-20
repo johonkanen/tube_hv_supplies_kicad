@@ -225,6 +225,65 @@ def shunt_amp_cell(sh, ref, unit, UX, UY, pins, r_in, r_bias, c_bias, r_gnd, r_f
     return u
 
 
+# --- divider + difference amplifier cell (sheet 3, x4) -----------------------------------------------
+def diff_amp_cell(sh, ref, unit, UX, UY, pins, r_gdiv, r_sdiv, r_pgnd, r_fb, r_out, c_out, inp, out):
+    """One op-amp unit of the voltage measurements, as on PDF page 3, op-amp at (UX, UY);
+    pins = (+, -, output) pin numbers of the unit.
+
+    r_sdiv = three 1M in series from the global label `inp` (pin 1 of the first) to the + node
+    (pin 2 of the last); r_pgnd (pin 2) from the + node to GND. r_gdiv = three 1M in series from
+    GND (pin 1 of the first) to the - node (pin 2 of the last); r_fb (pin 2) from the - node to
+    the output. Output: r_out (pin 2) -> global label `out` with c_out (pin 1) to GND."""
+    u = sh.place(sym(ref), ref, UX, UY, unit=unit, value=sh_value(ref))
+    INP, INN, OUT = (u.pin(n) for n in pins)
+    xg, xs, xn = UX - g(32), UX - g(21), UX - g(15)      # GND divider, signal divider, node column
+    rows = (UY - g(31), UY - g(20), UY - g(8))           # the three 1M of a divider
+    for x, refs in ((xg, r_gdiv), (xs, r_sdiv)):
+        prev = None
+        for r, y in zip(refs, rows):
+            _, t, b = vert2(sh, "R", r, x, y, sh_value(r), top=1)
+            if prev:
+                sh.wire(prev, t)
+            else:
+                first = t
+            prev = b
+        top = (x, UY - g(38))
+        sh.wire(first, top)
+        if x == xg:
+            power_at(sh, "GND", top, "up")
+            sh.wire(prev, (x, INN[1]), INN)
+        else:
+            sh.glabel(inp, *top, 90)
+            sh.wire(prev, (x, INP[1]), INP)
+    # + node: r_pgnd to GND
+    YA = UY - g(19)
+    _, rl, rr = horiz2(sh, "R", r_pgnd, UX - g(9), YA, sh_value(r_pgnd), left=2)
+    sh.wire((xn, INP[1]), (xn, YA), rl)
+    sh.junction(xn, INP[1])
+    sh.wire(rr, (UX + g(6), YA))
+    power_at(sh, "GND", (UX + g(6), YA), "right")
+    # - node: feedback
+    YF = UY + g(10)
+    xo = UX + g(10)
+    _, rl, rr = horiz2(sh, "R", r_fb, UX - g(9), YF, sh_value(r_fb), left=2)
+    sh.wire((xn, INN[1]), (xn, YF), rl)
+    sh.junction(xn, INN[1])
+    sh.wire(rr, (xo, YF), (xo, OUT[1]))
+    sh.junction(xo, OUT[1])
+    # output filter
+    _, rl, rr = horiz2(sh, "R", r_out, UX + g(17), OUT[1], sh_value(r_out), left=2)
+    sh.wire(OUT, rl)
+    xq = UX + g(24)
+    sh.wire(rr, (xq, OUT[1]), (UX + g(30), OUT[1]))
+    sh.junction(xq, OUT[1])
+    sh.glabel(out, UX + g(30), OUT[1], 0)
+    _, ct, cb = vert2(sh, "C", c_out, xq, OUT[1] + g(10), sh_value(c_out), top=1)
+    sh.wire((xq, OUT[1]), ct)
+    sh.wire(cb, down(cb, 2))
+    power_at(sh, "GND", down(cb, 2), "down")
+    return u
+
+
 def _hcap(sh, ref, x, y):
     """Horizontal capacitor with pin 2 on the left, reference above and value below the plates."""
     fa = {0: 0, 90: 270, 180: 0, 270: 90}[_two_pin_rot("C", 2, "left")]
