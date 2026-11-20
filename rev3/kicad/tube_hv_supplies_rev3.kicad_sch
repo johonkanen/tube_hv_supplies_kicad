@@ -1,0 +1,225 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "03f0c202-7f3b-5886-8b65-7114de9c723e")
+	(paper "A3")
+	(title_block
+		(title "HV supplies rev 3")
+		(company "Tube amplifier")
+		(rev "rev 3 - initial schematic")
+		(comment 1 "From tube_amplifier_kicad docs/interfaces.md IF-1.1, sim/power_stage, rev3/sim")
+	)
+	(lib_symbols)
+	(sheet
+		(at 25.4 38.1)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "35b1356d-3f01-581c-97b9-913a99953d93")
+		(property "Sheetname" "01 Raw HV input, RAW_SS feeds, power star, fault network, brake"
+			(at 25.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "01_input_star.kicad_sch"
+			(at 25.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 38.1)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "23e44fdf-1b14-5c93-bd53-42eb317cabba")
+		(property "Sheetname" "02 Half-bridges: V_ANODE and V_SCREEN power stages"
+			(at 152.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "02_bridges.kicad_sch"
+			(at 152.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 38.1)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "db218c57-fce2-5029-b7fb-e41a4af8aa9b")
+		(property "Sheetname" "03 Isolated gate drivers, bootstrap"
+			(at 279.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "03_gate_drive.kicad_sch"
+			(at 279.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 78.74000000000001)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "630fdf75-055f-596b-abb9-8f591324bbb9")
+		(property "Sheetname" "04 Voltage and current measurement, ADC"
+			(at 25.4 78.04 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "04_measurement.kicad_sch"
+			(at 25.4 99.66000000000001 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 78.74000000000001)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "b0237d6c-9d07-5511-aa07-2e7d80cc2a2a")
+		(property "Sheetname" "05 J1 40-pin, HV_PERMIT, enable logic, hardware protection"
+			(at 152.4 78.04 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "05_interface_protection.kicad_sch"
+			(at 152.4 99.66000000000001 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

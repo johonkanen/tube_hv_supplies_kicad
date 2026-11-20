@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "filename": "tube_hv_supplies_rev3.kicad_pro",
+    "version": 3
+  },
+  "schematic": {},
+  "board": {},
+  "sheets": [
+    [
+      "03f0c202-7f3b-5886-8b65-7114de9c723e",
+      "Root"
+    ],
+    [
+      "35b1356d-3f01-581c-97b9-913a99953d93",
+      "01 Raw HV input, RAW_SS feeds, power star, fault network, brake"
+    ],
+    [
+      "23e44fdf-1b14-5c93-bd53-42eb317cabba",
+      "02 Half-bridges: V_ANODE and V_SCREEN power stages"
+    ],
+    [
+      "db218c57-fce2-5029-b7fb-e41a4af8aa9b",
+      "03 Isolated gate drivers, bootstrap"
+    ],
+    [
+      "630fdf75-055f-596b-abb9-8f591324bbb9",
+      "04 Voltage and current measurement, ADC"
+    ],
+    [
+      "b0237d6c-9d07-5511-aa07-2e7d80cc2a2a",
+      "05 J1 40-pin, HV_PERMIT, enable logic, hardware protection"
+    ]
+  ]
+}
