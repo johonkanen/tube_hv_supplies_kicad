@@ -445,8 +445,8 @@ Reported, not fixed (PLAN.md section 5).
 11. **R26 || R27 (1k each, 500 R) between UC6 and PREOUT, and the L4 / C6 / R30 arrangement:**
     C6 returns through the shunt R30 (`C3_CURRENT`), C5 and C7 go straight to GND, and the
     load current to VPRE passes R26 || R27 (500 R). As drawn in the PDF and the IPC;
-    reproduced. Whether 500 R in series with the preamp supply is intended is a redesign
-    question (to confirm with the user).
+    reproduced. **Confirmed intended by the user (2026-11-20):** the output fed the preamp, which
+    draws only milliamps, so the 500 R series resistance is fine.
 
 ## p2k candidates
 
@@ -493,6 +493,9 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     numbered or never; no wrapper needed.
 
 ## Decisions
+
+- **Finding 11, R26 || R27 (500 R) in series with the VPRE output: intended (user, 2026-11-20).** The
+  output fed the preamp, which draws only milliamps.
 
 - KiCad refdes `B_P` / `B_N` for `B+` / `B-` (P/N for the sign, as tube_psu `P400V` /
   `N5V_OUT`). They can still be renamed before any Phase 1 sheet exists.
