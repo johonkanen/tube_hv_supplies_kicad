@@ -21,17 +21,19 @@ board is in `p2k_config.py`.
 
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
-Phases 0-4 are done: schematic redrawn on 6 sheets (158 parts, netlist equal to the IPC, ERC
-0 errors), footprints assigned (`lib/footprint_map.csv`, `lib/tube_hv_supplies.pretty`; every
-part fits the IPC pads within 0.05 mm), PCB generated (`tools/make_pcb.sh`: 4 layers, pours on all
-layers, 141 vias, board 1.6 mm; Proteus copper 0 shorts / 0 orphans / 0 opens). Pad sizes: Proteus
-pads on U1 U2 ADC1-ADC3 DRV5 DRV6 J1 (user decision), KiCad pads elsewhere; DRC 0 errors apart from
-the accepted courtyard overlaps. Independent verification (Phase 4): KiCad's IPC-D-356 export equals
-the Proteus netlist (574 records, 113 nets 1:1), and KiCad's gerbers equal the Proteus gerbers on all
-four copper layers and in the drills, outside the pad shapes, except one 0.73 mm² piece of GND plane
-between four J2 pins on In2.Cu that the larger KiCad pads of J2 remove (it connects nothing; a pending
-user decision, STATUS.md "Phase 4 - J2"). `tools/check_all.sh` passes with that one pending decision.
-Next: Phase 5, clean-up (user decisions first).
+**The conversion is complete (Phases 0-5, 2026-11-20).** Schematic redrawn on 6 sheets (158 parts,
+netlist equal to the IPC, ERC 0 errors), footprints assigned (`lib/footprint_map.csv`,
+`lib/tube_hv_supplies.pretty`; every part fits the IPC pads within 0.05 mm), PCB generated
+(`tools/make_pcb.sh`: 4 layers, pours on all layers, 141 vias, board 1.6 mm, reference texts placed
+by `p2k.place_refdes`; Proteus copper 0 shorts / 0 orphans / 0 opens). Pad sizes (user decisions):
+the Proteus pads on U1 U2 ADC1-ADC3 DRV5 DRV6 J1 J2 and on the TO-220s Q3 Q4 Q7 Q8 (1.524 x 2.54 mm
+rounded rectangles from the gerbers, drill 1.016: 1.016 mm between the HV pins), J1 and J2 all
+round; KiCad pads elsewhere. DRC 0 errors apart from the accepted courtyard overlaps. Independent
+verification: KiCad's IPC-D-356 export equals the Proteus netlist (574 records, 113 nets 1:1), and
+KiCad's gerbers equal the Proteus gerbers on all four copper layers and in the drills outside the
+pad shapes of the KiCad-pad parts. `tools/check_all.sh` prints ALL CHECKS PASSED (18 steps).
+The board is still generated: hand edits in KiCad start when the user stops the generation
+(STATUS.md "Phase 5"). Open, report-only: the design findings in STATUS.md.
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 
@@ -69,7 +71,8 @@ tools/p2k/       proteus2kicad (submodule)
 tools/make_part_map.py, tools/gen_symbols.py  generators of lib/ (--check)
 tools/sheets/   one transcription script per sheet (_common.py: board helpers)
 tools/erc.sh    ERC of the schematic
-tools/roundtrip_pending.py  gerber round trip while the J2 pad decision is open (Phase 4)
+tools/gen_footprints.py, tools/make_pcb.sh  footprints and the board (generated, --check)
+tools/check_proteus_pads.py  pads of the Proteus-pad parts vs the Proteus gerber flashes (Phase 5)
 reports/roundtrip/  round-trip report and overlays (KiCad gerbers vs Proteus)
 tools/check_all.sh  every verification step (run at the start and end of a session)
 p2k_config.py   board configuration for the tools

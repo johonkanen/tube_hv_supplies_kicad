@@ -1124,7 +1124,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical"
+		(property "Footprint" "tube_hv_supplies:PinHeader_2x08_P1.27mm_Vertical_ProteusPads"
 			(at 81.28 119.38 0)
 			(effects
 				(font

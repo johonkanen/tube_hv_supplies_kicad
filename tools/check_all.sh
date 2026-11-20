@@ -32,14 +32,15 @@ step "Pin order vs unmoved KiCad base footprints" python3 tools/check_pin_order.
 # Phase 3: PCB (build_pcb, gerber_to_tracks, assign_nets, pours_to_zones on all four layers)
 step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
 step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
-# pad sizes: KiCad pads except the PROTEUS_PADS parts of tools/gen_footprints.py (user decision A2)
+# pad sizes: KiCad pads except the PROTEUS_PADS parts of tools/gen_footprints.py (user decisions A2
+# and Phase 5: + J2, + Q3 Q4 Q7 Q8 with the gerber TO-220 pad, J1 all round)
 step "Board copper connectivity after zone fill" tools/p2k/bin/kipy -m p2k.assign_nets --check
 step "DRC with schematic parity" tools/p2k/bin/p2k drc
 # Phase 4: the finished board against the Proteus CADCAM files (independent of the generators)
 step "IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)" tools/p2k/bin/p2k ipc356_diff
-# J2 pad sizes: the one 'other' cluster (In2.Cu web between J2-1..4) is a pending user decision;
-# after it: tools/p2k/bin/p2k gerber_roundtrip --check
-step "Gerber round trip vs Proteus (copper XOR, coverage, drills)" python3 tools/roundtrip_pending.py
+step "Gerber round trip vs Proteus (copper XOR, coverage, drills)" tools/p2k/bin/p2k gerber_roundtrip --check
+# Phase 5: the pad decisions (round trip and ipc356_diff accept other pad shapes / larger drills)
+step "Proteus-pad parts: board pads = Proteus flashes and drills" tools/p2k/bin/kipy tools/check_proteus_pads.py
 
 echo
 pending=$(grep -c "PENDING USER DECISION" "$log")

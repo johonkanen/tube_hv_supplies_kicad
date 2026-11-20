@@ -36,8 +36,14 @@ P = "tube_hv_supplies:"
 # 3 shorts, 29 clearance, 3 solder-mask bridges, all at these parts). Every other part keeps the
 # KiCad pads. The rules with `refdes=PROTEUS_PADS` come before the general rule of their symbol;
 # p2k.footprints fails if a refdes listed here is taken by no such rule.
+#
+# Phase 5 (user, 2026-11-20): + J2 (with the KiCad pads the In2.Cu GND plane lost a 0.73 mm^2 web
+# between J2-1..4, STATUS.md "Phase 4 - J2") and + Q3 Q4 Q7 Q8 (the Proteus TO-220 pads keep the
+# 1.016 mm copper gap between the HV collector pad and its neighbours; finding 15). The TO-220 pad
+# shape is not in the IPC (1.524 x 1.524 there), so that spec takes it from the gerber flash via the
+# board-local `pads` key (PAD_OVERRIDE below), not from ipc_sizes.
 PROTEUS_PADS = frozenset("""
-    U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1
+    U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 J2 Q3 Q4 Q7 Q8
 """.split())
 
 # (symbol, conditions, footprint, note). Conditions: n = pad count, tht, span (mm, +-0.02),
@@ -65,7 +71,8 @@ RULES = [
      "10 mm radial electrolytic P5, pad 1 = + (KiCad pad 1)"),
     # --- semiconductors
     ("D", dict(tht=False, span=4.10), P + "D_SMA_AC", "SMA (DIOM5025X231), pads A/C"),
-    ("IKP08N65F5", dict(tht=True, span=5.08), "Package_TO_SOT_THT:TO-220-3_Vertical", "TO-220, 1=G 2=C 3=E"),
+    ("IKP08N65F5", dict(refdes=PROTEUS_PADS), P + "TO-220-3_Vertical_ProteusPads",
+     "TO-220, 1=G 2=C 3=E, Proteus pads 1.524 x 2.54 rounded rectangle, drill 1.016"),
     ("ISL21010", dict(), P + "SOT-23_Proteus", "SOT-23, Proteus pad numbering (1 = JEDEC 3, 2 = JEDEC 1, 3 = JEDEC 2)"),
     ("ADC121C027", dict(refdes=PROTEUS_PADS), P + "SOT-23-6_ADC121C027_Proteus_ProteusPads",
      "SOT-23-6, Proteus pin ids A1 A2 COM2 K2 K1 COM1 = pads 1-6, rows 2.65 mm apart, Proteus pad size"),
@@ -82,7 +89,8 @@ RULES = [
     ("HEADER_2X20_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads",
      "2x20 1.27 mm header (IDC), Proteus numbering with the odd / even rows swapped, pins 37 / 38 N/C, "
      "Proteus pad size"),
-    ("HEADER_2X8_50MIL", dict(), "Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical", "2x8 1.27 mm header"),
+    ("HEADER_2X8_50MIL", dict(refdes=PROTEUS_PADS), P + "PinHeader_2x08_P1.27mm_Vertical_ProteusPads",
+     "2x8 1.27 mm header, Proteus pad size and drill"),
     ("PIN", dict(n=2), P + "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm", "blade terminal, two holes both pad 1"),
     ("PIN", dict(n=1), P + "Terminal_1x1_D2.54mm_Drill1.524mm", "wire terminal of an off-board inductor, one hole"),
 ]
@@ -138,8 +146,24 @@ PROJECT = {
     "PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads": dict(
         base="Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical",
         renumber={str(k): str(k + 1 if k % 2 else k - 1) for k in range(1, 41)}, ipc="J1", ipc_sizes=True,
+        pads={"2": dict(shape="circle")},   # Phase 5 (user): round as in Proteus, no square pad on pad 2
         descr="2x20 1.27 mm header, Proteus numbering: odd / even pad numbers swapped (pad 1 at KiCad's "
-              "pad 2 position, KiCad's pin-1 marking stays at the pad now numbered 2); Proteus pad sizes"),
+              "pad 2 position, KiCad's pin-1 marking stays at the pad now numbered 2); Proteus pad sizes, "
+              "all pads round"),
+    # Phase 5 (user, 2026-11-20): J2 with the Proteus pads (0.762 round, drill 0.558; pad 1 round too,
+    # as in Proteus and as J1 - KiCad's square pad 1 left 4 corners per layer in the round trip)
+    "PinHeader_2x08_P1.27mm_Vertical_ProteusPads": dict(
+        base="Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical", ipc="J2", ipc_sizes=True,
+        pads={"1": dict(shape="circle")},
+        descr="2x8 1.27 mm header; Proteus pad sizes, all pads round"),
+    # Phase 5 (user, 2026-11-20): TO-220 with the Proteus pads as flashed in all four copper gerbers
+    # (aperture macro PPAD010: 1.524 x 2.54 mm rounded rectangle, corner radius 0.3048 = ratio 0.2,
+    # long axis across the pin row on all 12 pads of Q3 Q4 Q7 Q8) and the Proteus drill 1.016. The IPC
+    # records 1.524 x 1.524 (finding 15), so not ipc_sizes: the board-local `pads` key sets them.
+    "TO-220-3_Vertical_ProteusPads": dict(
+        base="Package_TO_SOT_THT:TO-220-3_Vertical", ipc="Q3",
+        pads={"*": dict(shape="roundrect", size=(1.524, 2.54), rratio=0.2, drill=1.016)},
+        descr="TO-220-3 vertical; Proteus pads 1.524 x 2.54 mm rounded rectangle (gerber aperture), drill 1.016"),
     "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm": dict(
         ipc="B_P", descr="Blade wire terminal, two holes both pad 1"),
     "Terminal_1x1_D2.54mm_Drill1.524mm": dict(
@@ -149,6 +173,42 @@ PROJECT = {
         board_only=True, pad=(6.35, 3.0), plated=True,
         descr="Plated 3.0 mm mounting hole with a 6.35 mm pad on all copper layers, no net"),
 }
+
+# Board-local spec key `pads` (p2k candidates 21 / 23: p2k.footprints takes pad sizes only from the
+# IPC and keeps the KiCad pad shape): {pad number or "*": dict(shape=, size=(w, h), rratio=, drill=)}
+# applied to the derived footprint, sizes in the footprint frame (the pad's rotation is kept).
+_derive = footprints.derive
+
+
+def _derive_pads(name, spec, ipc):
+    node = _derive(name, spec, ipc)
+    over = spec.get("pads")
+    if not over:
+        return node
+    from p2k import sexpr
+    from p2k.sexpr import Sym
+    seen = set()
+    for pad in sexpr.find_all(node, "pad"):
+        o = over.get(str(pad[1]), over.get("*"))
+        if o is None:
+            continue
+        seen.add(str(pad[1]) if str(pad[1]) in over else "*")
+        if "shape" in o:
+            pad[3] = Sym(o["shape"])
+        if "size" in o:
+            sexpr.find(pad, "size")[1:] = list(o["size"])
+        if "drill" in o:
+            sexpr.find(pad, "drill")[1:] = [o["drill"]]
+        pad[:] = [c for c in pad if not (isinstance(c, list) and c and c[0] in ("roundrect_rratio", "chamfer_ratio", "chamfer"))]
+        if o.get("shape") == "roundrect":
+            pad.append([Sym("roundrect_rratio"), o["rratio"]])
+    missing = set(over) - seen
+    if missing:
+        raise SystemExit(f"gen_footprints: {name}: `pads` names pads the footprint does not have: {sorted(missing)}")
+    return node
+
+
+footprints.derive = _derive_pads
 
 FP_LIB_TABLE = """(fp_lib_table
 \t(version 7)

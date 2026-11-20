@@ -62,7 +62,7 @@ DRV6,tube_hv_supplies:SI8271,tube_hv_supplies:SOIC-8_3.9x4.9mm_P1.27mm_Proteus_P
 GND_PRE,tube_hv_supplies:PIN,tube_hv_supplies:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 GND_PWR,tube_hv_supplies:PIN,tube_hv_supplies:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"blade terminal, two holes both pad 1"
 J1,tube_hv_supplies:HEADER_2X20_50MIL,tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_RowsSwapped_ProteusPads,"2x20 1.27 mm header (IDC), Proteus numbering with the odd / even rows swapped, pins 37 / 38 N/C, Proteus pad size"
-J2,tube_hv_supplies:HEADER_2X8_50MIL,Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical,2x8 1.27 mm header
+J2,tube_hv_supplies:HEADER_2X8_50MIL,tube_hv_supplies:PinHeader_2x08_P1.27mm_Vertical_ProteusPads,"2x8 1.27 mm header, Proteus pad size and drill"
 L1,tube_hv_supplies:L_OFFBOARD,,"off board: 3 mH inductor (OUT1 -> UC3), wired to the L5 / L12 terminals"
 L2,tube_hv_supplies:L,tube_hv_supplies:L_Bourns_SRP1038C_10.0x10.0mm_Proteus,"Bourns SRP1038CC, Proteus pads 10.0 mm apart"
 L3,tube_hv_supplies:L_OFFBOARD,,"off board: 3 mH inductor (OUT2 -> U_OUT), wired to the L11 / L6 terminals"
@@ -72,10 +72,10 @@ L6,tube_hv_supplies:PIN,tube_hv_supplies:Terminal_1x1_D2.54mm_Drill1.524mm,"wire
 L7,tube_hv_supplies:L,tube_hv_supplies:L_Bourns_SRP1038C_10.0x10.0mm_Proteus,"Bourns SRP1038CC, Proteus pads 10.0 mm apart"
 L11,tube_hv_supplies:PIN,tube_hv_supplies:Terminal_1x1_D2.54mm_Drill1.524mm,"wire terminal of an off-board inductor, one hole"
 L12,tube_hv_supplies:PIN,tube_hv_supplies:Terminal_1x1_D2.54mm_Drill1.524mm,"wire terminal of an off-board inductor, one hole"
-Q3,tube_hv_supplies:IKP08N65F5,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220, 1=G 2=C 3=E"
-Q4,tube_hv_supplies:IKP08N65F5,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220, 1=G 2=C 3=E"
-Q7,tube_hv_supplies:IKP08N65F5,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220, 1=G 2=C 3=E"
-Q8,tube_hv_supplies:IKP08N65F5,Package_TO_SOT_THT:TO-220-3_Vertical,"TO-220, 1=G 2=C 3=E"
+Q3,tube_hv_supplies:IKP08N65F5,tube_hv_supplies:TO-220-3_Vertical_ProteusPads,"TO-220, 1=G 2=C 3=E, Proteus pads 1.524 x 2.54 rounded rectangle, drill 1.016"
+Q4,tube_hv_supplies:IKP08N65F5,tube_hv_supplies:TO-220-3_Vertical_ProteusPads,"TO-220, 1=G 2=C 3=E, Proteus pads 1.524 x 2.54 rounded rectangle, drill 1.016"
+Q7,tube_hv_supplies:IKP08N65F5,tube_hv_supplies:TO-220-3_Vertical_ProteusPads,"TO-220, 1=G 2=C 3=E, Proteus pads 1.524 x 2.54 rounded rectangle, drill 1.016"
+Q8,tube_hv_supplies:IKP08N65F5,tube_hv_supplies:TO-220-3_Vertical_ProteusPads,"TO-220, 1=G 2=C 3=E, Proteus pads 1.524 x 2.54 rounded rectangle, drill 1.016"
 R1,tube_hv_supplies:R,tube_hv_supplies:R_0402_1005Metric_Proteus0.91,0402 (Proteus pads 0.91 mm apart)
 R2,tube_hv_supplies:R,tube_hv_supplies:R_0402_1005Metric_Proteus0.91,0402 (Proteus pads 0.91 mm apart)
 R3,tube_hv_supplies:R,Resistor_SMD:R_0603_1608Metric,0603 (Proteus pads 1.73 mm apart)
