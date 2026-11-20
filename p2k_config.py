@@ -134,6 +134,9 @@ OUTLINE_RECT = (-122.6, -28.26, 170.085, 56.485)  # x, y, width, height
 FOOTPRINT_PAD_SIZES = "kicad"
 # kicad/fp-lib-table (the project footprint library) is written / checked by p2k.footprints.run.
 FP_LIB_TABLE = True
+# The footprint generator is frozen in tools/generate/ (generation stopped, D-STOP); p2k check_pin_order
+# still imports its RULES / PROJECT specs (spec= entries of PIN_ORDER).
+FOOTPRINT_SCRIPT = "tools/generate/gen_footprints.py"
 # Parts drawn in the PDF without a layout part (no IPC pads): no footprint.
 OFF_BOARD_PARTS = {
     "L1": "off board: 3 mH inductor (OUT1 -> UC3), wired to the L5 / L12 terminals",

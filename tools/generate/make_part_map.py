@@ -12,7 +12,7 @@ no EID markers (p2k candidate 3, solved in p2k a9a286c as pdsprj.dsn_devices).
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "p2k"))  # proteus2kicad
 from p2k import part_map  # noqa: E402
 
 C, CP, R = "C", "C_Polarized", "R"
@@ -56,4 +56,9 @@ SPEC = dict(
 )
 
 if __name__ == "__main__":
+    if "--force-regenerate" not in sys.argv:
+        sys.exit("make_part_map: frozen since generation stopped (STATUS.md Decisions, D-STOP): the committed "
+                 "KiCad files are edited by hand now. Re-running would overwrite the hand edits; pass "
+                 "--force-regenerate only to reproduce the history in a scratch copy.")
+    sys.argv.remove("--force-regenerate")
     sys.exit(part_map.run(SPEC))

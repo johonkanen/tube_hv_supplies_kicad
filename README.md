@@ -32,8 +32,7 @@ round; KiCad pads elsewhere. DRC 0 errors apart from the accepted courtyard over
 verification: KiCad's IPC-D-356 export equals the Proteus netlist (574 records, 113 nets 1:1), and
 KiCad's gerbers equal the Proteus gerbers on all four copper layers and in the drills outside the
 pad shapes of the KiCad-pad parts. `tools/check_all.sh` printed ALL CHECKS PASSED (18 steps).
-The board is still generated: hand edits in KiCad start when the user stops the generation
-(STATUS.md "Phase 5"). Open, report-only: the design findings in STATUS.md.
+The board was generated until D-STOP (below); hand edits since then. Open, report-only: the design findings in STATUS.md.
 After Phase 5 the bias rail `+2V5_BIAS` was renamed `+1V0_BIAS` in the KiCad design (user decision:
 REF1 is the 1.5 V ISL21010 into a 220 / 470 divider, about 1.0 V); the Proteus files keep the old name
 and `p2k_config.NET_ALIASES` maps it for every check.
@@ -60,6 +59,13 @@ unchanged except the square pin-1 pad (user decision). The four current-measurem
 
 **HV supplies v2 is not installed and will be redone anyway: this conversion is only the starting point
 for the redesign** (user, 2026-11-20).
+
+**Generation stopped 2026-11-20 (user decision D-STOP; STATUS.md "Generation stopped 2026-11-20"):** the
+board is no longer generated from the Proteus data. `kicad/` and `lib/` are edited by hand from now on; the
+generators are kept as frozen history in `tools/generate/` (they refuse to run without
+`--force-regenerate`). `tools/check_all.sh` no longer regenerates or byte-compares anything: it checks the
+committed files against the Proteus sources (netlist, pads, vias, copper, drills) and the KiCad rules (ERC,
+DRC) and prints ALL CHECKS PASSED (14 steps).
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 
@@ -94,13 +100,10 @@ source/         Proteus exports (read-only)
   schematic_pdf/  schematic PDF to redraw from
   *.pdsprj        Proteus project (schematic values, devices, packages, pin names)
 reference/      tables derived from the IPC netlist (p2k ipc356; generated, don't edit)
-lib/            part_map.csv and the project symbol library (generated)
+lib/            part_map.csv, the project symbol and footprint libraries (generated until D-STOP, hand-edited since)
 kicad/          KiCad project: root sheet + 6 sub-sheets (one per PDF page)
 tools/p2k/       proteus2kicad (submodule)
-tools/make_part_map.py, tools/gen_symbols.py  data for the lib/ generators (p2k part_map, symgen; --check)
-tools/sheets/   one transcription script per sheet (_common.py: board helpers)
-tools/gen_footprints.py  footprint RULES / PROJECT specs (p2k footprints; --check)
-tools/make_pcb.sh  the board: `exec tools/p2k/bin/p2k make_pcb` (generated, --check)
+tools/generate/ the frozen rev A generators (part map, symbols, sheets, footprints, make_pcb.sh): history, don't run
 reports/roundtrip/  round-trip report and overlays (KiCad gerbers vs Proteus)
 tools/check_all.sh  every verification step (run at the start and end of a session)
 p2k_config.py   board configuration for the shared tools (incl. PIN_ORDER, PROTEUS_PADS_CHECK, REMOVED_TRACKS)

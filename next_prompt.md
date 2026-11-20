@@ -12,12 +12,13 @@ check output"). Component values are unchanged (user decision).
 **HV supplies v2 is not installed and will be redone (user, 2026-11-20): this KiCad project is the starting
 point for the redesign.**
 
+**Generation stopped (user decision D-STOP, 2026-11-20; STATUS.md "Generation stopped 2026-11-20"):** the
+generators are frozen in `tools/generate/` (they refuse without `--force-regenerate`); `kicad/` and `lib/` are
+edited by hand (KiCad, or pcbnew / s-expression scripts in `build/tmp`). `tools/check_all.sh` (14 steps) has
+no regenerate / byte-compare step any more.
+
 What remains (in this order, each needs its trigger):
 
-- **Stop generating the board** (the user's call): today `kicad/tube_hv_supplies.kicad_pcb` is rebuilt by
-  `tools/make_pcb.sh` (`p2k make_pcb`) and `make_pcb --check` requires it byte-identical. At the first hand
-  edit, drop the `make_pcb --check` step from `tools/check_all.sh` (the other checks keep working on a
-  hand-edited board) and record it in STATUS.md.
 - **ADC VA / VIN swap (finding 6)**: a hand edit in KiCad **after generation stops** (user decision): swap the
   ADC121C027 supply / input connections of ADC1-ADC3 (pin 1 VA = 3V3, pin 3 VIN = the filtered input).
   The IPC-based checks will then report exactly those pins as differing from Proteus: record them as the
@@ -30,5 +31,7 @@ What remains (in this order, each needs its trigger):
   (voltage range 1 / 200), 13 (0.127 mm clearances). Not decided: LCSC / BOM fields, Proteus pads on more
   parts, silk cosmetics.
 
-A later session that changes anything starts with `tools/check_all.sh` and follows PLAN.md section 5
-(generators only, never by hand in kicad/ or lib/ while the board is generated; tools/p2k pinned at a9a286c).
+A later session that changes anything starts with `tools/check_all.sh`. Since D-STOP the design is the
+committed KiCad files: edit them (never re-run the frozen generators), record every hand edit in STATUS.md
+"Hand edits after generation stopped" together with how each Proteus-based check accepts it, and finish with
+ALL CHECKS PASSED (tools/p2k pinned at a9a286c).

@@ -13,9 +13,39 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | Design fixes | **done** 2026-11-20 (Opus 5.5): user decisions – finding 7 current-measurement nets renamed to what they measure (8 nets, 4 of them on J1) through `NET_ALIASES`; finding 14 Proteus stubs removed (15V_BOOST stub by `REMOVED_TRACKS`, the two zero-length OUT1 draws by the board-local `tools/remove_dot_tracks.py`); README hole numbering = board H1-H4; make_pcb.sh --check step-failure bug fixed; new name-hint guard; **ALL CHECKS PASSED** (19 steps). Values unchanged |
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5): user decisions applied – Proteus pads on J2 and on the TO-220s Q3 Q4 Q7 Q8 (1.524 × 2.54 rounded rectangle from the gerbers, drill 1.016), J1 / J2 all round, reference texts by `place_refdes`; round trip 0 other / 0 clearance (roundtrip_pending.py removed); new `check_proteus_pads.py`; DRC 0 errors except 20 accepted courtyards (30 violations); **ALL CHECKS PASSED** (18 steps). The board stays generated |
 | Shared tools, J1 | **done** 2026-11-20 (Opus 5.5): `tools/p2k` → a9a286c; every board-local tool replaced by the shared tools / keys (D-R, D-I7 re-baselines; no strict opt-outs); J1 renumbered to the standard header numbering with `IPC_PIN_IDS` (finding 12, with the control card J11), square pad 1 (user); **ALL CHECKS PASSED** (18 steps) |
+| Generation stopped | **done** 2026-11-20 (Opus 5.5): user decision D-STOP – the board is no longer generated from the Proteus data; the generators are frozen in `tools/generate/` (refuse without `--force-regenerate`); check_all.sh keeps only the checks against Proteus and the KiCad rules; **ALL CHECKS PASSED** (14 steps) |
 
 **HV supplies v2 is not installed and will be redone anyway (user, 2026-11-20).** This conversion is
 only the starting point for the redesign; the findings below are input for it.
+
+## Generation stopped 2026-11-20 – done (Opus 5.5, 2026-11-20)
+
+User decision D-STOP (section "Decisions"). The committed files in `kicad/` and `lib/` are the design from
+now on and are edited by hand (KiCad, or pcbnew / s-expression scripts kept in `build/tmp`); the frozen
+generators reproduce them byte for byte at 36b7f6f (checked once more before the stop:
+`gen_footprints` / `gen_symbols` / `make_part_map --check` up to date, `make_pcb.sh --force-regenerate --check`
+byte-identical).
+
+- `tools/generate/` (git mv, history kept): `make_part_map.py`, `gen_symbols.py`, `sheets/`,
+  `gen_footprints.py`, `make_pcb.sh`, with a README "frozen history, don't run". Every entry point exits
+  unless given `--force-regenerate` (make_pcb.sh: exit 2; the Python generators: exit 1; the flag is
+  removed before the p2k code parses its arguments). Paths adjusted for the deeper directory.
+- `p2k_config.FOOTPRINT_SCRIPT = "tools/generate/gen_footprints.py"`: `p2k check_pin_order` still imports
+  the `RULES` / `PROJECT` specs (the `spec=` entries of `PIN_ORDER`); importing writes nothing.
+- `tools/check_all.sh`: removed `make_part_map.py --check`, `gen_symbols.py --check`,
+  `gen_footprints.py --check` and `make_pcb.sh --check` (18 → 14 steps; `p2k sheets --check` was not in
+  it). Kept: KiCad environment, `ipc356 --check` (reference/ is the Proteus side of every comparison,
+  parsed from source/ and never edited, so it guards the checks rather than a generated design file),
+  `check_sources`, `check_symbols`, ERC, `compare_netlists`, `check_footprints --pcbnew`,
+  `check_pin_order`, `check_board`, `assign_nets --check`, DRC (strict defaults), `ipc356_diff`,
+  `gerber_roundtrip --check`, `check_pads` + the J1-1 guard.
+- Negative tests (scratch copies `build/tmp/neg_*` of the repo, full `tools/check_all.sh` each, deleted):
+  an ADC1 SDA F.Cu track moved 0.3 mm in x → SOME CHECKS FAILED (assign_nets --check: open; DRC: 2
+  unconnected; round trip: 2 `other` clusters 0.65 / 0.59 mm² at ADC1); the R77 reference text moved
+  0.4 mm (copper-neutral) → ALL CHECKS PASSED.
+- p2k note (candidate 31): `tools/p2k/tools/regress.sh` regenerates each board with its own scripts and
+  requires a clean `git status`; this board no longer has a `tools/make_pcb.sh` and is hand-edited, so it
+  must leave the regression set (or be run with the checks only).
 
 ## Shared-tool migration 2026-11-20 – done (Opus 5.5, 2026-11-20)
 
@@ -1194,7 +1224,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (after the shared-tool migration and the J1 renumbering, p2k a9a286c; 18 steps):
+`tools/check_all.sh`, 2026-11-20 (generation stopped, D-STOP; p2k a9a286c; 14 steps):
 
 ```
 == KiCad environment
@@ -1212,10 +1242,6 @@ ipc356: pin ids renamed (IPC_PIN_IDS): J1 1->2 2->1 3->4 4->3 5->6 6->5 7->8 8->
   drills: 247 plated, 0 non-plated
   outline 170.1 x 56.5 mm at (-122.60, -28.26)
 check_sources: OK
-== Part map up to date
-make_part_map: lib/part_map.csv up to date, 160 parts (158 on the board); per sheet 1:36 2:26 3:42 4:34 5:7 6:15
-== Symbol library up to date
-gen_symbols: lib/tube_hv_supplies.kicad_sym up to date (20 symbols)
 == Symbol pin sets vs IPC
   ADC121C027             3  pins  6  ADC1 ADC2 ADC3
   C                     39  pins  2  C9 C10 C23 C24 C25 C30 C31 C32 ...
@@ -1240,20 +1266,6 @@ erc: 0 errors, 21 warnings (2 ground_pin_not_ground, 19 isolated_pin_label) (rep
 compare: parts 158/158 present, 0 missing, 0 extra; pins compared 423, wrong-net pins 0; IPC nets touched 113, complete 113 (+ 2 N/C / no-net pins)
 compare: per sheet (drawn/total) 1:34/34 2:26/26 3:42/42 4:34/34 5:7/7 6:15/15
 compare: OK
-== Footprint library, map and fp-lib-table up to date
-footprints: R_0402_1005Metric_Proteus0.91: fit on R1 unmirrored, largest pad move 0.053 mm (pad 2), limit 0.510 mm
-footprints: R_0508_1220Metric_KRL2012: fit on R29 unmirrored, largest pad move 0.087 mm (pad 2), limit 0.575 mm
-footprints: D_SMA_AC: fit on D2 mirrored, largest pad move 0.050 mm (pad C), limit 2.000 mm
-footprints: SOT-23_Proteus: fit on REF1 unmirrored, largest pad move 0.020 mm (pad 1), limit 0.950 mm
-footprints: SOT-23-6_ADC121C027_Proteus_ProteusPads: fit on ADC1 unmirrored, largest pad move 0.188 mm (pad COM2), limit 0.475 mm
-footprints: TSSOP-14_4.4x5mm_P0.65mm_Proteus_ProteusPads: fit on U1 unmirrored, largest pad move 0.063 mm (pad 9), limit 0.325 mm
-footprints: SOIC-8_3.9x4.9mm_P1.27mm_Proteus: fit on DRV1 mirrored, largest pad move 0.275 mm (pad 8), limit 0.635 mm
-footprints: SOIC-8_3.9x4.9mm_P1.27mm_Proteus_ProteusPads: fit on DRV5 mirrored, largest pad move 0.275 mm (pad 8), limit 0.635 mm
-footprints: L_Bourns_SRP1038C_10.0x10.0mm_Proteus: fit on L2 unmirrored, largest pad move 0.525 mm (pad 1), limit 4.475 mm
-footprints: PinHeader_2x20_P1.27mm_Vertical_ProteusPads: fit on J1 unmirrored, largest pad move 0.000 mm (pad 23), limit 0.635 mm
-footprints: PinHeader_2x08_P1.27mm_Vertical_ProteusPads: fit on J2 unmirrored, largest pad move 0.000 mm (pad 16), limit 0.635 mm
-footprints: TO-220-3_Vertical_ProteusPads: fit on Q3 unmirrored, largest pad move 0.000 mm (pad 3), limit 1.270 mm
-gen_footprints: 158 parts, 23 footprints (15 project), up to date
 == Footprints vs IPC pad geometry (fit and pcbnew placement)
 check_footprints: pcbnew placement of 158 parts, worst pad offset 0.039 mm
 check_footprints: 158/158 parts fitted, 429 pads, 23 footprints, worst residual 0.039 mm (limit 0.05)
@@ -1275,14 +1287,6 @@ TO-220                   TO-220-3_Vertical                               0.000 @
 SMA                      D_SMA                                           0.050 @     0    0.050 @   180  mirrored 0.050  (two pads: band by render)
 CP                       CP_Radial_D10.0mm_P5.00mm                       0.000 @   270    0.000 @    90  unmirrored 0.000  (two pads: '+' by render)
 check_pin_order: OK (13 checks as recorded)
-== PCB rebuilt from schematic + gerbers, up to date
-build_pcb: 158 footprints placed (2 excluded from board), 4 mounting holes, 115 nets, 4 outline segments
-gerber_to_tracks: 1836 tracks, 141 vias (IPC 141), 21 pour outlines on User.1-4; removed as recorded: 3 tracks (REMOVED_TRACKS), 0 vias (REMOVED_VIAS)
-assign_nets: stage A (no pours): 225 groups, 0 shorts, 36 orphans, 11 opens
-assign_nets: stage B (with pours): 119 groups, 0 shorts, 0 orphans, 0 opens
-pours_to_zones: 21 pours -> 21 zones; 24 holes closed by the stroke, 259 holes kept
-place_refdes: 4 Fab only, 92 kept, 64 moved, 2 moved, 0.8 mm text (sizes 1.0, 0.8 mm)
-make_pcb: board rebuilt from scratch, byte-identical
 == Board pads, holes, vias vs IPC (position, size, nets 1:1)
 check_board: 162 footprints, 429 pads, worst pad offset 0.039 mm (limit 0.05), 113 IPC nets mapped 1:1, 4 mounting holes
 check_board: 1836 tracks, 141 vias, 21 zones
@@ -1584,9 +1588,18 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     from `PROTEUS_PADS_CHECK` (loses J1-2..40) or raising `CHECK_PADS_AREA_TOL` (loses every pad). Board
     workaround: `check_pads_j1()` in `tools/check_all.sh` accepts exactly the four J1-1 lines. A key such as
     `CHECK_PADS_ACCEPTED = {"J1-1": reason}` (stale entry fails) would replace it.
-
+31. **`regress.sh` assumes every board is generated** (2026-11-20, D-STOP): it regenerates with the board's
+    own scripts and requires a clean `git status`. A board that stopped generating (hand edits; generators
+    frozen in `tools/generate/`, refusing without `--force-regenerate`) needs a "checks only" mode or must
+    leave the regression set; a config key (e.g. `GENERATED = False`) could tell the shared tools.
 
 ## Decisions
+
+- **User decision 2026-11-20 (through the coordinating session), D-STOP: "stop generating this board from
+  the Proteus data".** The board files were last generated at 36b7f6f; generation stopped with the commit
+  "Stop generating the board" (section "Generation stopped 2026-11-20"); every later change to `kicad/` or
+  `lib/` is a hand edit, recorded in section "Hand edits after generation stopped". Next, as the first hand
+  edit: finding 6 (ADC VA / VIN), component values unchanged.
 
 - **User decision 2026-11-20 (through the coordinating session): "ribbon: renumber the pads to standard at
   both ends, copper unchanged, square pin-1 pad on the real pin 1".** J1 gets `IPC_PIN_IDS` (Proteus pin k →

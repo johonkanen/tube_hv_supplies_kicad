@@ -95,6 +95,8 @@ independent:
    ("Findings"), not fixed. The redesign happens later, from this baseline.
 4. **Generate, don't hand-edit** (playbook section 1): every file in `kicad/`, `lib/` and
    `reference/` is written by a script and is reproducible.
+   **Ended by the user's D-STOP (2026-11-20):** since then `kicad/` and `lib/` are hand-edited (STATUS.md
+   "Generation stopped 2026-11-20"); `reference/` stays generated from source/.
 5. **Temporary files in `build/tmp/`** (git-ignored). Never run the KiCad AppImage with
    `--version` (it starts the GUI and hangs); use `tools/p2k/bin/kipy` and `tools/p2k/bin/kicad-cli`.
 6. **Commit and push at the end of every phase** (and at the end of a session), with
