@@ -25,6 +25,9 @@ step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
 step "ERC" tools/erc.sh
 # all 6 sheets drawn: every part must be present (no --allow-missing)
 step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
+# compare_netlists only warns when a KiCad net is an IPC net under another name (p2k candidate 27):
+# with the NET_ALIASES renames (+1V0_BIAS, the finding 7 current nets) a missing / typo'd alias must fail
+step "KiCad net names = IPC names after NET_ALIASES (no name hints)" bash -c '! grep "WARNING: name hint" build/tmp/check_all.log'
 # Phase 2: footprints
 step "Footprint library, map and fp-lib-table up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry (fit and pcbnew placement)" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew

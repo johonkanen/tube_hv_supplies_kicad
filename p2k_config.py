@@ -60,7 +60,24 @@ KICAD_REFDES = {
 # (reference/, compare_netlists, check_symbols, check_board, assign_nets, gerber_roundtrip
 # labels) sees +1V0_BIAS; ipc356_diff matches nets by pad sets. ipc356 --check fails if the
 # source name is not in the IPC or the target collides with an IPC net.
-NET_ALIASES = {"+2V5_BIAS": "+1V0_BIAS"}
+# Current-measurement nets renamed to what each sense path measures (user decision 2026-11-20,
+# finding 7; STATUS.md "Design fixes 2026-11-20"). Shunts: R75 under C3 (UC3 filter capacitor of
+# bridge 1), R30 under C6 (UC6 filter capacitor of bridge 2), R72 in the Q4 emitter and R29 in the
+# Q7 emitter (low-side IGBT + copack diode: the L1 / L3 current only while the low side conducts).
+# U2:A..D amplify them to J1 (the four *_MEAS nets cross the ribbon to the control card). Style
+# CURRENT_<part> as the Proteus CURRENT_L1; C3_CURRENT / C3_CURRENT_MEAS can't be targets (ipc356
+# rejects an alias target that is an IPC net name, even one that is renamed itself).
+NET_ALIASES = {
+    "+2V5_BIAS": "+1V0_BIAS",
+    "C1_CURRENT": "CURRENT_C3",              # R75: current of C3 (bridge 1 output capacitor, UC3)
+    "C3_CURRENT": "CURRENT_C6",              # R30: current of C6 (bridge 2 second-stage capacitor, UC6)
+    "CURRENT_L1": "CURRENT_Q4",              # R72: Q4 emitter (bridge 1 low side)
+    "CURRENT_L3": "CURRENT_Q7",              # R29: Q7 emitter (bridge 2 low side)
+    "C1_CURRENT_MEAS": "CURRENT_C3_MEAS",    # U2:B out, J1-7
+    "INPUT_CURRENT_MEAS": "CURRENT_C6_MEAS", # U2:A out, J1-5
+    "C2_CURRENT_MEAS": "CURRENT_Q4_MEAS",    # U2:C out, J1-1
+    "C3_CURRENT_MEAS": "CURRENT_Q7_MEAS",    # U2:D out, J1-3
+}
 
 # Blank-refdes records: a net and one of these drills = via (0.5/0.3 x139, 1.016/0.381 x2),
 # no net = hole (4 plated 3.0 mm mounting holes, 6.35 mm ring on every copper layer, no net).
@@ -142,4 +159,21 @@ PCB_RULES = dict(
 # Error-severity DRC types that remain by design ({type: reason}, STATUS.md "Phase 3").
 DRC_ACCEPTED = {
     "courtyards_overlap": "KiCad IPC-7351 courtyards vs the Proteus placement (parts at the Proteus positions)",
+}
+
+# Proteus copper deliberately not built (user decision 2026-11-20, finding 14; reverses the Phase 5
+# keep decision). IPC frame, {(layer, x1, y1, x2, y2): reason} (p2k gerber_to_tracks; accepted by
+# check_board, ipc356_diff, gerber_roundtrip).
+REMOVED_TRACKS = {
+    ("B.Cu", -73.6, -20.2, -72.7, -20.2): "15V_BOOST: dangling 0.9 mm stub, 0.762 mm wide (finding 14)",
+}
+# Board-local (tools/remove_dot_tracks.py, make_pcb.sh step 2b), not a p2k key: the two zero-length
+# OUT1 draws of finding 14 are the same segment drawn in both directions (1e-5 mm long), so one
+# REMOVED_TRACKS key matches both and gerber_to_tracks rejects the duplicate match ("found 2 draws");
+# two keys can't tell them apart either. {(layer, x, y): (count, reason)}, IPC frame: exactly `count`
+# tracks shorter than 0.001 mm at (x, y) are deleted after gerber_to_tracks (they lie inside the two
+# 0.762 mm OUT1 tracks that meet there, so the copper is unchanged). p2k candidate: a count for
+# REMOVED_TRACKS (or dedupe reversed duplicate draws); then this moves to REMOVED_TRACKS.
+REMOVED_DOT_TRACKS = {
+    ("B.Cu", -32.85196, -11.53736): (2, "OUT1: two zero-length draws (both directions) inside the OUT1 track junction (finding 14)"),
 }

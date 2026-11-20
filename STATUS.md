@@ -10,10 +10,120 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 3 PCB | **done** 2026-11-20 (Opus 5.5, two sessions): board generated, Proteus copper 0 shorts / 0 orphans / 0 opens, check_board OK, make_pcb reproducible; pad sizes option A2 (user): Proteus pads on U1 U2 ADC1-3 DRV5 DRV6 J1, KiCad elsewhere → DRC 0 shorts / 0 clearance / 0 mask bridges / 0 unconnected / 0 parity, copper after zone fill 0 / 0 / 0 |
 | 4 Verification | **done** 2026-11-20 (Fable 5.2, fresh session), 1 pending user decision (J2 pads, decided in Phase 5): ipc356_diff OK (574 / 574 records, 113 nets 1:1); gerber round trip: all four layers equal to Proteus outside the pad shapes except one 0.73 mm² GND-plane web at J2 on In2.Cu (KiCad pads on J2), 0 uncovered draws / flashes, drills 247 = 247; PDF re-read vs IPC: no disagreement; both checks in check_all.sh and negative-tested |
 | After 5: net rename | **done** 2026-11-20 (Opus 5.5): user decision – `+2V5_BIAS` → `+1V0_BIAS` in the KiCad design through `NET_ALIASES` (finding 1); the Proteus files keep `+2V5_BIAS`; **ALL CHECKS PASSED** (18 steps). HV supplies v2 is not installed and will be redone: this conversion is the starting point for the redesign |
+| Design fixes | **done** 2026-11-20 (Opus 5.5): user decisions – finding 7 current-measurement nets renamed to what they measure (8 nets, 4 of them on J1) through `NET_ALIASES`; finding 14 Proteus stubs removed (15V_BOOST stub by `REMOVED_TRACKS`, the two zero-length OUT1 draws by the board-local `tools/remove_dot_tracks.py`); README hole numbering = board H1-H4; make_pcb.sh --check step-failure bug fixed; new name-hint guard; **ALL CHECKS PASSED** (19 steps). Values unchanged |
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5): user decisions applied – Proteus pads on J2 and on the TO-220s Q3 Q4 Q7 Q8 (1.524 × 2.54 rounded rectangle from the gerbers, drill 1.016), J1 / J2 all round, reference texts by `place_refdes`; round trip 0 other / 0 clearance (roundtrip_pending.py removed); new `check_proteus_pads.py`; DRC 0 errors except 20 accepted courtyards (30 violations); **ALL CHECKS PASSED** (18 steps). The board stays generated |
 
 **HV supplies v2 is not installed and will be redone anyway (user, 2026-11-20).** This conversion is
 only the starting point for the redesign; the findings below are input for it.
+
+## Design fixes 2026-11-20 – findings 7 and 14, README holes – done (Opus 5.5, 2026-11-20)
+
+User decisions (Decisions, first entry): fix design findings in the KiCad design but leave every
+component **value** as it is (HV supplies v2 is not installed; it is the redesign's starting point);
+finding 7: rename the current-measurement nets to what they measure (`NET_ALIASES`); finding 14:
+remove the Proteus stubs; README hole numbering = board refdes. Not now: finding 6 (ADC VA / VIN, a
+hand edit after generation stops) and finding 12 (J1 renumbering, waits for a shared-tool key).
+Everything in the generators; `tools/p2k` untouched (pin c5682dd).
+
+### Finding 7 – the current-measurement nets (`p2k_config.NET_ALIASES`)
+
+The circuit (sheet 1 / 4, IPC): bridge 1 = Q3 (UIN → OUT1) / Q4 (OUT1 → emitter shunt R72 4 m → GND),
+OUT1 → off-board L1 3 mH → UC3; C3 47u from UC3 returns to GND through the shunt R75 4 m; UC3 → L2 →
+V_A (C4). Bridge 2 = Q8 / Q7 (emitter shunt R29), OUT2 → off-board L3 → U_OUT (C5 straight to GND) →
+L4 → UC6; C6 47u from UC6 returns through the shunt R30; UC6 → R26 || R27 → PREOUT. U2:A..D (LT1014)
+amplify the four shunt voltages (330 R in, 6.8 k to +1V0_BIAS / feedback, 100 R / 100 p out) to J1.
+There is no input-current shunt (the page 1 `Input_current` terminal is on GND; a text note only).
+
+| Proteus / IPC name | KiCad name | sense path | what it measures |
+|---|---|---|---|
+| `C1_CURRENT` | **`CURRENT_C3`** | R75 under C3 | the current of C3, bridge 1's output capacitor (UC3); the old name used no refdes that fits (C1 is the B+ input capacitor) |
+| `C3_CURRENT` | **`CURRENT_C6`** | R30 under C6 | the current of C6, the second-stage capacitor of bridge 2 (UC6); C3 is the bridge 1 capacitor |
+| `CURRENT_L1` | **`CURRENT_Q4`** | R72 in the Q4 emitter | the current of the low-side switch Q4 (IGBT + its copack diode): the L1 current, with a negative sign while the low side conducts, 0 while Q3 conducts; not the L1 current at all times |
+| `CURRENT_L3` | **`CURRENT_Q7`** | R29 in the Q7 emitter | the same for Q7 / L3 (bridge 2 low side) |
+| `INPUT_CURRENT_MEAS` (J1-5) | **`CURRENT_C6_MEAS`** | U2:A output | amplified `CURRENT_C6`; not an input current |
+| `C1_CURRENT_MEAS` (J1-7) | **`CURRENT_C3_MEAS`** | U2:B output | amplified `CURRENT_C3` |
+| `C2_CURRENT_MEAS` (J1-1) | **`CURRENT_Q4_MEAS`** | U2:C output | amplified `CURRENT_Q4`; not a capacitor current |
+| `C3_CURRENT_MEAS` (J1-3) | **`CURRENT_Q7_MEAS`** | U2:D output | amplified `CURRENT_Q7`; not a capacitor current |
+
+Style: `CURRENT_<refdes>` as the Proteus `CURRENT_L1`, `_MEAS` for the amplified signal on J1 as
+`UIN_MEAS` / `UC3_MEAS`. The `<refdes>_CURRENT` form (`C3_CURRENT`, `C3_CURRENT_MEAS`) can't be used:
+`ipc356 --check` rejects an alias target that is an IPC net name, even when that IPC net is renamed
+itself. `CURRENT_Q4` / `CURRENT_Q7` name the switch, not the inductor, because the emitter shunt only
+sees the inductor current during the low-side interval (the firmware samples it there);
+`CURRENT_L1` / `CURRENT_L3` would be the alternative if the user prefers the inductor in the name.
+**Four renamed nets cross the J1 ribbon to the control card: J1-1 `CURRENT_Q4_MEAS`, J1-3
+`CURRENT_Q7_MEAS`, J1-5 `CURRENT_C6_MEAS`, J1-7 `CURRENT_C3_MEAS`** (PDF aliases ADB0 / ADB1 / ADB2 /
+ADB3); the control-card repo is not touched (its names / firmware mapping are its own question).
+Pins and copper are unchanged: every renamed net has the same pins and vias as its IPC net.
+
+Changed: `p2k_config.py` (NET_ALIASES), `tools/sheets/sheet01.py` / `sheet04.py` / `sheet05.py`
+(labels and notes; the sheet 1 notes moved down 3 grid units clear of the `CURRENT_C3` label);
+regenerated `reference/*`, sheets 1 / 4 / 5, the board, `reports/pour_nets.json`,
+`reports/roundtrip/roundtrip.txt`, renders of sheets 1 / 4 / 5.
+
+**New guard** (check_all.sh, after the netlist comparison): "KiCad net names = IPC names after
+NET_ALIASES" fails on any `WARNING: name hint` of compare_netlists. These nets are labels, not power
+symbols, so check_symbols does not see them (as it did for `+1V0_BIAS`), and compare_netlists only
+warns (p2k candidate 27): without the guard a dropped or typo'd alias passed every check once
+`reference/` was regenerated (negative tests below).
+
+### Finding 14 – the Proteus stubs removed
+
+- **15V_BOOST stub** (B.Cu, (-73.6, -20.2) → (-72.7, -20.2) IPC, 0.762 mm wide, dangling): `REMOVED_TRACKS`
+  in `p2k_config.py` (the p2k key; gerber_to_tracks drops it, the round trip lists it as "1 Conductor draws
+  (REMOVED_TRACKS)").
+- **The two zero-length OUT1 draws** (B.Cu, (-32.85196, -11.53736) ↔ (-32.85196, -11.53737), 1e-5 mm): one
+  segment drawn twice, in opposite directions. `REMOVED_TRACKS` can't express them: matching is
+  direction-free with 0.001 mm tolerance, so one key matches both draws and gerber_to_tracks fails with
+  "REMOVED_TRACKS: 2 listed, found 3 draws" (duplicate match), and no second key can tell them apart.
+  Board-local instead (PLAN 5.1): `p2k_config.REMOVED_DOT_TRACKS = {(layer, x, y): (count, reason)}` and
+  `tools/remove_dot_tracks.py`, make_pcb.sh step 2b after gerber_to_tracks: deletes exactly `count` tracks
+  shorter than 0.001 mm at that point, fails (nothing saved) on any other count. The dot lies inside the
+  junction of two 0.762 mm OUT1 tracks, so the copper is unchanged (round trip clean without a recorded
+  deviation). p2k candidate 28.
+- Result: DRC 28 violations (was 30): the two `track_dangling` warnings are gone; 20 accepted
+  courtyards_overlap errors, 5 silk_overlap / 3 silk_over_copper warnings. gerber_to_tracks 1838 tracks
+  (was 1839 with the stub; 1836 on the board after the dots).
+
+### make_pcb.sh --check ignored failing steps (fixed)
+
+`run >"$tmp/log" 2>&1 || {...}` disables `set -e` inside `run()`, so in `--check` mode a failing step
+(e.g. a gerber_to_tracks `REMOVED_TRACKS` error) was skipped, its ERROR line filtered out, and the check
+failed only as "not up to date" - or passed, when the board came out equal anyway (seen in this session:
+the duplicate-match error above passed through as "not up to date"). The steps in `run()` are now chained
+with `&&` (as the preamp b2adf22 / PI-FX da551f3 fixes). Negative test below: a bogus entry now prints the
+step's ERROR and `make_pcb: FAILED`.
+
+### README
+
+"Mechanical baseline": the holes are numbered as the board refdes (H1 (4.49, 51.755), H2 (165.49, 51.755),
+H3 (4.49, 4.755), H4 (165.49, 4.755)); the old list's H2 / H3 / H4 were board H3 / H4 / H2 (positions
+unchanged). Note: tube_amplifier_kicad `mechanical/hv_supplies_v2.kicad_pcb` may follow the old README
+numbering (not checked, other repo).
+
+### Negative tests (in place, restored with `git checkout`; full `tools/check_all.sh` each)
+
+| change | result |
+|---|---|
+| alias `C1_CURRENT_MEAS` removed | `ipc356 --check` FAIL (reference/ stale) |
+| … and `p2k ipc356` rerun | **new guard** FAIL "name hint: KiCad net CURRENT_C3_MEAS = IPC net C1_CURRENT_MEAS"; everything else passes (pin-based) - without the guard ALL CHECKS PASSED |
+| source typo `CURRENT_L01` | `ipc356 --check` FAIL "alias source net 'CURRENT_L01' not in IPC" |
+| target typo `CURRENT_Q04` + `p2k ipc356` | new guard FAIL "KiCad net CURRENT_Q4 = IPC net CURRENT_Q04" (without the guard: passed) |
+| target collides (`C3_CURRENT` → `C1_CURRENT`) | `ipc356 --check` FAIL "alias target 'C1_CURRENT' collides" |
+| KiCad typo on one sheet (`CURRENT_Q4_MAES` on sheet 4) | compare_netlists FAIL (1 wrong-net pin), make_pcb --check, drc FAIL |
+| KiCad rename on both sheets (`CURRENT_L1_MEAS` on sheets 4 and 5) | new guard FAIL (name hint), make_pcb --check not up to date, drc 3 parity issues |
+| `REMOVED_TRACKS` entry removed | make_pcb --check FAIL (board and assign_nets.txt not up to date) |
+| bogus `REMOVED_TRACKS` entry (x2 -72.6) | make_pcb --check prints "gerber_to_tracks: ERROR REMOVED_TRACKS: 1 listed, found 0 draws (missing …)", "make_pcb: FAILED" |
+| `REMOVED_DOT_TRACKS` entry removed | make_pcb --check FAIL (not up to date) |
+| `REMOVED_DOT_TRACKS` count 1 | "remove_dot_tracks: ERROR … 2 zero-length tracks, expected 1", make_pcb FAILED |
+| OUT1 dot as a `REMOVED_TRACKS` key instead | "gerber_to_tracks: ERROR REMOVED_TRACKS: 2 listed, found 3 draws", make_pcb FAILED |
+
+(The last six were run while the new guard step still matched its own header line "no name hints" and
+failed every run; that is fixed - the guard now greps `WARNING: name hint` - and their make_pcb results
+are unaffected. The guard tests and "entry removed" were rerun with the fixed guard: only the listed
+steps fail.)
+
+End state: **ALL CHECKS PASSED, 19 steps** ("Last check output").
 
 ## After Phase 5 – `+2V5_BIAS` renamed to `+1V0_BIAS` – done (Opus 5.5, 2026-11-20)
 
@@ -256,7 +366,7 @@ J1-37 / 38; no `no_connect` pin type anywhere). Board spot-checks (pcbnew, scrat
 - **Mounting holes H1-H4**: one plated pad each, drill 3.0, 6.35 mm on all copper layers, no net, at the
   four IPC hole records; in the round trip their flashes match on all four layers. (README's "Mechanical
   baseline" numbers the holes in another order than the board refdes: README H2 / H3 / H4 = board H3 /
-  H4 / H2. Cosmetic.)
+  H4 / H2. Cosmetic.) **Corrected 2026-11-20 (user decision): README uses the board refdes.**
 - **38 bottom-side parts**: the board's bottom list equals the IPC bottom SMD list exactly (C23 C24 C25,
   C30-C48, D2 D18, DRV1 DRV2 DRV5 DRV6, R21-R25, R31-R35); a part
   flipped to the wrong side fails ipc356_diff (negative test).
@@ -936,7 +1046,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (after the `+1V0_BIAS` rename; 18 steps):
+`tools/check_all.sh`, 2026-11-20 (after the design fixes: finding 7 renames, finding 14 stubs; 19 steps):
 
 ```
 == KiCad environment
@@ -981,6 +1091,7 @@ erc: 0 errors, 21 warnings (reports/erc.rpt)
 compare: parts 158/158 present, 0 missing, 0 extra; pins compared 423, wrong-net pins 0; IPC nets touched 115, complete 115
 compare: per sheet (drawn/total) 1:34/34 2:26/26 3:42/42 4:34/34 5:7/7 6:15/15
 compare: OK
+== KiCad net names = IPC names after NET_ALIASES (no name hints)
 == Footprint library, map and fp-lib-table up to date
 gen_footprints: 158 parts, 23 footprints (15 project), up to date
 == Footprints vs IPC pad geometry (fit and pcbnew placement)
@@ -1005,7 +1116,8 @@ CP               CP_Radial_D10.0mm_P5.00mm                   0.000 @   270    0.
 check_pin_order: OK (results as recorded in STATUS.md)
 == PCB rebuilt from schematic + gerbers, up to date
 build_pcb: 158 footprints placed (2 excluded from board), 4 mounting holes, 115 nets, 4 outline segments
-gerber_to_tracks: 1839 tracks, 141 vias (IPC 141), 21 pour outlines on User.1-4
+gerber_to_tracks: 1838 tracks, 141 vias (IPC 141), 21 pour outlines on User.1-4; removed as recorded: 1 tracks (REMOVED_TRACKS), 0 vias (REMOVED_VIAS)
+remove_dot_tracks: 2 zero-length tracks deleted (1 entries, REMOVED_DOT_TRACKS)
 assign_nets: stage A (no pours): 225 groups, 0 shorts, 36 orphans, 11 opens
 assign_nets: stage B (with pours): 119 groups, 0 shorts, 0 orphans, 0 opens
 pours_to_zones: 21 pours -> 21 zones; 24 holes closed by the stroke, 259 holes kept
@@ -1013,17 +1125,16 @@ place_refdes: 4 Fab only, 92 kept, 64 moved, 2 moved, 0.8 mm text (sizes 1.0, 0.
 make_pcb: board rebuilt from scratch, byte-identical
 == Board pads, holes, vias vs IPC (position, size, nets 1:1)
 check_board: 162 footprints, 429 pads, worst pad offset 0.039 mm (limit 0.05), 113 IPC nets mapped 1:1, 4 mounting holes
-check_board: 1839 tracks, 141 vias, 21 zones
+check_board: 1836 tracks, 141 vias, 21 zones
 check_board: OK
 == Board copper connectivity after zone fill
 assign_nets: after zone fill: 119 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
 == DRC with schematic parity
-drc: 30 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc: 28 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
 drc:     20 error    courtyards_overlap  accepted: KiCad IPC-7351 courtyards vs the Proteus placement (parts at the Proteus positions)
 drc:      5 warning  silk_overlap
 drc:      3 warning  silk_over_copper
-drc:      2 warning  track_dangling
 drc: OK
 == IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)
 ipc356_diff: Proteus 574 records, KiCad 574; matched 574 (429 pads incl. 2 N/C, 141 vias, 4 holes), worst position offset 0.040 mm (limit 0.05)
@@ -1036,6 +1147,7 @@ roundtrip: F.Cu   XOR   46.69 mm^2, beyond 0.05 mm: only Proteus   3.89, only Ki
 roundtrip: In1.Cu XOR   31.75 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.52 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
 roundtrip: In2.Cu XOR   33.82 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.57 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
 roundtrip: B.Cu   XOR   52.14 mm^2, beyond 0.05 mm: only Proteus   0.99, only KiCad  36.02 mm^2; clusters >= 0.01 mm^2: 139 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: Proteus objects not compared (recorded deviations, all layers): 1 Conductor draws (REMOVED_TRACKS)
 roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
 roundtrip: OK
 == Proteus-pad parts: board pads = Proteus flashes and drills
@@ -1046,7 +1158,8 @@ ALL CHECKS PASSED
 
 ## Findings about the original design
 
-Reported, not fixed (PLAN.md section 5).
+Reported, not fixed (PLAN.md section 5). Since 2026-11-20 the user has findings fixed in the KiCad design
+(values unchanged): 1 (rename), 7, 14 done; 6 and 12 later (section "Design fixes 2026-11-20").
 
 1. **`+2V5_BIAS` name vs the circuit (to confirm):** REF1 is an ISL21010CFH315Z-TK. In the
    ISL21010 ordering code, `-15` is the 1.5 V version (confirm against the fitted part).
@@ -1086,6 +1199,10 @@ Reported, not fixed (PLAN.md section 5).
    into `C2_CURRENT_MEAS`, U2:D amplifies `CURRENT_L3` into `C3_CURRENT_MEAS` (only U2:B,
    `C1_CURRENT` → `C1_CURRENT_MEAS`, matches). Names kept (IPC); note for the redesign and for
    the control-card firmware mapping of J1-1/3/5.
+   **Done (user decision 2026-11-20): renamed** through `NET_ALIASES` to `CURRENT_C3`, `CURRENT_C6`,
+   `CURRENT_Q4`, `CURRENT_Q7` and `CURRENT_C3_MEAS` (J1-7), `CURRENT_C6_MEAS` (J1-5), `CURRENT_Q4_MEAS`
+   (J1-1), `CURRENT_Q7_MEAS` (J1-3) (section "Design fixes 2026-11-20"; on closer reading `C1_CURRENT` did
+   not match either: it is C3's current). The control card side keeps its own names.
 8. **LT1014 on a 3.3 V supply (to check):** U2 (value LT1014, the shunt amplifiers) runs from
    3V3 like U1 (LMV324A). The LT1014 is specified for 5 V single supply and up; its output
    swing and common-mode range at 3.3 V are not specified. Check the fitted part (perhaps an
@@ -1126,6 +1243,8 @@ Reported, not fixed (PLAN.md section 5).
 14. **Proteus copper stubs (Phase 3, cosmetic):** two zero-length OUT1 draws on B.Cu at
     (-32.852, -11.537) and a dangling 0.9 mm 15V_BOOST stub on B.Cu (-73.6 → -72.7, y -20.2) (IPC
     coordinates); KiCad DRC `track_dangling` warnings, copper as drawn. **Kept as drawn (user, Phase 5).**
+    **Removed (user decision 2026-11-20, reverses Phase 5):** the stub by `REMOVED_TRACKS`, the two OUT1
+    draws by `tools/remove_dot_tracks.py` (section "Design fixes 2026-11-20"); 0 track_dangling.
 
 15. **TO-220 pads (Q3 Q4 Q7 Q8) are 1.524 × 2.54 mm in the Proteus copper; the IPC-D-356A file says
     1.524 × 1.524** (Phase 4): the gerber flashes are an aperture macro (rounded rectangle), the IPC
@@ -1251,8 +1370,38 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     only because the net is a power symbol. A strict option (fail when a KiCad net that is not
     auto-named matches an IPC net that is not `#00xxx` under another name) would guard renamed labels too.
     (Candidate 1, the empty `Net aliases:` header, no longer shows on this board.)
+    **2026-11-20:** with the finding 7 label renames this gap is real (a dropped alias passed every check);
+    board-local guard in check_all.sh: fail on `WARNING: name hint`.
+28. **`REMOVED_TRACKS` can't remove a segment that Proteus drew twice** (2026-11-20, finding 14): the two
+    zero-length OUT1 draws are one segment in both directions; one key matches both and gerber_to_tracks
+    rejects the duplicate match, two keys can't be told apart. A count in the value (`(reason, n)`) or
+    "a key matches all identical draws" would do; board-local `tools/remove_dot_tracks.py` +
+    `REMOVED_DOT_TRACKS` until then (then move the entry to REMOVED_TRACKS and drop the script).
+29. **make_pcb.sh template:** `run ... || {...}` disables `set -e` inside `run()`; chain the steps with `&&`
+    (fixed here, preamp, PI/FX). Worth fixing in the playbook's make_pcb template / other boards.
 
 ## Decisions
+
+- **User decisions, 2026-11-20 (through the coordinating session), design fixes:**
+  1. **Fix design findings in the KiCad design, but leave component values as they are** (finding 8,
+     LT1014 at 3V3, etc. unchanged). HV supplies v2 is not installed and is the redesign's starting point.
+  2. **Finding 7: rename the current-measurement nets so each name says what it measures**, worked out from
+     the circuit, in the board's naming style, through `NET_ALIASES`; nets crossing the J1 ribbon may be
+     renamed if listed (the control card is a separate repo, not touched).
+  3. **Finding 14: remove the two zero-length OUT1 draws and the 0.9 mm 15V_BOOST stub** with
+     `REMOVED_TRACKS` (reverses the Phase 5 keep decision).
+  4. **README "Mechanical baseline": hole numbering = board refdes H1-H4.**
+  5. **Not now:** finding 6 (ADC VA / VIN swap: a hand edit later, after generation stops) and finding 12
+     (J1 renumbering: waits for a new shared-tool pin-renumber key).
+  6. **Generation stops later; the board stays generated for now.**
+  Also from the coordinating session (user-approved, a check bug): fix the make_pcb.sh `--check` step
+  failure handling (as preamp b2adf22 / PI-FX da551f3).
+- **Design fixes (agent, 2026-11-20):** names `CURRENT_<refdes>` / `CURRENT_<refdes>_MEAS` (the
+  `<refdes>_CURRENT` form collides with IPC names in `ipc356 --check`); the low-side shunts named after the
+  switch (`CURRENT_Q4` / `Q7`), not the inductor (open for the user: `CURRENT_L1` / `L3` instead). The OUT1
+  zero-length pair by a board-local step (`REMOVED_DOT_TRACKS`, `tools/remove_dot_tracks.py`), since
+  `REMOVED_TRACKS` can't express a segment drawn twice (p2k candidate 28). New check_all guard on
+  compare_netlists name hints.
 
 - **User decisions, 2026-11-20 (through the coordinating session), after Phase 5:**
   1. **Rename `+2V5_BIAS` to `+1V0_BIAS`** (finding 1; REF1 1.5 V into R74 220 / R73 470 → about

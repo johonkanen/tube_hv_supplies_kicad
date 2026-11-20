@@ -31,12 +31,22 @@ rounded rectangles from the gerbers, drill 1.016: 1.016 mm between the HV pins),
 round; KiCad pads elsewhere. DRC 0 errors apart from the accepted courtyard overlaps. Independent
 verification: KiCad's IPC-D-356 export equals the Proteus netlist (574 records, 113 nets 1:1), and
 KiCad's gerbers equal the Proteus gerbers on all four copper layers and in the drills outside the
-pad shapes of the KiCad-pad parts. `tools/check_all.sh` prints ALL CHECKS PASSED (18 steps).
+pad shapes of the KiCad-pad parts. `tools/check_all.sh` printed ALL CHECKS PASSED (18 steps).
 The board is still generated: hand edits in KiCad start when the user stops the generation
 (STATUS.md "Phase 5"). Open, report-only: the design findings in STATUS.md.
 After Phase 5 the bias rail `+2V5_BIAS` was renamed `+1V0_BIAS` in the KiCad design (user decision:
 REF1 is the 1.5 V ISL21010 into a 220 / 470 divider, about 1.0 V); the Proteus files keep the old name
 and `p2k_config.NET_ALIASES` maps it for every check.
+
+**Design fixes 2026-11-20 (user decisions; component values unchanged; STATUS.md "Design fixes
+2026-11-20"):** the current-measurement nets are renamed to what they measure, through `NET_ALIASES`:
+`CURRENT_C3` / `CURRENT_C6` (the shunts R75 / R30 under the filter capacitors C3 / C6), `CURRENT_Q4` /
+`CURRENT_Q7` (the low-side emitter shunts R72 / R29), and the amplified signals on the control-card ribbon
+`CURRENT_Q4_MEAS` (J1-1), `CURRENT_Q7_MEAS` (J1-3), `CURRENT_C6_MEAS` (J1-5), `CURRENT_C3_MEAS` (J1-7)
+(Proteus: `C1_CURRENT`, `C3_CURRENT`, `CURRENT_L1`, `CURRENT_L3`, `C2_CURRENT_MEAS`, `C3_CURRENT_MEAS`,
+`INPUT_CURRENT_MEAS`, `C1_CURRENT_MEAS`). The dangling Proteus copper stubs are removed (finding 14).
+`tools/check_all.sh` prints ALL CHECKS PASSED (19 steps). Still to come: the ADC VA / VIN fix (finding 6, a
+hand edit after generation stops) and the J1 renumbering (finding 12, waits for a shared-tool key).
 
 **HV supplies v2 is not installed and will be redone anyway: this conversion is only the starting point
 for the redesign** (user, 2026-11-20).
@@ -56,12 +66,15 @@ From the export (the fit reference for the redesign; the KiCad file is
 ```
 outline: 170.08 x 56.48 mm, lower-left corner at (-122.600, -28.260) in the Proteus frame
 copper layers: 4; components: 158; mounting holes: 4
-mounting holes (relative to the lower-left outline corner, mm):
+mounting holes (relative to the lower-left outline corner, mm; numbered as the board refdes H1-H4):
   H1: x    4.490  y   51.755  drill 3.00 plated
-  H2: x    4.490  y    4.755  drill 3.00 plated
-  H3: x  165.490  y    4.755  drill 3.00 plated
-  H4: x  165.490  y   51.755  drill 3.00 plated
+  H2: x  165.490  y   51.755  drill 3.00 plated
+  H3: x    4.490  y    4.755  drill 3.00 plated
+  H4: x  165.490  y    4.755  drill 3.00 plated
 ```
+
+(Corrected 2026-11-20: this list numbered the holes in another order than the board, old H2 / H3 / H4 =
+board H3 / H4 / H2; the positions are unchanged.)
 
 ## Layout
 
@@ -79,6 +92,7 @@ tools/sheets/   one transcription script per sheet (_common.py: board helpers)
 tools/erc.sh    ERC of the schematic
 tools/gen_footprints.py, tools/make_pcb.sh  footprints and the board (generated, --check)
 tools/check_proteus_pads.py  pads of the Proteus-pad parts vs the Proteus gerber flashes (Phase 5)
+tools/remove_dot_tracks.py   make_pcb step 2b: the zero-length Proteus draws REMOVED_TRACKS can't express (finding 14)
 reports/roundtrip/  round-trip report and overlays (KiCad gerbers vs Proteus)
 tools/check_all.sh  every verification step (run at the start and end of a session)
 p2k_config.py   board configuration for the tools

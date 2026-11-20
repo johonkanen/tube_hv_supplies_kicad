@@ -5,7 +5,8 @@ C8 / C21, R74 -> +1V0_BIAS with R73 / C22 to GND, and the control-card ribbon co
 
 PDF: J1 pins 1-8 are labelled ADB0-ADB7 and tied to the *_meas nets by separate terminal links
 (lower left of the page); KiCad puts the IPC net names on the pins and keeps ADBn as small
-texts. The link `15V - 15V_boost` ("Not yet complete") is one IPC net, 15V_BOOST: a text note.
+texts. The four current-measurement nets on J1-1/3/5/7 are renamed through NET_ALIASES
+(STATUS.md "Design fixes 2026-11-20", finding 7). The link `15V - 15V_boost` ("Not yet complete") is one IPC net, 15V_BOOST: a text note.
 PDF `Gnd` (J1-34) = GND. J1 is drawn as in the PDF, pin 1 at the bottom (symbol mirrored)."""
 from _common import *  # noqa: F401,F403
 
@@ -55,9 +56,9 @@ power_at(sh, "GND", (RGND[0], GROW + g(5)), "down")
 
 # --- J1: control-card ribbon; (pin, IPC net, PDF alias or None) ----------------------------------
 J1_PINS = [
-    (1, "C2_CURRENT_MEAS", "ADB0"), (2, "V_A_MEAS", "ADB7"), (3, "C3_CURRENT_MEAS", "ADB1"),
-    (4, "UIN_MEAS", "ADB6"), (5, "INPUT_CURRENT_MEAS", "ADB2"), (6, "UC3_MEAS", "ADB5"),
-    (7, "C1_CURRENT_MEAS", "ADB3"), (8, "U_OUT_MEAS", "ADB4"), (9, "ADASEL1_ISO", None),
+    (1, "CURRENT_Q4_MEAS", "ADB0"), (2, "V_A_MEAS", "ADB7"), (3, "CURRENT_Q7_MEAS", "ADB1"),
+    (4, "UIN_MEAS", "ADB6"), (5, "CURRENT_C6_MEAS", "ADB2"), (6, "UC3_MEAS", "ADB5"),
+    (7, "CURRENT_C3_MEAS", "ADB3"), (8, "U_OUT_MEAS", "ADB4"), (9, "ADASEL1_ISO", None),
     (10, "ADASEL2_ISO", None), (11, "SCL", None), (12, "ADASEL0_ISO", None), (13, "CLK1_ISO", None),
     (14, "CS1_ISO", None), (15, "PWM_TRANS2_ISO", None), (16, "PWM_TRANS1_ISO", None),
     (17, "PWM_G4_ISO", None), (18, "PWM_TRANS3_ISO", None), (19, "PWM_G1_ISO", None),
@@ -68,8 +69,8 @@ J1_PINS = [
     (33, "GND", None), (34, "GND", None), (35, "3V3", None), (36, "3V3", None),
     (37, None, None), (38, None, None), (39, "15V_BOOST", None), (40, "15V_BOOST", None),
 ]
-GLOBAL = {"C2_CURRENT_MEAS", "V_A_MEAS", "C3_CURRENT_MEAS", "UIN_MEAS", "INPUT_CURRENT_MEAS", "UC3_MEAS",
-          "C1_CURRENT_MEAS", "U_OUT_MEAS", "SCL", "SDA", "G3_LO", "G1_LO", "G3_HI", "G1_HI"}
+GLOBAL = {"CURRENT_Q4_MEAS", "V_A_MEAS", "CURRENT_Q7_MEAS", "UIN_MEAS", "CURRENT_C6_MEAS", "UC3_MEAS",
+          "CURRENT_C3_MEAS", "U_OUT_MEAS", "SCL", "SDA", "G3_LO", "G1_LO", "G3_HI", "G1_HI"}
 POWER = {"GND", "3V3", "15V_BOOST"}
 JX, JY = P(134, 55)
 j1 = place_mirrored(sh, sym("J1"), "J1", JX, JY, axis="x", value=sh_value("J1"),
@@ -103,7 +104,7 @@ NX, NY = P(104, 22)
 sh.text("PDF: link 15V - 15V_boost, \"Not yet complete\": one net, 15V_BOOST (IPC);", NX, NY)
 sh.text("the gate drivers' 15V (sheet 2) is 15V_BOOST.", NX, NY + g(2))
 NX, NY = P(30, 66)
-sh.text("PDF alias links (J1 pins 1-8 are labelled ADB0-ADB7 in the PDF; nets = IPC names):", NX, NY)
+sh.text("PDF alias links (J1 pins 1-8 = ADB0-ADB7 in the PDF; Proteus names, see sheet 4):", NX, NY)
 for i, (a, n) in enumerate((("ADB0", "C2_current_meas  (J1-1)"), ("ADB1", "C3_current_meas  (J1-3)"),
                             ("ADB2", "input_current_meas  (J1-5)"), ("ADB3", "C1_current_meas  (J1-7)"),
                             ("ADB4", "U_out_meas  (J1-8)"), ("ADB5", "Uc3_meas  (J1-6)"),

@@ -5,18 +5,20 @@ amplifiers. Each unit: shunt signal -> 330R -> + input, biased to +1V0_BIAS thro
 the control card (J1, sheet 5). U2's supply pins (unit 5: 4 = 3V3, 11 = GND) are drawn once,
 with C34; the PDF repeats them on every unit.
 
-Net names as the IPC has them (PDF lower case -> upper case). They do not match what is
-measured (STATUS.md finding 7): U2:A C3_CURRENT -> INPUT_CURRENT_MEAS, U2:B C1_CURRENT ->
-C1_CURRENT_MEAS, U2:C CURRENT_L1 -> C2_CURRENT_MEAS, U2:D CURRENT_L3 -> C3_CURRENT_MEAS."""
+Net names: renamed to what each path measures (user decision 2026-11-20, finding 7, through
+p2k_config.NET_ALIASES; STATUS.md "Design fixes 2026-11-20"): U2:A CURRENT_C6 -> CURRENT_C6_MEAS
+(Proteus C3_CURRENT -> INPUT_CURRENT_MEAS), U2:B CURRENT_C3 -> CURRENT_C3_MEAS (C1_CURRENT ->
+C1_CURRENT_MEAS), U2:C CURRENT_Q4 -> CURRENT_Q4_MEAS (CURRENT_L1 -> C2_CURRENT_MEAS), U2:D
+CURRENT_Q7 -> CURRENT_Q7_MEAS (CURRENT_L3 -> C3_CURRENT_MEAS)."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("04_current_measurements.kicad_sch")
 
 #        unit pins(+,-,out) PDF pos   r_in   r_bias c_bias r_gnd  r_fb   c_fb   r_out  c_out  input         output
-CELLS = [(1, (3, 2, 1), (48, 39), "R56", "R54", "C45", "R52", "R53", "C13", "R55", "C14", "C3_CURRENT", "INPUT_CURRENT_MEAS"),
-         (2, (5, 6, 7), (149, 39), "R61", "R59", "C47", "R57", "R58", "C15", "R60", "C16", "C1_CURRENT", "C1_CURRENT_MEAS"),
-         (3, (10, 9, 8), (48, 104), "R66", "R64", "C44", "R62", "R63", "C17", "R65", "C18", "CURRENT_L1", "C2_CURRENT_MEAS"),
-         (4, (12, 13, 14), (149, 104), "R71", "R69", "C48", "R67", "R68", "C19", "R70", "C20", "CURRENT_L3", "C3_CURRENT_MEAS")]
+CELLS = [(1, (3, 2, 1), (48, 39), "R56", "R54", "C45", "R52", "R53", "C13", "R55", "C14", "CURRENT_C6", "CURRENT_C6_MEAS"),
+         (2, (5, 6, 7), (149, 39), "R61", "R59", "C47", "R57", "R58", "C15", "R60", "C16", "CURRENT_C3", "CURRENT_C3_MEAS"),
+         (3, (10, 9, 8), (48, 104), "R66", "R64", "C44", "R62", "R63", "C17", "R65", "C18", "CURRENT_Q4", "CURRENT_Q4_MEAS"),
+         (4, (12, 13, 14), (149, 104), "R71", "R69", "C48", "R67", "R68", "C19", "R70", "C20", "CURRENT_Q7", "CURRENT_Q7_MEAS")]
 for unit, pins, pos, *rest in CELLS:
     shunt_amp_cell(sh, "U2", unit, *P(*pos), pins, *rest)
 
@@ -38,8 +40,8 @@ sh.junction(VN[0], YB)
 
 # --- notes ---------------------------------------------------------------------------------------
 NX, NY = P(4, 132)
-sh.text("Net names = IPC (PDF: C3_current, input_current_meas, ...). They do not match what is measured (STATUS.md finding 7):", NX, NY)
-sh.text("U2:A C3_CURRENT -> INPUT_CURRENT_MEAS, U2:C CURRENT_L1 -> C2_CURRENT_MEAS, U2:D CURRENT_L3 -> C3_CURRENT_MEAS.", NX, NY + g(2))
+sh.text("Current nets renamed to what they measure (finding 7; Proteus names: U2:A C3_current -> input_current_meas, U2:B C1_current -> C1_current_meas,", NX, NY)
+sh.text("U2:C current_L1 -> C2_current_meas, U2:D current_L3 -> C3_current_meas). CURRENT_Q4 / Q7 = low-side emitter shunts: the L1 / L3 current while the low side conducts.", NX, NY + g(2))
 sh.text("U2 supply pins 4 / 11 drawn once (the PDF repeats them on every unit). PWR_FLAGs of 3V3, GND, +1V0_BIAS: sheet 5.", NX, NY + g(4))
 
 sh.save()

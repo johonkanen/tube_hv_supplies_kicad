@@ -2981,7 +2981,7 @@
 		)
 		(uuid "89fe0a51-d5e5-5c16-87e3-914277bfdee8")
 	)
-	(global_label "C2_CURRENT_MEAS"
+	(global_label "CURRENT_Q4_MEAS"
 		(shape passive)
 		(at 205.74 133.35 180)
 		(fields_autoplaced yes)
@@ -3067,7 +3067,7 @@
 		)
 		(uuid "7290d281-4da8-5543-a288-cdb4e6966aac")
 	)
-	(global_label "C3_CURRENT_MEAS"
+	(global_label "CURRENT_Q7_MEAS"
 		(shape passive)
 		(at 205.74 130.81 180)
 		(fields_autoplaced yes)
@@ -3153,7 +3153,7 @@
 		)
 		(uuid "fb19dc2d-05a4-5ad4-a14e-ff14c4f428e5")
 	)
-	(global_label "INPUT_CURRENT_MEAS"
+	(global_label "CURRENT_C6_MEAS"
 		(shape passive)
 		(at 205.74 128.27 180)
 		(fields_autoplaced yes)
@@ -3239,7 +3239,7 @@
 		)
 		(uuid "572ca3fa-4e96-540e-b6e0-bb0089019858")
 	)
-	(global_label "C1_CURRENT_MEAS"
+	(global_label "CURRENT_C3_MEAS"
 		(shape passive)
 		(at 205.74 125.73 180)
 		(fields_autoplaced yes)
@@ -4784,7 +4784,7 @@
 		)
 		(uuid "934d8aad-63fe-59b6-85e9-9fa01a7b4364")
 	)
-	(text "PDF alias links (J1 pins 1-8 are labelled ADB0-ADB7 in the PDF; nets = IPC names):"
+	(text "PDF alias links (J1 pins 1-8 = ADB0-ADB7 in the PDF; Proteus names, see sheet 4):"
 		(exclude_from_sim no)
 		(at 88.9 121.92 0)
 		(effects

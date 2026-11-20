@@ -50,7 +50,7 @@
  {
   "layer": "F.Cu",
   "index": 2,
-  "net": "CURRENT_L3",
+  "net": "CURRENT_Q7",
   "order": 49,
   "width": 0.1524,
   "group": 11
@@ -74,7 +74,7 @@
  {
   "layer": "F.Cu",
   "index": 5,
-  "net": "CURRENT_L1",
+  "net": "CURRENT_Q4",
   "order": 66,
   "width": 0.1524,
   "group": 5
@@ -122,7 +122,7 @@
  {
   "layer": "F.Cu",
   "index": 11,
-  "net": "C3_CURRENT",
+  "net": "CURRENT_C6",
   "order": 91,
   "width": 0.1524,
   "group": 19
@@ -146,7 +146,7 @@
  {
   "layer": "F.Cu",
   "index": 14,
-  "net": "C1_CURRENT",
+  "net": "CURRENT_C3",
   "order": 115,
   "width": 0.1524,
   "group": 15

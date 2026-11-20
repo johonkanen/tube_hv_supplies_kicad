@@ -112,7 +112,7 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.023 mm^2 at ( -52.128,  -19.000) 0.10x0.55 mm  near R1-1 (#00052) 0.37 mm, via (#00052) 1.72 mm
    pad shape  only Proteus  0.023 mm^2 at ( -60.272,  -22.500) 0.10x0.55 mm  near R43-1 (#00091) 0.37 mm, via (#00092) 1.48 mm
    pad shape  only Proteus  0.023 mm^2 at ( -53.372,  -23.500) 0.10x0.55 mm  near R20-1 (GND) 0.37 mm, via (#00079) 1.13 mm
-   pad shape  only Proteus  0.022 mm^2 at ( -78.570,   -5.172) 0.55x0.10 mm  near R71-1 (#00136) 0.37 mm, via (CURRENT_L1) 1.48 mm
+   pad shape  only Proteus  0.022 mm^2 at ( -78.570,   -5.172) 0.55x0.10 mm  near R71-1 (#00136) 0.37 mm, via (CURRENT_Q4) 1.48 mm
    pad shape  only Proteus  0.022 mm^2 at ( -84.470,   -5.727) 0.55x0.10 mm  near R68-2 (#00131) 0.37 mm, via (#00136) 1.96 mm
    pad shape  only Proteus  0.022 mm^2 at ( -82.670,   -6.473) 0.55x0.10 mm  near R69-2 (+1V0_BIAS) 0.37 mm, via (GND) 2.37 mm
    pad shape  only Proteus  0.022 mm^2 at ( -79.847,   -7.705) 0.10x0.55 mm  near R63-2 (#00122) 0.37 mm, via (#00124) 1.41 mm
@@ -121,10 +121,10 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.022 mm^2 at ( -77.370,  -12.373) 0.55x0.10 mm  near R57-1 (#00112) 0.37 mm, via (GND) 1.13 mm
    pad shape  only Proteus  0.022 mm^2 at ( -57.005,  -14.127) 0.55x0.10 mm  near R11-2 (#00068) 0.37 mm, via (GND) 2.18 mm
    pad shape  only Proteus  0.022 mm^2 at ( -83.270,  -14.828) 0.55x0.10 mm  near R52-2 (GND) 0.37 mm, via (#00106) 2.44 mm
-   pad shape  only Proteus  0.022 mm^2 at ( -96.373,  -17.005) 0.10x0.55 mm  near R55-1 (INPUT_CURRENT_MEAS) 0.37 mm, via (#00114) 2.97 mm
-   pad shape  only Proteus  0.022 mm^2 at ( -95.627,  -17.005) 0.10x0.55 mm  near R55-1 (INPUT_CURRENT_MEAS) 0.37 mm, via (#00114) 2.42 mm
+   pad shape  only Proteus  0.022 mm^2 at ( -96.373,  -17.005) 0.10x0.55 mm  near R55-1 (CURRENT_C6_MEAS) 0.37 mm, via (#00114) 2.97 mm
+   pad shape  only Proteus  0.022 mm^2 at ( -95.627,  -17.005) 0.10x0.55 mm  near R55-1 (CURRENT_C6_MEAS) 0.37 mm, via (#00114) 2.42 mm
    pad shape  only Proteus  0.022 mm^2 at ( -64.072,  -17.105) 0.10x0.55 mm  near R74-1 (#00194) 0.37 mm, via (3V3) 3.22 mm
-   pad shape  only Proteus  0.022 mm^2 at ( -99.972,  -17.605) 0.10x0.55 mm  near R65-1 (C2_CURRENT_MEAS) 0.37 mm, via (GND) 1.70 mm
+   pad shape  only Proteus  0.022 mm^2 at ( -99.972,  -17.605) 0.10x0.55 mm  near R65-1 (CURRENT_Q4_MEAS) 0.37 mm, via (GND) 1.70 mm
    pad shape  only Proteus  0.022 mm^2 at (-109.230,  -19.663) 0.10x0.70 mm  near R76-1 (3V3) 0.46 mm, via (3V3) 3.24 mm
    pad shape  only Proteus  0.022 mm^2 at (-106.645,  -21.263) 0.10x0.70 mm  near R77-2 (SDA) 0.46 mm, via (GND) 3.27 mm
    pad shape  only Proteus  0.022 mm^2 at ( -52.027,  -21.595) 0.10x0.55 mm  near R19-1 (#00078) 0.37 mm, via (#00079) 1.48 mm
@@ -132,17 +132,17 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.022 mm^2 at ( -94.337,  -23.870) 0.70x0.10 mm  near R12-1 (UC3_MEAS) 0.46 mm, via (#00065) 2.45 mm
    pad shape  only Proteus  0.022 mm^2 at ( -92.337,  -24.070) 0.70x0.10 mm  near R45-1 (U_OUT_MEAS) 0.46 mm, via (GND) 1.14 mm
    pad shape  only Proteus  0.021 mm^2 at ( -64.800,  -14.973) 0.55x0.10 mm  near R73-1 (+1V0_BIAS) 0.37 mm, via (+1V0_BIAS) 1.33 mm
-   pad shape  only Proteus  0.021 mm^2 at ( -82.175,  -16.673) 0.55x0.10 mm  near R56-1 (#00106) 0.37 mm, via (C3_CURRENT) 1.05 mm
+   pad shape  only Proteus  0.021 mm^2 at ( -82.175,  -16.673) 0.55x0.10 mm  near R56-1 (#00106) 0.37 mm, via (CURRENT_C6) 1.05 mm
    pad shape  only Proteus  0.021 mm^2 at ( -57.800,  -24.027) 0.55x0.10 mm  near R44-2 (#00094) 0.37 mm, via (#00094) 1.05 mm
    pad shape  only Proteus  0.021 mm^2 at ( -57.800,  -24.773) 0.55x0.10 mm  near R44-2 (#00094) 0.37 mm, via (#00094) 0.93 mm
-   pad shape  only Proteus  0.018 mm^2 at ( -77.662,   -4.421) 0.53x0.08 mm  near R71-2 (CURRENT_L3) 0.38 mm, via (CURRENT_L3) 0.88 mm
-   pad shape  only Proteus  0.018 mm^2 at ( -77.662,   -5.179) 0.53x0.08 mm  near R71-2 (CURRENT_L3) 0.38 mm, via (CURRENT_L3) 0.88 mm
+   pad shape  only Proteus  0.018 mm^2 at ( -77.662,   -4.421) 0.53x0.08 mm  near R71-2 (CURRENT_Q7) 0.38 mm, via (CURRENT_Q7) 0.88 mm
+   pad shape  only Proteus  0.018 mm^2 at ( -77.662,   -5.179) 0.53x0.08 mm  near R71-2 (CURRENT_Q7) 0.38 mm, via (CURRENT_Q7) 0.88 mm
    pad shape  only Proteus  0.018 mm^2 at ( -85.387,   -5.721) 0.53x0.08 mm  near R68-1 (#00133) 0.38 mm, via (#00136) 2.28 mm
-   pad shape  only Proteus  0.018 mm^2 at ( -80.662,   -5.721) 0.53x0.08 mm  near R66-2 (CURRENT_L1) 0.38 mm, via (CURRENT_L1) 0.84 mm
-   pad shape  only Proteus  0.018 mm^2 at ( -80.662,   -6.479) 0.53x0.08 mm  near R66-2 (CURRENT_L1) 0.38 mm, via (CURRENT_L1) 0.99 mm
+   pad shape  only Proteus  0.018 mm^2 at ( -80.662,   -5.721) 0.53x0.08 mm  near R66-2 (CURRENT_Q4) 0.38 mm, via (CURRENT_Q4) 0.84 mm
+   pad shape  only Proteus  0.018 mm^2 at ( -80.662,   -6.479) 0.53x0.08 mm  near R66-2 (CURRENT_Q4) 0.38 mm, via (CURRENT_Q4) 0.99 mm
    pad shape  only Proteus  0.018 mm^2 at ( -76.462,  -11.621) 0.53x0.08 mm  near R57-2 (GND) 0.38 mm, via (#00117) 1.14 mm
    pad shape  only Proteus  0.018 mm^2 at ( -79.621,  -12.913) 0.08x0.53 mm  near R58-1 (#00114) 0.38 mm, via (#00114) 0.97 mm
-   pad shape  only Proteus  0.018 mm^2 at ( -78.662,  -13.921) 0.53x0.08 mm  near R61-2 (C1_CURRENT) 0.38 mm, via (#00114) 1.78 mm
+   pad shape  only Proteus  0.018 mm^2 at ( -78.662,  -13.921) 0.53x0.08 mm  near R61-2 (CURRENT_C3) 0.38 mm, via (#00114) 1.78 mm
    pad shape  only Proteus  0.018 mm^2 at ( -56.087,  -14.121) 0.53x0.08 mm  near R11-1 (GND) 0.38 mm, via (GND) 1.29 mm
    pad shape  only Proteus  0.018 mm^2 at ( -85.062,  -14.821) 0.53x0.08 mm  near R53-2 (#00101) 0.38 mm, via (#00106) 2.83 mm
    pad shape  only Proteus  0.018 mm^2 at ( -81.362,  -14.821) 0.53x0.08 mm  near R54-2 (+1V0_BIAS) 0.38 mm, via (#00114) 1.64 mm
@@ -152,7 +152,7 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.018 mm^2 at ( -96.379,  -16.087) 0.08x0.53 mm  near R55-2 (#00103) 0.38 mm, via (#00114) 2.54 mm
    pad shape  only Proteus  0.018 mm^2 at ( -94.379,  -16.087) 0.08x0.53 mm  near R60-2 (#00114) 0.38 mm, via (#00114) 0.95 mm
    pad shape  only Proteus  0.018 mm^2 at ( -93.621,  -16.087) 0.08x0.53 mm  near R60-2 (#00114) 0.38 mm, via (#00114) 0.94 mm
-   pad shape  only Proteus  0.018 mm^2 at ( -81.262,  -15.921) 0.53x0.08 mm  near R56-2 (C3_CURRENT) 0.38 mm, via (+1V0_BIAS) 1.21 mm
+   pad shape  only Proteus  0.018 mm^2 at ( -81.262,  -15.921) 0.53x0.08 mm  near R56-2 (CURRENT_C6) 0.38 mm, via (+1V0_BIAS) 1.21 mm
    pad shape  only Proteus  0.018 mm^2 at ( -64.079,  -16.188) 0.08x0.53 mm  near R74-2 (+1V0_BIAS) 0.38 mm, via (+1V0_BIAS) 2.64 mm
    pad shape  only Proteus  0.018 mm^2 at ( -63.321,  -16.188) 0.08x0.53 mm  near R74-2 (+1V0_BIAS) 0.38 mm, via (+1V0_BIAS) 2.93 mm
    pad shape  only Proteus  0.018 mm^2 at ( -79.362,  -16.079) 0.53x0.08 mm  near R59-1 (#00117) 0.38 mm, via (GND) 0.55 mm
@@ -165,19 +165,19 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.018 mm^2 at ( -58.712,  -24.021) 0.53x0.08 mm  near R44-1 (GND) 0.38 mm, via (#00092) 0.95 mm
    pad shape  only Proteus  0.018 mm^2 at ( -52.621,  -24.413) 0.08x0.53 mm  near R20-2 (#00081) 0.38 mm, via (GND) 1.00 mm
    pad shape  only Proteus  0.018 mm^2 at ( -58.712,  -24.779) 0.53x0.08 mm  near R44-1 (GND) 0.38 mm, via (GND) 1.37 mm
-   pad shape  only Proteus  0.016 mm^2 at ( -78.484,   -4.423) 0.48x0.10 mm  near R71-1 (#00136) 0.39 mm, via (CURRENT_L3) 1.66 mm
+   pad shape  only Proteus  0.016 mm^2 at ( -78.484,   -4.423) 0.48x0.10 mm  near R71-1 (#00136) 0.39 mm, via (CURRENT_Q7) 1.66 mm
    pad shape  only Proteus  0.016 mm^2 at ( -86.752,   -8.591) 0.10x0.48 mm  near R67-1 (#00131) 0.39 mm, via (GND) 0.93 mm
    pad shape  only Proteus  0.016 mm^2 at (-117.542,  -12.577) 0.12x0.38 mm  near R80-2 (#00206) 0.53 mm, via (#00204) 3.32 mm
    pad shape  only Proteus  0.016 mm^2 at ( -80.184,  -15.323) 0.48x0.10 mm  near R59-2 (+1V0_BIAS) 0.39 mm, via (+1V0_BIAS) 1.34 mm
    pad shape  only Proteus  0.016 mm^2 at ( -59.523,  -22.591) 0.10x0.48 mm  near R43-1 (#00091) 0.39 mm, via (#00092) 0.79 mm
    pad shape  only Proteus  0.016 mm^2 at (-111.565,   -5.279) 0.20x0.18 mm  near C29-1 (GND) 0.60 mm, via (GND) 1.22 mm
    pad shape  only Proteus  0.016 mm^2 at ( -89.365,   -5.680) 0.20x0.18 mm  near C19-1 (#00133) 0.60 mm, via (GND) 4.32 mm
-   pad shape  only Proteus  0.016 mm^2 at ( -81.472,   -6.477) 0.45x0.10 mm  near R66-1 (#00127) 0.39 mm, via (CURRENT_L1) 1.72 mm
+   pad shape  only Proteus  0.016 mm^2 at ( -81.472,   -6.477) 0.45x0.10 mm  near R66-1 (#00127) 0.39 mm, via (CURRENT_Q4) 1.72 mm
    pad shape  only Proteus  0.016 mm^2 at ( -88.265,   -9.080) 0.20x0.18 mm  near C16-2 (GND) 0.60 mm, via (GND) 1.13 mm
    pad shape  only Proteus  0.016 mm^2 at (-111.465,   -9.980) 0.20x0.18 mm  near C28-1 (GND) 0.60 mm, via (GND) 1.10 mm
    pad shape  only Proteus  0.016 mm^2 at (-101.265,  -10.880) 0.20x0.18 mm  near C20-2 (GND) 0.60 mm, via (GND) 0.79 mm
    pad shape  only Proteus  0.016 mm^2 at ( -93.465,  -10.980) 0.20x0.18 mm  near C15-2 (#00112) 0.60 mm, via (#00114) 2.92 mm
-   pad shape  only Proteus  0.016 mm^2 at ( -88.265,  -11.520) 0.20x0.18 mm  near C16-1 (C1_CURRENT_MEAS) 0.60 mm, via (GND) 2.37 mm
+   pad shape  only Proteus  0.016 mm^2 at ( -88.265,  -11.520) 0.20x0.18 mm  near C16-1 (CURRENT_C3_MEAS) 0.60 mm, via (GND) 2.37 mm
    pad shape  only Proteus  0.016 mm^2 at (-111.465,  -12.420) 0.20x0.18 mm  near C28-2 (3V3) 0.60 mm, via (GND) 2.19 mm
    pad shape  only Proteus  0.016 mm^2 at ( -93.465,  -13.420) 0.20x0.18 mm  near C15-1 (#00114) 0.60 mm, via (#00114) 0.63 mm
    pad shape  only Proteus  0.016 mm^2 at (-101.065,  -14.480) 0.20x0.18 mm  near C17-2 (#00122) 0.60 mm, via (#00122) 0.45 mm
@@ -185,21 +185,21 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    0.016 mm^2 at ( -65.952,  -15.758) 0.12x0.18 mm  near REF1-1 (GND) 0.69 mm, via (+1V0_BIAS) 2.41 mm
    pad shape  only KiCad    0.016 mm^2 at ( -65.472,  -15.758) 0.12x0.18 mm  near REF1-1 (GND) 0.68 mm, via (+1V0_BIAS) 2.22 mm
    pad shape  only Proteus  0.016 mm^2 at ( -67.865,  -16.280) 0.20x0.18 mm  near C8-2 (GND) 0.60 mm, via (GND) 1.65 mm
-   pad shape  only Proteus  0.016 mm^2 at ( -86.420,  -16.666) 0.18x0.20 mm  near C13-1 (#00103) 0.60 mm, via (C3_CURRENT) 4.74 mm
-   pad shape  only Proteus  0.016 mm^2 at ( -94.377,  -16.913) 0.10x0.48 mm  near R60-1 (C1_CURRENT_MEAS) 0.39 mm, via (C1_CURRENT_MEAS) 1.34 mm
+   pad shape  only Proteus  0.016 mm^2 at ( -86.420,  -16.666) 0.18x0.20 mm  near C13-1 (#00103) 0.60 mm, via (CURRENT_C6) 4.74 mm
+   pad shape  only Proteus  0.016 mm^2 at ( -94.377,  -16.913) 0.10x0.48 mm  near R60-1 (CURRENT_C3_MEAS) 0.39 mm, via (CURRENT_C3_MEAS) 1.34 mm
    pad shape  only Proteus  0.016 mm^2 at ( -93.379,  -19.135) 0.18x0.20 mm  near C14-2 (GND) 0.60 mm, via (GND) 0.76 mm
    pad shape  only Proteus  0.016 mm^2 at (-100.865,  -19.180) 0.20x0.18 mm  near C18-2 (GND) 0.60 mm, via (GND) 0.75 mm
    pad shape  only Proteus  0.015 mm^2 at (-116.858,   -6.941) 0.33x0.12 mm  near R78-2 (#00211) 0.54 mm, via (#00202) 2.57 mm
    pad shape  only Proteus  0.014 mm^2 at (-114.985,  -12.549) 0.12x0.30 mm  near R80-1 (#00204) 0.54 mm, via (#00204) 1.32 mm
    pad shape  only Proteus  0.014 mm^2 at ( -95.618,  -16.148) 0.08x0.48 mm  near R55-2 (#00103) 0.39 mm, via (#00114) 1.87 mm
-   pad shape  only Proteus  0.014 mm^2 at ( -83.971,  -16.670) 0.12x0.20 mm  near C13-2 (#00101) 0.61 mm, via (C3_CURRENT) 2.76 mm
+   pad shape  only Proteus  0.014 mm^2 at ( -83.971,  -16.670) 0.12x0.20 mm  near C13-2 (#00101) 0.61 mm, via (CURRENT_C6) 2.76 mm
    pad shape  only Proteus  0.014 mm^2 at ( -96.849,  -23.785) 0.30x0.12 mm  near R3-1 (UIN_MEAS) 0.54 mm, via (#00065) 2.54 mm
    pad shape  only Proteus  0.014 mm^2 at ( -96.849,  -26.340) 0.30x0.12 mm  near R3-2 (#00052) 0.54 mm, via (#00052) 0.64 mm
    pad shape  only Proteus  0.013 mm^2 at ( -84.608,   -6.476) 0.38x0.10 mm  near R68-2 (#00131) 0.40 mm, via (#00136) 2.73 mm
    pad shape  only Proteus  0.013 mm^2 at ( -79.093,   -6.703) 0.08x0.43 mm  near R63-1 (#00124) 0.39 mm, via (#00124) 0.91 mm
    pad shape  only Proteus  0.013 mm^2 at ( -82.129,  -14.826) 0.35x0.10 mm  near R54-1 (#00106) 0.40 mm, via (#00114) 2.19 mm
-   pad shape  only Proteus  0.013 mm^2 at ( -97.624,  -17.367) 0.10x0.38 mm  near R70-1 (C3_CURRENT_MEAS) 0.40 mm, via (#00124) 3.48 mm
-   pad shape  only Proteus  0.013 mm^2 at ( -99.224,  -17.467) 0.10x0.38 mm  near R65-1 (C2_CURRENT_MEAS) 0.40 mm, via (GND) 2.41 mm
+   pad shape  only Proteus  0.013 mm^2 at ( -97.624,  -17.367) 0.10x0.38 mm  near R70-1 (CURRENT_Q7_MEAS) 0.40 mm, via (#00124) 3.48 mm
+   pad shape  only Proteus  0.013 mm^2 at ( -99.224,  -17.467) 0.10x0.38 mm  near R65-1 (CURRENT_Q4_MEAS) 0.40 mm, via (GND) 2.41 mm
    pad shape  only Proteus  0.013 mm^2 at ( -59.518,  -23.497) 0.08x0.43 mm  near R43-2 (#00092) 0.39 mm, via (#00092) 0.73 mm
    pad shape  only Proteus  0.012 mm^2 at (-117.541,   -6.948) 0.30x0.10 mm  near R78-2 (#00211) 0.54 mm, via (#00202) 3.00 mm
    pad shape  only Proteus  0.012 mm^2 at (-114.977,  -13.241) 0.10x0.30 mm  near R80-1 (#00204) 0.54 mm, via (#00204) 0.74 mm
@@ -213,29 +213,29 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.011 mm^2 at (-112.339,   -9.967) 0.18x0.12 mm  near C28-1 (GND) 0.62 mm, via (GND) 1.92 mm
    pad shape  only Proteus  0.011 mm^2 at (-102.139,  -10.867) 0.18x0.12 mm  near C20-2 (GND) 0.62 mm, via (GND) 1.61 mm
    pad shape  only Proteus  0.011 mm^2 at ( -94.339,  -10.967) 0.18x0.12 mm  near C15-2 (#00112) 0.62 mm, via (#00114) 2.93 mm
-   pad shape  only Proteus  0.011 mm^2 at ( -89.139,  -11.533) 0.18x0.12 mm  near C16-1 (C1_CURRENT_MEAS) 0.62 mm, via (GND) 2.88 mm
+   pad shape  only Proteus  0.011 mm^2 at ( -89.139,  -11.533) 0.18x0.12 mm  near C16-1 (CURRENT_C3_MEAS) 0.62 mm, via (GND) 2.88 mm
    pad shape  only Proteus  0.011 mm^2 at (-112.339,  -12.433) 0.18x0.12 mm  near C28-2 (3V3) 0.62 mm, via (#00204) 2.48 mm
    pad shape  only Proteus  0.011 mm^2 at ( -94.339,  -13.433) 0.18x0.12 mm  near C15-1 (#00114) 0.62 mm, via (#00114) 0.60 mm
    pad shape  only Proteus  0.011 mm^2 at (-101.939,  -14.467) 0.18x0.12 mm  near C17-2 (#00122) 0.62 mm, via (#00122) 0.97 mm
    pad shape  only Proteus  0.011 mm^2 at (-112.139,  -14.967) 0.18x0.12 mm  near C27-1 (GND) 0.62 mm, via (GND) 1.68 mm
    pad shape  only Proteus  0.011 mm^2 at ( -68.739,  -16.267) 0.18x0.12 mm  near C8-2 (GND) 0.62 mm, via (GND) 0.83 mm
-   pad shape  only Proteus  0.011 mm^2 at ( -86.433,  -17.539) 0.12x0.18 mm  near C13-1 (#00103) 0.62 mm, via (C3_CURRENT) 4.36 mm
-   pad shape  only Proteus  0.011 mm^2 at ( -83.967,  -17.539) 0.12x0.18 mm  near C13-2 (#00101) 0.62 mm, via (C3_CURRENT) 2.26 mm
+   pad shape  only Proteus  0.011 mm^2 at ( -86.433,  -17.539) 0.12x0.18 mm  near C13-1 (#00103) 0.62 mm, via (CURRENT_C6) 4.36 mm
+   pad shape  only Proteus  0.011 mm^2 at ( -83.967,  -17.539) 0.12x0.18 mm  near C13-2 (#00101) 0.62 mm, via (CURRENT_C6) 2.26 mm
    pad shape  only Proteus  0.011 mm^2 at ( -93.367,  -18.261) 0.12x0.18 mm  near C14-2 (GND) 0.62 mm, via (GND) 0.61 mm
    pad shape  only Proteus  0.011 mm^2 at (-101.739,  -19.167) 0.18x0.12 mm  near C18-2 (GND) 0.62 mm, via (GND) 0.69 mm
    pad shape  only Proteus  0.011 mm^2 at (-111.549,   -7.726) 0.15x0.15 mm  near C29-2 (3V3) 0.62 mm, via (GND) 2.29 mm
    pad shape  only Proteus  0.011 mm^2 at ( -89.349,   -8.126) 0.15x0.15 mm  near C19-2 (#00131) 0.62 mm, via (GND) 2.52 mm
    pad shape  only Proteus  0.011 mm^2 at (-117.546,  -13.261) 0.10x0.25 mm  near R80-2 (#00206) 0.55 mm, via (#00204) 3.15 mm
-   pad shape  only Proteus  0.011 mm^2 at (-101.249,  -13.326) 0.15x0.15 mm  near C20-1 (C3_CURRENT_MEAS) 0.62 mm, via (#00122) 0.73 mm
+   pad shape  only Proteus  0.011 mm^2 at (-101.249,  -13.326) 0.15x0.15 mm  near C20-1 (CURRENT_Q7_MEAS) 0.62 mm, via (#00122) 0.73 mm
    pad shape  only Proteus  0.011 mm^2 at ( -55.957,  -14.880) 0.33x0.08 mm  near R11-1 (GND) 0.40 mm, via (GND) 1.63 mm
    pad shape  only Proteus  0.011 mm^2 at (-101.049,  -16.926) 0.15x0.15 mm  near C17-1 (#00124) 0.62 mm, via (GND) 1.70 mm
    pad shape  only Proteus  0.011 mm^2 at (-111.249,  -17.426) 0.15x0.15 mm  near C27-2 (3V3) 0.62 mm, via (GND) 2.20 mm
-   pad shape  only Proteus  0.011 mm^2 at ( -98.371,  -17.686) 0.10x0.25 mm  near R70-1 (C3_CURRENT_MEAS) 0.42 mm, via (GND) 3.11 mm
+   pad shape  only Proteus  0.011 mm^2 at ( -98.371,  -17.686) 0.10x0.25 mm  near R70-1 (CURRENT_Q7_MEAS) 0.42 mm, via (GND) 3.11 mm
    pad shape  only Proteus  0.011 mm^2 at ( -67.849,  -18.726) 0.15x0.15 mm  near C8-1 (3V3) 0.62 mm, via (GND) 2.60 mm
    pad shape  only Proteus  0.011 mm^2 at ( -61.549,  -19.074) 0.15x0.15 mm  near C12-2 (GND) 0.62 mm, via (#00065) 3.42 mm
-   pad shape  only Proteus  0.011 mm^2 at ( -61.549,  -21.526) 0.15x0.15 mm  near C12-1 (3V3) 0.62 mm, via (C1_CURRENT) 3.00 mm
-   pad shape  only Proteus  0.011 mm^2 at (-100.849,  -21.626) 0.15x0.15 mm  near C18-1 (C2_CURRENT_MEAS) 0.62 mm, via (GND) 2.91 mm
-   pad shape  only Proteus  0.010 mm^2 at ( -81.380,   -5.730) 0.23x0.10 mm  near R66-1 (#00127) 0.42 mm, via (CURRENT_L1) 1.55 mm
+   pad shape  only Proteus  0.011 mm^2 at ( -61.549,  -21.526) 0.15x0.15 mm  near C12-1 (3V3) 0.62 mm, via (CURRENT_C3) 3.00 mm
+   pad shape  only Proteus  0.011 mm^2 at (-100.849,  -21.626) 0.15x0.15 mm  near C18-1 (CURRENT_Q4_MEAS) 0.62 mm, via (GND) 2.91 mm
+   pad shape  only Proteus  0.010 mm^2 at ( -81.380,   -5.730) 0.23x0.10 mm  near R66-1 (#00127) 0.42 mm, via (CURRENT_Q4) 1.55 mm
    pad shape  only Proteus  0.010 mm^2 at ( -99.980,  -16.830) 0.08x0.30 mm  near R65-2 (#00124) 0.41 mm, via (GND) 2.24 mm
 
 == In1.Cu: Proteus copper 726.6 mm^2, KiCad copper 758.2 mm^2
@@ -250,17 +250,17 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    1.946 mm^2 at (   2.474,   11.574) 2.02x2.02 mm  near C3-1 (UC3) 0.04 mm, via (GND) 9.12 mm
    pad shape  only KiCad    1.946 mm^2 at ( -45.226,    6.874) 2.02x2.02 mm  near C2-1 (UIN) 0.04 mm, via (G3_HI) 9.13 mm
    pad shape  only KiCad    1.946 mm^2 at (   2.574,   -7.926) 2.02x2.02 mm  near C5-1 (U_OUT) 0.04 mm, via (GND) 9.98 mm
-   pad shape  only KiCad    1.946 mm^2 at (  18.326,   -8.174) 2.02x2.02 mm  near C6-1 (UC6) 0.04 mm, via (C3_CURRENT) 8.52 mm
-   pad shape  only KiCad    1.946 mm^2 at (  30.826,   -8.426) 2.02x2.02 mm  near C7-1 (PREOUT) 0.04 mm, via (C3_CURRENT) 16.46 mm
+   pad shape  only KiCad    1.946 mm^2 at (  18.326,   -8.174) 2.02x2.02 mm  near C6-1 (UC6) 0.04 mm, via (CURRENT_C6) 8.52 mm
+   pad shape  only KiCad    1.946 mm^2 at (  30.826,   -8.426) 2.02x2.02 mm  near C7-1 (PREOUT) 0.04 mm, via (CURRENT_C6) 16.46 mm
    pad shape  only KiCad    1.118 mm^2 at ( -92.936,   13.064) 2.02x2.02 mm  near C1-2 (GND) 0.05 mm, via (#00136) 18.99 mm
    pad shape  only KiCad    1.118 mm^2 at ( -81.936,   13.064) 2.02x2.02 mm  near C11-2 (GND) 0.05 mm, via (#00127) 16.99 mm
    pad shape  only KiCad    1.118 mm^2 at ( -60.836,   13.064) 2.02x2.02 mm  near C26-2 (GND) 0.05 mm, via (GND) 4.86 mm
    pad shape  only KiCad    1.118 mm^2 at (  25.464,    6.964) 2.02x2.02 mm  near C4-2 (GND) 0.05 mm, via (GND) 7.98 mm
    pad shape  only KiCad    1.118 mm^2 at ( -45.236,    1.864) 2.02x2.02 mm  near C2-2 (GND) 0.05 mm, via (GND) 11.22 mm
    pad shape  only KiCad    1.118 mm^2 at (   2.564,   -2.936) 2.02x2.02 mm  near C5-2 (GND) 0.05 mm, via (GND) 5.83 mm
-   pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (C3_CURRENT) 0.05 mm, via (C3_CURRENT) 3.70 mm
+   pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (CURRENT_C6) 0.05 mm, via (CURRENT_C6) 3.70 mm
    pad shape  only KiCad    1.118 mm^2 at (  30.836,   -3.436) 2.02x2.02 mm  near C7-2 (GND) 0.05 mm, via (GND) 11.61 mm
-   pad shape  only KiCad    1.059 mm^2 at (   2.498,    6.598) 2.02x2.02 mm  near C3-2 (C1_CURRENT) 0.00 mm, via (GND) 4.34 mm
+   pad shape  only KiCad    1.059 mm^2 at (   2.498,    6.598) 2.02x2.02 mm  near C3-2 (CURRENT_C3) 0.00 mm, via (GND) 4.34 mm
 
 == In2.Cu: Proteus copper 1951.9 mm^2, KiCad copper 1982.9 mm^2
    raw XOR 33.82 mm^2; after 0.05 mm tolerance: only Proteus 0.00 mm^2, only KiCad 27.57 mm^2, 18 clusters (0 below 0.01 mm^2)
@@ -274,22 +274,23 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    1.946 mm^2 at (   2.474,   11.574) 2.02x2.02 mm  near C3-1 (UC3) 0.04 mm, via (GND) 9.12 mm
    pad shape  only KiCad    1.946 mm^2 at ( -45.226,    6.874) 2.02x2.02 mm  near C2-1 (UIN) 0.04 mm, via (G3_HI) 9.13 mm
    pad shape  only KiCad    1.946 mm^2 at (   2.574,   -7.926) 2.02x2.02 mm  near C5-1 (U_OUT) 0.04 mm, via (GND) 9.98 mm
-   pad shape  only KiCad    1.946 mm^2 at (  18.326,   -8.174) 2.02x2.02 mm  near C6-1 (UC6) 0.04 mm, via (C3_CURRENT) 8.52 mm
-   pad shape  only KiCad    1.946 mm^2 at (  30.826,   -8.426) 2.02x2.02 mm  near C7-1 (PREOUT) 0.04 mm, via (C3_CURRENT) 16.46 mm
+   pad shape  only KiCad    1.946 mm^2 at (  18.326,   -8.174) 2.02x2.02 mm  near C6-1 (UC6) 0.04 mm, via (CURRENT_C6) 8.52 mm
+   pad shape  only KiCad    1.946 mm^2 at (  30.826,   -8.426) 2.02x2.02 mm  near C7-1 (PREOUT) 0.04 mm, via (CURRENT_C6) 16.46 mm
    pad shape  only KiCad    1.118 mm^2 at ( -92.936,   13.064) 2.02x2.02 mm  near C1-2 (GND) 0.05 mm, via (#00136) 18.99 mm
    pad shape  only KiCad    1.118 mm^2 at ( -81.936,   13.064) 2.02x2.02 mm  near C11-2 (GND) 0.05 mm, via (#00127) 16.99 mm
    pad shape  only KiCad    1.118 mm^2 at ( -60.836,   13.064) 2.02x2.02 mm  near C26-2 (GND) 0.05 mm, via (GND) 4.86 mm
    pad shape  only KiCad    1.118 mm^2 at (  25.464,    6.964) 2.02x2.02 mm  near C4-2 (GND) 0.05 mm, via (GND) 7.98 mm
-   pad shape  only KiCad    1.118 mm^2 at (   2.464,    6.564) 2.02x2.02 mm  near C3-2 (C1_CURRENT) 0.05 mm, via (GND) 4.30 mm
+   pad shape  only KiCad    1.118 mm^2 at (   2.464,    6.564) 2.02x2.02 mm  near C3-2 (CURRENT_C3) 0.05 mm, via (GND) 4.30 mm
    pad shape  only KiCad    1.118 mm^2 at ( -45.236,    1.864) 2.02x2.02 mm  near C2-2 (GND) 0.05 mm, via (GND) 11.22 mm
    pad shape  only KiCad    1.118 mm^2 at (   2.564,   -2.936) 2.02x2.02 mm  near C5-2 (GND) 0.05 mm, via (GND) 5.83 mm
-   pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (C3_CURRENT) 0.05 mm, via (C3_CURRENT) 3.70 mm
+   pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (CURRENT_C6) 0.05 mm, via (CURRENT_C6) 3.70 mm
    pad shape  only KiCad    1.118 mm^2 at (  30.836,   -3.436) 2.02x2.02 mm  near C7-2 (GND) 0.05 mm, via (GND) 11.61 mm
 
-== B.Cu: Proteus copper 1787.9 mm^2, KiCad copper 1832.6 mm^2
+== B.Cu: Proteus objects not compared (recorded deviations): 1 Conductor draws (REMOVED_TRACKS)
+== B.Cu: Proteus copper 1787.8 mm^2, KiCad copper 1832.6 mm^2
    raw XOR 52.14 mm^2; after 0.05 mm tolerance: only Proteus 0.99 mm^2, only KiCad 36.02 mm^2, 250 clusters (111 below 0.01 mm^2)
    pad shape   139 clusters, 36.55 mm^2
-   coverage: Proteus 877 draws / 347 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 404 draws / 347 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   coverage: Proteus 876 draws / 347 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 401 draws / 347 flashes, 0 not on Proteus copper (0 explained by pad shape)
    pad shape    15 clusters, only KiCad  22.56 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:CP_Radial_D10.0mm_P5.00mm  (9 parts: C1 C11 C2 C26 C3 C4 ...)
    pad shape    20 clusters, only KiCad   5.88 mm^2, only Proteus   0.00 mm^2  Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder  (8 parts: R22 R23 R24 R25 R32 R33 ...)
    pad shape    15 clusters, only KiCad   4.35 mm^2, only Proteus   0.00 mm^2  Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder  (6 parts: C23 C30 C31 C38 C43 C46)
@@ -303,15 +304,15 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only KiCad    1.946 mm^2 at ( -60.826,   18.074) 2.02x2.02 mm  near C26-1 (UIN) 0.04 mm, via (GND) 7.21 mm
    pad shape  only KiCad    1.946 mm^2 at (  25.474,   11.974) 2.02x2.02 mm  near C4-1 (V_A) 0.04 mm, via (GND) 8.91 mm
    pad shape  only KiCad    1.946 mm^2 at ( -45.226,    6.874) 2.02x2.02 mm  near C2-1 (UIN) 0.04 mm, via (G3_HI) 9.13 mm
-   pad shape  only KiCad    1.946 mm^2 at (  18.326,   -8.174) 2.02x2.02 mm  near C6-1 (UC6) 0.04 mm, via (C3_CURRENT) 8.52 mm
-   pad shape  only KiCad    1.946 mm^2 at (  30.826,   -8.426) 2.02x2.02 mm  near C7-1 (PREOUT) 0.04 mm, via (C3_CURRENT) 16.46 mm
+   pad shape  only KiCad    1.946 mm^2 at (  18.326,   -8.174) 2.02x2.02 mm  near C6-1 (UC6) 0.04 mm, via (CURRENT_C6) 8.52 mm
+   pad shape  only KiCad    1.946 mm^2 at (  30.826,   -8.426) 2.02x2.02 mm  near C7-1 (PREOUT) 0.04 mm, via (CURRENT_C6) 16.46 mm
    pad shape  only KiCad    1.118 mm^2 at ( -92.936,   13.064) 2.02x2.02 mm  near C1-2 (GND) 0.05 mm, via (#00136) 18.99 mm
    pad shape  only KiCad    1.118 mm^2 at ( -81.936,   13.064) 2.02x2.02 mm  near C11-2 (GND) 0.05 mm, via (#00127) 16.99 mm
    pad shape  only KiCad    1.118 mm^2 at ( -60.836,   13.064) 2.02x2.02 mm  near C26-2 (GND) 0.05 mm, via (GND) 4.86 mm
    pad shape  only KiCad    1.118 mm^2 at (  25.464,    6.964) 2.02x2.02 mm  near C4-2 (GND) 0.05 mm, via (GND) 7.98 mm
-   pad shape  only KiCad    1.118 mm^2 at (   2.464,    6.564) 2.02x2.02 mm  near C3-2 (C1_CURRENT) 0.05 mm, via (GND) 4.30 mm
+   pad shape  only KiCad    1.118 mm^2 at (   2.464,    6.564) 2.02x2.02 mm  near C3-2 (CURRENT_C3) 0.05 mm, via (GND) 4.30 mm
    pad shape  only KiCad    1.118 mm^2 at (   2.564,   -2.936) 2.02x2.02 mm  near C5-2 (GND) 0.05 mm, via (GND) 5.83 mm
-   pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (C3_CURRENT) 0.05 mm, via (C3_CURRENT) 3.70 mm
+   pad shape  only KiCad    1.118 mm^2 at (  18.336,   -3.164) 2.02x2.02 mm  near C6-2 (CURRENT_C6) 0.05 mm, via (CURRENT_C6) 3.70 mm
    pad shape  only KiCad    1.118 mm^2 at (  30.836,   -3.436) 2.02x2.02 mm  near C7-2 (GND) 0.05 mm, via (GND) 11.61 mm
    pad shape  only KiCad    0.475 mm^2 at ( -34.701,  -10.684) 1.35x1.85 mm  near C46-2 (#00021) 0.10 mm, via (#00092) 17.38 mm
    pad shape  only KiCad    0.449 mm^2 at ( -38.824,   13.833) 1.35x1.83 mm  near C30-2 (#00036) 0.23 mm, via (G3_HI) 9.35 mm
@@ -402,7 +403,7 @@ board outline -122.6 .. 47.485 x -28.26 .. 28.225 mm
    pad shape  only Proteus  0.016 mm^2 at ( -81.779,  -10.666) 0.18x0.20 mm  near C34-2 (3V3) 0.60 mm, via (3V3) 1.74 mm
    pad shape  only Proteus  0.016 mm^2 at (-114.980,  -12.566) 0.18x0.20 mm  near C37-2 (#00204) 0.60 mm, via (#00204) 1.30 mm
    pad shape  only Proteus  0.016 mm^2 at ( -79.279,  -14.066) 0.18x0.20 mm  near C45-1 (+1V0_BIAS) 0.60 mm, via (#00114) 1.25 mm
-   pad shape  only Proteus  0.016 mm^2 at ( -94.779,  -17.566) 0.18x0.20 mm  near C41-2 (GND) 0.60 mm, via (C1_CURRENT_MEAS) 1.84 mm
+   pad shape  only Proteus  0.016 mm^2 at ( -94.779,  -17.566) 0.18x0.20 mm  near C41-2 (GND) 0.60 mm, via (CURRENT_C3_MEAS) 1.84 mm
    pad shape  only Proteus  0.016 mm^2 at (-100.579,  -22.066) 0.18x0.20 mm  near C40-1 (V_A_MEAS) 0.60 mm, via (GND) 3.08 mm
    pad shape  only Proteus  0.016 mm^2 at ( -94.920,  -23.865) 0.18x0.20 mm  near C42-1 (UC3_MEAS) 0.60 mm, via (#00065) 2.22 mm
    pad shape  only Proteus  0.016 mm^2 at ( -92.480,  -23.865) 0.18x0.20 mm  near C42-2 (GND) 0.60 mm, via (GND) 1.32 mm

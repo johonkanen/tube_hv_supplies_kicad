@@ -2581,7 +2581,7 @@
 		(color 0 0 0 0)
 		(uuid "20a0ad53-f50b-5715-af05-1235b1f45323")
 	)
-	(global_label "CURRENT_L1"
+	(global_label "CURRENT_Q4"
 		(shape passive)
 		(at 147.32 176.53 270)
 		(fields_autoplaced yes)
@@ -2976,7 +2976,7 @@
 		(color 0 0 0 0)
 		(uuid "65b4ee77-5360-59f6-9ab7-1b3d3fb8992e")
 	)
-	(global_label "CURRENT_L3"
+	(global_label "CURRENT_Q7"
 		(shape passive)
 		(at 246.38 177.8 270)
 		(fields_autoplaced yes)
@@ -3622,7 +3622,7 @@
 		(color 0 0 0 0)
 		(uuid "4c86596d-a0ed-5fee-ada6-523604208479")
 	)
-	(global_label "C1_CURRENT"
+	(global_label "CURRENT_C3"
 		(shape passive)
 		(at 187.96 186.69 270)
 		(fields_autoplaced yes)
@@ -4835,7 +4835,7 @@
 		(color 0 0 0 0)
 		(uuid "01e1a51d-8071-594e-82cc-0afa69190465")
 	)
-	(global_label "C3_CURRENT"
+	(global_label "CURRENT_C6"
 		(shape passive)
 		(at 264.16 186.69 270)
 		(fields_autoplaced yes)
@@ -5208,9 +5208,9 @@
 		)
 		(uuid "eb8166ab-a1c7-5552-8a0d-f1b242dfac31")
 	)
-	(text "Net names = IPC (PDF: b+, Uin, Uc3, V_a, U_out, uc6, preout, out1, out2). PDF BRIDGE+ (terminal above Q3) = UIN."
+	(text "Net names = IPC (PDF: b+, Uin, Uc3, V_a, U_out, uc6, preout, out1, out2); shunt nets renamed (finding 7). PDF BRIDGE+ (terminal above Q3) = UIN."
 		(exclude_from_sim no)
-		(at 55.88 200.66 0)
+		(at 55.88 204.47 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5221,7 +5221,7 @@
 	)
 	(text "L1 / L3 (3 mH) are off-board, wired to the terminals L5 - L12 and L11 - L6; they are not in the netlist (OUT1 / UC3 and OUT2 / U_OUT are separate nets)."
 		(exclude_from_sim no)
-		(at 55.88 203.2 0)
+		(at 55.88 207.01 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5232,7 +5232,7 @@
 	)
 	(text "PDF terminal Input_current (below C2) is on the GND rail = GND: there is no input-current shunt (STATUS.md finding 7)."
 		(exclude_from_sim no)
-		(at 55.88 205.74 0)
+		(at 55.88 209.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5241,9 +5241,9 @@
 		)
 		(uuid "4a043dba-58ae-5f18-87e2-05c6dba53160")
 	)
-	(text "OUT1, OUT2, PWMx: sheet 2. UIN, UC3, V_A, U_OUT: sheet 3. C1_CURRENT, C3_CURRENT, CURRENT_L1, CURRENT_L3: sheet 4. PWR_FLAGs of GND (sheet 5), OUT1 / OUT2 (sheet 2)."
+	(text "OUT1, OUT2, PWMx: sheet 2. UIN, UC3, V_A, U_OUT: sheet 3. CURRENT_C3, CURRENT_C6, CURRENT_Q4, CURRENT_Q7: sheet 4. PWR_FLAGs of GND (sheet 5), OUT1 / OUT2 (sheet 2)."
 		(exclude_from_sim no)
-		(at 55.88 208.28 0)
+		(at 55.88 212.09 0)
 		(effects
 			(font
 				(size 1.27 1.27)

@@ -5,8 +5,10 @@ terminals L5 - L12) -> UC3 (C3 over the shunt R75) -> L2 -> V_A (C4, terminal V_
 Q8 / Q7 -> OUT2 -> off-board L3 (3 mH, terminals L11 - L6) -> U_OUT (C5) -> L4 -> UC6 (C6 over
 the shunt R30) -> R26 || R27 -> PREOUT (C7, terminal VPRE). Emitter shunts R72 (Q4) and R29 (Q7).
 
-Net names as the IPC has them (PDF b+, Uin, Uc3, V_a, U_out, uc6, preout, out1, out2,
-current_L3, C1_current, C3_current). PDF BRIDGE+ is a second terminal on UIN (text note). The
+Net names as the IPC has them (PDF b+, Uin, Uc3, V_a, U_out, uc6, preout, out1, out2), except
+the shunt nets, renamed to what they measure (user decision 2026-11-20, finding 7, NET_ALIASES):
+CURRENT_C3 (R75, PDF C1_current), CURRENT_C6 (R30, C3_current), CURRENT_Q4 (R72, current_L1),
+CURRENT_Q7 (R29, current_L3). PDF BRIDGE+ is a second terminal on UIN (text note). The
 PDF terminal Input_current hangs on the GND rail: GND (text note, STATUS.md finding 7).
 L1 / L3 are off-board parts (symbol L_OFFBOARD, not in the netlist comparison): OUT1 / UC3 and
 OUT2 / U_OUT stay separate nets, as in the IPC."""
@@ -87,9 +89,9 @@ def half_bridge(q_hi, q_lo, x, g_hi, g_lo, xg_hi, xg_lo, yg_hi, yg_lo, shunt, cu
     gl_down(cur, x_cur, y_cur)
 
 
-half_bridge("Q3", "Q4", 83, "PWM1_HI", "PWM1_LO", 69, 72, 104, 112, "R72", "CURRENT_L1", 76, 109)
+half_bridge("Q3", "Q4", 83, "PWM1_HI", "PWM1_LO", 69, 72, 104, 112, "R72", "CURRENT_Q4", 76, 109)
 node(83, YT)
-half_bridge("Q8", "Q7", 145, "PWM3_HI", "PWM3_LO", 130, 135, 100, 107, "R29", "CURRENT_L3", 154, 110)
+half_bridge("Q8", "Q7", 145, "PWM3_HI", "PWM3_LO", 130, 135, 100, 107, "R29", "CURRENT_Q7", 154, 110)
 
 # --- OUT1 -> L1 (off-board, L5 - L12) -> UC3 -> L2 -> V_A -----------------------------------------
 term(sh, "L5", *P(70, 19), "up")
@@ -107,7 +109,7 @@ gl_up("UC3", 100, 7)
 term(sh, "L12", *P(105, 19), "up")
 sh.wire(P(105, 19), P(105, 43), P(100, 43))
 node(100, 43)
-t, b = vcap("C3", 100, 66)                           # C3: + = UC3, - = C1_CURRENT (shunt R75)
+t, b = vcap("C3", 100, 66)                           # C3: + = UC3, - = CURRENT_C3 (shunt R75)
 sh.wire(P(100, YM), t)
 _, rt, rb = vert2(sh, "R", "R75", *P(100, 81), sh_value("R75"), top=2)
 sh.wire(b, rt)
@@ -116,7 +118,7 @@ node(100, YB)
 power_at(sh, "GND", P(100, 96), "down")              # PDF: terminal gnd below R75
 sh.wire(P(100, 72), P(108, 72), P(108, 117))
 node(100, 72)
-gl_down("C1_CURRENT", 108, 117)
+gl_down("CURRENT_C3", 108, 117)
 l, r = hpart("L2", 110, YM)                          # L2: 1 = UC3, 2 = V_A
 sh.wire(P(100, YM), l)
 sh.wire(r, P(128, YM), P(128, 7))                    # PDF V_a; crosses the UIN rail
@@ -158,7 +160,7 @@ l27, r27 = hpart("R27", 186, 51, text="above")
 sh.wire(P(179, YM), l26)
 sh.wire(P(179, YM), P(179, 51), l27)
 sh.label("UC6", *P(179, 51), 0)
-t, b = vcap("C6", 179, 66)                           # C6: + = UC6, - = C3_CURRENT (shunt R30)
+t, b = vcap("C6", 179, 66)                           # C6: + = UC6, - = CURRENT_C6 (shunt R30)
 sh.wire(P(179, YM), t)
 _, rt, rb = vert2(sh, "R", "R30", *P(179, 81), sh_value("R30"), top=2)
 sh.wire(b, rt)
@@ -166,7 +168,7 @@ sh.wire(rb, P(179, YB))
 node(179, YB)
 sh.wire(P(179, 72), P(168, 72), P(168, 117))
 node(179, 72)
-gl_down("C3_CURRENT", 168, 117)
+gl_down("CURRENT_C6", 168, 117)
 term(sh, "GND_PRE", *P(179, 99), "down")
 sh.wire(P(179, 99), P(179, YB))
 term(sh, "VPRE", *P(193, 25), "up")
@@ -183,11 +185,11 @@ term(sh, "GND_PWR", *P(193, 99), "down")
 sh.wire(P(193, 99), P(193, YB))
 
 # --- notes ----------------------------------------------------------------------------------------
-NX, NY = P(4, 128)
-sh.text("Net names = IPC (PDF: b+, Uin, Uc3, V_a, U_out, uc6, preout, out1, out2). PDF BRIDGE+ (terminal above Q3) = UIN.", NX, NY)
+NX, NY = P(4, 131)
+sh.text("Net names = IPC (PDF: b+, Uin, Uc3, V_a, U_out, uc6, preout, out1, out2); shunt nets renamed (finding 7). PDF BRIDGE+ (terminal above Q3) = UIN.", NX, NY)
 sh.text("L1 / L3 (3 mH) are off-board, wired to the terminals L5 - L12 and L11 - L6; they are not in the netlist (OUT1 / UC3 and OUT2 / U_OUT are separate nets).", NX, NY + g(2))
 sh.text("PDF terminal Input_current (below C2) is on the GND rail = GND: there is no input-current shunt (STATUS.md finding 7).", NX, NY + g(4))
-sh.text("OUT1, OUT2, PWMx: sheet 2. UIN, UC3, V_A, U_OUT: sheet 3. C1_CURRENT, C3_CURRENT, CURRENT_L1, CURRENT_L3: sheet 4. PWR_FLAGs of GND (sheet 5), OUT1 / OUT2 (sheet 2).", NX, NY + g(6))
+sh.text("OUT1, OUT2, PWMx: sheet 2. UIN, UC3, V_A, U_OUT: sheet 3. CURRENT_C3, CURRENT_C6, CURRENT_Q4, CURRENT_Q7: sheet 4. PWR_FLAGs of GND (sheet 5), OUT1 / OUT2 (sheet 2).", NX, NY + g(6))
 
 sh.save()
 print("sheet01: written")

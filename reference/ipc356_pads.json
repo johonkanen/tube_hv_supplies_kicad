@@ -2,7 +2,15 @@
  "source": "hi_voltage_suppliesv2 - CADCAM Netlist.IPC",
  "units": "mm, IPC coordinates (Y up)",
  "net_aliases": {
-  "+2V5_BIAS": "+1V0_BIAS"
+  "+2V5_BIAS": "+1V0_BIAS",
+  "C1_CURRENT": "CURRENT_C3",
+  "C3_CURRENT": "CURRENT_C6",
+  "CURRENT_L1": "CURRENT_Q4",
+  "CURRENT_L3": "CURRENT_Q7",
+  "C1_CURRENT_MEAS": "CURRENT_C3_MEAS",
+  "INPUT_CURRENT_MEAS": "CURRENT_C6_MEAS",
+  "C2_CURRENT_MEAS": "CURRENT_Q4_MEAS",
+  "C3_CURRENT_MEAS": "CURRENT_Q7_MEAS"
  },
  "truncated_refdes": {
   "V_ANOD": "V_ANODE",
@@ -18,11 +26,11 @@
   "NNAME00006": "UIN",
   "NNAME00007": "OUT1",
   "NNAME00008": "PWM1_LO",
-  "NNAME00009": "CURRENT_L1",
+  "NNAME00009": "CURRENT_Q4",
   "NNAME00010": "PWM3_HI",
   "NNAME00011": "OUT2",
   "NNAME00012": "PWM3_LO",
-  "NNAME00013": "CURRENT_L3",
+  "NNAME00013": "CURRENT_Q7",
   "NNAME00014": "#00022",
   "NNAME00015": "#00024",
   "NNAME00016": "#00028",
@@ -41,20 +49,20 @@
   "NNAME00029": "#00036",
   "NNAME00030": "G3_LO",
   "NNAME00031": "UC3",
-  "NNAME00032": "C1_CURRENT",
+  "NNAME00032": "CURRENT_C3",
   "NNAME00033": "U_OUT",
   "NNAME00034": "UC6",
-  "NNAME00035": "C3_CURRENT",
+  "NNAME00035": "CURRENT_C6",
   "NNAME00036": "PREOUT",
   "NNAME00037": "#00041",
   "NNAME00038": "#00026",
-  "NNAME00039": "C2_CURRENT_MEAS",
+  "NNAME00039": "CURRENT_Q4_MEAS",
   "NNAME00040": "V_A_MEAS",
-  "NNAME00041": "C3_CURRENT_MEAS",
+  "NNAME00041": "CURRENT_Q7_MEAS",
   "NNAME00042": "UIN_MEAS",
-  "NNAME00043": "INPUT_CURRENT_MEAS",
+  "NNAME00043": "CURRENT_C6_MEAS",
   "NNAME00044": "UC3_MEAS",
-  "NNAME00045": "C1_CURRENT_MEAS",
+  "NNAME00045": "CURRENT_C3_MEAS",
   "NNAME00046": "U_OUT_MEAS",
   "NNAME00047": "ADASEL1_ISO",
   "NNAME00048": "ADASEL2_ISO",
@@ -311,7 +319,7 @@
   },
   {
    "kind": "pad",
-   "net": "CURRENT_L1",
+   "net": "CURRENT_Q4",
    "net_raw": "CURRENT_L1",
    "net_id": "NNAME00009",
    "refdes": "Q4",
@@ -431,7 +439,7 @@
   },
   {
    "kind": "pad",
-   "net": "CURRENT_L3",
+   "net": "CURRENT_Q7",
    "net_raw": "CURRENT_L3",
    "net_id": "NNAME00013",
    "refdes": "Q7",
@@ -1471,7 +1479,7 @@
   },
   {
    "kind": "pad",
-   "net": "C1_CURRENT",
+   "net": "CURRENT_C3",
    "net_raw": "C1_CURRENT",
    "net_id": "NNAME00032",
    "refdes": "C3",
@@ -1551,7 +1559,7 @@
   },
   {
    "kind": "pad",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "C6",
@@ -1771,7 +1779,7 @@
   },
   {
    "kind": "pad",
-   "net": "C2_CURRENT_MEAS",
+   "net": "CURRENT_Q4_MEAS",
    "net_raw": "C2_CURRENT_MEAS",
    "net_id": "NNAME00039",
    "refdes": "J1",
@@ -1811,7 +1819,7 @@
   },
   {
    "kind": "pad",
-   "net": "C3_CURRENT_MEAS",
+   "net": "CURRENT_Q7_MEAS",
    "net_raw": "C3_CURRENT_MEAS",
    "net_id": "NNAME00041",
    "refdes": "J1",
@@ -1851,7 +1859,7 @@
   },
   {
    "kind": "pad",
-   "net": "INPUT_CURRENT_MEAS",
+   "net": "CURRENT_C6_MEAS",
    "net_raw": "INPUT_CURRENT_MEAS",
    "net_id": "NNAME00043",
    "refdes": "J1",
@@ -1891,7 +1899,7 @@
   },
   {
    "kind": "pad",
-   "net": "C1_CURRENT_MEAS",
+   "net": "CURRENT_C3_MEAS",
    "net_raw": "C1_CURRENT_MEAS",
    "net_id": "NNAME00045",
    "refdes": "J1",
@@ -2671,7 +2679,7 @@
   },
   {
    "kind": "pad",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "R30",
@@ -3071,7 +3079,7 @@
   },
   {
    "kind": "pad",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "R56",
@@ -3211,7 +3219,7 @@
   },
   {
    "kind": "pad",
-   "net": "INPUT_CURRENT_MEAS",
+   "net": "CURRENT_C6_MEAS",
    "net_raw": "INPUT_CURRENT_MEAS",
    "net_id": "NNAME00043",
    "refdes": "R55",
@@ -3371,7 +3379,7 @@
   },
   {
    "kind": "pad",
-   "net": "C1_CURRENT_MEAS",
+   "net": "CURRENT_C3_MEAS",
    "net_raw": "C1_CURRENT_MEAS",
    "net_id": "NNAME00045",
    "refdes": "R60",
@@ -3431,7 +3439,7 @@
   },
   {
    "kind": "pad",
-   "net": "C1_CURRENT",
+   "net": "CURRENT_C3",
    "net_raw": "C1_CURRENT",
    "net_id": "NNAME00032",
    "refdes": "R61",
@@ -3571,7 +3579,7 @@
   },
   {
    "kind": "pad",
-   "net": "C2_CURRENT_MEAS",
+   "net": "CURRENT_Q4_MEAS",
    "net_raw": "C2_CURRENT_MEAS",
    "net_id": "NNAME00039",
    "refdes": "R65",
@@ -3631,7 +3639,7 @@
   },
   {
    "kind": "pad",
-   "net": "CURRENT_L1",
+   "net": "CURRENT_Q4",
    "net_raw": "CURRENT_L1",
    "net_id": "NNAME00009",
    "refdes": "R66",
@@ -3771,7 +3779,7 @@
   },
   {
    "kind": "pad",
-   "net": "C3_CURRENT_MEAS",
+   "net": "CURRENT_Q7_MEAS",
    "net_raw": "C3_CURRENT_MEAS",
    "net_id": "NNAME00041",
    "refdes": "R70",
@@ -3831,7 +3839,7 @@
   },
   {
    "kind": "pad",
-   "net": "CURRENT_L3",
+   "net": "CURRENT_Q7",
    "net_raw": "CURRENT_L3",
    "net_id": "NNAME00013",
    "refdes": "R71",
@@ -5291,7 +5299,7 @@
   },
   {
    "kind": "pad",
-   "net": "CURRENT_L3",
+   "net": "CURRENT_Q7",
    "net_raw": "CURRENT_L3",
    "net_id": "NNAME00013",
    "refdes": "R29",
@@ -5331,7 +5339,7 @@
   },
   {
    "kind": "pad",
-   "net": "CURRENT_L1",
+   "net": "CURRENT_Q4",
    "net_raw": "CURRENT_L1",
    "net_id": "NNAME00009",
    "refdes": "R72",
@@ -6231,7 +6239,7 @@
   },
   {
    "kind": "pad",
-   "net": "C3_CURRENT_MEAS",
+   "net": "CURRENT_Q7_MEAS",
    "net_raw": "C3_CURRENT_MEAS",
    "net_id": "NNAME00041",
    "refdes": "C20",
@@ -6351,7 +6359,7 @@
   },
   {
    "kind": "pad",
-   "net": "INPUT_CURRENT_MEAS",
+   "net": "CURRENT_C6_MEAS",
    "net_raw": "INPUT_CURRENT_MEAS",
    "net_id": "NNAME00043",
    "refdes": "C14",
@@ -6431,7 +6439,7 @@
   },
   {
    "kind": "pad",
-   "net": "C1_CURRENT_MEAS",
+   "net": "CURRENT_C3_MEAS",
    "net_raw": "C1_CURRENT_MEAS",
    "net_id": "NNAME00045",
    "refdes": "C16",
@@ -6511,7 +6519,7 @@
   },
   {
    "kind": "pad",
-   "net": "C2_CURRENT_MEAS",
+   "net": "CURRENT_Q4_MEAS",
    "net_raw": "C2_CURRENT_MEAS",
    "net_id": "NNAME00039",
    "refdes": "C18",
@@ -7611,7 +7619,7 @@
   },
   {
    "kind": "pad",
-   "net": "C1_CURRENT",
+   "net": "CURRENT_C3",
    "net_raw": "C1_CURRENT",
    "net_id": "NNAME00032",
    "refdes": "R75",
@@ -9931,7 +9939,7 @@
   },
   {
    "kind": "via",
-   "net": "C1_CURRENT_MEAS",
+   "net": "CURRENT_C3_MEAS",
    "net_raw": "C1_CURRENT_MEAS",
    "net_id": "NNAME00045",
    "refdes": "",
@@ -9951,7 +9959,7 @@
   },
   {
    "kind": "via",
-   "net": "C1_CURRENT_MEAS",
+   "net": "CURRENT_C3_MEAS",
    "net_raw": "C1_CURRENT_MEAS",
    "net_id": "NNAME00045",
    "refdes": "",
@@ -10411,7 +10419,7 @@
   },
   {
    "kind": "via",
-   "net": "CURRENT_L1",
+   "net": "CURRENT_Q4",
    "net_raw": "CURRENT_L1",
    "net_id": "NNAME00009",
    "refdes": "",
@@ -10431,7 +10439,7 @@
   },
   {
    "kind": "via",
-   "net": "CURRENT_L1",
+   "net": "CURRENT_Q4",
    "net_raw": "CURRENT_L1",
    "net_id": "NNAME00009",
    "refdes": "",
@@ -10451,7 +10459,7 @@
   },
   {
    "kind": "via",
-   "net": "CURRENT_L1",
+   "net": "CURRENT_Q4",
    "net_raw": "CURRENT_L1",
    "net_id": "NNAME00009",
    "refdes": "",
@@ -10551,7 +10559,7 @@
   },
   {
    "kind": "via",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "",
@@ -10571,7 +10579,7 @@
   },
   {
    "kind": "via",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "",
@@ -10591,7 +10599,7 @@
   },
   {
    "kind": "via",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "",
@@ -10611,7 +10619,7 @@
   },
   {
    "kind": "via",
-   "net": "C3_CURRENT",
+   "net": "CURRENT_C6",
    "net_raw": "C3_CURRENT",
    "net_id": "NNAME00035",
    "refdes": "",
@@ -10671,7 +10679,7 @@
   },
   {
    "kind": "via",
-   "net": "C1_CURRENT",
+   "net": "CURRENT_C3",
    "net_raw": "C1_CURRENT",
    "net_id": "NNAME00032",
    "refdes": "",
@@ -10691,7 +10699,7 @@
   },
   {
    "kind": "via",
-   "net": "C1_CURRENT",
+   "net": "CURRENT_C3",
    "net_raw": "C1_CURRENT",
    "net_id": "NNAME00032",
    "refdes": "",
@@ -10711,7 +10719,7 @@
   },
   {
    "kind": "via",
-   "net": "C1_CURRENT",
+   "net": "CURRENT_C3",
    "net_raw": "C1_CURRENT",
    "net_id": "NNAME00032",
    "refdes": "",
@@ -10971,7 +10979,7 @@
   },
   {
    "kind": "via",
-   "net": "CURRENT_L3",
+   "net": "CURRENT_Q7",
    "net_raw": "CURRENT_L3",
    "net_id": "NNAME00013",
    "refdes": "",
