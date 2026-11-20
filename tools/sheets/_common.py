@@ -86,3 +86,80 @@ def place_mirrored(sh, name, ref, x, y, axis="x", **kw):
     for num, (px, py) in list(p.pins.items()):
         p.pins[num] = (px, round(2 * y - py, 4)) if axis == "x" else (round(2 * x - px, 4), py)
     return p
+
+
+# --- SI8271 gate-driver cell (sheet 2, x4) -----------------------------------------------------------
+def si8271_cell(sh, ref, UX, UY, vin, cdec, r_on, r_off, gate, cvdd2, rail="15V_BOOST", boot=None, src=None):
+    """SI8271 isolated gate driver with its parts, IC at (UX, UY).
+
+    Input side: pin 1 Vin = global label `vin`; VDD1 (2) and EN (4) on 3V3, GND1 (3) on GND;
+    cdec = decoupling capacitor 3V3 - GND (pin 2 on 3V3).
+    Output side: r_on = 15R on OUT+ (7), r_off = 8R on OUT- (6), pin 1 on the driver, pin 2 of both
+    on the global label `gate`; cvdd2 = capacitor VDD2 (8) - GND2 (5).
+    Low side (boot None): VDD2 on `rail` (cvdd2 pin 1), GND2 on GND.
+    High side (boot = (diode, resistor), src = global label of the switch node): `rail` -> diode
+    A-C -> resistor 1-2 -> VDD2 (cvdd2 pin 2), GND2 = `src` (cvdd2 pin 1). VDD2 and GND2 are
+    power inputs fed through passives only, so each of the two nets gets a PWR_FLAG."""
+    u = sh.place(sym(ref), ref, UX, UY, value=sh_value(ref))
+    VDD1, VIN, EN, GND1, VDD2, OUTP, OUTN, GND2 = (u.pin(n) for n in (2, 1, 4, 3, 8, 7, 6, 5))
+
+    # --- input side ---
+    glabel_left(sh, vin, VIN, 22)
+    xs = UX - g(12)
+    top = (xs, UY - g(7))
+    sh.wire(VDD1, (xs, VDD1[1]), top, (xs, UY - g(9)))
+    power_at(sh, "3V3", (xs, UY - g(9)), "up")
+    fa = {0: 0, 90: 270, 180: 0, 270: 90}[_two_pin_rot("C", 1, "left")]     # texts clear of the plates
+    _, cl, cr = horiz2(sh, "C", cdec, UX - g(17), top[1], sh_value(cdec), left=1,
+                       ref_at=(UX - g(17), top[1] - 3.81, fa, None), value_at=(UX - g(17), top[1] + 3.81, fa, None))
+    sh.wire(cr, top)
+    sh.junction(*top)
+    sh.wire(cl, (UX - g(22), top[1]), (UX - g(22), UY - g(6)))
+    power_at(sh, "GND", (UX - g(22), UY - g(6)), "down")
+    q = left(EN, 3)                       # EN tied to VDD1: own power symbol (the bus would cross Vin)
+    sh.wire(EN, q)
+    power_at(sh, "3V3", q, "left")
+    sh.wire(GND1, (xs, GND1[1]), (xs, UY + g(5)))
+    power_at(sh, "GND", (xs, UY + g(5)), "down")
+
+    # --- output side ---
+    xv, xc = UX + g(10), UX + g(13)       # VDD2 riser, capacitor column
+    YT, YB = UY - g(15), UY + g(6)        # VDD2 row, GND2 row
+    sh.wire(VDD2, (xv, VDD2[1]), (xv, YT), (xc, YT))
+    _, ct, cb = vert2(sh, "C", cvdd2, xc, UY - g(10), sh_value(cvdd2), top=2 if boot else 1)
+    sh.wire((xc, YT), ct)
+    sh.wire(cb, (xc, YB))                 # crosses the OUT+ / OUT- wires, as in the PDF
+    sh.wire(GND2, (xc, GND2[1]))
+    sh.junction(xc, GND2[1])
+    xr, xj = UX + g(19), UX + g(24)
+    _, rl, rr = horiz2(sh, "R", r_on, xr, OUTP[1], sh_value(r_on), left=1, text="above")
+    sh.wire(OUTP, rl)
+    sh.wire(rr, (xj, OUTP[1]), (xj, OUTN[1]))
+    _, rl, rr = horiz2(sh, "R", r_off, xr, OUTN[1], sh_value(r_off), left=1, text="below")
+    sh.wire(OUTN, rl)
+    sh.wire(rr, (xj, OUTN[1]), (UX + g(30), OUTN[1]))
+    sh.junction(xj, OUTN[1])
+    sh.glabel(gate, UX + g(30), OUTN[1], 0)
+    if boot is None:
+        sh.wire((xv, YT), (xv, YT - g(2)))
+        sh.junction(xv, YT)
+        power_at(sh, rail, (xv, YT - g(2)), "up")
+        power_at(sh, "GND", (xc, YB), "down")
+        return u
+    dref, rref = boot
+    _, rl, rr = horiz2(sh, "R", rref, UX + g(3), YT, sh_value(rref), left=1)
+    sh.wire(rr, (xv, YT))
+    sh.junction(xv, YT)
+    _, da, dc = horiz2(sh, "D", dref, UX - g(6), YT, sh_value(dref), left="A")
+    sh.wire(dc, rl)
+    sh.wire(da, (UX - g(16), YT), (UX - g(16), YT - g(2)))
+    power_at(sh, rail, (UX - g(16), YT - g(2)), "up")
+    sh.wire((xv, YT), (xv, YT - g(3)))
+    sh.pwr_flag(xv, YT - g(3), 0)         # bootstrap node: VDD2 fed through the diode and resistor
+    sh.wire((xc, YB), (UX + g(30), YB))
+    sh.glabel(src, UX + g(30), YB, 0)
+    xf = UX + g(22)
+    sh.wire((xf, YB), (xf, YB + g(2)))
+    sh.junction(xf, YB)
+    sh.pwr_flag(xf, YB + g(2), 180)       # switch node: GND2 of the high-side driver
+    return u
