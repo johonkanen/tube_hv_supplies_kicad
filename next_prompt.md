@@ -3,58 +3,54 @@
 Ready-to-paste prompt for the next agent session. Replaced at the end of every session.
 
 ```
-Convert the Proteus board in /home/jari/dev/tube_hv_supplies_kicad to KiCad 10: Phase 1
-transcription, sheets 3 (Voltage measurements) and 1 (Power stage) (Fable): the last two sheets.
-Phase 0, the Phase 1 preparation and sheets 5, 6, 2 and 4 are done (82/158 parts).
+Convert the Proteus board in /home/jari/dev/tube_hv_supplies_kicad to KiCad 10: Phase 2,
+footprints (Opus). Phases 0 and 1 are done: all 158 parts are drawn on 6 sheets (plus the
+off-board L1 / L3), the netlist equals the IPC (0 wrong-net pins, every net complete), ERC 0
+errors / 21 explained warnings.
 
-Read, in this order: PLAN.md, STATUS.md ("Phase 1 transcription": per-sheet table, ERC warnings,
-how the sheets were drawn, the N/C section; "Transcription rules"; "Off-board inductors L1 / L3";
-findings; decisions), tools/p2k/CONVERSION_PLAYBOOK.md (sections 1, 3 "Phase 1" and 5),
-tools/p2k/README.md, tools/sheets/_common.py (si8271_cell, shunt_amp_cell, _hcap, term, P,
-place_mirrored), tools/sheets/sheet04.py and sheet02.py (the style to follow) and
-reference/pin_nets_by_component.md (the IPC nets per pin: the truth for every wire).
-Examples from other boards (read only): ~/dev/tube_psu_kicad/tools/sheets/ and
-~/dev/tube_power_amp_kicad/tools/sheets/.
+Read, in this order: PLAN.md, STATUS.md (phase table, "Pinouts", "Off-board inductors L1 / L3",
+the refdes table, "Notes for Phase 1" on pin-id families and the bottom-side parts, findings,
+p2k candidates, decisions), tools/p2k/CONVERSION_PLAYBOOK.md (sections 1, 3 "Phase 2" and 5),
+tools/p2k/README.md (p2k.footprints, check_footprints, fpgeom), lib/part_map.csv (device and
+package per refdes), reference/ipc356_pads.csv and reference/pin_nets_by_component.md.
+Reference (read only): ~/dev/tube_psu_kicad/tools/gen_footprints.py and its p2k_config.py
+(same p2k version, Phase 2 done); ~/dev/tube_power_amp_kicad for the terminal footprints.
 
-Start with tools/check_all.sh; it must print ALL CHECKS PASSED (8 steps; compare 82/158 present,
-ERC 0 errors / 29 warnings). Render the PDF pages for reading:
-pdftoppm -r 200 -png source/schematic_pdf/hi_voltage_suppliesv2.PDF build/tmp/pdf/hi
+Start with tools/check_all.sh; it must print ALL CHECKS PASSED (8 steps; compare 158/158 parts,
+423 pins, 0 wrong-net pins, 115 / 115 net groups complete; ERC 0 errors / 21 warnings).
 
 Then:
-- tools/sheets/sheet03.py -> kicad/03_voltage_measurements.kicad_sch (42 parts): U1 (LMV324A;
-  units 1-4 = A-D, supply unit 5 placed once with 3V3 / GND) and the four divider + difference
-  amplifier blocks (cell in _common.py, x4; shunt_amp_cell shows the pattern). Global labels:
-  UIN, UC3, V_A, U_OUT (sheet 1), UIN_MEAS, UC3_MEAS, V_A_MEAS, U_OUT_MEAS (sheet 5).
-- tools/sheets/sheet01.py -> kicad/01_power_stage.kicad_sch (34 parts on the board + L1 / L3):
-  the IGBTs Q3 / Q4 / Q7 / Q8, the inductors, capacitors, shunts and the terminals. Terminals
-  with _common.term() (B_P, B_N, V_ANODE, GND_PRE, GND_PWR, VPRE, L5, L6, L11, L12); L1 / L3
-  with sym("L1") = L_OFFBOARD between L5 - L12 and L11 - L6 (never the plain L symbol). Local
-  labels B+, UC6, PREOUT; PDF BRIDGE+ = UIN; the PDF terminal Input_current is GND (no label).
-  Global labels to sheet 2 (OUT1, OUT2, PWM1_HI, PWM1_LO, PWM3_HI, PWM3_LO), sheet 3 (UIN, UC3,
-  V_A, U_OUT) and sheet 4 (C1_CURRENT, C3_CURRENT, CURRENT_L1, CURRENT_L3). C_Polarized: pin 1
-  on the positive net.
-- 3V3, GND, 15V_BOOST and +2V5_BIAS already have their PWR_FLAGs on sheet 5; OUT1 / OUT2 and the
-  bootstrap nodes on sheet 2: plain power_at / labels. Add a PWR_FLAG only where ERC reports an
-  undriven power pin, and note it in STATUS.md.
-- Never use the no_connect pin type (STATUS.md "N/C pads"); the only N/C pads are J1-37 / 38.
-- After each sheet: tools/p2k/bin/p2k compare_netlists --allow-missing --sheet N (0 missing on
-  that sheet, 0 errors), tools/erc.sh (0 errors; explain each warning in STATUS.md; the 8
-  temporary isolated-label warnings must disappear: expected at the end 21 = 19 single-pin
-  labels + 2 ground_pin_not_ground on DRV1-5 / DRV5-5), render with
-  tools/p2k/bin/p2k render_sheet kicad/NN_*.kicad_sch and compare with build/tmp/pdf/hi-N.png.
-- Running a sheet script twice must give byte-identical files; check it once per sheet.
-- Commit after each finished sheet (with its reports/render PNG).
-- When both sheets are done: drop --allow-missing from the compare step in tools/check_all.sh
-  (all 158 parts present, every IPC net complete, 0 wrong-net pins), negative-test the final
-  check once on a scratch copy (P2K_BOARD), and mark Phase 1 done in STATUS.md.
+- tools/gen_footprints.py (RULES and PROJECT of this board; the shared code is p2k.footprints)
+  -> lib/footprint_map.csv (refdes -> footprint) and lib/tube_hv_supplies.pretty. Assign by
+  symbol + IPC pad pattern (pad count, span, pad size, drill). Keep KiCad pad sizes
+  (FOOTPRINT_PAD_SIZES = "kicad"); Proteus sizes only where DRC forces it later (user decision).
+- p2k_config.py: OFF_BOARD_PARTS = L1, L3 (no footprint, excluded from the board), the
+  footprint settings the tools need, the mounting-hole footprint (4 holes, 3.0 mm PLATED,
+  6.35 mm ring on all four layers, no net) for Phase 3.
+- Special parts: the six two-hole TERMINAL parts (B_P, B_N, V_ANODE, GND_PRE, GND_PWR, VPRE:
+  both holes are pin 1) and the four one-hole ones (L5, L6, L11, L12: 1.524 mm hole, 2.54 mm
+  pad); ADC1-ADC3 (SOT-23-6 with the Proteus pin ids A1, A2, COM2, K2, K1, COM1 = pads 1-6);
+  REF1 (SOT-23, Proteus 1 / 2 / 3 on JEDEC 3 / 1 / 2: the pin-order fit must confirm it);
+  Q3 / Q4 / Q7 / Q8 (TO-220, 1 = G, 2 = C, 3 = E); D2 / D18 (pads A / C); J1 (2x20, 1.27 mm,
+  pins 37 / 38 N/C) and J2 (2x8); the 38 bottom-side parts (mirror in the fit).
+- p2k check_footprints (and --pcbnew): every part fits the IPC pads within 0.05 mm; writes
+  reports/footprint_fit.csv (the placement input for Phase 3). Run the pin-order check (unmoved
+  KiCad base footprint with the Proteus renumbering) and report every pinout oddity in
+  STATUS.md (ADC1-3: finding 6 expects A1 = pad 1 and COM2 = pad 3).
+- The sheet scripts fill the Footprint field from the map: re-run all six (tools/sheets/
+  sheet0N.py), then compare_netlists and ERC must be unchanged (0 wrong-net pins, 21 warnings).
+- Add the new steps to tools/check_all.sh (footprint map / library up to date, footprint fit)
+  and negative-test each once on a scratch copy (P2K_BOARD).
 
 Open user decisions (don't change without asking): the +2V5_BIAS net name (finding 1); the board
-thickness (finding 3, Phase 3); findings 6-8 are reported only.
+thickness (finding 3, Phase 3); pad sizes (KiCad by default); findings 6-8, 10 and 11 are
+reported only.
 
 Rules (PLAN.md section 5): don't change tools/p2k or its pin (c5682dd); board-local workarounds in
-tools/ (e.g. _common.py), noted in STATUS.md "p2k candidates"; don't touch other repos; report design
-findings, don't fix them; temporary files in build/tmp; never run the KiCad AppImage with
---version (use tools/p2k/bin/kipy and tools/p2k/bin/kicad-cli). At the end: STATUS.md updated
-(per-sheet result table, check output, findings, decisions), next_prompt.md replaced with the
-prompt for Phase 2 (footprints, Opus), commit and push (git push origin main).
+tools/, noted in STATUS.md "p2k candidates"; don't touch other repos; report design findings,
+don't fix them; never use the no_connect pin type (N/C pads are passive pins with no-connect
+flags); temporary files in build/tmp; never run the KiCad AppImage with --version (use
+tools/p2k/bin/kipy and tools/p2k/bin/kicad-cli). At the end: STATUS.md updated (phase table, fit
+result, check output, findings, decisions), next_prompt.md replaced with the prompt for Phase 3
+(PCB, Opus), commit and push (git push origin main).
 ```

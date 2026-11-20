@@ -5,13 +5,13 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | Phase | State |
 |---|---|
 | 0 Skeleton and inventory | **done** 2026-11-20 (Opus 5.5) |
-| 1 Schematic | preparation **done** 2026-11-20 (Opus 5.5); transcription: sheets 5, 6, 2 and 4 **done** 2026-11-20 (Fable 5.2), 82/158 parts; next: sheets 3 and 1 (`next_prompt.md`) |
-| 2 Footprints | not started |
+| 1 Schematic | **done** 2026-11-20 (preparation Opus 5.5; transcription Fable 5.2): 158/158 parts, 0 wrong-net pins, every IPC net complete, ERC 0 errors / 21 explained warnings |
+| 2 Footprints | not started; next (`next_prompt.md`) |
 | 3 PCB | not started |
 | 4 Verification | not started |
 | 5 Clean-up | not started |
 
-## Phase 1 transcription – in progress
+## Phase 1 transcription – done (Fable 5.2, 2026-11-20)
 
 | Sheet | Script | Parts | compare (`--sheet N`) | ERC | Session |
 |---|---|---|---|---|---|
@@ -19,30 +19,34 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 6 ADC | `tools/sheets/sheet06.py` | 15/15 | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
 | 2 Gate drivers | `tools/sheets/sheet02.py` | 26/26 | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
 | 4 Current measurements | `tools/sheets/sheet04.py` | 34/34 | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
-| 3 Voltage measurements | | 0/42 | | | next |
-| 1 Power stage | | 0/34 | | | next |
+| 3 Voltage measurements | `tools/sheets/sheet03.py` | 42/42 | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
+| 1 Power stage | `tools/sheets/sheet01.py` | 34/34 (+ L1, L3 off-board) | 0 missing, 0 extra, 0 wrong-net pins | 0 errors | Fable 5.2, 2026-11-20 |
 
-Whole project after sheets 5, 6, 2 and 4: 82/158 parts, 265 pins compared, 0 wrong-net pins, 80
-IPC nets touched, 64 complete. Every script was run twice: byte-identical files. Renders in
-`reports/render/` (compared with `build/tmp/pdf/hi-N.png`).
+**Whole project (full comparison, no `--allow-missing`): 158/158 parts, 0 missing, 0 extra, 423
+pins compared, 0 wrong-net pins, 115 / 115 IPC net groups complete** (the 113 nets + the two N/C
+pads J1-37 / J1-38, each its own group). Every script was run twice: byte-identical files.
+Renders in `reports/render/` (compared with `build/tmp/pdf/hi-N.png`).
 
-**ERC: 0 errors, 29 warnings**:
+**ERC: 0 errors, 21 warnings** (the number expected; all permanent):
 
-- 27 `isolated_pin_label` ("label connected to only one pin"):
-  - 18 permanent: the local labels of the unused J1 ribbon signals (single-pin nets in the IPC:
-    the `*_ISO` signals, PWM_TRANS4 / PWM_TRANS6, DAB_*, ADCLK_DAB).
-  - 1 permanent: `FLOATING` on ADC3-K2 (ADR0 left open; single-pin net in the IPC).
-  - 8 temporary, the other end is on a sheet not drawn yet: UIN_MEAS, UC3_MEAS, V_A_MEAS,
-    U_OUT_MEAS on J1 (sheet 3) and C1_CURRENT, C3_CURRENT, CURRENT_L1, CURRENT_L3 on sheet 4
-    (one pin each there; the shunts are on sheet 1). The sheet 2 globals going to sheet 1
-    (OUT1, OUT2, PWM1_HI, PWM1_LO, PWM3_HI, PWM3_LO) have two pins on sheet 2 already, so they
-    give no warning. The 4 + 4 warnings of G1_HI ... G3_LO and of the `*_CURRENT_MEAS` J1
-    globals are gone.
-- 2 permanent `ground_pin_not_ground` ("Pin GND2 not connected to ground net"): DRV1-5 and
-  DRV5-5. GND2 of a high-side driver is the switch node (OUT1 / OUT2), as in the PDF and the
-  IPC; KiCad warns because of the pin name.
+- 19 `isolated_pin_label` ("label connected to only one pin"):
+  - 18: the local labels of the unused J1 ribbon signals (single-pin nets in the IPC: the
+    `*_ISO` signals, PWM_TRANS4 / PWM_TRANS6, DAB_*, ADCLK_DAB).
+  - 1: `FLOATING` on ADC3-K2 (ADR0 left open; single-pin net in the IPC).
+- 2 `ground_pin_not_ground` ("Pin GND2 not connected to ground net"): DRV1-5 and DRV5-5. GND2
+  of a high-side driver is the switch node (OUT1 / OUT2), as in the PDF and the IPC; KiCad
+  warns because of the pin name.
 
-Expected at the end of Phase 1: 21 warnings (19 + 2).
+The 8 temporary isolated-label warnings of the earlier sessions (UIN_MEAS, UC3_MEAS, V_A_MEAS,
+U_OUT_MEAS, C1_CURRENT, C3_CURRENT, CURRENT_L1, CURRENT_L3) are gone. **Sheets 3 and 1 needed
+no new PWR_FLAG** (no `power_pin_not_driven`): the flags are on sheet 5 (3V3, GND, 15V_BOOST,
++2V5_BIAS) and sheet 2 (bootstrap nodes, OUT1 / OUT2).
+
+Negative test of the final check (scratch copy in build/tmp, `P2K_BOARD`, deleted): R75 not
+drawn → "missing parts (1): R75", `check_all.sh` SOME CHECKS FAILED (it passed with
+`--allow-missing` before); C3 reversed → "KiCad net C1_CURRENT merges IPC nets [C1_CURRENT]
+[UC3]" (4 errors); a junction where the L5 wire crosses the UIN rail → "KiCad net OUT1 merges
+IPC nets [UIN ...] [OUT1 ...]", 5 wrong-net pins.
 
 How the sheets were drawn:
 
@@ -84,6 +88,30 @@ How the sheets were drawn:
   (the PDF draws C34 alone and repeats the supply pins on every unit). IPC net names
   (finding 7 unchanged).
 
+- **Sheet 3**: one `diff_amp_cell()` in `_common.py`, called four times at the PDF positions
+  (U1:C UIN → UIN_MEAS, U1:D UC3 → UC3_MEAS, U1:B V_A → V_A_MEAS, U1:A U_OUT → U_OUT_MEAS)
+  with the PDF's layout: two columns of 3 x 1M (GND on top of the left one as a GND symbol
+  pointing up, the measured voltage on top of the right one as a global label), the right
+  column to the + input with 15k to GND (GND symbol at the right end, as the PDF's `gnd`
+  terminal), the left column to the - input with 15k feedback below; output 100R → global
+  label with 100p to GND. U1 units 1-4 = A-D; unit 5 (pins 4 / 11) once at the left with
+  3V3 / GND and C12 (the PDF draws C12 at U1:A and repeats the supply pins on every unit).
+- **Sheet 1**: drawn at the PDF positions: the UIN rail (B+ → L7 → UIN) and the GND rail as
+  **one wire each**, so the columns that only cross them (the L5 / L12 / L11 terminal wires,
+  UC3, V_A, V_ANODE, the gate and current-sense columns) stay unconnected, as in the PDF;
+  junctions only at real nodes (negative-tested, see above). `half_bridge()` in sheet01.py
+  draws Q3 / Q4 / R72 and Q8 / Q7 / R29. L1 / L3 with `L_OFFBOARD` between the OUT1 node and
+  UC3 and between OUT2 and U_OUT. Global labels: UIN, UC3, V_A, U_OUT pointing up at the top
+  (the PDF's terminals), the gate and current-sense labels pointing down below the GND rail,
+  **OUT1 / OUT2 on a short stub of the L5 / L11 terminal wires** (the PDF has small `out1` /
+  `out2` wire labels at the switch nodes). Local labels B+, UC6, PREOUT. One GND power symbol
+  below R75 (the PDF's `gnd` terminal); B_N, GND_PRE, GND_PWR hang on the rail. Not drawn:
+  the PDF's second UIN terminal `BRIDGE+` and the `Input_current` terminal on the GND rail
+  (text notes). Layout changes: C10 / C9 at x = 55 / 60 (PDF 59 / 64) and the PWM1 gate
+  columns at 69 / 72 (PDF 67 / 71), PWM3_LO at 135 (PDF 133, the L11 column), to keep texts
+  and columns apart. C_Polarized pin 1 on the positive net everywhere (C3 on UC3 over
+  C1_CURRENT, C6 on UC6 over C3_CURRENT).
+
 ### N/C pads and the `no_connect` pin type (checked 2026-11-20)
 
 Found by the preamp conversion: KiCad 10's netlist keeps a pin of electrical type `no_connect`
@@ -99,7 +127,7 @@ such a pad wired by mistake.
   with "N/C mismatch: J1-37 is N/C in IPC but on KiCad net GND" and "KiCad net GND merges IPC
   nets [GND ...] [N/C: J1-37]". ERC stayed at 0 errors / 29 warnings in both cases (no
   `no_connect_connected` line), so the comparison, not ERC, is what guards the N/C pads here.
-- Rule for later symbols (sheets 3 and 1 need none): never use the `no_connect` pin type; a
+- Rule for later symbols (sheets 3 and 1 needed none): never use the `no_connect` pin type; a
   pad without a net is a passive pin with a no-connect flag.
 
 ## Phase 1 preparation – done (Opus 5.5, 2026-11-20)
@@ -251,7 +279,8 @@ driven by R76 / J1 in the full sheet).
   compare errors, 0 ERC errors (warnings explained here).
 - Order: 5 Reference and connector → 6 ADC → 2 Gate drivers → 4 Current measurements →
   3 Voltage measurements → 1 Power stage.
-- No new design findings came from sheets 2 and 4 (findings 2, 7 and 8 cover them).
+- No new design findings came from sheets 2 and 4 (findings 2, 7 and 8 cover them); sheets 3
+  and 1 added findings 10 and 11.
 
 ## Phase 0 – done (Opus 5.5, 2026-11-20)
 
@@ -315,7 +344,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (after sheets 5, 6, 2 and 4):
+`tools/check_all.sh`, 2026-11-20 (Phase 1 done, all six sheets):
 
 ```
 == KiCad environment
@@ -355,11 +384,10 @@ gen_symbols: lib/tube_hv_supplies.kicad_sym up to date (20 symbols)
 symbols: 15 part types, 160 refdes, 4 power symbols
 symbols: OK
 == ERC
-erc: 0 errors, 29 warnings (reports/erc.rpt)
+erc: 0 errors, 21 warnings (reports/erc.rpt)
 == Netlist comparison vs IPC
-compare: parts 82/158 present, 76 missing, 0 extra; pins compared 265, wrong-net pins 0; IPC nets touched 80, complete 64
-compare: per sheet (drawn/total) 1:0/34 2:26/26 3:0/42 4:34/34 5:7/7 6:15/15
-WARNING: missing parts (76): (see --verbose or --sheet N)
+compare: parts 158/158 present, 0 missing, 0 extra; pins compared 423, wrong-net pins 0; IPC nets touched 115, complete 115
+compare: per sheet (drawn/total) 1:34/34 2:26/26 3:42/42 4:34/34 5:7/7 6:15/15
 compare: OK
 
 ALL CHECKS PASSED
@@ -409,6 +437,17 @@ Reported, not fixed (PLAN.md section 5).
    Pinouts agree with the values' parts (TO-220 G-C-E, quad op-amp, SOT-23 renumbered), so
    nothing changes; the KiCad symbols are named after the values.
 
+10. **Voltage-measurement range (note for the redesign):** the four difference amplifiers
+    (3 x 1M, 15k) have a gain of 15k / 3M = 1 / 200, so the 3.3 V output range of U1
+    corresponds to 660 V at UIN / UC3 / V_A / U_OUT, referred to GND with no offset (only
+    positive voltages can be measured). The - divider's far end is GND on the same board, so
+    the amplifier is a plain 1 / 200 divider with a buffer; fine as built, noted only.
+11. **R26 || R27 (1k each, 500 R) between UC6 and PREOUT, and the L4 / C6 / R30 arrangement:**
+    C6 returns through the shunt R30 (`C3_CURRENT`), C5 and C7 go straight to GND, and the
+    load current to VPRE passes R26 || R27 (500 R). As drawn in the PDF and the IPC;
+    reproduced. Whether 500 R in series with the preamp supply is intended is a redesign
+    question (to confirm with the user).
+
 ## p2k candidates
 
 Shared-tool limitations met on this board, with the board-local workaround used.
@@ -446,6 +485,13 @@ Shared-tool limitations met on this board, with the board-local workaround used.
    `ref_at` / `value_at` at ±3.81 mm in `_common.py` (`_hcap()`, `si8271_cell()`). The shared
    tool could take the offset from the symbol's body height.
 
+9. `compare_netlists` prints "IPC nets touched 115, complete 115" on a board with 113 nets: the
+   two N/C pads (J1-37 / 38) count as one group each. Printing "113 nets + 2 N/C pads" would
+   read better (cosmetic).
+10. The `SEND` / `SEND1` refdes sort crash of `compare_netlists` (reported by the FX-loop
+    board) **does not occur here**: every refdes prefix of this board is either always
+    numbered or never; no wrapper needed.
+
 ## Decisions
 
 - KiCad refdes `B_P` / `B_N` for `B+` / `B-` (P/N for the sign, as tube_psu `P400V` /
@@ -473,3 +519,8 @@ Shared-tool limitations met on this board, with the board-local workaround used.
   two bootstrap nodes and on OUT1 / OUT2 (sheet 2).
 - No symbol uses the `no_connect` pin type; N/C pads are passive pins with a no-connect flag
   (J1-37 / 38), guarded by `compare_netlists`.
+- Sheet 3: U1's supply unit and C12 at the left of the sheet (the PDF draws C12 at U1:A).
+- Sheet 1: rails as single wires with junctions only at real nodes; OUT1 / OUT2 global labels on
+  the L5 / L11 terminal wires; `BRIDGE+` and `Input_current` only as text notes; no new
+  PWR_FLAG on sheets 3 and 1.
+- `tools/check_all.sh` runs the full netlist comparison (no `--allow-missing`) from now on.
