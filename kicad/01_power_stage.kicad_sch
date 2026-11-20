@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "40a8ab47-1272-4183-badd-26877f30fc99")
+	(paper "A3")
+	(title_block
+		(title "Tube HV supplies - Power stage")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus hi_voltage_suppliesv2")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

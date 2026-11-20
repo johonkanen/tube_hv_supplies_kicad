@@ -1,0 +1,277 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "73c567c2-3d25-405c-8d46-6363f81c67af")
+	(paper "A3")
+	(title_block
+		(title "Tube HV supplies")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus hi_voltage_suppliesv2")
+	)
+	(lib_symbols)
+	(text "Tube HV supplies v2 - redrawn from Proteus. One sheet per Proteus PDF page.\nNet names follow the IPC-D-356A netlist (reference/pins_by_net.md)."
+		(exclude_from_sim no)
+		(at 25.4 22.86 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "97f21807-6c6b-4ce4-b625-8db6781df418")
+	)
+	(sheet
+		(at 25.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "c97b6f9f-c270-4deb-9b1e-208b0320e303")
+		(property "Sheetname" "01 Power stage"
+			(at 25.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "01_power_stage.kicad_sch"
+			(at 25.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "196ee51d-b945-4e97-8975-dbee38b233a9")
+		(property "Sheetname" "02 Gate drivers"
+			(at 152.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "02_gate_drivers.kicad_sch"
+			(at 152.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "80cffea8-9c61-4239-ae42-8e80dd6cd6af")
+		(property "Sheetname" "03 Voltage measurements"
+			(at 279.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "03_voltage_measurements.kicad_sch"
+			(at 279.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "50c65a94-6b83-45f3-88ff-a9038ff870c2")
+		(property "Sheetname" "04 Current measurements"
+			(at 25.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "04_current_measurements.kicad_sch"
+			(at 25.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "0de0d19d-168e-4471-929a-17fd567b426a")
+		(property "Sheetname" "05 Reference and connector"
+			(at 152.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "05_reference_connector.kicad_sch"
+			(at 152.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fcc317d6-5109-4f72-bf72-1702d49add25")
+		(property "Sheetname" "06 ADC"
+			(at 279.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "06_adc.kicad_sch"
+			(at 279.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies"
+				(path "/73c567c2-3d25-405c-8d46-6363f81c67af"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

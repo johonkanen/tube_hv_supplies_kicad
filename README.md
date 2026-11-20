@@ -21,8 +21,9 @@ board is in `p2k_config.py`.
 
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
-Phase 0 (skeleton and inventory) done: `p2k_config.py` complete, `reference/` cheat sheets
-generated from the IPC netlist, `tools/check_all.sh` passes. Next: Phase 1 preparation.
+Phase 0 (skeleton and inventory) and the Phase 1 preparation are done: part map, symbol
+library, empty KiCad project with one sub-sheet per PDF page, transcription rules in STATUS.md;
+`tools/check_all.sh` passes. Next: Phase 1 transcription (sheets 5 and 6 first).
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 
@@ -54,7 +55,12 @@ source/         Proteus exports (read-only)
   schematic_pdf/  schematic PDF to redraw from
   *.pdsprj        Proteus project (schematic values, devices, packages, pin names)
 reference/      tables derived from the IPC netlist (p2k ipc356; generated, don't edit)
+lib/            part_map.csv and the project symbol library (generated)
+kicad/          KiCad project: root sheet + 6 sub-sheets (one per PDF page)
 tools/p2k/       proteus2kicad (submodule)
+tools/make_part_map.py, tools/gen_symbols.py  generators of lib/ (--check)
+tools/sheets/   one transcription script per sheet (_common.py: board helpers)
+tools/erc.sh    ERC of the schematic
 tools/check_all.sh  every verification step (run at the start and end of a session)
 p2k_config.py   board configuration for the tools
 ```

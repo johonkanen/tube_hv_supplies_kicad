@@ -47,7 +47,8 @@ STATUS.md for how each step was done.
 - **`L5`, `L6`, `L11`, `L12` are single-pad TERMINAL parts** (one 1.524 mm hole, 2.54 mm pad, each):
   the wire ends of the two off-board 3 mH inductors drawn on PDF page 1 but not in the IPC: `L1`
   between L5 (OUT1) and L12 (UC3), `L3` between L11 (OUT2) and L6 (U_OUT). Phase 1 draws L1 / L3 as
-  off-board parts (Phase 2: `OFF_BOARD_PARTS`) or leaves them out (decide in Phase 1 preparation).
+  off-board parts (symbol `L_OFFBOARD`, excluded from the board; Phase 2: `OFF_BOARD_PARTS`),
+  decided in Phase 1 preparation.
 - ADC1-ADC3 have Proteus pin ids `A1`, `A2`, `COM1`, `COM2`, `K1`, `K2` (a diode-array style
   package): VA = A1, GND = A2, SDA = COM1, VIN = COM2, SCL = K1, ADR0 = K2. Symbols and footprints
   must use these ids.

@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "54ff6b40-15b0-4374-980a-0aae6c67ff44")
+	(paper "A3")
+	(title_block
+		(title "Tube HV supplies - Gate drivers")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus hi_voltage_suppliesv2")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

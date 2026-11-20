@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "43661722-778c-4579-982b-87ae34898eb3")
+	(paper "A3")
+	(title_block
+		(title "Tube HV supplies - ADC")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus hi_voltage_suppliesv2")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

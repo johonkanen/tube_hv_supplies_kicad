@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "7a02b5ca-3f59-4f60-be52-8cb310e4cfb7")
+	(paper "A3")
+	(title_block
+		(title "Tube HV supplies - Reference and connector")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus hi_voltage_suppliesv2")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)
