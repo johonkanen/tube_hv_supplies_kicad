@@ -1894,7 +1894,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:SOT-23_Proteus"
 			(at 99.06 76.2 0)
 			(effects
 				(font
@@ -2056,7 +2056,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 84.7852 90.17 0)
 			(effects
 				(font
@@ -2179,7 +2179,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 115.2652 90.17 0)
 			(effects
 				(font
@@ -2266,7 +2266,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 124.46 77.978 0)
 			(effects
 				(font
@@ -2434,7 +2434,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 132.842 86.36 0)
 			(effects
 				(font
@@ -2521,7 +2521,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 147.0152 90.17 0)
 			(effects
 				(font
@@ -2815,7 +2815,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:PinHeader_2x20_P1.27mm_Vertical_RowsSwapped"
 			(at 220.98 107.95 0)
 			(effects
 				(font

@@ -94,3 +94,22 @@ DRILL_PLATED = "Drill TOP-BOT Plated"
 DRILL_NONPLATED = None   # Proteus wrote no NonPlated drill file (the mounting holes are plated)
 OUTLINE = "Mechanical 1"
 OUTLINE_RECT = (-122.6, -28.26, 170.085, 56.485)  # x, y, width, height
+
+# --- Footprints (Phase 2, tools/gen_footprints.py, p2k check_footprints) ---------------
+
+# Pad sizes: "kicad" (KiCad library pad sizes and drills, pad centres on the Proteus positions;
+# the footprints built from the IPC pads - terminals - and the KRL2012 shunt land pattern have the
+# Proteus pads). Changing it is a user decision (Phase 3 DRC; STATUS.md "Phase 2 - pad sizes").
+FOOTPRINT_PAD_SIZES = "kicad"
+# Parts drawn in the PDF without a layout part (no IPC pads): no footprint.
+OFF_BOARD_PARTS = {
+    "L1": "off board: 3 mH inductor (OUT1 -> UC3), wired to the L5 / L12 terminals",
+    "L3": "off board: 3 mH inductor (OUT2 -> U_OUT), wired to the L11 / L6 terminals",
+}
+
+# --- PCB (Phase 3, build_pcb) ----------------------------------------------------------
+
+# The 4 IPC 'hole' records: plated 3.0 mm holes with a 6.35 mm ring on all four copper layers,
+# no net (lib/tube_hv_supplies.pretty, tools/gen_footprints.py PROJECT).
+HOLE_FOOTPRINT = "tube_hv_supplies:MountingHole_3.0mm_PTH_Pad6.35mm"
+HOLE_VALUE = "MountingHole_3.0mm"

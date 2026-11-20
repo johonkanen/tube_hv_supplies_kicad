@@ -21,9 +21,9 @@ board is in `p2k_config.py`.
 
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
-Phase 0 (skeleton and inventory) and the Phase 1 preparation are done: part map, symbol
-library, empty KiCad project with one sub-sheet per PDF page, transcription rules in STATUS.md;
-`tools/check_all.sh` passes. Next: Phase 1 transcription (sheets 5 and 6 first).
+Phases 0-2 are done: schematic redrawn on 6 sheets (158 parts, netlist equal to the IPC, ERC
+0 errors), footprints assigned (`lib/footprint_map.csv`, `lib/tube_hv_supplies.pretty`; every
+part fits the IPC pads within 0.05 mm); `tools/check_all.sh` passes. Next: Phase 3 (PCB).
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 

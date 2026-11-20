@@ -1135,7 +1135,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
 			(at 110.49 85.09 0)
 			(effects
 				(font
@@ -1205,7 +1205,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 90.17 83.312 0)
 			(effects
 				(font
@@ -1330,7 +1330,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 111.76 75.438 0)
 			(effects
 				(font
@@ -1505,7 +1505,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 107.95 65.7352 0)
 			(effects
 				(font
@@ -1622,7 +1622,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 90.17 99.822 0)
 			(effects
 				(font
@@ -1781,7 +1781,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 111.76 99.822 0)
 			(effects
 				(font
@@ -1874,7 +1874,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 107.95 111.4552 0)
 			(effects
 				(font
@@ -1977,7 +1977,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 133.35 85.852 0)
 			(effects
 				(font
@@ -2102,7 +2102,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 145.7452 100.33 0)
 			(effects
 				(font
@@ -2256,7 +2256,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
 			(at 238.76 85.09 0)
 			(effects
 				(font
@@ -2326,7 +2326,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 218.44 83.312 0)
 			(effects
 				(font
@@ -2451,7 +2451,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 240.03 75.438 0)
 			(effects
 				(font
@@ -2626,7 +2626,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 236.22 65.7352 0)
 			(effects
 				(font
@@ -2743,7 +2743,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 218.44 99.822 0)
 			(effects
 				(font
@@ -2902,7 +2902,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 240.03 99.822 0)
 			(effects
 				(font
@@ -2995,7 +2995,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 236.22 111.4552 0)
 			(effects
 				(font
@@ -3098,7 +3098,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 261.62 85.852 0)
 			(effects
 				(font
@@ -3223,7 +3223,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 274.0152 100.33 0)
 			(effects
 				(font
@@ -3377,7 +3377,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
 			(at 110.49 167.64 0)
 			(effects
 				(font
@@ -3447,7 +3447,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 90.17 165.862 0)
 			(effects
 				(font
@@ -3572,7 +3572,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 111.76 157.988 0)
 			(effects
 				(font
@@ -3747,7 +3747,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 107.95 148.2852 0)
 			(effects
 				(font
@@ -3864,7 +3864,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 90.17 182.372 0)
 			(effects
 				(font
@@ -4023,7 +4023,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 111.76 182.372 0)
 			(effects
 				(font
@@ -4116,7 +4116,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 107.95 194.0052 0)
 			(effects
 				(font
@@ -4239,7 +4239,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 133.35 168.402 0)
 			(effects
 				(font
@@ -4364,7 +4364,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 145.7452 182.88 0)
 			(effects
 				(font
@@ -4518,7 +4518,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
 			(at 238.76 167.64 0)
 			(effects
 				(font
@@ -4588,7 +4588,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 218.44 165.862 0)
 			(effects
 				(font
@@ -4713,7 +4713,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 240.03 157.988 0)
 			(effects
 				(font
@@ -4888,7 +4888,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 236.22 148.2852 0)
 			(effects
 				(font
@@ -5005,7 +5005,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 218.44 182.372 0)
 			(effects
 				(font
@@ -5164,7 +5164,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 240.03 182.372 0)
 			(effects
 				(font
@@ -5257,7 +5257,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 236.22 194.0052 0)
 			(effects
 				(font
@@ -5380,7 +5380,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:R_0402_1005Metric_Proteus0.91"
 			(at 261.62 168.402 0)
 			(effects
 				(font
@@ -5505,7 +5505,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 274.0152 182.88 0)
 			(effects
 				(font
@@ -5657,7 +5657,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies:TSSOP-14_4.4x5mm_P0.65mm_Proteus"
 			(at 54.61 127 0)
 			(effects
 				(font
@@ -5894,7 +5894,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 70.1548 125.73 0)
 			(effects
 				(font
