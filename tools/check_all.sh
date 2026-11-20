@@ -6,7 +6,13 @@ set -u
 cd "$(dirname "$0")/.."
 [ -x tools/p2k/bin/p2k ] || { echo "tools/p2k missing: git submodule update --init"; exit 1; }
 fail=0
-step() { echo "== $1"; shift; "$@" || { echo "!! FAILED: $*"; fail=1; }; }
+mkdir -p build/tmp
+log=build/tmp/check_all.log; : > "$log"
+step() {
+    echo "== $1" | tee -a "$log"; shift
+    "$@" 2>&1 | tee -a "$log"
+    [ "${PIPESTATUS[0]}" -eq 0 ] || { echo "!! FAILED: $*" | tee -a "$log"; fail=1; }
+}
 
 # Phase 0: environment and sources
 step "KiCad environment" tools/p2k/bin/kipy -c "import pcbnew; v = pcbnew.GetBuildVersion(); print('pcbnew', v); assert v.startswith('10.0.7'), v"
@@ -23,7 +29,17 @@ step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
 step "Footprint library, map and fp-lib-table up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry (fit and pcbnew placement)" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
 step "Pin order vs unmoved KiCad base footprints" python3 tools/check_pin_order.py
+# Phase 3: PCB (build_pcb, gerber_to_tracks, assign_nets, pours_to_zones on all four layers)
+step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
+step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
+# pad-size decision open (STATUS.md "Phase 3 - pad sizes"): tools/drc_pending.py passes only the
+# recorded KiCad-pad conflicts; once decided, run p2k.assign_nets --check and p2k drc directly
+step "Board copper connectivity after zone fill" python3 tools/drc_pending.py copper
+step "DRC with schematic parity" python3 tools/drc_pending.py drc
 
 echo
-[ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"
+pending=$(grep -c "PENDING USER DECISION" "$log")
+if [ $fail -ne 0 ]; then echo "SOME CHECKS FAILED"
+elif [ "$pending" -ne 0 ]; then echo "ALL CHECKS PASSED, EXCEPT $pending PENDING USER DECISION(S):"; grep "PENDING USER DECISION" "$log" | sed 's/^/  /'
+else echo "ALL CHECKS PASSED"; fi
 exit $fail

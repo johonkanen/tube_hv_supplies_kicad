@@ -7,9 +7,129 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 0 Skeleton and inventory | **done** 2026-11-20 (Opus 5.5) |
 | 1 Schematic | **done** 2026-11-20 (preparation Opus 5.5; transcription Fable 5.2): 158/158 parts, 0 wrong-net pins, every IPC net complete, ERC 0 errors / 21 explained warnings |
 | 2 Footprints | **done** 2026-11-20 (Opus 5.5): 158/158 parts fit the IPC pads, worst residual 0.039 mm (pcbnew placement 0.039 mm); pin order checked (J1 numbering mirrored, finding 12; ADC1-3 finding 6 confirmed) |
-| 3 PCB | not started; next (`next_prompt.md`) |
+| 3 PCB | **stopped on a user decision** 2026-11-20 (Opus 5.5): board generated, Proteus copper 0 shorts / 0 orphans / 0 opens, check_board OK, make_pcb reproducible; KiCad pads of 8 parts (U1 U2 ADC1-3 DRV5 DRV6 J1) collide with Proteus tracks: Proteus pads for them? (option A2, "Phase 3 – pad sizes") |
 | 4 Verification | not started |
 | 5 Clean-up | not started |
+
+## Phase 3 – PCB – STOPPED on a user decision (pad sizes) (Opus 5.5, 2026-11-20)
+
+`kicad/tube_hv_supplies.kicad_pcb` is generated and its copper is the Proteus copper (0 shorts / 0
+orphans / 0 opens in the Proteus geometry, every pad / via / hole on its IPC position and net). With
+the KiCad pad sizes (`FOOTPRINT_PAD_SIZES = "kicad"`, Phase 2) the pads of **8 parts reach Proteus
+tracks** (3 shorts, 29 clearance errors, 3 solder-mask bridges). Switching them to the Proteus pads is
+a user decision (playbook Phase 3, PLAN.md section 5.7), so the phase stops here: **see "Phase 3 – pad
+sizes (OPEN USER DECISION)" below.** `tools/check_all.sh` prints `ALL CHECKS PASSED, EXCEPT 2 PENDING
+USER DECISION(S)` (board-local wrapper `tools/drc_pending.py`, after tube_pi_fxloop's).
+
+### New (all generated / re-runnable)
+
+- **`p2k_config.py`**: `PCB_THICKNESS = 1.6` (user decision, finding 3), `PCB_RULES` (measured, below),
+  `DRC_ACCEPTED` (courtyards_overlap).
+- **`tools/make_pcb.sh`** (after tube_psu / tube_power_amp): `p2k.build_pcb`, `p2k.gerber_to_tracks`,
+  `p2k.assign_nets`, `p2k.pours_to_zones` (≈ 6 s); `--check` rebuilds into `build/tmp/make_pcb_check`
+  (with a copy of the `.kicad_pro`) and compares the board, `reports/pour_nets.json` and the stage A/B
+  sections of `reports/assign_nets.txt` byte for byte. No place_refdes (Phase 5).
+- **`tools/measure_gaps.py`** (copied unchanged from tube_psu; read-only): the Proteus copper as built.
+- **`tools/drc_pending.py`** (temporary): `drc` mode runs `p2k drc` and passes only when the unaccepted
+  errors are exactly the recorded pad conflicts (3 shorting_items, 29 clearance, 3 solder_mask_bridge,
+  each with a pad of U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1; 0 unconnected, 0 parity); `copper` mode runs
+  `p2k.assign_nets --check` and passes only when its failure is exactly the 3 touching pairs at those
+  pads (0 orphans / opens / foreign nets). Prints `PENDING USER DECISION`; remove it once decided.
+- **`tools/pad_option_test.sh NAME "REFDES ..."`** (read-only for the repo): copies the repo to
+  `build/tmp/padopt_NAME`, gives the named parts the Proteus pads (a `refdes=` rule before the general
+  rule of the symbol and a derived `<footprint>_ProteusPads` spec with `ipc_sizes=True`, as tube_psu),
+  re-runs gen_footprints, the six sheet scripts, check_footprints, make_pcb, check_board,
+  assign_nets --check and DRC there.
+- **`tools/check_all.sh`**: + make_pcb --check, check_board, copper after zone fill and DRC (both
+  through drc_pending.py), log in `build/tmp/check_all.log`, summary line with the pending decisions.
+
+### Steps (tools/make_pcb.sh)
+
+| Step | Tool | Result |
+|---|---|---|
+| 3a | `p2k.build_pcb` | 158 footprints with nets and symbol links (L1 / L3 excluded), placed from `reports/footprint_fit.csv`; 4 Cu layers (Top Copper / Inner 1 / Inner 2 / Bottom Copper → F.Cu / In1.Cu / In2.Cu / B.Cu, pour outlines on User.1-4); outline 170.085 × 56.485 mm (4 segments); **H1-H4** = `tube_hv_supplies:MountingHole_3.0mm_PTH_Pad6.35mm` (plated 3.0 mm, 6.35 mm pad on every layer, no net) at the IPC hole records; 115 nets; thickness 1.6 mm. |
+| 3b | `p2k.gerber_to_tracks` | **1839 tracks** (F 847 / In1 548 / In2 40 / B 404), 3891 pour edge strokes skipped (F 1374 / In1 77 / In2 1971 / B 469), **141 vias** (IPC 141: 139 × 0.5/0.3, 2 × 1.016/0.381; no stacked duplicates), **21 pour outlines** (F 15 / In1 1 / In2 1 / B 4; clear regions 103 / 3 / 131 / 46), no NonConductor draws; every pad flash lands on a footprint pad (329 / 102 / 102 / 202), every drill on a pad hole or via. |
+| 3c | `p2k.assign_nets` | stage A (no pours) 225 groups, 0 shorts, 36 orphans, 11 opens (connections through the pours, expected); **stage B (with pours) 119 groups, 0 shorts, 0 orphans, 0 opens**; 1980 tracks / vias assigned, 0 without net; 21 / 21 pours have a net (`reports/pour_nets.json`). |
+| 3d | `p2k.pours_to_zones` | 21 zones (24 stroke-closed holes dropped, 259 clearance / thermal holes kept), solid pad connection, priority = Proteus draw order, filled. |
+| check | `p2k.check_board` | 162 footprints, 429 pads within 0.039 mm and on their IPC nets (113 IPC nets 1:1), 4 mounting holes, 141 vias (size and net), 1839 tracks / 21 zones with a net: **OK**. |
+| check | `p2k.assign_nets --check` | after zone fill with the KiCad pads: 117 groups, **1 short group** (3V3 + SCL + Net-(U2A-+): ADC1-K2 and U2-4 touch Proteus tracks), 0 orphans, 0 opens, 0 foreign nets → pending (below). |
+| check | `p2k drc` | 0 unconnected, 0 parity; **3 shorts, 29 clearance, 3 solder_mask_bridge, all at the 8 pending parts**; 20 courtyards_overlap accepted → pending (below). |
+
+### Design rules (p2k_config.py `PCB_RULES`, stored in kicad/tube_hv_supplies.kicad_pro)
+
+Measured (`tools/p2k/bin/kipy tools/measure_gaps.py 0.3`, assign_nets stage B geometry with the
+Proteus pad flashes): smallest different-net gap **0.1265 mm** (5 mil; track–via, e.g. via
+(-58.911, -23.092) Net-(U1A--) / In1.Cu C1_CURRENT track), pad–track 0.1270 (J1-29 / B.Cu 3V3),
+track–track 0.1270 (In1.Cu GND / C1_CURRENT), via–via 0.2013, pad–via 0.2179, pour–via 0.2428,
+pad–pad 0.2500 (U2-1 / U2-2), pour–pour 0.2540; 52 different-net pairs closer than 0.14 mm; copper to
+outline ≥ **0.2286 mm** (In2.Cu pour); drill to drill ≥ 0.4013 mm; thinnest conductor 0.1524 mm.
+Rules: clearance **0.12** (also the zone clearance; tube_psu had 0.15 from its 0.1524 gaps), min track
+0.15, min via 0.5 / annular 0.1 / drill 0.3, hole clearance 0.15, hole-to-hole 0.25, copper-to-edge
+**0.2**; Default netclass track 0.254, via 0.5 / 0.3. Board thickness 1.6 mm (stack-up in Decisions).
+
+### Phase 3 – pad sizes (OPEN USER DECISION)
+
+The DRC with the Phase 2 footprints (KiCad pad sizes) has **3 shorts, 29 clearance errors (< 0.12 mm)
+and 3 solder-mask bridges**, every one between a KiCad pad of one of 8 parts and a Proteus track
+(Proteus routes 0.127 mm from its own, smaller pads). Per refdes (`reports/drc.json`; actual clearance
+in mm, rule 0.12):
+
+| Part (footprint) | Proteus pad → KiCad pad | Conflicts with the KiCad pads |
+|---|---|---|
+| U1 (TSSOP-14_…_Proteus) | 0.4 × 1.1 → 1.475 × 0.4 | 6 clearance: pad 9 / Net-(U1C-+) 0.063, pad 14 / Net-(U1D--) 0.071-0.108, pad 7 / Net-(U1B--) 0.084-0.091 (F.Cu) |
+| U2 (TSSOP-14_…_Proteus) | same | **2 shorts** pad 4 (3V3) / Net-(U2A-+) track, 2 mask bridges; 11 clearance 0.036-0.108 (pads 4, 6, 7, 8, 10, 12, 14: GND, U2B/U2C/U2D nodes) |
+| ADC1 (SOT-23-6_ADC121C027_Proteus) | 0.5 × 0.65 → 1.325 × 0.6 | **1 short** K2 (3V3) / SCL track, 1 mask bridge, 2 clearance 0.073 |
+| ADC2 | same | K2 (GND) / SCL track 0.102 (hidden behind ADC3 in the first DRC: KiCad reports the closest pad per track; it shows once ADC3 has the Proteus pads) |
+| ADC3 | same | 3 clearance COM1 (SDA) / SCL track 0.079-0.107 |
+| DRV5 (SOIC-8_…_Proteus, bottom) | 0.609 × 1.498 → 1.95 × 0.6 | 1 clearance pad 3 (GND) / B.Cu 3V3 track 0.108 |
+| DRV6 (bottom) | same | 1 clearance pad 4 (3V3) / B.Cu GND track **0.031** |
+| J1 (PinHeader_2x20_…_RowsSwapped) | 0.762 / drill 0.558 → 1.0 / drill 0.65 | 5 clearance with B.Cu tracks: pads 29 (G3_LO) and 31 (G3_HI) / 3V3 **0.008**, 29 / 3V3 0.087, 5 (INPUT_CURRENT_MEAS) / U_OUT_MEAS 0.093, 27 (PWM_TRANS6) / 3V3 0.110 |
+
+Not affected (KiCad pads clear at 0.12 mm): **J2** (the expected 1.27 mm-header item: KiCad's 1.0 mm
+pads leave 0.27 mm between neighbouring pads, which is no DRC error at a 0.12 mm clearance, and no track
+comes closer than 0.12), DRV1 / DRV2, REF1, every resistor / capacitor / inductor, C1-C7 C11 C26,
+Q3 Q4 Q7 Q8, D2 D18. A smaller clearance rule does not help (shorts and mask bridges remain).
+
+Options tested (`tools/pad_option_test.sh`, scratch copies, deleted):
+
+| Option | Parts with Proteus pads | Result |
+|---|---|---|
+| none (as now) | – | 3 shorts, 29 clearance, 3 mask bridges; copper check 1 short group |
+| A | U1 U2 ADC1 ADC3 DRV5 DRV6 J1 (the parts the first DRC names) | 0 shorts, **1 clearance** (ADC2 K2 / SCL 0.102), 0 mask bridges; copper 0 shorts |
+| **A2 (recommended)** | **U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1** (8 parts) | check_footprints 158/158 (worst 0.039), make_pcb stage B 0/0/0, check_board OK, copper after zone fill 119 groups 0 shorts / 0 orphans / 0 opens, **DRC 0 shorts, 0 clearance, 0 mask bridges, 0 unconnected, 0 parity** (only the accepted 20 courtyards_overlap); `drc_pending.py` passes as plain OK |
+| B | whole families: U1 U2, ADC1-3, DRV1 DRV2 DRV5 DRV6, J1 J2 (11 parts) | same as A2 (DRV1 / DRV2 / J2 change nothing in the DRC) |
+| T4 (negative) | U2 only | DRC 1 short / 18 clearance / 1 bridge left; `drc_pending.py` FAILED (counts differ) |
+
+Applying A2 (or B) would be: a `PROTEUS_PADS` refdes set and `refdes=` rules with `<footprint>_ProteusPads`
+specs (`ipc_sizes=True`) in `tools/gen_footprints.py` (what `pad_option_test.sh` patches in), re-run
+gen_footprints, the sheet scripts, check_footprints, `tools/make_pcb.sh`; then remove
+`tools/drc_pending.py` and run `p2k.assign_nets --check` / `p2k drc` directly in check_all.sh. J1 then has
+the Proteus drill 0.558 mm (KiCad 0.65; no `DRILL_SMALLER` entry needed: that key is for KiCad drills
+smaller than Proteus). Reversible.
+
+### Remaining DRC items
+
+| Type | Count | Why it stays |
+|---|---|---|
+| shorting_items / clearance / solder_mask_bridge (error) | 3 / 29 / 3 | **pending pad decision** (above); `tools/drc_pending.py` |
+| unconnected / schematic parity | 0 / 0 | – |
+| courtyards_overlap (error) | 20 | Proteus placed parts closer than KiCad's IPC-7351 courtyards: C3/R75, C6/R30, D2/C43, DRV6/C32, J1/R3, J1/R36, J1/R12, J1/R45, J2/R78, J2/R79, J2/R80, Q7/R29, R10/C12, R21/C46, R33/R32, R53/R52, R58/U2, R63/R62, R69/R68, R74/REF1; parts sit exactly at the Proteus positions. Accepted (`DRC_ACCEPTED`). |
+| silk_overlap / silk_over_copper / silk_edge_clearance (warning) | 111 / 95 / 3 | KiCad footprint silk and default reference positions on the Proteus placement (edge: references of L7, H1, H2 at the bottom edge); Phase 5. |
+| track_dangling (warning) | 2 | Proteus copper as drawn: two zero-length (1e-5 mm) OUT1 draws on B.Cu at (-32.852, -11.537), and a 0.9 mm, 0.762 mm wide 15V_BOOST stub on B.Cu from (-73.6, -20.2) to (-72.7, -20.2) (IPC coordinates); Phase 5 `REMOVED_TRACKS` candidates. |
+
+### Negative tests (scratch copies in build/tmp, `P2K_BOARD`, deleted)
+
+- T1 one GND track (F.Cu, 0.381 mm at (-3, -3.91)) given net 3V3 in the board file → **only
+  `make_pcb.sh --check` fails** ("kicad/tube_hv_supplies.kicad_pcb is not up to date"); check_board OK,
+  assign_nets --check unchanged (pcbnew re-derives track nets on load), DRC unchanged. Same as the
+  tube_power_amp pitfall: the byte compare is the guard.
+- T2 a GND via moved 0.3 mm (inside the GND pour) → make_pcb --check fails; check_board "IPC via
+  (-9.804, 6.432) GND: no board via" / "board via (-9.504, 6.432) is neither an IPC via …", FAILED.
+- T3 a B.Cu track added between the G3_LO and G3_HI vias → `drc_pending.py drc` FAILED (other:
+  "shorting_items … G3_LO and G3_HI"), `drc_pending.py copper` FAILED (5 touching pairs, 3 at pending
+  pads); check_board OK (it does not look at extra tracks).
+- T4 Proteus pads on U2 only → both drc_pending modes FAILED (counts differ from the recorded ones).
+- Option A2 (above) → `p2k drc` and `assign_nets --check` OK, so the wrapper passes without a pending line.
 
 ## Phase 2 – done (Opus 5.5, 2026-11-20)
 
@@ -477,7 +597,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (Phase 2 done):
+`tools/check_all.sh`, 2026-11-20 (Phase 3 stopped on the pad decision; the per-violation `drc:` lines of the 35 pending items are cut here, they are in the table above):
 
 ```
 == KiCad environment
@@ -543,8 +663,44 @@ TO-220           TO-220-3_Vertical                           0.000 @   180    0.
 SMA              D_SMA                                       0.050 @     0    0.050 @   180  mirrored 0.050  (two pads: band by render)
 CP               CP_Radial_D10.0mm_P5.00mm                   0.000 @   270    0.000 @    90  unmirrored 0.000  (two pads: '+' by render)
 check_pin_order: OK (results as recorded in STATUS.md)
+== PCB rebuilt from schematic + gerbers, up to date
+build_pcb: 158 footprints placed (2 excluded from board), 4 mounting holes, 115 nets, 4 outline segments
+gerber_to_tracks: 1839 tracks, 141 vias (IPC 141), 21 pour outlines on User.1-4
+assign_nets: stage A (no pours): 225 groups, 0 shorts, 36 orphans, 11 opens
+assign_nets: stage B (with pours): 119 groups, 0 shorts, 0 orphans, 0 opens
+pours_to_zones: 21 pours -> 21 zones; 24 holes closed by the stroke, 259 holes kept
+make_pcb: board rebuilt from scratch, byte-identical
+== Board pads, holes, vias vs IPC (position, size, nets 1:1)
+check_board: 162 footprints, 429 pads, worst pad offset 0.039 mm (limit 0.05), 113 IPC nets mapped 1:1, 4 mounting holes
+check_board: 1839 tracks, 141 vias, 21 zones
+check_board: OK
+== Board copper connectivity after zone fill
+assign_nets: after zone fill: 117 groups, 1 shorts, 0 orphans, 0 opens, 0 items with a foreign net
+assign_nets:  SHORT group 25: 3V3: ADC1-COM2 ADC1-K2 ADC2-COM2 ADC3-COM2 C12-1 C24-2; SCL: ADC1-K1 ADC2-K1 ADC3-K1 J1-11 R76-2 via(-106.011,-15.346); Net-(U2A-+): C45-2 R54-1 R56-1 U2-3 via(-83.586,-12.409)
+assign_nets:  touching on F.Cu: ADC1-K2 [3V3] - track F.Cu(-106.369,-7.097)-(-106.369,-6.303) [SCL]
+assign_nets:  touching on F.Cu: U2-4 [3V3] - track F.Cu(-82.276,-15.056)-(-83.053,-14.279) [Net-(U2A-+)]
+assign_nets:  touching on F.Cu: U2-4 [3V3] - track F.Cu(-83.053,-14.279)-(-83.220,-14.279) [Net-(U2A-+)]
+assign_nets: FAILED (report reports/assign_nets.txt)
+drc_pending: PENDING USER DECISION: 3 KiCad pads touching Proteus tracks (U2-4, ADC1-K2; STATUS.md Phase 3 - pad sizes)
+== DRC with schematic parity
+drc: 266 violations, 3 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc:     29 error    clearance
+drc:     20 error    courtyards_overlap  accepted: KiCad IPC-7351 courtyards vs the Proteus placement (parts at the Proteus positions)
+drc:      3 error    shorting_items
+drc:      3 error    solder_mask_bridge
+drc:    111 warning  silk_overlap
+drc:     95 warning  silk_over_copper
+drc:      3 warning  silk_edge_clearance
+drc:      2 warning  track_dangling
+drc: ERROR 3 shorts
+drc: ERROR 29 clearance
+drc: ERROR 3 solder_mask_bridge
+drc: FAILED
+drc_pending: PENDING USER DECISION: 29 clearance, 3 shorting_items, 3 solder_mask_bridge between KiCad pads of U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 and Proteus tracks (STATUS.md Phase 3 - pad sizes)
 
-ALL CHECKS PASSED
+ALL CHECKS PASSED, EXCEPT 2 PENDING USER DECISION(S):
+  drc_pending: PENDING USER DECISION: 3 KiCad pads touching Proteus tracks (U2-4, ADC1-K2; STATUS.md Phase 3 - pad sizes)
+  drc_pending: PENDING USER DECISION: 29 clearance, 3 shorting_items, 3 solder_mask_bridge between KiCad pads of U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 and Proteus tracks (STATUS.md Phase 3 - pad sizes)
 ```
 
 ## Findings about the original design
@@ -563,6 +719,8 @@ Reported, not fixed (PLAN.md section 5).
 3. **Board thickness:** the CADCAM READ-ME stack (4 x 0.036 Cu, 0.32 prepreg, 1.483 core,
    0.32 prepreg) adds up to 2.267 mm without resist, not a standard 1.6 mm. Check the real
    board before choosing `PCB_THICKNESS` in Phase 3.
+   **Answered (user, 2026-11-20): the board is 1.6 mm**; the READ-ME stack-up is a Proteus default.
+   `PCB_THICKNESS = 1.6`.
 4. **No title blocks** on the six PDF pages (sheet names chosen from content).
 5. The PDF and the project were saved 2026-09-19, and the CADCAM export was made 2026-11-19 from
    that project. The PDF matches the IPC: every IPC part is on a page, and only the off-board
@@ -615,6 +773,15 @@ Reported, not fixed (PLAN.md section 5).
     mirrored footprint (then the two swaps cancel). Reproduced: KiCad footprint
     `PinHeader_2x20_P1.27mm_Vertical_RowsSwapped` (KiCad's pin-1 corner mark lands at the pad
     numbered 2). Check the control card footprint / the built cable; a redesign item.
+
+13. **Copper clearances of 0.127 mm (5 mil) (Phase 3, note for the redesign):** the Proteus copper
+    has 52 different-net pairs closer than 0.14 mm, the smallest 0.1265 mm (track–via, track–track on
+    In1.Cu, J1 pads to B.Cu tracks); tube_psu's smallest was 0.1524. Copper reaches 0.2286 mm from the
+    board edge (the In2.Cu pour). Both are within common 4-layer fab limits but tighter than the
+    other boards; `PCB_RULES` clearance 0.12 / edge 0.2 reproduce them.
+14. **Proteus copper stubs (Phase 3, cosmetic):** two zero-length OUT1 draws on B.Cu at
+    (-32.852, -11.537) and a dangling 0.9 mm 15V_BOOST stub on B.Cu (-73.6 → -72.7, y -20.2) (IPC
+    coordinates); KiCad DRC `track_dangling` warnings, copper as drawn.
 
 ## p2k candidates
 
@@ -674,6 +841,25 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     symmetric two-pad / inline patterns and `--render` over the Proteus silk / assembly of the
     part's side): a shared `p2k.check_pin_order` with the CHECKS table in the board repo.
 
+15. **`tools/measure_gaps.py` copied unchanged a third time** (tube_psu, tube_pi_fxloop, here): a
+    shared `p2k.measure_gaps` would do.
+16. **A pending-decision mode for `p2k drc` and `p2k.assign_nets --check`:** board-local
+    `tools/drc_pending.py` (as tube_pi_fxloop's) passes exactly the recorded conflicts while a pad
+    decision is open. A config key (e.g. `DRC_PENDING = {refdes: reason}` with expected counts) and
+    a "PENDING" exit state in the shared tools would replace the per-board wrappers.
+17. **Testing Proteus pads on a refdes set:** board-local `tools/pad_option_test.sh` patches
+    `refdes=` rules and `<footprint>_ProteusPads` specs (`ipc_sizes=True`) into a scratch copy of
+    gen_footprints.py. `p2k.footprints` could take a `PROTEUS_PADS = {refdes}` config key that does
+    this (derived Proteus-pad variants for the named parts only), so the decision is one config line.
+18. **A changed track net is caught only by the byte compare** (negative test T1, as tube_power_amp):
+    pcbnew re-derives track nets on load, so check_board, assign_nets --check and DRC do not see it.
+    check_board could read the track nets from the file (s-expression) and compare them with the
+    assign_nets groups.
+19. KiCad's DRC reports one violation per track against its closest pad, so a conflict can hide
+    behind a neighbour (ADC2 showed only after ADC3 had the Proteus pads): `pad_option_test.sh`
+    re-runs the DRC on the whole candidate set; a shared tool could measure every pad-to-track gap
+    itself (as measure_gaps does for the Proteus copper).
+
 ## Decisions
 
 - **Phase 2 footprints (agent, 2026-11-20):** KiCad library footprints where their pads land
@@ -686,6 +872,18 @@ Shared-tool limitations met on this board, with the board-local workaround used.
   Proteus. Finding 12 is the user's question.
 - `reports/pin_order/*.png` and `reports/footprint_fit.csv` / `footprint_pads.csv` are
   committed (as tube_power_amp).
+
+- **Board thickness 1.6 mm (user, 2026-11-20, finding 3)**; `PCB_THICKNESS = 1.6`. The CADCAM
+  READ-ME stack-up of about 2.27 mm is a Proteus default.
+- **Stack-up (agent's choice, 2026-11-20):** a common 4-layer 1.6 mm build, F.Cu 0.035 / prepreg
+  0.2104 / In1.Cu 0.0152 / core 1.065 / In2.Cu 0.0152 / prepreg 0.2104 / B.Cu 0.035 (1.586 mm plus
+  solder resist). Only the total thickness goes into the board (`build_pcb`); the checks compare the
+  copper layers, which are what matters electrically.
+- **Phase 3 rules (agent):** `PCB_RULES` from the measured Proteus copper (clearance 0.12, edge 0.2;
+  "Phase 3 – design rules"); `DRC_ACCEPTED = {courtyards_overlap}` (Proteus placement).
+- **Pad sizes (OPEN, user):** the KiCad pads of U1 U2 ADC1 ADC2 ADC3 DRV5 DRV6 J1 collide with
+  Proteus tracks; the agent recommends option A2 (Proteus pads for exactly these 8 parts; KiCad pads
+  everywhere else). Until decided, `tools/drc_pending.py` holds the DRC / copper checks.
 
 - **Finding 11, R26 || R27 (500 R) in series with the VPRE output: intended (user, 2026-11-20).** The
   output fed the preamp, which draws only milliamps.

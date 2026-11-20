@@ -113,3 +113,28 @@ OFF_BOARD_PARTS = {
 # no net (lib/tube_hv_supplies.pretty, tools/gen_footprints.py PROJECT).
 HOLE_FOOTPRINT = "tube_hv_supplies:MountingHole_3.0mm_PTH_Pad6.35mm"
 HOLE_VALUE = "MountingHole_3.0mm"
+# Board thickness: 1.6 mm (user decision 2026-11-20, finding 3; the CADCAM READ-ME stack of
+# 2.267 mm is a Proteus default). Stack-up (agent's choice, a common 4-layer 1.6 mm build; only
+# the total goes into the board, the copper layers are what the checks compare):
+# F.Cu 0.035 / prepreg 0.2104 / In1.Cu 0.0152 / core 1.065 / In2.Cu 0.0152 / prepreg 0.2104 /
+# B.Cu 0.035 = 1.586 mm + 2 x ~0.01 mm solder resist = 1.6 mm.
+PCB_THICKNESS = 1.6
+# Design rules from the Proteus copper as built (STATUS.md "Phase 3", tools/measure_gaps.py), mm.
+PCB_RULES = dict(
+    min_track=0.15,       # thinnest conductor draw 0.1524 (6 mil)
+    min_via=0.5,          # vias 0.5/0.3 (139) and 1.016/0.381 (2)
+    min_annular=0.1,      # (0.5 - 0.3) / 2
+    min_drill=0.3,
+    clearance=0.12,       # smallest different-net gap 0.1265 (5 mil: track-via, pad-track, track-track; 52 pairs < 0.14)
+    hole_clearance=0.15,  # via drills: 0.1 annular + >= 0.1265 gap
+    hole_to_hole=0.25,    # smallest drill-to-drill 0.401
+    edge_clearance=0.2,   # copper to outline >= 0.2286 (In2.Cu pour)
+    track=0.254,          # Default netclass
+    via=0.5,
+    via_drill=0.3,
+)
+
+# Error-severity DRC types that remain by design ({type: reason}, STATUS.md "Phase 3").
+DRC_ACCEPTED = {
+    "courtyards_overlap": "KiCad IPC-7351 courtyards vs the Proteus placement (parts at the Proteus positions)",
+}

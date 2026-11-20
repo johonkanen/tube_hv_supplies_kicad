@@ -1,0 +1,170 @@
+[
+ {
+  "layer": "B.Cu",
+  "index": 0,
+  "net": "GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 13
+ },
+ {
+  "layer": "B.Cu",
+  "index": 1,
+  "net": "OUT2",
+  "order": 41,
+  "width": 0.1524,
+  "group": 8
+ },
+ {
+  "layer": "B.Cu",
+  "index": 2,
+  "net": "U_OUT",
+  "order": 44,
+  "width": 0.1524,
+  "group": 16
+ },
+ {
+  "layer": "B.Cu",
+  "index": 3,
+  "net": "UC3",
+  "order": 47,
+  "width": 0.1524,
+  "group": 14
+ },
+ {
+  "layer": "F.Cu",
+  "index": 0,
+  "net": "GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 13
+ },
+ {
+  "layer": "F.Cu",
+  "index": 1,
+  "net": "OUT2",
+  "order": 46,
+  "width": 0.1524,
+  "group": 8
+ },
+ {
+  "layer": "F.Cu",
+  "index": 2,
+  "net": "CURRENT_L3",
+  "order": 49,
+  "width": 0.1524,
+  "group": 11
+ },
+ {
+  "layer": "F.Cu",
+  "index": 3,
+  "net": "UIN",
+  "order": 52,
+  "width": 0.1524,
+  "group": 1
+ },
+ {
+  "layer": "F.Cu",
+  "index": 4,
+  "net": "OUT1",
+  "order": 62,
+  "width": 0.1524,
+  "group": 2
+ },
+ {
+  "layer": "F.Cu",
+  "index": 5,
+  "net": "CURRENT_L1",
+  "order": 66,
+  "width": 0.1524,
+  "group": 5
+ },
+ {
+  "layer": "F.Cu",
+  "index": 6,
+  "net": "/01 Power stage/PREOUT",
+  "order": 69,
+  "width": 0.1524,
+  "group": 20
+ },
+ {
+  "layer": "F.Cu",
+  "index": 7,
+  "net": "UC3",
+  "order": 75,
+  "width": 0.1524,
+  "group": 14
+ },
+ {
+  "layer": "F.Cu",
+  "index": 8,
+  "net": "V_A",
+  "order": 78,
+  "width": 0.1524,
+  "group": 63
+ },
+ {
+  "layer": "F.Cu",
+  "index": 9,
+  "net": "U_OUT",
+  "order": 83,
+  "width": 0.1524,
+  "group": 16
+ },
+ {
+  "layer": "F.Cu",
+  "index": 10,
+  "net": "/01 Power stage/UC6",
+  "order": 86,
+  "width": 0.1524,
+  "group": 18
+ },
+ {
+  "layer": "F.Cu",
+  "index": 11,
+  "net": "C3_CURRENT",
+  "order": 91,
+  "width": 0.1524,
+  "group": 19
+ },
+ {
+  "layer": "F.Cu",
+  "index": 12,
+  "net": "GND",
+  "order": 94,
+  "width": 0.1524,
+  "group": 13
+ },
+ {
+  "layer": "F.Cu",
+  "index": 13,
+  "net": "/01 Power stage/B+",
+  "order": 109,
+  "width": 0.1524,
+  "group": 130
+ },
+ {
+  "layer": "F.Cu",
+  "index": 14,
+  "net": "C1_CURRENT",
+  "order": 115,
+  "width": 0.1524,
+  "group": 15
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 0,
+  "net": "OUT1",
+  "order": 0,
+  "width": 0.1524,
+  "group": 2
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 0,
+  "net": "GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 13
+ }
+]

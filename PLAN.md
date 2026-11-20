@@ -20,7 +20,7 @@ STATUS.md for how each step was done.
 | Schematic PDF | `source/schematic_pdf/hi_voltage_suppliesv2.PDF`, 6 pages (printed 2026-09-19, same as the project), **no title blocks** (sheet names chosen from content, `p2k_config.py` SHEETS) |
 | CADCAM export | `source/cadcam/` (Gerber X2, metric, `FSLAX45Y45`, no arcs, one `SameCoordinates` id, generated 2026-11-19), 14 gerbers + IPC |
 | IPC netlist (the reference) | `source/cadcam/hi_voltage_suppliesv2 - CADCAM Netlist.IPC` |
-| Copper layers | 4: `Top Copper`, `Inner  1`, `Inner  2`, `Bottom Copper` (CADCAM READ-ME stack: 4 x 0.036 Cu, 0.32 prepreg / 1.483 core / 0.32 prepreg = 2.267 mm without resist: check against the real board before Phase 3 `PCB_THICKNESS`) |
+| Copper layers | 4: `Top Copper`, `Inner  1`, `Inner  2`, `Bottom Copper` (CADCAM READ-ME stack: 4 x 0.036 Cu, 0.32 prepreg / 1.483 core / 0.32 prepreg = 2.267 mm without resist, a Proteus default; **the board is 1.6 mm**, user 2026-11-20, `PCB_THICKNESS = 1.6`) |
 | Outline | 170.085 x 56.485 mm, lower-left (-122.600, -28.260) (`Mechanical 1`, 4 `Profile` draws) |
 | Nets (IPC NNAME) | **113** (pre-check said 114); no `=POWER` suffixes; 19 single-pin nets (18 unused J1 ribbon signals + `FLOATING` = ADC3 ADR0) |
 | Records | 574: 247 THT (102 component pads + 141 vias + 4 holes), 327 SMD (227 top, 100 bottom) |
