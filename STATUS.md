@@ -23,6 +23,9 @@ Task: proteus2kicad `docs/CANDIDATES.md` section 7.4 (HV): bump `tools/p2k`, mov
 the shared keys, renumber the ribbon header J1 (finding 12, D-PIN). Each commit is proven from a clean
 clone with `~/dev/proteus2kicad/tools/regress.sh <pin> tube_hv_supplies_kicad` (PASS).
 
+Commits (each proven with `~/dev/proteus2kicad/tools/regress.sh a9a286c tube_hv_supplies_kicad`: PASS):
+a09b8f5 step 1 (bump, D-R), 74f532b step 2 (migration, D-I7), 811a03a step 3 (J1 renumbering).
+
 ### Step 1 – bump to p2k a9a286c (+ D-R re-baseline, temporary strict exception)
 
 - `tools/p2k` c5682dd → **a9a286c** (proteus2kicad main; all code is batch Z 2fb1563, later commits docs).
