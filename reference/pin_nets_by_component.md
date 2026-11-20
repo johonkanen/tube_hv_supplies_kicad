@@ -8,7 +8,7 @@ KiCad refdes for Proteus names with spaces/signs: `B+` → `B_P`, `B-` → `B_N`
 `N/C` = explicitly unconnected in Proteus; `(no net)` = pad without any net record.
 Coordinates in mm, IPC orientation (Y up). Side: top/bottom for SMD, both for THT.
 
-Index: ADC (3), B_N (1), B_P (1), C (48), D (2), DRV (4), GND_PRE (1), GND_PWR (1), J (2), L (7), Q (4), R (79), REF (1), U (2), VPRE (1), V_ANODE (1)
+Index: ADC (3), B_N (1), B_P (1), C (48), D (2), DRV (4), GND_PRE (1), GND_PWR (1), J (2), L (7), Q (4), R (79), REF1 (1), U (2), VPRE (1), V_ANODE (1)
 
 ## ADC1
 

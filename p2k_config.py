@@ -177,3 +177,7 @@ REMOVED_TRACKS = {
 REMOVED_DOT_TRACKS = {
     ("B.Cu", -32.85196, -11.53736): (2, "OUT1: two zero-length draws (both directions) inside the OUT1 track junction (finding 14)"),
 }
+
+# Strict checks (p2k D-Z: every id of board.STRICT_DEFAULT is on). Temporary exception until the D-I7
+# migration (tools/remove_dot_tracks.py removes the two OUT1 dot draws after gerber_to_tracks).
+STRICT_CHECKS_OFF = {"roundtrip_counts": "B.Cu 401 vs 403 until the D-I7 migration"}

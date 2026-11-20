@@ -16,6 +16,24 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 **HV supplies v2 is not installed and will be redone anyway (user, 2026-11-20).** This conversion is
 only the starting point for the redesign; the findings below are input for it.
 
+## Shared-tool migration 2026-11-20 – in progress (Opus 5.5, 2026-11-20)
+
+Task: proteus2kicad `docs/CANDIDATES.md` section 7.4 (HV): bump `tools/p2k`, move the board-local tools to
+the shared keys, renumber the ribbon header J1 (finding 12, D-PIN). Each commit is proven from a clean
+clone with `~/dev/proteus2kicad/tools/regress.sh <pin> tube_hv_supplies_kicad` (PASS).
+
+### Step 1 – bump to p2k a9a286c (+ D-R re-baseline, temporary strict exception)
+
+- `tools/p2k` c5682dd → **a9a286c** (proteus2kicad main; all code is batch Z 2fb1563, later commits docs).
+- **D-R** (accepted re-baseline, batch R report texts): `reference/pin_nets_by_component.md` 1 line
+  (`Index:` `REF` → `REF1`), `reference/pins_by_net.md` 4 lines (B+, GND, PREOUT, V_A: the two-hole
+  terminals B_P, B_N, GND_PRE, GND_PWR, VPRE, V_ANODE listed once; counts 5 → 4, 82 → 79, 5 → 4, 5 → 4).
+  `.csv` / `.json` unchanged (p2k candidates 1, 2: solved in p2k a9a286c).
+- **D-Z** strict checks on by default; temporary `STRICT_CHECKS_OFF = {"roundtrip_counts": ...}`: B.Cu
+  401 KiCad draws vs 403 from gerber_to_tracks, because `tools/remove_dot_tracks.py` removes the two OUT1
+  dot draws after gerber_to_tracks. Removed in step 2 (D-I7).
+- Every other generated file byte-identical; `tools/check_all.sh` ALL CHECKS PASSED.
+
 ## Design fixes 2026-11-20 – findings 7 and 14, README holes – done (Opus 5.5, 2026-11-20)
 
 User decisions (Decisions, first entry): fix design findings in the KiCad design but leave every
