@@ -1382,6 +1382,14 @@ Shared-tool limitations met on this board, with the board-local workaround used.
 
 ## Decisions
 
+- **User decision 2026-11-20 (through the coordinating session): the current-measurement nets are
+  named after the switch (`CURRENT_Q4`, `CURRENT_Q7` and their `_MEAS` outputs), not the inductor,
+  because the emitter shunt measures the switch current.** Confirms the names chosen in "Design
+  fixes 2026-11-20"; `CURRENT_L1` / `CURRENT_L3` were the alternative.
+- User decision 2026-11-20: the master repo's mechanical baseline (`tube_amplifier_kicad`
+  `mechanical/hv_supplies_v2.kicad_pcb`) now numbers its holes H1-H4 like this board (done there,
+  be5124f).
+
 - **User decisions, 2026-11-20 (through the coordinating session), design fixes:**
   1. **Fix design findings in the KiCad design, but leave component values as they are** (finding 8,
      LT1014 at 3V3, etc. unchanged). HV supplies v2 is not installed and is the redesign's starting point.
