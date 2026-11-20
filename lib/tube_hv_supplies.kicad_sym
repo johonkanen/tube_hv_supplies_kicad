@@ -2569,7 +2569,7 @@
 				)
 			)
 		)
-		(property "Description" "12-bit I2C ADC SOT-23-6, Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
+		(property "Description" "12-bit I2C ADC SOT-23-6 (TI ADC121C027: 1 VA, 2 GND, 3 VIN, 4 ADR0, 5 SCL, 6 SDA), Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
 			(at 0 0 0)
 			(hide yes)
 			(effects
@@ -2593,7 +2593,7 @@
 		)
 		(symbol "ADC121C027_1_1"
 			(pin input line
-				(at -10.16 2.54 0)
+				(at -10.16 0 0)
 				(length 2.54)
 				(name "VIN"
 					(effects
@@ -2610,8 +2610,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at -10.16 0 0)
+			(pin power_in line
+				(at -10.16 2.54 0)
 				(length 2.54)
 				(name "VA"
 					(effects

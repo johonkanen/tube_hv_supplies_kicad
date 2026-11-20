@@ -14,9 +14,79 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5): user decisions applied – Proteus pads on J2 and on the TO-220s Q3 Q4 Q7 Q8 (1.524 × 2.54 rounded rectangle from the gerbers, drill 1.016), J1 / J2 all round, reference texts by `place_refdes`; round trip 0 other / 0 clearance (roundtrip_pending.py removed); new `check_proteus_pads.py`; DRC 0 errors except 20 accepted courtyards (30 violations); **ALL CHECKS PASSED** (18 steps). The board stays generated |
 | Shared tools, J1 | **done** 2026-11-20 (Opus 5.5): `tools/p2k` → a9a286c; every board-local tool replaced by the shared tools / keys (D-R, D-I7 re-baselines; no strict opt-outs); J1 renumbered to the standard header numbering with `IPC_PIN_IDS` (finding 12, with the control card J11), square pad 1 (user); **ALL CHECKS PASSED** (18 steps) |
 | Generation stopped | **done** 2026-11-20 (Opus 5.5): user decision D-STOP – the board is no longer generated from the Proteus data; the generators are frozen in `tools/generate/` (refuse without `--force-regenerate`); check_all.sh keeps only the checks against Proteus and the KiCad rules; **ALL CHECKS PASSED** (14 steps) |
+| Hand edit 1: finding 6 | **done** 2026-11-20 (Opus 5.5): ADC1-3 VA (A1, pad 1) on 3V3, VIN (COM2, pad 3) on the filtered input – symbol pins swapped in place (VA power_in), copper rerouted inside three small areas with 6 added vias, DRC unchanged (0 new items); the Proteus-based checks accept exactly the 6 pin nets / 3 areas / 6 vias through `tools/hand_edits.py`; **ALL CHECKS PASSED** (14 steps) |
 
 **HV supplies v2 is not installed and will be redone anyway (user, 2026-11-20).** This conversion is
 only the starting point for the redesign; the findings below are input for it.
+
+## Hand edits after generation stopped
+
+Every change to `kicad/` / `lib/` since D-STOP (733d5dc). Each edit that differs from Proteus on purpose is
+listed in `tools/hand_edits.py`; the Proteus-based checks of `tools/check_all.sh` run through it and accept
+exactly those differences (a listed pin that no longer has its recorded Proteus net fails as stale).
+
+### Recorded deviations from Proteus (`tools/hand_edits.py`)
+
+| # | What | Pins | Copper |
+|---|---|---|---|
+| 1 | Finding 6, ADC121C027 VA / VIN (user decision 2026-11-20) | ADC1-A1 #00200 → 3V3, ADC1-COM2 3V3 → #00200, ADC2-A1 #00202 → 3V3, ADC2-COM2 3V3 → #00202, ADC3-A1 #00204 → 3V3, ADC3-COM2 3V3 → #00204 | `AREAS` (IPC frame, all layers): ADC1 x -111.30..-107.85 y -7.75..-3.65, ADC2 x -112.25..-107.85 y -12.45..-8.60, ADC3 x -113.20..-108.15 y -17.75..-13.10; `EXTRA_VIAS`: 6 vias 0.5 / 0.3 on #00200 / #00202 / #00204 |
+
+(KiCad names the input nets `Net-(ADC1-VIN)`, `Net-(ADC2-VIN)`, `Net-(ADC3-VIN)` now, from the VIN pin; they
+were `Net-(ADCn-VA)`.)
+
+### Edit 1 – finding 6, ADC VA / VIN (Opus 5.5, 2026-11-20)
+
+TI ADC121C027 SOT-23-6: 1 VA (supply / reference), 2 GND, 3 VIN, 4 ADR0, 5 SCL, 6 SDA. The footprint pads
+keep the Proteus ids (A1 = pad 1, COM2 = pad 3, check_pin_order); the nets now follow the datasheet.
+Component values unchanged. Done by scripts on the committed files (kept in `build/tmp`, not committed;
+the frozen generators were not used):
+
+- **Schematic** (`lib/tube_hv_supplies.kicad_sym` + the `lib_symbols` copy in `kicad/06_adc.kicad_sch`): in the
+  ADC121C027 symbol VA (A1) and VIN (COM2) exchange their positions on the left side (VA at the top, VIN in
+  the middle), so the unchanged sheet wires put 3V3 on VA and the R78-R80 / C35-C37 input on VIN for all
+  three parts; no wire moved. **VA is `power_in` again** (the datasheet role; it was passive so ERC would not
+  flag the input on a supply pin). ADR0 stays passive (ADC3's ADR0 is open on purpose, net FLOATING; an
+  input type would only add an ERC warning). Description field with the TI pin table (symbol, the three
+  instances and the PCB footprints, for DRC parity); the two sheet notes say the fix and the Proteus state.
+  ERC unchanged: 0 errors, 21 warnings.
+- **PCB** (pcbnew script): per part, A1 joins the 3V3 column between the pad rows (x -108.34 / -108.351,
+  which already fed K2 / the next ADC); the local 3V3 feeds that ended on COM2 (C29 / C28 / C27 and, at ADC3,
+  the 3V3 line from the left, the R76 / R77 pull-up line and the B.Cu 3V3 via) are rejoined to that column
+  around COM2 (F.Cu, 0.1524 mm, ≥ 0.2 mm from the pad); the input line that ended on A1 now ends in a via,
+  runs on B.Cu (free under the parts: no B.Cu or inner copper there) past the A2 GND via (≥ 0.25 mm) to a
+  second via next to COM2 and a short F.Cu stub into COM2. 17 segments removed, 2 shortened (end points),
+  23 segments and 6 vias added (copies of a 0.5 / 0.3 board via, new UUIDs), pad nets set (A1 3V3
+  `power_in`, COM2 input), zones refilled (only the F.Cu GND pour changes, around the parts), input nets
+  renamed `Net-(ADCn-VIN)`. No other copper moved.
+- **DRC**: 28 violations as before (20 accepted courtyard overlaps, 5 silk_overlap, 3 silk_over_copper
+  warnings), 0 shorts / 0 clearance / 0 unconnected / 0 parity; nothing new accepted.
+
+How each check accepts it (`tools/hand_edits.py`, the shared p2k hooks; no p2k change):
+
+| Check | Mechanism | Accepts |
+|---|---|---|
+| `compare_netlists` | `compare_netlists.load_ipc` replaced by the original + `PIN_NETS` (p2k's documented wrapper hook) | the 6 pin nets |
+| `check_board` | `p2k.pcb.configure(records=)` with `PIN_NETS` + `main(extra_vias=)` | the 6 pin nets, the 6 vias (position, net) |
+| `assign_nets --check` | `p2k.pcb.configure(records=)` (its IPC net map and via nets) | the 6 pin nets |
+| `ipc356_diff` | `configure(records=)` + `main(extra_vias=)` | the 6 pin nets, 6 via records (580 = 574 + 6) |
+| `gerber_roundtrip --check` | `configure(records=)` + `main(in_area=AREAS, extra_vias=)`; strict `roundtrip_counts` re-implemented with the areas (`count_check` replaced): outside the areas draws and flashes equal, inside KiCad flashes = Proteus + 6 per layer | XOR clusters / uncovered draws inside the 3 areas, the 6 via drills |
+| `check_pin_order`, `check_footprints`, `check_pads`, `check_symbols` | nothing needed (geometry and pin sets unchanged) | – |
+| DRC, ERC | nothing needed (schematic and board agree; no new violation) | – |
+
+The round trip: F.Cu 31 / In1.Cu 6 / B.Cu 3 `deviation` clusters, all inside the areas; 0 `other`, 0
+uncovered draws outside them, drills 0 mismatches (+6 listed via drills); counts inside the areas F.Cu
+37 Proteus / 32 KiCad draws, B.Cu 0 / 11, flashes +6 on each layer.
+
+Negative tests (scratch copies `build/tmp/neg_*` of the repo, full `tools/check_all.sh`, deleted):
+- an unlisted 3V3 via on the 3V3 column between ADC1 and ADC2 (outside the areas) → SOME CHECKS FAILED:
+  check_board (unlisted via), ipc356_diff (`KiCad via ... no Proteus record`), round trip (4 `other`
+  clusters, an unmatched drill, counts outside the areas +1 flash per layer);
+- ADC2 reverted on the PCB (Proteus copper and pad nets; ADC1 / ADC3 fixed, schematic fixed) → SOME CHECKS
+  FAILED: check_board, assign_nets --check, DRC (4 parity issues), ipc356_diff (`Proteus net #00202 spans
+  KiCad nets`, 4 of 6 listed vias), round trip (4 of 6 via drills, inside-area flash counts);
+- the schematic reverted (the old symbol, all three ADCs as Proteus) with the fixed PCB → compare_netlists
+  8 errors (`IPC net #00200 split …`), DRC 15 parity issues.
+- p2k candidates 32 / 33 (below).
 
 ## Generation stopped 2026-11-20 – done (Opus 5.5, 2026-11-20)
 
@@ -588,7 +658,7 @@ Review findings (conversion; for Phase 5 decisions):
 | 3 Board thickness | Answered by the user (1.6 mm); board file 1.6 mm, 4 copper layers. |
 | 4 No title blocks | Confirmed. |
 | 5 Dates | Confirmed (PDF 2026-09-19, gerbers `CreationDate` 2026-11-19); PDF = IPC on every page (above). |
-| 6 ADC VA / VIN | **Confirmed, also against the TI datasheet** (ADC121C021/027, pin table: ADC121C027 SOT VA 1, GND 2, VIN 3, ADR0 4, SCL 5, SDA 6): the board has the filtered input on pad 1 (VA) and 3V3 on pad 3 (VIN) on all three ADCs. PDF, IPC, KiCad agree. Open (redesign). |
+| 6 ADC VA / VIN | **Confirmed, also against the TI datasheet** (ADC121C021/027, pin table: ADC121C027 SOT VA 1, GND 2, VIN 3, ADR0 4, SCL 5, SDA 6): the board has the filtered input on pad 1 (VA) and 3V3 on pad 3 (VIN) on all three ADCs. PDF, IPC, KiCad agree. **Fixed 2026-11-20** in the KiCad design (hand edit 1 after D-STOP). |
 | 7 Current-measurement names | Confirmed from pages 1 and 4 (`Input_current` on the GND rail; C3_current → input_current_meas, CURRENT_L1 → C2_current_meas, CURRENT_L3 → C3_current_meas). Open. |
 | 8 LT1014 at 3.3 V | Confirmed as drawn (U2 `LT1014`, pins 4 / 11 on 3V3 / GND). Open. |
 | 9 Devices vs values | Not re-derived from ROOT.DSN; the values agree with the PDF and the pinouts with the IPC nets. |
@@ -1224,7 +1294,7 @@ driven by R76 / J1 in the full sheet).
 
 ## Last check output
 
-`tools/check_all.sh`, 2026-11-20 (generation stopped, D-STOP; p2k a9a286c; 14 steps):
+`tools/check_all.sh`, 2026-11-20 (after hand edit 1, finding 6; p2k a9a286c; 14 steps):
 
 ```
 == KiCad environment
@@ -1262,7 +1332,8 @@ symbols: 15 part types, 160 refdes, 4 power symbols
 symbols: OK
 == ERC
 erc: 0 errors, 21 warnings (2 ground_pin_not_ground, 19 isolated_pin_label) (reports/erc.rpt)
-== Netlist comparison vs IPC
+== Netlist comparison vs IPC (hand edits: exactly tools/hand_edits.py PIN_NETS)
+hand_edits: accepted (D-STOP edit 1, finding 6): 6 pin nets ADC1-A1 #00200->3V3, ADC1-COM2 3V3->#00200, ADC2-A1 #00202->3V3, ADC2-COM2 3V3->#00202, ADC3-A1 #00204->3V3, ADC3-COM2 3V3->#00204
 compare: parts 158/158 present, 0 missing, 0 extra; pins compared 423, wrong-net pins 0; IPC nets touched 113, complete 113 (+ 2 N/C / no-net pins)
 compare: per sheet (drawn/total) 1:34/34 2:26/26 3:42/42 4:34/34 5:7/7 6:15/15
 compare: OK
@@ -1287,12 +1358,15 @@ TO-220                   TO-220-3_Vertical                               0.000 @
 SMA                      D_SMA                                           0.050 @     0    0.050 @   180  mirrored 0.050  (two pads: band by render)
 CP                       CP_Radial_D10.0mm_P5.00mm                       0.000 @   270    0.000 @    90  unmirrored 0.000  (two pads: '+' by render)
 check_pin_order: OK (13 checks as recorded)
-== Board pads, holes, vias vs IPC (position, size, nets 1:1)
+== Board pads, holes, vias vs IPC (position, size, nets 1:1; hand edits: PIN_NETS, EXTRA_VIAS)
+hand_edits: accepted (D-STOP edit 1, finding 6): 6 pin nets ADC1-A1 #00200->3V3, ADC1-COM2 3V3->#00200, ADC2-A1 #00202->3V3, ADC2-COM2 3V3->#00202, ADC3-A1 #00204->3V3, ADC3-COM2 3V3->#00204
 check_board: 162 footprints, 429 pads, worst pad offset 0.039 mm (limit 0.05), 113 IPC nets mapped 1:1, 4 mounting holes
-check_board: 1836 tracks, 141 vias, 21 zones
-check_board: 1977 track / via nets in the board file = their copper group's net (track_nets)
+check_board: 6 added vias at their positions and nets
+check_board: 1842 tracks, 147 vias, 21 zones
+check_board: 1989 track / via nets in the board file = their copper group's net (track_nets)
 check_board: OK
-== Board copper connectivity after zone fill
+== Board copper connectivity after zone fill (hand edits: PIN_NETS)
+hand_edits: accepted (D-STOP edit 1, finding 6): 6 pin nets ADC1-A1 #00200->3V3, ADC1-COM2 3V3->#00200, ADC2-A1 #00202->3V3, ADC2-COM2 3V3->#00202, ADC3-A1 #00204->3V3, ADC3-COM2 3V3->#00204
 assign_nets: after zone fill: 119 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
 == DRC with schematic parity
@@ -1301,21 +1375,29 @@ drc:     20 error    courtyards_overlap  accepted: KiCad IPC-7351 courtyards vs 
 drc:      5 warning  silk_overlap
 drc:      3 warning  silk_over_copper
 drc: OK
-== IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)
-ipc356_diff: Proteus 574 records, KiCad 574; matched 574 (429 pads incl. 2 N/C, 141 vias, 4 holes), worst position offset 0.040 mm (limit 0.05)
+== IPC-D-356 from the board vs Proteus (pads, vias, holes, nets; hand edits: PIN_NETS, EXTRA_VIAS)
+hand_edits: accepted (D-STOP edit 1, finding 6): 6 pin nets ADC1-A1 #00200->3V3, ADC1-COM2 3V3->#00200, ADC2-A1 #00202->3V3, ADC2-COM2 3V3->#00202, ADC3-A1 #00204->3V3, ADC3-COM2 3V3->#00204
+ipc356_diff: Proteus 574 records, KiCad 580; matched 574 (429 pads incl. 2 N/C, 141 vias, 4 holes), worst position offset 0.040 mm (limit 0.05)
 ipc356_diff: 113 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
+ipc356_diff: 6 KiCad records of added parts / vias without a Proteus record, nets checked
 ipc356_diff: KiCad drill larger (footprint kept): 18x 0.812->1.001
 ipc356_diff: pads with another size in KiCad (info): C 96, D 4, DRV 16, L 6, Q 12, R 150, REF 3
 ipc356_diff: 2 unconnected-(...) nets, one record each (nc_joined)
 ipc356_diff: OK
-== Gerber round trip vs Proteus (copper XOR, coverage, drills)
-roundtrip: F.Cu   XOR   46.80 mm^2, beyond 0.05 mm: only Proteus   3.89, only KiCad  20.04 mm^2; clusters >= 0.01 mm^2: 227 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: In1.Cu XOR   31.88 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.59 mm^2; clusters >= 0.01 mm^2: 22 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: In2.Cu XOR   34.09 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  27.59 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
-roundtrip: B.Cu   XOR   52.26 mm^2, beyond 0.05 mm: only Proteus   0.99, only KiCad  36.07 mm^2; clusters >= 0.01 mm^2: 142 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+== Gerber round trip vs Proteus (copper XOR, coverage, drills; hand edits: AREAS, EXTRA_VIAS)
+hand_edits: accepted (D-STOP edit 1, finding 6): 6 pin nets ADC1-A1 #00200->3V3, ADC1-COM2 3V3->#00200, ADC2-A1 #00202->3V3, ADC2-COM2 3V3->#00202, ADC3-A1 #00204->3V3, ADC3-COM2 3V3->#00204
+hand_edits: deviation areas (IPC frame, all layers): ADC1 x -111.3..-107.85 y -7.75..-3.65, ADC2 x -112.25..-107.85 y -12.45..-8.6, ADC3 x -113.2..-108.15 y -17.75..-13.1; 6 added vias
+hand_edits: counts F.Cu: inside the areas 37 Proteus / 32 KiCad track draws, 17 Proteus / 23 KiCad flashes (6 added vias)
+hand_edits: counts In1.Cu: inside the areas 0 Proteus / 0 KiCad track draws, 4 Proteus / 10 KiCad flashes (6 added vias)
+hand_edits: counts In2.Cu: inside the areas 0 Proteus / 0 KiCad track draws, 4 Proteus / 10 KiCad flashes (6 added vias)
+hand_edits: counts B.Cu: inside the areas 0 Proteus / 11 KiCad track draws, 4 Proteus / 10 KiCad flashes (6 added vias)
+roundtrip: F.Cu   XOR   51.35 mm^2, beyond 0.05 mm: only Proteus   5.09, only KiCad  22.74 mm^2; clusters >= 0.01 mm^2: 227 pad shape, 31 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+20 inside deviation areas)
+roundtrip: In1.Cu XOR   33.19 mm^2, beyond 0.05 mm: only Proteus   0.00, only KiCad  28.89 mm^2; clusters >= 0.01 mm^2: 22 pad shape, 6 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+6 inside deviation areas)
+roundtrip: In2.Cu XOR   35.23 mm^2, beyond 0.05 mm: only Proteus   0.14, only KiCad  27.59 mm^2; clusters >= 0.01 mm^2: 18 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: B.Cu   XOR   55.10 mm^2, beyond 0.05 mm: only Proteus   0.99, only KiCad  38.91 mm^2; clusters >= 0.01 mm^2: 142 pad shape, 3 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+17 inside deviation areas)
 roundtrip: Proteus objects not compared (recorded deviations, all layers): 3 Conductor draws (REMOVED_TRACKS)
 roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
-roundtrip: counts (roundtrip_counts): KiCad track draws / flashes per layer F.Cu 847 / 474, In1.Cu 548 / 247, In2.Cu 40 / 247, B.Cu 401 / 347: tracks as gerber_to_tracks builds them, flashes = Proteus
+roundtrip: counts (roundtrip_counts): KiCad track draws / flashes per layer F.Cu 842 / 480, In1.Cu 548 / 253, In2.Cu 40 / 253, B.Cu 412 / 353: tracks as gerber_to_tracks builds them, flashes = Proteus
 roundtrip: OK
 == Proteus-pad parts: board pads = Proteus flashes and drills (J1-1 square: accepted)
 check_pads: J1-1 F.Cu: board pad 0.762 x 0.762 mm, 0.581 mm^2; Proteus flash (C) 0.762 x 0.762 mm, 0.456 mm^2
@@ -1331,7 +1413,8 @@ ALL CHECKS PASSED
 ## Findings about the original design
 
 Reported, not fixed (PLAN.md section 5). Since 2026-11-20 the user has findings fixed in the KiCad design
-(values unchanged): 1 (rename), 7, 14 done; 6 and 12 later (section "Design fixes 2026-11-20").
+(values unchanged): 1 (rename), 7, 14, 12 done; 6 done 2026-11-20 as the first hand edit after generation
+stopped (section "Hand edits after generation stopped").
 
 1. **`+2V5_BIAS` name vs the circuit (to confirm):** REF1 is an ISL21010CFH315Z-TK. In the
    ISL21010 ordering code, `-15` is the 1.5 V version (confirm against the fitted part).
@@ -1365,6 +1448,9 @@ Reported, not fixed (PLAN.md section 5). Since 2026-11-20 the user has findings 
    **Phase 2 confirmed it geometrically** (`tools/check_pin_order.py`, STATUS "Phase 2 - pin
    order"): A1 = JEDEC pad 1 and COM2 = pad 3 on all three ADCs (the only assignment with A2 on
    GND, K1 on SCL, COM1 on SDA); the footprint reproduces the IPC pads exactly.
+   **FIXED 2026-11-20** (user decision, hand edit 1 after D-STOP; section "Hand edits after generation
+   stopped"): VA (A1, pad 1) on 3V3, VIN (COM2, pad 3) on the filtered input on all three ADCs, VA
+   `power_in`; values unchanged. The Proteus-based checks accept exactly these 6 pin nets.
 7. **Current-measurement net names do not match what they measure:** the page 1 terminal
    `Input_current` sits on the GND rail (there is no input-current shunt; B- is GND), U2:A
    amplifies `C3_CURRENT` (shunt R30) into `INPUT_CURRENT_MEAS`, U2:C amplifies `CURRENT_L1`
@@ -1592,14 +1678,29 @@ Shared-tool limitations met on this board, with the board-local workaround used.
     own scripts and requires a clean `git status`. A board that stopped generating (hand edits; generators
     frozen in `tools/generate/`, refusing without `--force-regenerate`) needs a "checks only" mode or must
     leave the regression set; a config key (e.g. `GENERATED = False`) could tell the shared tools.
+32. **Strict `roundtrip_counts` ignores `in_area`** (2026-11-20, hand edit 1): the per-layer draw / flash
+    counts must equal the Proteus counts even when `main(in_area=, extra_vias=)` accepts a recorded
+    deviation, so a hand-edited board fails it. Workaround: `tools/hand_edits.py` replaces
+    `gerber_roundtrip.count_check` (draws / flashes outside the areas equal; inside, flashes = Proteus +
+    added vias). The shared version could do the same whenever `in_area` / `extra_vias` are given.
+33. **No shared key for recorded pin-net deviations of a later revision** (2026-11-20, hand edit 1):
+    `pcb.configure(records=)` + `main(added=, extra_vias=)` / `in_area` are wrapper hooks, and
+    `compare_netlists` does not read the IPC through `pcb.ipc_records()` (it needs its `load_ipc`
+    replaced). A config key (e.g. `DEVIATIONS = dict(pin_nets=..., areas=..., vias=...)`) read by every
+    Proteus-based check would replace the board wrapper `tools/hand_edits.py`.
 
 ## Decisions
 
 - **User decision 2026-11-20 (through the coordinating session), D-STOP: "stop generating this board from
-  the Proteus data".** The board files were last generated at 36b7f6f; generation stopped with the commit
+  the Proteus data".** The board files were last generated at 36b7f6f; generation stopped with commit 733d5dc
   "Stop generating the board" (section "Generation stopped 2026-11-20"); every later change to `kicad/` or
   `lib/` is a hand edit, recorded in section "Hand edits after generation stopped". Next, as the first hand
   edit: finding 6 (ADC VA / VIN), component values unchanged.
+- **User decision 2026-11-20 (through the coordinating session): after generation stops, fix finding 6 – the
+  ADC121C027 VA / VIN swap on ADC1-3 – as the first hand edit; component values stay.** Done (hand edit 1).
+  Agent choices: the symbol pins exchange positions (no wire edits); VA `power_in`, ADR0 stays passive; the
+  input crosses the A2 GND connection on B.Cu with two vias per part; the deviation is recorded in one
+  board-local file `tools/hand_edits.py` that drives the existing p2k hooks.
 
 - **User decision 2026-11-20 (through the coordinating session): "ribbon: renumber the pads to standard at
   both ends, copper unchanged, square pin-1 pad on the real pin 1".** J1 gets `IPC_PIN_IDS` (Proteus pin k →

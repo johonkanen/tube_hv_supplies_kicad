@@ -806,7 +806,7 @@
 					)
 				)
 			)
-			(property "Description" "12-bit I2C ADC SOT-23-6, Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
+			(property "Description" "12-bit I2C ADC SOT-23-6 (TI ADC121C027: 1 VA, 2 GND, 3 VIN, 4 ADR0, 5 SCL, 6 SDA), Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
 				(at 0 0 0)
 				(hide yes)
 				(effects
@@ -830,7 +830,7 @@
 			)
 			(symbol "ADC121C027_1_1"
 				(pin input line
-					(at -10.16 2.54 0)
+					(at -10.16 0 0)
 					(length 2.54)
 					(name "VIN"
 						(effects
@@ -847,8 +847,8 @@
 						)
 					)
 				)
-				(pin passive line
-					(at -10.16 0 0)
+				(pin power_in line
+					(at -10.16 2.54 0)
 					(length 2.54)
 					(name "VA"
 						(effects
@@ -2082,7 +2082,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "12-bit I2C ADC SOT-23-6, Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
+		(property "Description" "12-bit I2C ADC SOT-23-6 (TI ADC121C027: 1 VA, 2 GND, 3 VIN, 4 ADR0, 5 SCL, 6 SDA), Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
 			(at 193.04 87.63 0)
 			(effects
 				(font
@@ -2163,7 +2163,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "12-bit I2C ADC SOT-23-6, Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
+		(property "Description" "12-bit I2C ADC SOT-23-6 (TI ADC121C027: 1 VA, 2 GND, 3 VIN, 4 ADR0, 5 SCL, 6 SDA), Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
 			(at 193.04 121.92 0)
 			(effects
 				(font
@@ -2244,7 +2244,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "12-bit I2C ADC SOT-23-6, Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
+		(property "Description" "12-bit I2C ADC SOT-23-6 (TI ADC121C027: 1 VA, 2 GND, 3 VIN, 4 ADR0, 5 SCL, 6 SDA), Proteus pin ids A1=VA A2=GND COM2=VIN COM1=SDA K1=SCL K2=ADR0"
 			(at 193.04 152.4 0)
 			(effects
 				(font
@@ -3898,7 +3898,7 @@
 			)
 		)
 	)
-	(text "As drawn in the PDF (and built: IPC): VIN (COM2) on 3V3, VA (A1) on the filtered input."
+	(text "Finding 6 fixed (hand edit after D-STOP): VA (A1) on 3V3, VIN (COM2) on the filtered input."
 		(exclude_from_sim no)
 		(at 172.72 170.18 0)
 		(effects
@@ -3909,7 +3909,7 @@
 		)
 		(uuid "092d540b-bb65-5b5b-98fe-47f95488a9aa")
 	)
-	(text "ADC121C027: VA is the supply / reference, VIN the analog input (STATUS.md finding 6)."
+	(text "The Proteus design (PDF, IPC, rev A copper) had them swapped: VIN on 3V3, VA on the input (STATUS.md finding 6)."
 		(exclude_from_sim no)
 		(at 172.72 172.72 0)
 		(effects

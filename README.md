@@ -67,6 +67,14 @@ generators are kept as frozen history in `tools/generate/` (they refuse to run w
 committed files against the Proteus sources (netlist, pads, vias, copper, drills) and the KiCad rules (ERC,
 DRC) and prints ALL CHECKS PASSED (14 steps).
 
+**Hand edit 1, finding 6 fixed (2026-11-20, user decision; STATUS.md "Hand edits after generation stopped"):**
+ADC1-ADC3 (ADC121C027) now have 3V3 on VA (pin A1, SOT pad 1) and the filtered analog input on VIN (pin
+COM2, pad 3), as in the TI pin table; Proteus had them swapped. Schematic: the symbol's VA / VIN pins
+exchanged places (VA `power_in`); PCB: the copper at each part rerouted inside a small area, with two vias
+per part, DRC unchanged. Component values unchanged. The checks that compare against Proteus run through
+`tools/hand_edits.py`, which lists the deviations (6 pin nets, 3 areas, 6 vias) and accepts exactly those;
+ALL CHECKS PASSED (14 steps).
+
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 
 ## Source
@@ -104,6 +112,7 @@ lib/            part_map.csv, the project symbol and footprint libraries (genera
 kicad/          KiCad project: root sheet + 6 sub-sheets (one per PDF page)
 tools/p2k/       proteus2kicad (submodule)
 tools/generate/ the frozen rev A generators (part map, symbols, sheets, footprints, make_pcb.sh): history, don't run
+tools/hand_edits.py  the recorded deviations from Proteus since D-STOP; wrapper for the Proteus-based checks
 reports/roundtrip/  round-trip report and overlays (KiCad gerbers vs Proteus)
 tools/check_all.sh  every verification step (run at the start and end of a session)
 p2k_config.py   board configuration for the shared tools (incl. PIN_ORDER, PROTEUS_PADS_CHECK, REMOVED_TRACKS)
