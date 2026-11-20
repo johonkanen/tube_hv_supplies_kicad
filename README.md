@@ -21,8 +21,8 @@ board is in `p2k_config.py`.
 
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
-Phase 0 (skeleton and inventory) not started. The sources are in place; `p2k_config.py` holds
-only the paths and placeholder sheet names.
+Phase 0 (skeleton and inventory) done: `p2k_config.py` complete, `reference/` cheat sheets
+generated from the IPC netlist, `tools/check_all.sh` passes. Next: Phase 1 preparation.
 
 v2, built 2026. v1 (built 2024, same outline and mounting holes) is not converted; add it as a tagged revision if it's ever needed.
 
@@ -53,6 +53,8 @@ source/         Proteus exports (read-only)
   cadcam/         Gerber X2 export with the IPC-D-356A netlist (the reference)
   schematic_pdf/  schematic PDF to redraw from
   *.pdsprj        Proteus project (schematic values, devices, packages, pin names)
+reference/      tables derived from the IPC netlist (p2k ipc356; generated, don't edit)
 tools/p2k/       proteus2kicad (submodule)
+tools/check_all.sh  every verification step (run at the start and end of a session)
 p2k_config.py   board configuration for the tools
 ```
