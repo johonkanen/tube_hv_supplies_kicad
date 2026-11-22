@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="728" viewBox="0 0 640 728" font-family="sans-serif" font-size="9">
+<rect width="640" height="728" fill="white"/>
+<polygon points="160,20 620,20 620,620 448,620 448,700 160,700" fill="#eef5e9" stroke="#2d572c" stroke-width="2"/>
+<rect x="516" y="20" width="76" height="36" fill="white" stroke="#2d572c" stroke-dasharray="4"/>
+<rect x="516" y="480" width="76" height="140" fill="white" stroke="#2d572c" stroke-dasharray="4"/>
+<circle cx="554.0" cy="14.400000000000006" r="30.0" fill="none" stroke="black" stroke-dasharray="3"/>
+<circle cx="554.0" cy="518.4" r="30.0" fill="none" stroke="black" stroke-dasharray="3"/>
+<circle cx="280.0" cy="248.0" r="6.4" fill="white" stroke="black"/>
+<circle cx="340.0" cy="398.8" r="6.4" fill="white" stroke="black"/>
+<circle cx="340.0" cy="566.4" r="6.4" fill="white" stroke="black"/>
+<circle cx="604.0" cy="92.0" r="6.4" fill="white" stroke="black"/>
+<circle cx="604.0" cy="412.0" r="6.4" fill="white" stroke="black"/>
+<rect x="164" y="220" width="28" height="136" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="166" y="230">J1</text>
+<rect x="164" y="368" width="28" height="28" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="166" y="378">J501</text>
+<rect x="164" y="428" width="40" height="80" fill="#8e44ad" fill-opacity="0.55" stroke="black"/><text x="166" y="438">J201</text>
+<rect x="164" y="516" width="40" height="40" fill="#8e44ad" fill-opacity="0.55" stroke="black"/><text x="166" y="526">J202</text>
+<rect x="468" y="524" width="40" height="80" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="470" y="534">J101</text>
+<rect x="380" y="572" width="80" height="40" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="382" y="582">J102</text>
+<rect x="292" y="572" width="80" height="40" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="294" y="582">J103</text>
+<rect x="376" y="476" width="88" height="88" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="378" y="486">FAULT</text>
+<rect x="168" y="28" width="152" height="152" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="170" y="38">L211</text>
+<rect x="328" y="28" width="152" height="152" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="330" y="38">L221</text>
+<rect x="304" y="188" width="144" height="120" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="306" y="198">CTRL</text>
+<rect x="456" y="188" width="140" height="60" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="458" y="198">HS_Q211</text>
+<rect x="456" y="256" width="140" height="60" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="458" y="266">HS_Q212</text>
+<rect x="364" y="324" width="140" height="60" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="366" y="334">HS_Q221</text>
+<rect x="364" y="392" width="140" height="60" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="366" y="402">HS_Q222</text>
+<rect x="200" y="316" width="136" height="48" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="202" y="326">BLD_OUT</text>
+<rect x="488" y="64" width="80" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="490" y="74">C211</text>
+<rect x="212" y="372" width="80" height="80" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="214" y="382">C221</text>
+<rect x="212" y="460" width="80" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="214" y="470">C214</text>
+<rect x="168" y="564" width="80" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="170" y="574">C217</text>
+<rect x="256" y="620" width="132" height="48" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="258" y="630">C215</text>
+<rect x="512" y="324" width="48" height="132" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="514" y="334">C225</text>
+<rect x="200" y="188" width="56" height="104" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="202" y="198">DIV</text>
+<rect x="300" y="460" width="64" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="302" y="470">DRV1</text>
+<rect x="168" y="652" width="80" height="40" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="170" y="662">SHUNTS</text>
+<rect x="488" y="152" width="88" height="28" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="490" y="162">R213</text>
+<rect x="584" y="116" width="20" height="64" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="586" y="126">R216</text>
+<rect x="568" y="324" width="20" height="64" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="570" y="334">R226</text>
+<text x="8" y="720">HV supplies rev 3, ext: chassis frame (x right, y toward the rear panel), view from above</text>
+</svg>
