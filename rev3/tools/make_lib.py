@@ -14,10 +14,10 @@ KICAD = os.environ.get("KICAD_SYMBOLS", "/mnt/c/Program Files/KiCad/10.0/share/k
 WANT = [
     ("Device", "R"), ("Device", "C"), ("Device", "C_Polarized"), ("Device", "D"), ("Device", "D_TVS"),
     ("Device", "L"), ("Device", "LED"), ("Device", "Fuse"), ("Device", "NetTie_2"), ("Device", "Q_NIGBT_GCE"),
-    ("Diode_Bridge", "GBU8J"), ("Driver_FET", "UCC21520DW"), ("Driver_FET", "UCC27511ADBV"), ("Analog_ADC", "AD7689xCP"),
+    ("Diode_Bridge", "GBU8J"), ("Driver_FET", "UCC21520DW"), ("Analog_ADC", "AD7689xCP"),
     ("Amplifier_Operational", "MCP6004"), ("Comparator", "LMV339"), ("Isolator", "TLP293"),
     ("74xGxx", "74LVC1G10"), ("74xGxx", "74LVC1G17"), ("74xGxx", "74AUP1G74"),
-    ("Mechanical", "MountingHole_Pad"), ("Mechanical", "MountingHole"), ("Reference_Voltage", "LM4040DBZ-2.5"),
+    ("Mechanical", "MountingHole_Pad"), ("Mechanical", "MountingHole"), ("Mechanical", "Heatsink"), ("Reference_Voltage", "LM4040DBZ-2.5"),
     ("Connector_Generic", "Conn_02x20_Odd_Even"), ("Connector_Generic", "Conn_01x02"), ("Connector_Generic", "Conn_01x01"),
     ("power", "GND"), ("power", "+3V3"), ("power", "+12V"), ("power", "PWR_FLAG"),
 ]

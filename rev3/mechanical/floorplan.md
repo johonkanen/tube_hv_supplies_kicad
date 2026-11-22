@@ -2,58 +2,58 @@
 
 | Case | usable bottom area (mm2) | block area on the bottom (mm2) | fill | blocks that did not fit |
 |---|---|---|---|---|
-| base | 16094 | 15621 | 97 % | C217, C224, C227, C101, C225, BLD_RAW, LINKS, DRV2, F202, SHUNTS, L101, L212, L222, R223, C102, C212, C222, D201 |
-| base_ctltop | 16094 | 14177 | 88 % | C227, C101, C225, BLD_RAW, LINKS, DRV1, DRV2, R223, C102, C212, C222, D201 |
-| ext | 17534 | 15621 | 89 % | C224, C227, C101, BLD_RAW, LINKS, DRV2, F201, F202, L101, L212, L222, R223, C102, C212, C222, D201 |
-| ext_ctltop | 17534 | 14177 | 81 % | C101, BLD_RAW, LINKS, DRV1, DRV2, R223, C102, C212, C222, D201 |
-| extL | 20089 | 15621 | 78 % | LINKS, DRV2, SHUNTS, L101, L212, L222, R223, C102, C212, C222, D201 |
-| extL_ctltop | 20089 | 14177 | 71 % | L222, C102, C212, C222, D201 |
-| base_reduced | 16094 | 13850 | 86 % | BLD_RAW, LINKS, DRV1, DRV2, Q_FREE, F202, L212, L222, R213, R223, C102, C212, C222 |
-| base_ctltop_reduced | 16094 | 12406 | 77 % | LINKS, DRV2, R213, R223, C102, C212, C222, D201 |
-| ext_reduced | 17534 | 13850 | 79 % | LINKS, DRV1, DRV2, F202, L212, L222, R213, R223, C102, C212, C222, D201 |
-| ext_ctltop_reduced | 17534 | 12406 | 71 % | R223, C102, C212, C222 |
-| extL_reduced | 20089 | 13850 | 69 % | L212, L222, R213, R223, C222 |
+| base | 16094 | 15621 | 97 % | C204b, C209, C209b, C101, C210, BLD_RAW, LINKS, DRV2, F202, SHUNTS, L101, L202, L204, R210, C102, C202, C207, D201 |
+| base_ctltop | 16094 | 14177 | 88 % | C209b, C101, C210, BLD_RAW, LINKS, DRV1, DRV2, R210, C102, C202, C207, D201 |
+| ext | 17534 | 15621 | 89 % | C209, C209b, C101, BLD_RAW, LINKS, DRV2, F201, F202, L101, L202, L204, R210, C102, C202, C207, D201 |
+| ext_ctltop | 17534 | 14177 | 81 % | C101, BLD_RAW, LINKS, DRV1, DRV2, R210, C102, C202, C207, D201 |
+| extL | 20089 | 15621 | 78 % | LINKS, DRV2, SHUNTS, L101, L202, L204, R210, C102, C202, C207, D201 |
+| extL_ctltop | 20089 | 14177 | 71 % | L204, C102, C202, C207, D201 |
+| base_reduced | 16094 | 13850 | 86 % | BLD_RAW, LINKS, DRV1, DRV2, Q_FREE, F202, L202, L204, R204, R210, C102, C202, C207 |
+| base_ctltop_reduced | 16094 | 12406 | 77 % | LINKS, DRV2, R204, R210, C102, C202, C207, D201 |
+| ext_reduced | 17534 | 13850 | 79 % | LINKS, DRV1, DRV2, F202, L202, L204, R204, R210, C102, C202, C207, D201 |
+| ext_ctltop_reduced | 17534 | 12406 | 71 % | R210, C102, C202, C207 |
+| extL_reduced | 20089 | 13850 | 69 % | L202, L204, R204, R210, C207 |
 | extL_ctltop_reduced | 20089 | 12406 | 62 % | none |
 
 Case listed below: **extL_ctltop_reduced** (floorplan_extL_ctltop_reduced.svg).
 
 | Block | x (mm) | y (mm) | w x h (mm) | height below the board (mm) | note |
 |---|---|---|---|---|---|
-| L211 | 562 | 32 | 38 x 38 | 36 | 3 mH / 2.4 A sat, ETD34 gapped N87 (placeholder) |
-| L221 | 602 | 32 | 38 x 38 | 36 | 3 mH / 2.4 A sat, ETD34 |
+| L201 | 562 | 32 | 38 x 38 | 36 | 3 mH / 2.4 A sat, ETD34 gapped N87 (placeholder) |
+| L203 | 602 | 32 | 38 x 38 | 36 | 3 mH / 2.4 A sat, ETD34 |
 | SHUNTS | 642 | 41 | 20 x 10 | 2 | 4 x 50 mohm 2512, Kelvin |
-| C214 | 642 | 54 | 24 x 24 | 45 | 100 uF 500 V radial D22 (intermediate, bridge 1) |
+| C204 | 642 | 54 | 24 x 24 | 45 | 100 uF 500 V radial D22 (intermediate, bridge 1) |
 | L101 | 570 | 72 | 13 x 13 | 15 | 33 uH 2 A radial D12 |
-| C224 | 596 | 72 | 24 x 24 | 45 | 100 uF 500 V radial D22 (intermediate, bridge 2) |
-| R216 | 622 | 72 | 16 x 5 | 5 | 5.6 ohm 1 W damping, axial 0414 |
+| C209 | 596 | 72 | 24 x 24 | 45 | 100 uF 500 V radial D22 (intermediate, bridge 2) |
+| R203 | 622 | 72 | 16 x 5 | 5 | 5.6 ohm 1 W damping, axial 0414 |
 | J1 | 561 | 80 | 7 x 34 | 15 | IDC 1.27 mm 2x20 shrouded, mated socket ~15 mm; opposite J11 (y 84-110) |
-| HS_Q211 | 622 | 80 | 35 x 15 | 51 | IKP08N65F5 on Fischer SK 104 38.1 mm (35 x 13 mm, ~12 K/W), live at the tab |
-| L212 | 659 | 80 | 13 x 13 | 15 | 33 uH 2 A radial D12 |
-| C211 | 570 | 93 | 20 x 20 | 40 | 47 uF 500 V radial D18 (bridge 1 input) |
-| L222 | 659 | 95 | 13 x 13 | 15 | 33 uH 2 A radial D12 |
+| HS201_Q201 | 622 | 80 | 35 x 15 | 51 | IKP08N65F5 on Fischer SK 104 38.1 mm (35 x 13 mm, ~12 K/W), live at the tab |
+| L202 | 659 | 80 | 13 x 13 | 15 | 33 uH 2 A radial D12 |
+| C201 | 570 | 93 | 20 x 20 | 40 | 47 uF 500 V radial D18 (bridge 1 input) |
+| L204 | 659 | 95 | 13 x 13 | 15 | 33 uH 2 A radial D12 |
 | BLD_OUT | 622 | 97 | 34 x 12 | 5 | 4 x 110 kohm 1 W output bleeders + V_ANODE LED string |
-| C221 | 592 | 98 | 20 x 20 | 40 | 47 uF 500 V D18 (bridge 2 input) |
+| C206 | 592 | 98 | 20 x 20 | 40 | 47 uF 500 V D18 (bridge 2 input) |
 | C101 | 614 | 111 | 20 x 20 | 40 | 47 uF 500 V D18 (B_P, input filter) |
 | BLD_RAW | 636 | 111 | 24 x 16 | 7 | 2 x 75 kohm 2 W raw bleeder + 1 Mohm / LED |
 | J501 | 561 | 117 | 7 x 7 | 12 | HV_PERMIT KK-254 2-pin |
 | F201 | 570 | 120 | 26 x 8 | 12 | 5x20 clip holder (fuse >= 500 VDC, TBD) |
 | LINKS | 527 | 129 | 24 x 16 | 7 | R101 / R102 RAW_SS links, axial 0617 (0 ohm or 10-47 ohm 2 W fusible) |
-| C215 | 573 | 130 | 33 x 12 | 22 | 1 uF 630 V MKP, P27.5 |
+| C205 | 573 | 130 | 33 x 12 | 22 | 1 uF 630 V MKP, P27.5 |
 | J201 | 561 | 132 | 10 x 20 | 20 | V_ANODE / GND_PWR 4.8 mm tabs, toward the power amp (west) |
-| Q_FREE | 608 | 133 | 36 x 7 | 25 | Q212, Q221, Q222 standing TO-220, no heatsink (3 x 10.5 x 4.6 mm + clearance) |
+| Q_FREE | 608 | 133 | 36 x 7 | 25 | Q202, Q203, Q204 standing TO-220, no heatsink (3 x 10.5 x 4.6 mm + clearance) |
 | F202 | 646 | 134 | 26 x 8 | 12 | 5x20 clip holder |
-| C225 | 573 | 144 | 33 x 12 | 22 | 1 uF 630 V MKP, P27.5 |
+| C210 | 573 | 144 | 33 x 12 | 22 | 1 uF 630 V MKP, P27.5 |
 | FAULT | 614 | 144 | 22 x 22 | 18 | GBU8J + 100 nF Y2 + 100 ohm 2 W + plated standoff H101 |
 | DRV1 | 527 | 147 | 16 x 20 | 3 | UCC21520DW + bootstrap, gate resistors (SMD) |
 | J202 | 561 | 154 | 10 x 10 | 20 | V_SCREEN 4.8 mm tab |
 | J101 | 637 | 156 | 10 x 20 | 20 | B_P / B_N raw HV in, next to the rear cable slot |
 | DRV2 | 573 | 158 | 16 x 20 | 3 | UCC21520DW + bootstrap (SMD) |
-| R213 | 545 | 166 | 22 x 7 | 7 | 2.2 ohm 2 W fusible, axial 0617 |
+| R204 | 545 | 166 | 22 x 7 | 7 | 2.2 ohm 2 W fusible, axial 0617 |
 | J103 | 593 | 168 | 20 x 10 | 20 | RAW_SS2 / GND_PRE2 (W03) |
 | J102 | 615 | 168 | 20 x 10 | 20 | RAW_SS1 / GND_PRE1 (W02) |
-| R223 | 527 | 175 | 22 x 7 | 7 | 2.2 ohm 2 W fusible |
+| R210 | 527 | 175 | 22 x 7 | 7 | 2.2 ohm 2 W fusible |
 | C102 | 551 | 175 | 19 x 7 | 16 | 100 nF 630 V film P15 |
-| C212 | 572 | 180 | 19 x 7 | 16 | 100 nF 630 V film P15 |
-| C222 | 593 | 180 | 19 x 7 | 16 | 100 nF 630 V film P15 |
-| R226 | 614 | 180 | 16 x 5 | 5 | 5.6 ohm 1 W damping |
+| C202 | 572 | 180 | 19 x 7 | 16 | 100 nF 630 V film P15 |
+| C207 | 593 | 180 | 19 x 7 | 16 | 100 nF 630 V film P15 |
+| R209 | 614 | 180 | 16 x 5 | 5 | 5.6 ohm 1 W damping |
 | D201 | 527 | 184 | 20 x 6 | 6 | 1N5408 clamp V_SCREEN <= V_ANODE |

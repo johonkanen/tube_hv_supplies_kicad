@@ -1,0 +1,28 @@
+ERC report (2026-11-22T19:18:45, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+
+***** Sheet /01 Raw HV input, RAW_SS feeds (links), power star, fault network, bleeder/
+
+***** Sheet /02 Half-bridges: V_ANODE and V_SCREEN power stages/
+
+***** Sheet /03 Isolated gate drivers, bootstrap/
+[ground_pin_not_ground]: Pin VSSA not connected to ground net
+    ; warning
+    @(83.82 mm, 83.82 mm): Symbol U301 Pin 14 [VSSA, Power input, Line]
+[ground_pin_not_ground]: Pin VSSA not connected to ground net
+    ; warning
+    @(266.70 mm, 83.82 mm): Symbol U302 Pin 14 [VSSA, Power input, Line]
+
+***** Sheet /04 Voltage and current measurement, ADC/
+
+***** Sheet /05 J1 40-pin, HV_PERMIT, enable logic, hardware protection/
+
+ ** ERC messages: 2  Errors 0  Warnings 2
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

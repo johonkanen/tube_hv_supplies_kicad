@@ -7,8 +7,8 @@
 	(title_block
 		(title "HV supplies rev 3")
 		(company "Tube amplifier")
-		(rev "rev 3 - initial schematic")
-		(comment 1 "From tube_amplifier_kicad docs/interfaces.md IF-1.1, sim/power_stage, rev3/sim")
+		(rev "rev 3 - second pass (first draft)")
+		(comment 1 "From tube_amplifier_kicad docs/interfaces.md IF-1.2 / IF-2 (W17), rev3/sim")
 	)
 	(lib_symbols)
 	(sheet
@@ -26,7 +26,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "35b1356d-3f01-581c-97b9-913a99953d93")
-		(property "Sheetname" "01 Raw HV input, RAW_SS feeds, power star, fault network, brake"
+		(property "Sheetname" "01 Raw HV input, RAW_SS feeds (links), power star, fault network, bleeder"
 			(at 25.4 37.4 0)
 			(effects
 				(font

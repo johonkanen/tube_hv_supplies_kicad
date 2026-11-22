@@ -750,6 +750,118 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "tube_hv_supplies_rev3:Heatsink"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "HS"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Heatsink"
+				(at 0 -1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.3048 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0.3048 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Heatsink"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "thermal heat temperature"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Heatsink_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Heatsink_0_1"
+				(polyline
+					(pts
+						(xy -0.3302 1.27) (xy -0.9652 1.27) (xy -0.9652 3.81) (xy -1.6002 3.81) (xy -1.6002 1.27) (xy -2.2352 1.27) (xy -2.2352 3.81) (xy -2.8702 3.81) (xy -2.8702 0) (xy -0.9652 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.3302 1.27) (xy -0.3302 3.81) (xy 0.3048 3.81) (xy 0.3048 1.27) (xy 0.9398 1.27) (xy 0.9398 3.81) (xy 1.5748 3.81) (xy 1.5748 1.27) (xy 2.2098 1.27) (xy 2.2098 3.81) (xy 2.8448 3.81) (xy 2.8448 0) (xy -0.9652 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "tube_hv_supplies_rev3:R"
 			(pin_numbers
 				(hide yes)
@@ -1745,7 +1857,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "02 Two half-bridge synchronous bucks (v2 topology kept: IKP08N65F5, 3 mH + 33 uH, shunts in the low-side emitter and in the intermediate capacitor's return). Bridge 2 is now built like bridge 1 and v2's R26 || R27 (500 ohm) is gone (PS-2). Outputs: V_ANODE (W04-a) and V_SCREEN (W05-a)."
+	(text "02 Two half-bridge synchronous bucks (IKP08N65F5, 3 mH, shunts in the low-side emitter and in the electrolytic's return). Second stage moved from 4 kHz to 27.7 kHz (damped, Q = 1); one 100 uF per bridge. Sized for 0.57 A V_ANODE peaks and 30 ms ramps (bridge current 1.25 A, trip 2.0 A). Outputs: V_ANODE (W04-a) and V_SCREEN (W05-a). f_sw 50 kHz recommended."
 		(exclude_from_sim no)
 		(at 30.48 17.78 0)
 		(effects
@@ -1756,7 +1868,7 @@
 		)
 		(uuid "762f1af3-5d1b-51ed-8374-4cfe964cb8b3")
 	)
-	(text "Bridge 1: V_ANODE 0-400 V, 0.5 A peak (0-407 V at 420 V raw, D_max 0.97)"
+	(text "Bridge 1: V_ANODE 0-400 V, 0.57 A peak (about 403 V at 420 V raw, D_max 0.97)"
 		(exclude_from_sim no)
 		(at 30.48 40.64 0)
 		(effects
@@ -1792,7 +1904,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuseholder_Clip-5x20mm_Littelfuse_100_Inline_P20.50x4.60mm_D1.30mm_Horizontal"
 			(at 30.48 64.008 0)
 			(effects
 				(font
@@ -1903,15 +2015,15 @@
 				)
 			)
 		)
-		(property "Value" "39u/500V"
-			(at 57.74 72.39 0)
+		(property "Value" "47u/500V 105C"
+			(at 60.49 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
 			(at 51.7652 74.93 0)
 			(effects
 				(font
@@ -2030,7 +2142,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3"
 			(at 74.93 70.1548 0)
 			(effects
 				(font
@@ -2149,7 +2261,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 95.25 70.1548 0)
 			(effects
 				(font
@@ -2270,7 +2382,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 			(at 55.88 104.14 0)
 			(effects
 				(font
@@ -2289,6 +2401,15 @@
 			)
 		)
 		(property "Description" "N-IGBT transistor, gate/collector/emitter"
+			(at 50.8 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "IKP08N65F5XKSA1"
 			(at 50.8 106.68 0)
 			(effects
 				(font
@@ -2426,7 +2547,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 			(at 55.88 139.7 0)
 			(effects
 				(font
@@ -2445,6 +2566,15 @@
 			)
 		)
 		(property "Description" "N-IGBT transistor, gate/collector/emitter"
+			(at 50.8 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "IKP08N65F5XKSA1"
 			(at 50.8 142.24 0)
 			(effects
 				(font
@@ -2568,6 +2698,76 @@
 		)
 	)
 	(symbol
+		(lib_id "tube_hv_supplies_rev3:Heatsink")
+		(at 74.93 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8432b753-3be2-512a-b0e7-03830c9064ee")
+		(property "Reference" "HS201"
+			(at 74.93 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SK 104 38.1 mm (Q201, ~12 K/W, live at UIN)"
+			(at 74.93 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3"
+			(at 75.2348 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 75.2348 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Heatsink"
+			(at 74.93 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Fischer SK 104 38,1 STC"
+			(at 74.93 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "HS201")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
 		(at 50.8 170.18 90)
 		(unit 1)
@@ -2592,7 +2792,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 50.8 171.958 0)
 			(effects
 				(font
@@ -2715,7 +2915,7 @@
 				)
 			)
 		)
-		(property "Value" "3mH 1.5A sat (on board, toroid, TBD)"
+		(property "Value" "3mH, Isat >= 2.4A, DCR <= 2R (PLACEHOLDER)"
 			(at 91.44 118.11 270)
 			(effects
 				(font
@@ -2723,7 +2923,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies_rev3:PLACEHOLDER_L_ETD34_Vertical"
 			(at 91.44 115.57 0)
 			(effects
 				(font
@@ -2846,15 +3046,15 @@
 				)
 			)
 		)
-		(property "Value" "47u/500V"
-			(at 118.7 134.62 0)
+		(property "Value" "100u/500V 105C"
+			(at 122 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D22.0mm_P10.00mm_SnapIn"
 			(at 112.7252 137.16 0)
 			(effects
 				(font
@@ -2985,7 +3185,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 111.76 165.608 0)
 			(effects
 				(font
@@ -3108,7 +3308,7 @@
 				)
 			)
 		)
-		(property "Value" "33uH 2A (v2 L2 / L4)"
+		(property "Value" "33uH 2A"
 			(at 132.08 118.11 270)
 			(effects
 				(font
@@ -3116,7 +3316,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P"
 			(at 132.08 115.57 0)
 			(effects
 				(font
@@ -3211,8 +3411,127 @@
 		(uuid "4a77c4b4-0b6a-5aa5-b1cb-8f65c7c914b1")
 	)
 	(symbol
-		(lib_id "tube_hv_supplies_rev3:C_Polarized")
-		(at 152.4 133.35 0)
+		(lib_id "tube_hv_supplies_rev3:R")
+		(at 132.08 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7aefe6df-937b-5d11-a999-9c940808f62a")
+		(property "Reference" "R203"
+			(at 136.82 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5.6 1W (damping, Q = 1)"
+			(at 147.27 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+			(at 130.302 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 132.08 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9761a4a7-1b5f-5e77-b9b5-e833ba0daa0e")
+		)
+		(pin "2"
+			(uuid "fa9a2a9b-5f12-5ac0-ba09-19454e51bb9e")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "R203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 132.08 88.9) (xy 132.08 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5f2a27e-e8b0-5e2e-a09c-4f7a9a6242d4")
+	)
+	(global_label "UC1"
+		(shape passive)
+		(at 132.08 86.36 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "63634114-56ca-5934-b910-1ac8b88e8b53")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 132.08 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 132.08 96.52) (xy 132.08 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00d926c6-6dab-536c-bd3c-7d4bc4e20743")
+	)
+	(label "VO1"
+		(at 132.08 99.06 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3d357df9-d18f-5414-9677-8c4ea95c823f")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 152.4 133.35 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3220,23 +3539,23 @@
 		(dnp no)
 		(uuid "c319fd66-ea70-5d6c-915f-7d180affcb16")
 		(property "Reference" "C205"
-			(at 157.14 132.08 0)
+			(at 152.4 130.81 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "47u/500V"
-			(at 159.34 134.62 0)
+		(property "Value" "1u/630V MKP"
+			(at 152.4 135.89 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 153.3652 137.16 0)
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
+			(at 156.21 132.3848 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3253,7 +3572,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Polarized capacitor"
+		(property "Description" "Unpolarized capacitor"
 			(at 152.4 133.35 0)
 			(effects
 				(font
@@ -3279,126 +3598,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 129.54) (xy 152.4 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c5f2a27e-e8b0-5e2e-a09c-4f7a9a6242d4")
-	)
-	(label "VO1"
-		(at 152.4 127 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "63634114-56ca-5934-b910-1ac8b88e8b53")
-	)
-	(wire
-		(pts
-			(xy 152.4 137.16) (xy 152.4 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00d926c6-6dab-536c-bd3c-7d4bc4e20743")
-	)
-	(global_label "GND_STAR"
-		(shape passive)
-		(at 152.4 139.7 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "3d357df9-d18f-5414-9677-8c4ea95c823f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 152.4 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:C")
-		(at 172.72 133.35 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b3bb463e-ee3e-55be-8c93-d31270248d93")
-		(property "Reference" "C206"
-			(at 172.72 130.81 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100n/630V film"
-			(at 172.72 135.89 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 176.53 132.3848 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 172.72 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 172.72 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a9996a8a-c7d0-5e37-9c59-3dc4681697c3")
-		)
-		(pin "2"
-			(uuid "5d1683a4-7580-5396-89ff-4a22a8f8721a")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C206")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 168.91 133.35) (xy 166.37 133.35)
+			(xy 148.59 133.35) (xy 146.05 133.35)
 		)
 		(stroke
 			(width 0)
@@ -3407,7 +3607,7 @@
 		(uuid "006d7512-2850-59d0-a582-e9311767ce27")
 	)
 	(label "VO1"
-		(at 166.37 133.35 180)
+		(at 146.05 133.35 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3418,7 +3618,7 @@
 	)
 	(wire
 		(pts
-			(xy 176.53 133.35) (xy 179.07 133.35)
+			(xy 156.21 133.35) (xy 158.75 133.35)
 		)
 		(stroke
 			(width 0)
@@ -3428,7 +3628,7 @@
 	)
 	(global_label "GND_STAR"
 		(shape passive)
-		(at 179.07 133.35 0)
+		(at 158.75 133.35 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3438,7 +3638,7 @@
 		)
 		(uuid "6eefe495-0023-5cfc-bcab-c38442274218")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 179.07 133.35 0)
+			(at 158.75 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3456,8 +3656,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7aefe6df-937b-5d11-a999-9c940808f62a")
-		(property "Reference" "R203"
+		(uuid "c1c90660-4ea8-5eb1-b9df-2489db145825")
+		(property "Reference" "R204"
 			(at 157.14 105.41 0)
 			(effects
 				(font
@@ -3465,15 +3665,15 @@
 				)
 			)
 		)
-		(property "Value" "2.2 2W fusible (placeholder)"
-			(at 170.34 107.95 0)
+		(property "Value" "2.2 2W fusible (placeholder, M20)"
+			(at 173.09 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
 			(at 150.622 106.68 0)
 			(effects
 				(font
@@ -3501,15 +3701,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "9761a4a7-1b5f-5e77-b9b5-e833ba0daa0e")
+			(uuid "29c8a1cd-4545-5aca-a813-072f2a68acad")
 		)
 		(pin "2"
-			(uuid "fa9a2a9b-5f12-5ac0-ba09-19454e51bb9e")
+			(uuid "81d0b53d-5b95-58bb-84ea-5c96dcbb254b")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R203")
+					(reference "R204")
 					(unit 1)
 				)
 			)
@@ -3575,8 +3775,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c1c90660-4ea8-5eb1-b9df-2489db145825")
-		(property "Reference" "R204"
+		(uuid "d97fcb25-569a-5153-ad7a-94a0f42cb2d6")
+		(property "Reference" "R205"
 			(at 193.04 130.81 270)
 			(effects
 				(font
@@ -3592,7 +3792,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 193.04 135.128 0)
 			(effects
 				(font
@@ -3620,15 +3820,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "29c8a1cd-4545-5aca-a813-072f2a68acad")
+			(uuid "ebccae1d-c2fd-5455-b1c1-540040bb6236")
 		)
 		(pin "2"
-			(uuid "81d0b53d-5b95-58bb-84ea-5c96dcbb254b")
+			(uuid "caae8f43-fc5d-5796-b0c6-2dfa043c5cd4")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R204")
+					(reference "R205")
 					(unit 1)
 				)
 			)
@@ -3644,15 +3844,27 @@
 		)
 		(uuid "fed4fe51-dfef-511c-b12c-ac56bc981cf6")
 	)
-	(label "VO1"
+	(global_label "V_ANODE"
+		(shape passive)
 		(at 186.69 133.35 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify right)
 		)
 		(uuid "0a6b6a59-7ccf-5982-8163-efce6f64aefa")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 186.69 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -3682,8 +3894,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d97fcb25-569a-5153-ad7a-94a0f42cb2d6")
-		(property "Reference" "R205"
+		(uuid "39b0bf30-eac0-5bea-8e2b-29a6e63a0b5a")
+		(property "Reference" "R206"
 			(at 193.04 157.48 270)
 			(effects
 				(font
@@ -3699,7 +3911,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 193.04 161.798 0)
 			(effects
 				(font
@@ -3727,15 +3939,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "ebccae1d-c2fd-5455-b1c1-540040bb6236")
+			(uuid "bbd868da-5b27-5e6a-9807-98995d0ca57d")
 		)
 		(pin "2"
-			(uuid "caae8f43-fc5d-5796-b0c6-2dfa043c5cd4")
+			(uuid "faa5dc64-e6c4-53ad-88fd-da4c3182b5b5")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R205")
+					(reference "R206")
 					(unit 1)
 				)
 			)
@@ -3829,7 +4041,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuseholder_Clip-5x20mm_Littelfuse_100_Inline_P20.50x4.60mm_D1.30mm_Horizontal"
 			(at 254 64.008 0)
 			(effects
 				(font
@@ -3931,8 +4143,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9a76e08d-9d2e-5948-8215-e593ae3f8f79")
-		(property "Reference" "C207"
+		(uuid "b3bb463e-ee3e-55be-8c93-d31270248d93")
+		(property "Reference" "C206"
 			(at 279.06 69.85 0)
 			(effects
 				(font
@@ -3940,15 +4152,15 @@
 				)
 			)
 		)
-		(property "Value" "39u/500V"
-			(at 281.26 72.39 0)
+		(property "Value" "47u/500V 105C"
+			(at 284.01 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
 			(at 275.2852 74.93 0)
 			(effects
 				(font
@@ -3976,15 +4188,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "9297c192-9500-5109-aae2-df1c530466bc")
+			(uuid "a9996a8a-c7d0-5e37-9c59-3dc4681697c3")
 		)
 		(pin "2"
-			(uuid "85939e1a-7847-5236-ad85-456ebe0db1e4")
+			(uuid "5d1683a4-7580-5396-89ff-4a22a8f8721a")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C207")
+					(reference "C206")
 					(unit 1)
 				)
 			)
@@ -4050,8 +4262,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3a51dc2e-f8fc-52b8-94af-5f56ed46cdfa")
-		(property "Reference" "C208"
+		(uuid "9a76e08d-9d2e-5948-8215-e593ae3f8f79")
+		(property "Reference" "C207"
 			(at 294.64 68.58 270)
 			(effects
 				(font
@@ -4067,7 +4279,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3"
 			(at 298.45 70.1548 0)
 			(effects
 				(font
@@ -4095,15 +4307,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "d47e6e88-e162-510f-ae1e-aa95080315b1")
+			(uuid "9297c192-9500-5109-aae2-df1c530466bc")
 		)
 		(pin "2"
-			(uuid "46606bcd-829f-506b-8448-8037c828e730")
+			(uuid "85939e1a-7847-5236-ad85-456ebe0db1e4")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C208")
+					(reference "C207")
 					(unit 1)
 				)
 			)
@@ -4169,8 +4381,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c3b562f5-a651-5161-a00b-03a6fe7cfe48")
-		(property "Reference" "C209"
+		(uuid "3a51dc2e-f8fc-52b8-94af-5f56ed46cdfa")
+		(property "Reference" "C208"
 			(at 314.96 68.58 270)
 			(effects
 				(font
@@ -4186,7 +4398,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 318.77 70.1548 0)
 			(effects
 				(font
@@ -4214,15 +4426,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "492a38ca-3d97-58fd-8370-9fad9ca27114")
+			(uuid "d47e6e88-e162-510f-ae1e-aa95080315b1")
 		)
 		(pin "2"
-			(uuid "236269bb-4d4a-547e-bab9-c72a3245ef8b")
+			(uuid "46606bcd-829f-506b-8448-8037c828e730")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C209")
+					(reference "C208")
 					(unit 1)
 				)
 			)
@@ -4307,7 +4519,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 			(at 279.4 104.14 0)
 			(effects
 				(font
@@ -4326,6 +4538,15 @@
 			)
 		)
 		(property "Description" "N-IGBT transistor, gate/collector/emitter"
+			(at 274.32 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "IKP08N65F5XKSA1"
 			(at 274.32 106.68 0)
 			(effects
 				(font
@@ -4463,7 +4684,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 			(at 279.4 139.7 0)
 			(effects
 				(font
@@ -4482,6 +4703,15 @@
 			)
 		)
 		(property "Description" "N-IGBT transistor, gate/collector/emitter"
+			(at 274.32 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "IKP08N65F5XKSA1"
 			(at 274.32 142.24 0)
 			(effects
 				(font
@@ -4612,8 +4842,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "39b0bf30-eac0-5bea-8e2b-29a6e63a0b5a")
-		(property "Reference" "R206"
+		(uuid "111a1751-f1ba-5956-9c28-cede752f2ca3")
+		(property "Reference" "R207"
 			(at 274.32 167.64 270)
 			(effects
 				(font
@@ -4629,7 +4859,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 274.32 171.958 0)
 			(effects
 				(font
@@ -4657,15 +4887,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "bbd868da-5b27-5e6a-9807-98995d0ca57d")
+			(uuid "70d3356c-c141-5025-9c0f-5a3e9ca43ac3")
 		)
 		(pin "2"
-			(uuid "faa5dc64-e6c4-53ad-88fd-da4c3182b5b5")
+			(uuid "06261f9e-8a82-5f7f-9c00-696811bd3f8b")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R206")
+					(reference "R207")
 					(unit 1)
 				)
 			)
@@ -4752,7 +4982,7 @@
 				)
 			)
 		)
-		(property "Value" "3mH 1.5A sat (on board, toroid, TBD)"
+		(property "Value" "3mH, Isat >= 2.4A, DCR <= 2R (PLACEHOLDER)"
 			(at 314.96 118.11 270)
 			(effects
 				(font
@@ -4760,7 +4990,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies_rev3:PLACEHOLDER_L_ETD34_Vertical"
 			(at 314.96 115.57 0)
 			(effects
 				(font
@@ -4862,8 +5092,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b3131879-b4ef-5d24-9429-c18025f4855d")
-		(property "Reference" "C210"
+		(uuid "c3b562f5-a651-5161-a00b-03a6fe7cfe48")
+		(property "Reference" "C209"
 			(at 340.02 132.08 0)
 			(effects
 				(font
@@ -4871,15 +5101,15 @@
 				)
 			)
 		)
-		(property "Value" "47u/500V"
-			(at 342.22 134.62 0)
+		(property "Value" "100u/500V 105C"
+			(at 345.52 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D22.0mm_P10.00mm_SnapIn"
 			(at 336.2452 137.16 0)
 			(effects
 				(font
@@ -4907,15 +5137,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "6a525840-ab49-55a8-a726-0aaa5b0ee3a1")
+			(uuid "492a38ca-3d97-58fd-8370-9fad9ca27114")
 		)
 		(pin "2"
-			(uuid "54951f07-405d-52fd-9a4c-ca33cc6915fa")
+			(uuid "236269bb-4d4a-547e-bab9-c72a3245ef8b")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C210")
+					(reference "C209")
 					(unit 1)
 				)
 			)
@@ -4981,8 +5211,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "111a1751-f1ba-5956-9c28-cede752f2ca3")
-		(property "Reference" "R207"
+		(uuid "dbf960a4-6a83-55e5-88b3-b44cc3672837")
+		(property "Reference" "R208"
 			(at 335.28 161.29 270)
 			(effects
 				(font
@@ -4998,7 +5228,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 335.28 165.608 0)
 			(effects
 				(font
@@ -5026,15 +5256,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "70d3356c-c141-5025-9c0f-5a3e9ca43ac3")
+			(uuid "771f7a1b-e303-5c43-984e-36c3dcd9e074")
 		)
 		(pin "2"
-			(uuid "06261f9e-8a82-5f7f-9c00-696811bd3f8b")
+			(uuid "9de3885b-ba58-519a-9245-035b8e04b73c")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R207")
+					(reference "R208")
 					(unit 1)
 				)
 			)
@@ -5121,7 +5351,7 @@
 				)
 			)
 		)
-		(property "Value" "33uH 2A (v2 L2 / L4)"
+		(property "Value" "33uH 2A"
 			(at 355.6 118.11 270)
 			(effects
 				(font
@@ -5129,7 +5359,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P"
 			(at 355.6 115.57 0)
 			(effects
 				(font
@@ -5212,32 +5442,32 @@
 		(uuid "ac92b036-13d2-5a9c-9886-6656ad1319e5")
 	)
 	(symbol
-		(lib_id "tube_hv_supplies_rev3:C_Polarized")
-		(at 375.92 133.35 0)
+		(lib_id "tube_hv_supplies_rev3:R")
+		(at 355.6 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b7fd9c77-21bb-5643-a053-1daee0b9fe5e")
-		(property "Reference" "C211"
-			(at 380.66 132.08 0)
+		(uuid "6e6be394-fc90-50e4-8d57-d9f29978c9cb")
+		(property "Reference" "R209"
+			(at 360.34 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "47u/500V"
-			(at 382.86 134.62 0)
+		(property "Value" "5.6 1W (damping, Q = 1)"
+			(at 370.79 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 376.8852 137.16 0)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+			(at 353.822 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5246,7 +5476,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 375.92 133.35 0)
+			(at 355.6 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5254,8 +5484,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Polarized capacitor"
-			(at 375.92 133.35 0)
+		(property "Description" "Resistor"
+			(at 355.6 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5264,15 +5494,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "21fac090-b7f8-5a28-aa62-a1d94b23878e")
+			(uuid "a0b2f3f6-44b9-542f-b098-0a43d16cf2bb")
 		)
 		(pin "2"
-			(uuid "0ed49016-dcd6-5854-bdec-56d09a0ddcbc")
+			(uuid "34b01a86-b2b7-5439-b7fa-2248f3bf718b")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C211")
+					(reference "R209")
 					(unit 1)
 				)
 			)
@@ -5280,7 +5510,7 @@
 	)
 	(wire
 		(pts
-			(xy 375.92 129.54) (xy 375.92 127)
+			(xy 355.6 88.9) (xy 355.6 86.36)
 		)
 		(stroke
 			(width 0)
@@ -5288,8 +5518,8 @@
 		)
 		(uuid "1a5c8e20-cc52-58da-8f77-68cc066adae3")
 	)
-	(label "VO2"
-		(at 375.92 127 90)
+	(label "UC2"
+		(at 355.6 86.36 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5300,7 +5530,7 @@
 	)
 	(wire
 		(pts
-			(xy 375.92 137.16) (xy 375.92 139.7)
+			(xy 355.6 96.52) (xy 355.6 99.06)
 		)
 		(stroke
 			(width 0)
@@ -5308,55 +5538,43 @@
 		)
 		(uuid "15623c40-d07e-5f40-9123-dec1e026e63f")
 	)
-	(global_label "GND_STAR"
-		(shape passive)
-		(at 375.92 139.7 270)
-		(fields_autoplaced yes)
+	(label "VO2"
+		(at 355.6 99.06 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
 		(uuid "d9588f4d-6d02-5414-a88e-b40981e488e6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 375.92 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
-		(at 396.24 133.35 90)
+		(at 375.92 133.35 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6434b6af-9363-5a4e-8b6e-ac17f2f01e59")
-		(property "Reference" "C212"
-			(at 396.24 130.81 270)
+		(uuid "b3131879-b4ef-5d24-9429-c18025f4855d")
+		(property "Reference" "C210"
+			(at 375.92 130.81 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "100n/630V film"
-			(at 396.24 135.89 270)
+		(property "Value" "1u/630V MKP"
+			(at 375.92 135.89 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 400.05 132.3848 0)
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
+			(at 379.73 132.3848 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5365,7 +5583,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 396.24 133.35 0)
+			(at 375.92 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5374,7 +5592,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 396.24 133.35 0)
+			(at 375.92 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5383,15 +5601,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "df7dd4de-1e43-5e7e-9c3d-f76f13baa1fa")
+			(uuid "6a525840-ab49-55a8-a726-0aaa5b0ee3a1")
 		)
 		(pin "2"
-			(uuid "55984447-6359-5dd1-a067-32944fda25a7")
+			(uuid "54951f07-405d-52fd-9a4c-ca33cc6915fa")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "C212")
+					(reference "C210")
 					(unit 1)
 				)
 			)
@@ -5399,7 +5617,7 @@
 	)
 	(wire
 		(pts
-			(xy 392.43 133.35) (xy 389.89 133.35)
+			(xy 372.11 133.35) (xy 369.57 133.35)
 		)
 		(stroke
 			(width 0)
@@ -5408,7 +5626,7 @@
 		(uuid "141564c9-6c7f-5925-aba7-fefe71e0c21b")
 	)
 	(label "VO2"
-		(at 389.89 133.35 180)
+		(at 369.57 133.35 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5419,7 +5637,7 @@
 	)
 	(wire
 		(pts
-			(xy 400.05 133.35) (xy 402.59 133.35)
+			(xy 379.73 133.35) (xy 382.27 133.35)
 		)
 		(stroke
 			(width 0)
@@ -5429,7 +5647,7 @@
 	)
 	(global_label "GND_STAR"
 		(shape passive)
-		(at 402.59 133.35 0)
+		(at 382.27 133.35 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5439,7 +5657,7 @@
 		)
 		(uuid "e11748dc-2466-5866-a430-075a5f41fc19")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 402.59 133.35 0)
+			(at 382.27 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5457,8 +5675,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "dbf960a4-6a83-55e5-88b3-b44cc3672837")
-		(property "Reference" "R208"
+		(uuid "5d911287-bf5a-521e-9058-fd398b70d790")
+		(property "Reference" "R210"
 			(at 380.66 105.41 0)
 			(effects
 				(font
@@ -5466,15 +5684,15 @@
 				)
 			)
 		)
-		(property "Value" "2.2 2W fusible (placeholder)"
-			(at 393.86 107.95 0)
+		(property "Value" "2.2 2W fusible (placeholder, M20)"
+			(at 396.61 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
 			(at 374.142 106.68 0)
 			(effects
 				(font
@@ -5502,15 +5720,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "771f7a1b-e303-5c43-984e-36c3dcd9e074")
+			(uuid "5dc7c929-732d-51e7-a694-3c0741181547")
 		)
 		(pin "2"
-			(uuid "9de3885b-ba58-519a-9245-035b8e04b73c")
+			(uuid "eeec4bc2-220c-5185-ac45-bd692974768e")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R208")
+					(reference "R210")
 					(unit 1)
 				)
 			)
@@ -5576,8 +5794,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6e6be394-fc90-50e4-8d57-d9f29978c9cb")
-		(property "Reference" "R209"
+		(uuid "ef70d997-5e34-58b0-ba67-4cd91867b8c9")
+		(property "Reference" "R211"
 			(at 416.56 130.81 270)
 			(effects
 				(font
@@ -5593,7 +5811,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 416.56 135.128 0)
 			(effects
 				(font
@@ -5621,15 +5839,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "a0b2f3f6-44b9-542f-b098-0a43d16cf2bb")
+			(uuid "91f2c4fc-9bbc-564f-aee4-f8ec0b6b11e5")
 		)
 		(pin "2"
-			(uuid "34b01a86-b2b7-5439-b7fa-2248f3bf718b")
+			(uuid "c65618e1-410f-5978-8a0f-d7622a9166ea")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R209")
+					(reference "R211")
 					(unit 1)
 				)
 			)
@@ -5645,15 +5863,27 @@
 		)
 		(uuid "f947a034-1d95-5ccf-885a-7de4de8c9abb")
 	)
-	(label "VO2"
+	(global_label "V_SCREEN"
+		(shape passive)
 		(at 410.21 133.35 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify right)
 		)
 		(uuid "a3efa061-93ba-51c3-9ae9-7655aa121d0a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 410.21 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -5683,8 +5913,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5d911287-bf5a-521e-9058-fd398b70d790")
-		(property "Reference" "R210"
+		(uuid "7ceb7dc5-4fd0-5985-ae8b-bc762f6d26ce")
+		(property "Reference" "R212"
 			(at 416.56 157.48 270)
 			(effects
 				(font
@@ -5700,7 +5930,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 416.56 161.798 0)
 			(effects
 				(font
@@ -5728,15 +5958,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "5dc7c929-732d-51e7-a694-3c0741181547")
+			(uuid "949db579-bb75-5484-8696-4128edf4dec3")
 		)
 		(pin "2"
-			(uuid "eeec4bc2-220c-5185-ac45-bd692974768e")
+			(uuid "1e904ab1-50c4-577b-bd15-b2d2cd649d9f")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R210")
+					(reference "R212")
 					(unit 1)
 				)
 			)
@@ -5811,7 +6041,7 @@
 				)
 			)
 		)
-		(property "Value" "S1M (clamp: V_SCREEN <= V_ANODE + 0.7 V)"
+		(property "Value" "1N5408 (clamp: V_SCREEN <= V_ANODE + 0.7 V)"
 			(at 213.36 198.12 0)
 			(effects
 				(font
@@ -5819,7 +6049,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_THT:D_DO-201AD_P15.24mm_Horizontal"
 			(at 213.36 195.58 0)
 			(effects
 				(font
@@ -5838,6 +6068,15 @@
 			)
 		)
 		(property "Description" "Diode"
+			(at 213.36 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1N5408"
 			(at 213.36 195.58 0)
 			(effects
 				(font
@@ -5950,7 +6189,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies_rev3:Blade_Tab_4.8mm_2x_P12mm"
 			(at 91.44 213.36 0)
 			(effects
 				(font
@@ -6081,7 +6320,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_hv_supplies_rev3:Blade_Tab_4.8mm_1x"
 			(at 314.96 213.36 0)
 			(effects
 				(font
@@ -6160,8 +6399,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ef70d997-5e34-58b0-ba67-4cd91867b8c9")
-		(property "Reference" "R211"
+		(uuid "04cd00c7-9c9d-5ee7-891b-d3ec73702b98")
+		(property "Reference" "R213"
 			(at 152.4 210.82 270)
 			(effects
 				(font
@@ -6169,7 +6408,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 1W HV"
+		(property "Value" "1M 1W HV (VR37 class)"
 			(at 152.4 215.9 270)
 			(effects
 				(font
@@ -6177,7 +6416,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 152.4 215.138 0)
 			(effects
 				(font
@@ -6205,15 +6444,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "91f2c4fc-9bbc-564f-aee4-f8ec0b6b11e5")
+			(uuid "70093d9f-b477-551c-a87f-2f833fbfeb4c")
 		)
 		(pin "2"
-			(uuid "c65618e1-410f-5978-8a0f-d7622a9166ea")
+			(uuid "d94a8d65-f339-5f25-a761-2d5dda5e7a3f")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R211")
+					(reference "R213")
 					(unit 1)
 				)
 			)
@@ -6296,7 +6535,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 172.72 222.25 0)
 			(effects
 				(font

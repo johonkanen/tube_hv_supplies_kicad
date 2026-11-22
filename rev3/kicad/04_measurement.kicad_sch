@@ -1449,7 +1449,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "04 Measurement, digitised on this board (the 40-pin is isolated on the control board, so analog lines can't cross it): 4 voltages (1/200, 0-500 V into 2.5 V) and 4 shunt currents (1 V/A around 1.25 V, +-1.25 A), MCP6004 buffers, AD7689 8-channel 16-bit 250 kSPS SPI ADC (internal 2.5 V reference). ADC channel order mirrors v2's J1 pads 1-8."
+	(text "04 Measurement, digitised on this board (IF-2: nothing analog crosses the isolated 40-pin): 4 voltages (1/201, 0-500 V into 2.5 V) and 4 shunt currents (0.5 V/A around 1.25 V, +-2.5 A), MCP6004 buffers, AD7689 8-channel 16-bit 250 kSPS SPI ADC (internal 2.5 V reference). Channel order IN0..7 = interfaces.md 9."
 		(exclude_from_sim no)
 		(at 30.48 17.78 0)
 		(effects
@@ -1477,7 +1477,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 30.48 55.88 270)
 			(effects
 				(font
@@ -1485,7 +1485,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 30.48 55.118 0)
 			(effects
 				(font
@@ -1596,7 +1596,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 30.48 78.74 270)
 			(effects
 				(font
@@ -1604,7 +1604,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 30.48 77.978 0)
 			(effects
 				(font
@@ -1703,7 +1703,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 30.48 101.6 270)
 			(effects
 				(font
@@ -1711,7 +1711,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 30.48 100.838 0)
 			(effects
 				(font
@@ -1818,7 +1818,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 50.8 100.838 0)
 			(effects
 				(font
@@ -1980,7 +1980,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 71.12 98.0948 0)
 			(effects
 				(font
@@ -2144,7 +2144,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 49.53 130.81 0)
 			(effects
 				(font
@@ -2163,6 +2163,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 50.8 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 50.8 133.35 0)
 			(effects
 				(font
@@ -2298,7 +2307,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 49.53 158.75 0)
 			(effects
 				(font
@@ -2317,6 +2326,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 50.8 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 50.8 161.29 0)
 			(effects
 				(font
@@ -2515,7 +2533,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 69.342 168.91 0)
 			(effects
 				(font
@@ -2634,7 +2652,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 87.63 185.7248 0)
 			(effects
 				(font
@@ -2788,7 +2806,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 91.44 55.88 270)
 			(effects
 				(font
@@ -2796,7 +2814,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 91.44 55.118 0)
 			(effects
 				(font
@@ -2907,7 +2925,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 91.44 78.74 270)
 			(effects
 				(font
@@ -2915,7 +2933,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 91.44 77.978 0)
 			(effects
 				(font
@@ -3014,7 +3032,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 91.44 101.6 270)
 			(effects
 				(font
@@ -3022,7 +3040,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 91.44 100.838 0)
 			(effects
 				(font
@@ -3129,7 +3147,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 111.76 100.838 0)
 			(effects
 				(font
@@ -3291,7 +3309,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 132.08 98.0948 0)
 			(effects
 				(font
@@ -3455,7 +3473,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 110.49 130.81 0)
 			(effects
 				(font
@@ -3474,6 +3492,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 111.76 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 111.76 133.35 0)
 			(effects
 				(font
@@ -3609,7 +3636,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 130.302 168.91 0)
 			(effects
 				(font
@@ -3728,7 +3755,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 148.59 185.7248 0)
 			(effects
 				(font
@@ -3882,7 +3909,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 152.4 55.88 270)
 			(effects
 				(font
@@ -3890,7 +3917,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 152.4 55.118 0)
 			(effects
 				(font
@@ -4001,7 +4028,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 152.4 78.74 270)
 			(effects
 				(font
@@ -4009,7 +4036,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 152.4 77.978 0)
 			(effects
 				(font
@@ -4108,7 +4135,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 152.4 101.6 270)
 			(effects
 				(font
@@ -4116,7 +4143,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 152.4 100.838 0)
 			(effects
 				(font
@@ -4223,7 +4250,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 172.72 100.838 0)
 			(effects
 				(font
@@ -4385,7 +4412,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 193.04 98.0948 0)
 			(effects
 				(font
@@ -4549,7 +4576,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 171.45 130.81 0)
 			(effects
 				(font
@@ -4568,6 +4595,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 172.72 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 172.72 133.35 0)
 			(effects
 				(font
@@ -4679,7 +4715,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 191.262 168.91 0)
 			(effects
 				(font
@@ -4786,7 +4822,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 209.55 185.7248 0)
 			(effects
 				(font
@@ -4940,7 +4976,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 213.36 55.88 270)
 			(effects
 				(font
@@ -4948,7 +4984,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 213.36 55.118 0)
 			(effects
 				(font
@@ -5059,7 +5095,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 213.36 78.74 270)
 			(effects
 				(font
@@ -5067,7 +5103,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 213.36 77.978 0)
 			(effects
 				(font
@@ -5166,7 +5202,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV"
+		(property "Value" "1M 0.1% 1206"
 			(at 213.36 101.6 270)
 			(effects
 				(font
@@ -5174,7 +5210,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 213.36 100.838 0)
 			(effects
 				(font
@@ -5281,7 +5317,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 233.68 100.838 0)
 			(effects
 				(font
@@ -5443,7 +5479,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 254 98.0948 0)
 			(effects
 				(font
@@ -5607,7 +5643,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 232.41 130.81 0)
 			(effects
 				(font
@@ -5626,6 +5662,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 233.68 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 233.68 133.35 0)
 			(effects
 				(font
@@ -5761,7 +5806,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 252.222 168.91 0)
 			(effects
 				(font
@@ -5880,7 +5925,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 270.51 185.7248 0)
 			(effects
 				(font
@@ -6017,7 +6062,7 @@
 			)
 		)
 	)
-	(text "Dividers: the - ends return to GND, which joins PGND at the shunts (NT102), so the reading is referred to the switching ground (a few mV from the star)"
+	(text "Dividers: the - ends return to GND, which joins PGND at the shunts (NT501), so the reading is referred to the switching ground (a few mV from the star)"
 		(exclude_from_sim no)
 		(at 30.48 203.2 0)
 		(effects
@@ -6053,7 +6098,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 292.862 53.34 0)
 			(effects
 				(font
@@ -6164,7 +6209,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 314.96 73.66 270)
 			(effects
 				(font
@@ -6172,7 +6217,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 314.96 72.898 0)
 			(effects
 				(font
@@ -6279,7 +6324,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 292.862 96.52 0)
 			(effects
 				(font
@@ -6390,7 +6435,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 321.9 115.57 0)
 			(effects
 				(font
@@ -6398,7 +6443,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 313.182 114.3 0)
 			(effects
 				(font
@@ -6517,7 +6562,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 335.28 70.1548 0)
 			(effects
 				(font
@@ -6626,7 +6671,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 313.69 130.81 0)
 			(effects
 				(font
@@ -6645,6 +6690,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 314.96 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 314.96 133.35 0)
 			(effects
 				(font
@@ -6768,7 +6822,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 313.69 158.75 0)
 			(effects
 				(font
@@ -6787,6 +6841,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 314.96 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 314.96 161.29 0)
 			(effects
 				(font
@@ -6985,7 +7048,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 333.502 168.91 0)
 			(effects
 				(font
@@ -7104,7 +7167,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 351.79 185.7248 0)
 			(effects
 				(font
@@ -7266,7 +7329,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 353.822 53.34 0)
 			(effects
 				(font
@@ -7377,7 +7440,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 375.92 73.66 270)
 			(effects
 				(font
@@ -7385,7 +7448,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 375.92 72.898 0)
 			(effects
 				(font
@@ -7492,7 +7555,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 353.822 96.52 0)
 			(effects
 				(font
@@ -7603,7 +7666,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 382.86 115.57 0)
 			(effects
 				(font
@@ -7611,7 +7674,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 374.142 114.3 0)
 			(effects
 				(font
@@ -7730,7 +7793,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 396.24 70.1548 0)
 			(effects
 				(font
@@ -7839,7 +7902,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 374.65 130.81 0)
 			(effects
 				(font
@@ -7858,6 +7921,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 375.92 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 375.92 133.35 0)
 			(effects
 				(font
@@ -7981,7 +8053,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 394.462 168.91 0)
 			(effects
 				(font
@@ -8100,7 +8172,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 412.75 185.7248 0)
 			(effects
 				(font
@@ -8262,7 +8334,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 414.782 53.34 0)
 			(effects
 				(font
@@ -8373,7 +8445,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 436.88 73.66 270)
 			(effects
 				(font
@@ -8381,7 +8453,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 436.88 72.898 0)
 			(effects
 				(font
@@ -8488,7 +8560,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 414.782 96.52 0)
 			(effects
 				(font
@@ -8599,7 +8671,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 443.82 115.57 0)
 			(effects
 				(font
@@ -8607,7 +8679,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 435.102 114.3 0)
 			(effects
 				(font
@@ -8714,7 +8786,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 457.2 70.1548 0)
 			(effects
 				(font
@@ -8823,7 +8895,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 435.61 130.81 0)
 			(effects
 				(font
@@ -8842,6 +8914,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 436.88 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 436.88 133.35 0)
 			(effects
 				(font
@@ -8953,7 +9034,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 455.422 168.91 0)
 			(effects
 				(font
@@ -9060,7 +9141,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 473.71 185.7248 0)
 			(effects
 				(font
@@ -9222,7 +9303,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 475.742 53.34 0)
 			(effects
 				(font
@@ -9333,7 +9414,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 497.84 73.66 270)
 			(effects
 				(font
@@ -9341,7 +9422,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 497.84 72.898 0)
 			(effects
 				(font
@@ -9448,7 +9529,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 475.742 96.52 0)
 			(effects
 				(font
@@ -9559,7 +9640,7 @@
 				)
 			)
 		)
-		(property "Value" "20k 0.1%"
+		(property "Value" "10k 0.1%"
 			(at 504.78 115.57 0)
 			(effects
 				(font
@@ -9567,7 +9648,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 496.062 114.3 0)
 			(effects
 				(font
@@ -9674,7 +9755,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 518.16 70.1548 0)
 			(effects
 				(font
@@ -9783,7 +9864,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 496.57 130.81 0)
 			(effects
 				(font
@@ -9802,6 +9883,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 497.84 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 497.84 133.35 0)
 			(effects
 				(font
@@ -9913,7 +10003,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 516.382 168.91 0)
 			(effects
 				(font
@@ -10020,7 +10110,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 534.67 185.7248 0)
 			(effects
 				(font
@@ -10157,7 +10247,7 @@
 			)
 		)
 	)
-	(text "Current amplifiers: out = 1.25 V + 20 x V(shunt) (50 mOhm -> 1 V/A); positive inductor current freewheeling in a low-side diode reads below 1.25 V (as v2). Kelvin taps at the shunts (layout)."
+	(text "Current amplifiers: out = 1.25 V + 10 x V(shunt) (50 mOhm -> 0.5 V/A, +-2.5 A); forward inductor current freewheeling in the low-side diode reads below 1.25 V, reverse (sinking) current and shoot-through above. Kelvin taps at the shunts (layout)."
 		(exclude_from_sim no)
 		(at 294.64 203.2 0)
 		(effects
@@ -10193,7 +10283,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 50.8 232.918 0)
 			(effects
 				(font
@@ -10312,7 +10402,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 50.8 255.778 0)
 			(effects
 				(font
@@ -10476,7 +10566,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 90.17 237.49 0)
 			(effects
 				(font
@@ -10495,6 +10585,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 91.44 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 91.44 240.03 0)
 			(effects
 				(font
@@ -10606,7 +10705,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 90.17 265.43 0)
 			(effects
 				(font
@@ -10625,6 +10724,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 91.44 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 91.44 267.97 0)
 			(effects
 				(font
@@ -10823,7 +10931,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 115.57 256.8448 0)
 			(effects
 				(font
@@ -10987,7 +11095,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 130.81 237.49 0)
 			(effects
 				(font
@@ -11006,6 +11114,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 132.08 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 132.08 240.03 0)
 			(effects
 				(font
@@ -11174,7 +11291,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 161.29 237.49 0)
 			(effects
 				(font
@@ -11193,6 +11310,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 162.56 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 162.56 240.03 0)
 			(effects
 				(font
@@ -11361,7 +11487,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 191.77 237.49 0)
 			(effects
 				(font
@@ -11380,6 +11506,15 @@
 			)
 		)
 		(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
+			(at 193.04 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MCP6004-E/SL"
 			(at 193.04 240.03 0)
 			(effects
 				(font
@@ -11567,6 +11702,15 @@
 			)
 		)
 		(property "Description" "16-Bit, 8-Channel, 250 kSPS PulSAR ADC, LFSCP-20"
+			(at 233.68 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "AD7689BCPZRL7"
 			(at 233.68 248.92 0)
 			(effects
 				(font
@@ -12513,7 +12657,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 298.45 230.1748 0)
 			(effects
 				(font
@@ -12675,7 +12819,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 314.96 230.1748 0)
 			(effects
 				(font
@@ -12837,7 +12981,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 331.47 230.1748 0)
 			(effects
 				(font
@@ -13054,7 +13198,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 346.71 230.1748 0)
 			(effects
 				(font
@@ -13271,7 +13415,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 292.862 266.7 0)
 			(effects
 				(font
@@ -13365,16 +13509,147 @@
 			)
 		)
 	)
-	(text "SPI on J1 (proposed): ADC_CNV pad 13, ADC_SCK pad 14, ADC_SDO pad 12, ADC_DIN pad 11"
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:R")
+		(at 294.64 284.48 0)
+		(unit 1)
 		(exclude_from_sim no)
-		(at 233.68 289.56 0)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "7cd0dee7-0cf9-555d-9f09-bc6435055572")
+		(property "Reference" "R444"
+			(at 299.38 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "33 (DNP: returned SCK, J1 pad 16 proposed)"
+			(at 320.28 285.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 292.862 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 294.64 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 294.64 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "765ae7ff-fbe6-5de3-842a-c07a73b784e4")
+		)
+		(pin "2"
+			(uuid "8c3a7126-a2cc-5bab-beb9-782d155e3cad")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/630fdf75-055f-596b-abb9-8f591324bbb9"
+					(reference "R444")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 294.64 280.67) (xy 294.64 278.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "115e322d-72ca-52a6-9d5a-11fe467864c9")
+	)
+	(global_label "ADC_SCK"
+		(shape passive)
+		(at 294.64 278.13 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1f51993e-05cd-5bff-8076-d00a667c4138")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 294.64 278.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 294.64 288.29) (xy 294.64 290.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73c1c688-cf65-5164-9e9f-1e69b17f583c")
+	)
+	(global_label "ADC_SCK_RET"
+		(shape passive)
+		(at 294.64 290.83 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e10159d7-0fdf-594b-8117-5070f045592b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 294.64 290.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(text "SPI on J1 (IF-2): ADC_DIN pad 11, ADC_SDO pad 12, ADC_CNV pad 13, ADC_SCK pad 14; returned SCK pad 16 (proposed, R444 unfitted)"
+		(exclude_from_sim no)
+		(at 233.68 302.26 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "115e322d-72ca-52a6-9d5a-11fe467864c9")
+		(uuid "cccb8355-0949-57a6-8ee0-b314d7a06993")
 	)
 	(sheet_instances
 		(path "/"

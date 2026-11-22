@@ -18,24 +18,24 @@
 <rect x="380" y="572" width="80" height="40" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="382" y="582">J102</text>
 <rect x="292" y="572" width="80" height="40" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="294" y="582">J103</text>
 <rect x="376" y="476" width="88" height="88" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="378" y="486">FAULT</text>
-<rect x="168" y="28" width="152" height="152" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="170" y="38">L211</text>
-<rect x="328" y="28" width="152" height="152" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="330" y="38">L221</text>
+<rect x="168" y="28" width="152" height="152" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="170" y="38">L201</text>
+<rect x="328" y="28" width="152" height="152" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="330" y="38">L203</text>
 <rect x="304" y="188" width="144" height="120" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="306" y="198">CTRL</text>
-<rect x="488" y="116" width="96" height="96" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="490" y="126">C214</text>
-<rect x="456" y="220" width="96" height="96" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="458" y="230">C224</text>
-<rect x="364" y="324" width="140" height="60" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="366" y="334">HS_Q211</text>
+<rect x="488" y="116" width="96" height="96" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="490" y="126">C204</text>
+<rect x="456" y="220" width="96" height="96" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="458" y="230">C209</text>
+<rect x="364" y="324" width="140" height="60" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="366" y="334">HS201_Q201</text>
 <rect x="200" y="316" width="136" height="48" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="202" y="326">BLD_OUT</text>
-<rect x="212" y="372" width="80" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="214" y="382">C211</text>
-<rect x="472" y="392" width="80" height="80" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="474" y="402">C221</text>
+<rect x="212" y="372" width="80" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="214" y="382">C201</text>
+<rect x="472" y="392" width="80" height="80" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="474" y="402">C206</text>
 <rect x="212" y="460" width="80" height="80" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="214" y="470">C101</text>
-<rect x="300" y="420" width="132" height="48" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="302" y="430">C215</text>
-<rect x="560" y="220" width="48" height="132" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="562" y="230">C225</text>
+<rect x="300" y="420" width="132" height="48" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="302" y="430">C205</text>
+<rect x="560" y="220" width="48" height="132" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="562" y="230">C210</text>
 <rect x="200" y="188" width="56" height="104" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="202" y="198">DIV</text>
 <rect x="168" y="564" width="104" height="32" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="170" y="574">F201</text>
 <rect x="488" y="64" width="80" height="40" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="490" y="74">SHUNTS</text>
 <rect x="300" y="476" width="52" height="52" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="302" y="486">L101</text>
 <rect x="512" y="360" width="80" height="24" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="514" y="370">D201</text>
-<rect x="364" y="392" width="64" height="20" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="366" y="402">R216</text>
-<rect x="592" y="116" width="20" height="64" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="594" y="126">R226</text>
+<rect x="364" y="392" width="64" height="20" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="366" y="402">R203</text>
+<rect x="592" y="116" width="20" height="64" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="594" y="126">R209</text>
 <text x="8" y="720">HV supplies rev 3, base_reduced: chassis frame (x right, y toward the rear panel), view from above</text>
 </svg>

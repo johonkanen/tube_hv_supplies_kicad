@@ -9,7 +9,7 @@ import uuid
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 K = os.path.join(HERE, "kicad")
 PROJECT = "tube_hv_supplies_rev3"
-SHEETS = [("01_input_star", "01 Raw HV input, RAW_SS feeds, power star, fault network, brake"),
+SHEETS = [("01_input_star", "01 Raw HV input, RAW_SS feeds (links), power star, fault network, bleeder"),
           ("02_bridges", "02 Half-bridges: V_ANODE and V_SCREEN power stages"),
           ("03_gate_drive", "03 Isolated gate drivers, bootstrap"),
           ("04_measurement", "04 Voltage and current measurement, ADC"),
@@ -22,8 +22,8 @@ def u(k):
 
 
 def title(t):
-    return (f'\t(title_block\n\t\t(title "{t}")\n\t\t(company "Tube amplifier")\n\t\t(rev "rev 3 - initial schematic")\n'
-            f'\t\t(comment 1 "From tube_amplifier_kicad docs/interfaces.md IF-1.1, sim/power_stage, rev3/sim")\n\t)\n')
+    return (f'\t(title_block\n\t\t(title "{t}")\n\t\t(company "Tube amplifier")\n\t\t(rev "rev 3 - second pass (first draft)")\n'
+            f'\t\t(comment 1 "From tube_amplifier_kicad docs/interfaces.md IF-1.2 / IF-2 (W17), rev3/sim")\n\t)\n')
 
 
 def main():

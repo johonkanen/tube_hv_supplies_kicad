@@ -31,33 +31,33 @@ X0, Y0 = 525, 30
 
 # name, w, h, height below the board (mm), group, note
 BLOCKS = [
-    ("HS_Q211", 35, 15, 51, "B1", "IKP08N65F5 on Fischer SK 104 38.1 mm (35 x 13 mm, ~12 K/W), live at the tab"),
-    ("HS_Q212", 35, 15, 51, "B1", "IKP08N65F5 on SK 104"),
-    ("HS_Q221", 35, 15, 51, "B2", "IKP08N65F5 on SK 104 (may be omitted at 50 kHz)"),
-    ("HS_Q222", 35, 15, 51, "B2", "IKP08N65F5 on SK 104 (may be omitted at 50 kHz)"),
-    ("L211", 38, 38, 36, "B1", "3 mH / 2.4 A sat, ETD34 gapped N87 (placeholder)"),
-    ("L221", 38, 38, 36, "B2", "3 mH / 2.4 A sat, ETD34"),
-    ("C211", 20, 20, 40, "B1", "47 uF 500 V radial D18 (bridge 1 input)"),
-    ("C221", 20, 20, 40, "B2", "47 uF 500 V D18 (bridge 2 input)"),
-    ("C214", 20, 20, 40, "B1", "47 uF 500 V D18 (intermediate)"),
-    ("C217", 20, 20, 40, "B1", "47 uF 500 V D18 (intermediate)"),
-    ("C224", 20, 20, 40, "B2", "47 uF 500 V D18"),
-    ("C227", 20, 20, 40, "B2", "47 uF 500 V D18"),
+    ("HS201_Q201", 35, 15, 51, "B1", "IKP08N65F5 on Fischer SK 104 38.1 mm (35 x 13 mm, ~12 K/W), live at the tab"),
+    ("HS_Q202", 35, 15, 51, "B1", "IKP08N65F5 on SK 104"),
+    ("HS_Q203", 35, 15, 51, "B2", "IKP08N65F5 on SK 104 (may be omitted at 50 kHz)"),
+    ("HS_Q204", 35, 15, 51, "B2", "IKP08N65F5 on SK 104 (may be omitted at 50 kHz)"),
+    ("L201", 38, 38, 36, "B1", "3 mH / 2.4 A sat, ETD34 gapped N87 (placeholder)"),
+    ("L203", 38, 38, 36, "B2", "3 mH / 2.4 A sat, ETD34"),
+    ("C201", 20, 20, 40, "B1", "47 uF 500 V radial D18 (bridge 1 input)"),
+    ("C206", 20, 20, 40, "B2", "47 uF 500 V D18 (bridge 2 input)"),
+    ("C204", 20, 20, 40, "B1", "47 uF 500 V D18 (intermediate)"),
+    ("C204b", 20, 20, 40, "B1", "47 uF 500 V D18 (intermediate)"),
+    ("C209", 20, 20, 40, "B2", "47 uF 500 V D18"),
+    ("C209b", 20, 20, 40, "B2", "47 uF 500 V D18"),
     ("C101", 20, 20, 40, "IN", "47 uF 500 V D18 (B_P, input filter)"),
-    ("C215", 33, 12, 22, "B1", "1 uF 630 V MKP, P27.5"),
-    ("C225", 33, 12, 22, "B2", "1 uF 630 V MKP, P27.5"),
+    ("C205", 33, 12, 22, "B1", "1 uF 630 V MKP, P27.5"),
+    ("C210", 33, 12, 22, "B2", "1 uF 630 V MKP, P27.5"),
     ("C102", 19, 7, 16, "IN", "100 nF 630 V film P15"),
-    ("C212", 19, 7, 16, "B1", "100 nF 630 V film P15"),
-    ("C222", 19, 7, 16, "B2", "100 nF 630 V film P15"),
+    ("C202", 19, 7, 16, "B1", "100 nF 630 V film P15"),
+    ("C207", 19, 7, 16, "B2", "100 nF 630 V film P15"),
     ("L101", 13, 13, 15, "IN", "33 uH 2 A radial D12"),
-    ("L212", 13, 13, 15, "B1", "33 uH 2 A radial D12"),
-    ("L222", 13, 13, 15, "B2", "33 uH 2 A radial D12"),
+    ("L202", 13, 13, 15, "B1", "33 uH 2 A radial D12"),
+    ("L204", 13, 13, 15, "B2", "33 uH 2 A radial D12"),
     ("F201", 26, 8, 12, "B1", "5x20 clip holder (fuse >= 500 VDC, TBD)"),
     ("F202", 26, 8, 12, "B2", "5x20 clip holder"),
-    ("R213", 22, 7, 7, "B1", "2.2 ohm 2 W fusible, axial 0617"),
-    ("R223", 22, 7, 7, "B2", "2.2 ohm 2 W fusible"),
-    ("R216", 16, 5, 5, "B1", "5.6 ohm 1 W damping, axial 0414"),
-    ("R226", 16, 5, 5, "B2", "5.6 ohm 1 W damping"),
+    ("R204", 22, 7, 7, "B1", "2.2 ohm 2 W fusible, axial 0617"),
+    ("R210", 22, 7, 7, "B2", "2.2 ohm 2 W fusible"),
+    ("R203", 16, 5, 5, "B1", "5.6 ohm 1 W damping, axial 0414"),
+    ("R209", 16, 5, 5, "B2", "5.6 ohm 1 W damping"),
     ("BLD_OUT", 34, 12, 5, "B", "4 x 110 kohm 1 W output bleeders + V_ANODE LED string"),
     ("BLD_RAW", 24, 16, 7, "IN", "2 x 75 kohm 2 W raw bleeder + 1 Mohm / LED"),
     ("LINKS", 24, 16, 7, "IN", "R101 / R102 RAW_SS links, axial 0617 (0 ohm or 10-47 ohm 2 W fusible)"),
@@ -79,15 +79,15 @@ FIXED = [
     ("J103", 593, 168, 20, 10, 20, "IN", "RAW_SS2 / GND_PRE2 (W03)"),
     ("FAULT", 614, 144, 22, 22, 18, "IN", "GBU8J + 100 nF Y2 + 100 ohm 2 W + plated standoff H101"),
 ]
-# reduced part set (second-pass choice, see README): f_sw 50 kHz, so only Q211 (1.4 W) needs a
-# heatsink; Q212 / Q221 / Q222 (0.3-0.6 W) stand free (TO-220 62 K/W: Tj about 100-110 C at 70 C);
+# reduced part set (second-pass choice, see README): f_sw 50 kHz, so only Q201 (1.4 W) needs a
+# heatsink; Q202 / Q203 / Q204 (0.3-0.6 W) stand free (TO-220 62 K/W: Tj about 100-110 C at 70 C);
 # one 100 uF 500 V D22 per bridge instead of two 47 uF.
-REDUCE_DROP = {"HS_Q212", "HS_Q221", "HS_Q222", "C217", "C227"}
+REDUCE_DROP = {"HS_Q202", "HS_Q203", "HS_Q204", "C204b", "C209b"}
 REDUCE_ADD = [
-    ("Q_FREE", 36, 7, 25, "B", "Q212, Q221, Q222 standing TO-220, no heatsink (3 x 10.5 x 4.6 mm + clearance)"),
+    ("Q_FREE", 36, 7, 25, "B", "Q202, Q203, Q204 standing TO-220, no heatsink (3 x 10.5 x 4.6 mm + clearance)"),
 ]
-REDUCE_RESIZE = {"C214": (24, 24, 45, "100 uF 500 V radial D22 (intermediate, bridge 1)"),
-                 "C224": (24, 24, 45, "100 uF 500 V radial D22 (intermediate, bridge 2)")}
+REDUCE_RESIZE = {"C204": (24, 24, 45, "100 uF 500 V radial D22 (intermediate, bridge 1)"),
+                 "C209": (24, 24, 45, "100 uF 500 V radial D22 (intermediate, bridge 2)")}
 HOLES = [(590.0, 87.0), (605.0, 124.7), (605.0, 166.6), (671.0, 48.0), (671.0, 128.0)]   # H102-H106, non-plated
 KEEPOUT = [("notch", 649, 30, 19, 9), ("slot", 649, 145, 19, 35)]
 
