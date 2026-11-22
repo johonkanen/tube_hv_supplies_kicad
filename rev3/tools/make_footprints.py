@@ -5,8 +5,8 @@
                             (interfaces.md 4.1 DEFINED; the v2 terminal footprint, copied)
   Blade_Tab_4.8mm_2x_P12mm  two such tabs side by side, 12 mm apart (pad 1, pad 2): room for
                             two fully insulated receptacles (about 8-9 mm wide) and creepage
-  PLACEHOLDER_L_ETD34_Vertical  3 mH power inductor, ETD34 bobbin outline (38 x 38 mm courtyard),
-                            two pins 30 mm apart: a placeholder until the inductor is chosen
+  L_ETD39_2pin_custom       3 mH custom inductor, ETD39 bobbin outline (42 x 42 mm), two pins 30 mm
+                            apart (pad positions to the chosen bobbin)
 Run: python3 rev3/tools/make_footprints.py
 """
 import os
@@ -49,9 +49,9 @@ def main():
     footprint("Blade_Tab_4.8mm_2x_P12mm", "Two PCB blade tabs 4.8 mm, 12 mm apart, each 2 legs on 5.00 mm, "
               "1.4 mm drill (interfaces.md 4.1)", (-3.5, -1, 3.5, 13),
               [pad(1, 2.5, 0), pad(1, -2.5, 0), pad(2, 2.5, 12), pad(2, -2.5, 12)], -2.5)
-    footprint("PLACEHOLDER_L_ETD34_Vertical", "PLACEHOLDER: 3 mH / 2.4 A power inductor, ETD34 bobbin outline; "
-              "replace when the part is chosen", (-19, -19, 19, 19),
-              [pad(1, -15, 0, 2.5, 1.3), pad(2, 15, 0, 2.5, 1.3)], -21)
+    footprint("L_ETD39_2pin_custom", "3 mH custom inductor on an ETD39 bobbin (42 x 42 mm courtyard); winding ends "
+              "on two pins 30 mm apart: move the pads to the chosen bobbin's pin row", (-21, -21, 21, 21),
+              [pad(1, -15, 0, 2.5, 1.3), pad(2, 15, 0, 2.5, 1.3)], -23)
     with open(os.path.join(HERE, "kicad", "fp-lib-table"), "w") as f:
         f.write('(fp_lib_table\n\t(version 7)\n\t(lib (name "tube_hv_supplies_rev3")(type "KiCad")'
                 '(uri "${KIPRJMOD}/../lib/tube_hv_supplies_rev3.pretty")(options "")'

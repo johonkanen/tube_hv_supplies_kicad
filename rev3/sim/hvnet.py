@@ -18,6 +18,8 @@ Two variants of the second stage:
      same stored energy, one part less per bridge for the floorplan), 33 uH with a
      5.6 ohm damping resistor in parallel, 1 uF / 630 V film at vo: the second stage moves to
      27.7 kHz with Q = Rd * sqrt(Cvo / L2) = 1.0, out of the audio band and above the loop.
+     Third pass: bridge 1 (V_ANODE) has Rs = 1.0 ohm (0.7 A continuous) and the ETD39 inductor
+     (DCR 1.55 ohm hot); bridge 2 keeps 2.2 ohm (variant B with Rs=2.2 is the screen bridge).
   C  as B with 2.2 uF / 3.9 ohm (18.7 kHz, Q = 1.0): twice the ripple attenuation, a larger film.
 
 The measured quantities (interfaces.md 9, ADC channels): v_tab (V_ANODE / V_SCREEN, after Rs)
@@ -28,7 +30,7 @@ import numpy as np
 BASE = dict(L1=3e-3, RL1=1.7, L2=33e-6, RL2=0.1, Rs=2.2, ESR=0.5, Cel=47e-6)
 VARIANTS = {
     "A": dict(n_uc=1, Rd=None, Cvo=[(47e-6, "ESR"), (100e-9, 0.02)]),
-    "B": dict(n_uc=1, Cel=100e-6, Rd=5.6, Cvo=[(1e-6, 0.02)]),
+    "B": dict(n_uc=1, Cel=100e-6, Rd=5.6, Cvo=[(1e-6, 0.02)], Rs=1.0, RL1=1.55),
     "C": dict(n_uc=1, Cel=100e-6, Rd=3.9, Cvo=[(2.2e-6, 0.02)]),
 }
 

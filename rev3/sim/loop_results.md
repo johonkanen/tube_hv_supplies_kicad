@@ -14,42 +14,42 @@ Gains chosen by a grid search on variant B (PM >= 45 deg, GM >= 8 dB at every co
 | A | 0.5 | 700 ohm | 693 | 55 | 18.6 | 6.23 at 587 | 1.72 / 4.86 / 2.53 / 2.72 |
 | A | 0.5 | 4000 ohm | 693 | 55 | 18.6 | 6.28 at 587 | 1.72 / 4.89 / 2.53 / 2.72 |
 | A | 0.5 | open | 693 | 55 | 18.6 | 6.29 at 587 | 1.72 / 4.90 / 2.53 / 2.73 |
-| B | 0.1 | 700 ohm | 1128 | 56 | 9.6 | 4.10 at 747 | 2.19 / 4.06 / 2.49 / 6.44 |
-| B | 0.1 | 4000 ohm | 1128 | 56 | 9.6 | 4.12 at 750 | 2.20 / 4.08 / 2.49 / 6.49 |
-| B | 0.1 | open | 1128 | 56 | 9.6 | 4.13 at 750 | 2.20 / 4.08 / 2.49 / 6.50 |
-| B | 0.5 | 700 ohm | 1165 | 56 | 9.3 | 4.10 at 1257 | 2.18 / 4.08 / 3.05 / 6.72 |
-| B | 0.5 | 4000 ohm | 1165 | 56 | 9.3 | 4.12 at 1257 | 2.19 / 4.10 / 3.06 / 6.77 |
-| B | 0.5 | open | 1165 | 56 | 9.3 | 4.12 at 1257 | 2.19 / 4.10 / 3.07 / 6.79 |
+| B | 0.1 | 700 ohm | 1128 | 56 | 9.6 | 2.79 at 721 | 1.47 / 2.75 / 1.31 / 5.35 |
+| B | 0.1 | 4000 ohm | 1128 | 56 | 9.6 | 2.80 at 721 | 1.47 / 2.75 / 1.31 / 5.38 |
+| B | 0.1 | open | 1128 | 56 | 9.6 | 2.80 at 721 | 1.47 / 2.76 / 1.31 / 5.38 |
+| B | 0.5 | 700 ohm | 1165 | 56 | 9.3 | 2.81 at 1239 | 1.46 / 2.79 / 1.85 / 5.59 |
+| B | 0.5 | 4000 ohm | 1165 | 56 | 9.3 | 2.82 at 1239 | 1.46 / 2.80 / 1.86 / 5.62 |
+| B | 0.5 | open | 1169 | 56 | 9.3 | 2.82 at 1239 | 1.46 / 2.80 / 1.86 / 5.63 |
 
-Variant A tuned on its own (same rules): best Kp = 1, Ki = 1000, Kc = 20: crossover 638 Hz, phase margin 68 deg, gain margin 8.2 dB, max Zout 20 Hz-5 kHz 6.20 ohm (variant B with its gains: 4.10 ohm).
+Variant A tuned on its own (same rules): best Kp = 1, Ki = 1000, Kc = 20: crossover 638 Hz, phase margin 68 deg, gain margin 8.2 dB, max Zout 20 Hz-5 kHz 6.20 ohm (variant B with its gains: 2.81 ohm).
 
 ## Delay sensitivity (variant B, ESR 0.1 ohm, 700 ohm, same gains)
 
 | Sample-to-PWM delay (us) | Phase margin (deg) | Gain margin (dB) | max Zout (ohm) |
 |---|---|---|---|
-| 40 | 64 | 12.3 | 4.00 |
-| 50 | 60 | 10.9 | 4.04 |
-| 60 | 56 | 9.6 | 4.10 |
-| 80 | 48 | 7.5 | 4.34 |
-| 100 | 40 | 5.8 | 4.86 |
+| 40 | 64 | 12.3 | 2.70 |
+| 50 | 60 | 10.9 | 2.74 |
+| 60 | 56 | 9.6 | 2.79 |
+| 80 | 48 | 7.5 | 3.00 |
+| 100 | 40 | 5.8 | 3.50 |
 
-Without the capacitor-current damping (Kc = 0, voltage PI only): best Kp = 0.05, Ki = 30: crossover 5 Hz, max Zout 20.2 ohm.
+Without the capacitor-current damping (Kc = 0, voltage PI only): best Kp = 0.05, Ki = 30: crossover 5 Hz, max Zout 20.6 ohm.
 
 ## Time domain (raw 420 V unless stated, the low end of the rail: D14 headroom)
 
 | Case | Variant | V_tab min / max (V) | Bridge current iL1 min / max (A) | Note |
 |---|---|---|---|---|
-| Audio load 0.10 + 0.47 |sin(2 pi 82 Hz t)| (0.57 A peaks) at 400 V | B | 399.4 / 400.8 | 0.14 / 0.70 |  |
-| Audio load 0.10 + 0.47 |sin(2 pi 82 Hz t)| (0.57 A peaks) at 400 V | A | 399.5 / 400.7 | 0.13 / 0.70 |  |
-| Same at 430 V raw | B | 399.4 / 400.8 | 0.14 / 0.70 |  |
-| Same at 430 V raw | A | 399.5 / 400.7 | 0.13 / 0.70 |  |
-| Same at 380 V setpoint | B | 379.4 / 380.8 | 0.13 / 0.70 |  |
-| Same at 380 V setpoint | A | 379.5 / 380.7 | 0.12 / 0.69 |  |
-| Load step 0.10 -> 0.57 A at 380 V | B | 377.5 / 380.0 | 0.19 / 0.84 |  |
-| Load step 0.10 -> 0.57 A at 380 V | A | 378.0 / 380.0 | 0.19 / 0.95 |  |
-| Ramp up 200 -> 400 V in 30 ms, load 700 ohm (0.57 A at 400 V) | B | 200.0 / 403.9 | 0.29 / 1.25 | max tracking error 4.0 V |
-| Ramp up 200 -> 400 V in 30 ms, load 700 ohm (0.57 A at 400 V) | A | 200.0 / 402.8 | 0.29 / 1.20 | max tracking error 2.9 V |
-| Ramp down 400 -> 200 V in 30 ms, load 2 kohm (idle) | B | 196.1 / 400.0 | -0.59 / 0.20 | max tracking error 4.0 V; energy returned to the raw rail 4.7 J |
+| Overdrive load 0.60 + 0.20 |sin(2 pi 82 Hz t)| (0.7 A average, 0.8 A peaks) at 400 V | B | 399.8 / 400.2 | 0.68 / 0.91 |  |
+| Overdrive load 0.60 + 0.20 |sin(2 pi 82 Hz t)| (0.7 A average, 0.8 A peaks) at 400 V | A | 399.8 / 400.3 | 0.67 / 0.91 |  |
+| Same at 430 V raw | B | 399.8 / 400.2 | 0.68 / 0.91 |  |
+| Same at 430 V raw | A | 399.8 / 400.3 | 0.67 / 0.91 |  |
+| Same at 380 V setpoint | B | 379.8 / 380.2 | 0.68 / 0.90 |  |
+| Same at 380 V setpoint | A | 379.8 / 380.3 | 0.66 / 0.91 |  |
+| Load step 0.10 -> 0.80 A at 380 V | B | 377.1 / 380.0 | 0.20 / 1.09 |  |
+| Load step 0.10 -> 0.80 A at 380 V | A | 377.1 / 380.0 | 0.19 / 1.32 |  |
+| Ramp up 200 -> 400 V in 30 ms, load 570 ohm (0.7 A at 400 V) | B | 200.0 / 403.9 | 0.35 / 1.38 | max tracking error 3.9 V |
+| Ramp up 200 -> 400 V in 30 ms, load 570 ohm (0.7 A at 400 V) | A | 200.0 / 402.8 | 0.35 / 1.33 | max tracking error 2.9 V |
+| Ramp down 400 -> 200 V in 30 ms, load 2 kohm (idle) | B | 196.1 / 400.0 | -0.59 / 0.20 | max tracking error 3.9 V; energy returned to the raw rail 4.7 J |
 | Ramp down 400 -> 200 V in 30 ms, load 2 kohm (idle) | A | 197.1 / 400.0 | -0.59 / 0.25 | max tracking error 2.9 V; energy returned to the raw rail 4.3 J |
-| Ramp down 400 -> 200 V in 30 ms, no load | B | 196.1 / 400.0 | -0.78 / 0.11 | max tracking error 3.9 V; energy returned to the raw rail 6.1 J |
+| Ramp down 400 -> 200 V in 30 ms, no load | B | 196.1 / 400.0 | -0.78 / 0.10 | max tracking error 3.9 V; energy returned to the raw rail 6.1 J |
 | Ramp down 400 -> 200 V in 30 ms, no load | A | 197.1 / 400.0 | -0.78 / 0.16 | max tracking error 2.9 V; energy returned to the raw rail 5.7 J |

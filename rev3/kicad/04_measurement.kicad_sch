@@ -13516,7 +13516,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "7cd0dee7-0cf9-555d-9f09-bc6435055572")
 		(property "Reference" "R444"
 			(at 299.38 283.21 0)
@@ -13526,8 +13526,8 @@
 				)
 			)
 		)
-		(property "Value" "33 (DNP: returned SCK, J1 pad 16 proposed)"
-			(at 320.28 285.75 0)
+		(property "Value" "33 (returned SCK, J1 pad 16)"
+			(at 312.58 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13640,7 +13640,7 @@
 			)
 		)
 	)
-	(text "SPI on J1 (IF-2): ADC_DIN pad 11, ADC_SDO pad 12, ADC_CNV pad 13, ADC_SCK pad 14; returned SCK pad 16 (proposed, R444 unfitted)"
+	(text "SPI on J1 (IF-2): ADC_DIN pad 11, ADC_SDO pad 12, ADC_CNV pad 13, ADC_SCK pad 14; returned SCK pad 16 (ADC_SCK_RET, accepted 2026-11-23)"
 		(exclude_from_sim no)
 		(at 233.68 302.26 0)
 		(effects

@@ -50,9 +50,9 @@ FP_C = "Capacitor_SMD:C_0603_1608Metric"
 FP_C1206 = "Capacitor_SMD:C_1206_3216Metric"
 FP_EL47 = "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
 FP_EL100 = "Capacitor_THT:CP_Radial_D22.0mm_P10.00mm_SnapIn"
-FP_FILM100N = "Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3"
+FP_FILM100N = "Capacitor_SMD:C_1812_4532Metric"
 FP_FILM1U = "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
-FP_Y2 = "Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3"
+FP_Y2 = "Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4"
 FP_TAB1 = f"{LOCAL_LIB}:Blade_Tab_4.8mm_1x"
 FP_TAB2 = f"{LOCAL_LIB}:Blade_Tab_4.8mm_2x_P12mm"
 DEFAULT_FP = {
@@ -249,7 +249,7 @@ def sheet01(d):
     # input filter: C101 on B_P, L101, the bridge-local 47 uF on UIN (sheet 02); lc_ac.py: peak 0.7-0.9 ohm
     # against the bridges' -616 ohm input resistance (Middlebrook: far apart)
     CP(d, "C1", 1, 4, "B_P", "PGND", "47u/500V 105C", note="radial D18, ripple rating at 70 C to check")
-    C(d, "C2", 2, 4, "B_P", "PGND", "100n/630V film", fp=FP_FILM100N, mpn="")
+    C(d, "C2", 2, 4, "B_P", "PGND", "100n/630V X7R 1812", fp=FP_FILM100N, mpn="")
     d.part("L", "L1", 3, 4.5, {1: "B_P", 2: "UIN"}, value="33uH 2A", rot=90,
            fp="Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P", mpn="", note="33 uH, >= 2 A, radial D12")
     C(d, "C3", 5, 4, "UIN", "PGND", "1n/1kV C0G", fp=FP_C1206, mpn="")
@@ -266,7 +266,8 @@ def sheet01(d):
     # standoff H101 next to the raw input tabs; every other mounting hole non-plated
     d.part("GBU8J", "D2", 4, 8, {2: "GND_STAR", 3: "CHASSIS", 1: "BR_DC", 4: "BR_DC"},
            value="GBU8J (8 A 600 V, + and - joined: anti-parallel pair)")
-    C(d, "C4", 6, 8, "GND_STAR", "CHASSIS", "100n Y2 300VAC", fp=FP_Y2, mpn="", note="Y2 film, P15 (part TBD)")
+    C(d, "C4", 6, 8, "GND_STAR", "CHASSIS", "100n Y2 300VAC", fp=FP_Y2, mpn="TDK B32023A3104M",
+      note="Y2 film, P22.5 (body width to check against the TDK drawing)")
     R(d, "R6", 7, 8, "GND_STAR", "CHASSIS", "100 2W", fp=FP_AX2W, mpn="")
     d.part("MountingHole_Pad", "H1", 9, 8, {1: "CHASSIS"}, value="CHASSIS standoff, plated (fault / RF network)",
            mpn="", note="new plate hole next to J101 (mechanical/floorplan.md)")
@@ -284,27 +285,29 @@ def bridge(d, k, c0, out, tag):
     series fusible resistor to the tab, bleeders to the star."""
     t = str(k)
     d.text(f"Bridge {k}: {tag}", c0, 0.3, 1.8)
-    d.part("Fuse", f"F{k}", c0, 1.5, {1: "UIN", 2: f"UIN{t}"}, value=("2A" if k == 1 else "1.6A") + " T, >=500 VDC (part TBD)",
-           rot=90, mpn="", note="5x20 clip holder placeholder: the fuse needs a confirmed >= 500 VDC rating")
+    R(d, f"R{k}7", c0, 1.5, "UIN", f"UIN{t}", "0R link (bridge input; fuse option: Eaton PV-2A10/1P, 2 A 1000 VDC)",
+      fp=FP_AX2W, mpn="", note="proposal N7: no fuse, like RAW_SS (PSU short-circuit protection + 2.0 A trips); "
+      "the 10x38 PV fuse needs about 50 x 12 mm per bridge and a PCB-tab footprint")
     CP(d, f"C{k}1", c0 + 1, 2, f"UIN{t}", "PGND", "47u/500V 105C")
-    C(d, f"C{k}2", c0 + 2, 2, f"UIN{t}", "PGND", "100n/630V film", fp=FP_FILM100N, mpn="")
+    C(d, f"C{k}2", c0 + 2, 2, f"UIN{t}", "PGND", "100n/630V X7R 1812", fp=FP_FILM100N, mpn="")
     C(d, f"C{k}3", c0 + 3, 2, f"UIN{t}", "PGND", "1n/1kV C0G", fp=FP_C1206, mpn="")
     d.part("Q_NIGBT_GCE", f"Q{k}1", c0 + 1, 4, {1: f"GH{t}", 2: f"UIN{t}", 3: f"SW{t}"}, value="IKP08N65F5")
     d.part("Q_NIGBT_GCE", f"Q{k}2", c0 + 1, 6, {1: f"GL{t}", 2: f"SW{t}", 3: f"IS{t}"}, value="IKP08N65F5")
     if k == 1:
-        d.part("Heatsink", "HS1", c0 + 2.2, 4, {}, value="SK 104 38.1 mm (Q201, ~12 K/W, live at UIN)",
-               mpn="Fischer SK 104 38,1 STC", note="Q202 / Q203 / Q204 stand free at 50 kHz (STATUS thermal table)")
+        d.part("Heatsink", "HS1", c0 + 2.2, 4, {}, value="SK 104 38.1 mm (Q201, ~12 K/W, insulated mounting)",
+               mpn="Fischer SK 104 38,1 STC", note="Q201 on an insulating pad + bush (~1 K/W), heatsink not live; Q202-Q204 free (STATUS T3)")
     R(d, f"R{k}1", c0 + 1, 7.6, f"IS{t}", "PGND", "50m 1W 2512 (Kelvin)", fp=FP_R2512, mpn="")
-    d.part("L", f"L{k}1", c0 + 3, 4.5, {1: f"SW{t}", 2: f"UC{t}"}, value="3mH, Isat >= 2.4A, DCR <= 2R (PLACEHOLDER)",
-           rot=90, fp=f"{LOCAL_LIB}:PLACEHOLDER_L_ETD34_Vertical", mpn="",
-           note="e.g. ETD34 N87 gapped ~1.7 mm, ~250 t 0.45 mm, 600 V winding insulation")
+    d.part("L", f"L{k}1", c0 + 3, 4.5, {1: f"SW{t}", 2: f"UC{t}"}, value="3mH ETD39 N87, 192t 0.5mm, gap 1.9mm (Isat 2.4A, DCR 1.2R)",
+           rot=90, fp=f"{LOCAL_LIB}:L_ETD39_2pin_custom", mpn="TDK B66363G0000X187 core set + ETD39 bobbin",
+           note="custom-wound (no catalogue part found); pin positions to the chosen bobbin; 600 V winding-core insulation")
     CP(d, f"C{k}4", c0 + 4, 5.5, f"UC{t}", f"IC{t}", "100u/500V 105C", fp=FP_EL100, note="snap-in D22")
     R(d, f"R{k}2", c0 + 4, 7.2, f"IC{t}", "PGND", "50m 1W 2512 (Kelvin)", fp=FP_R2512, mpn="")
     d.part("L", f"L{k}2", c0 + 5, 4.5, {1: f"UC{t}", 2: f"VO{t}"}, value="33uH 2A", rot=90,
            fp="Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P", mpn="")
     R(d, f"R{k}6", c0 + 5, 3.2, f"UC{t}", f"VO{t}", "5.6 1W (damping, Q = 1)", rot=0, fp=FP_AX1W, mpn="")
     C(d, f"C{k}5", c0 + 6, 5.5, f"VO{t}", "GND_STAR", "1u/630V MKP", fp=FP_FILM1U, mpn="")
-    R(d, f"R{k}3", c0 + 6, 4, f"VO{t}", out, "2.2 2W fusible (placeholder, M20)", rot=0, fp=FP_AX2W, mpn="")
+    R(d, f"R{k}3", c0 + 6, 4, f"VO{t}", out, ("1.0" if k == 1 else "2.2") + " 2W fusible, pulse (ULW2)", rot=0, fp=FP_AX1W,
+      mpn=f"TT Welwyn ULW2-{'1R0' if k == 1 else '2R2'}JA25", note="pulse rating against an arc (8 J in 0.1-0.2 ms) is M20")
     R(d, f"R{k}4", c0 + 8, 5.5, out, f"BL{t}", "110k 1W HV", fp=FP_AX1W, mpn="")
     R(d, f"R{k}5", c0 + 8, 7, f"BL{t}", "GND_STAR", "110k 1W HV", fp=FP_AX1W, mpn="")
 
@@ -312,12 +315,12 @@ def bridge(d, k, c0, out, tag):
 def sheet02(d):
     d.text("02 Two half-bridge synchronous bucks (IKP08N65F5, 3 mH, shunts in the low-side emitter and in the "
            "electrolytic's return). Second stage moved from 4 kHz to 27.7 kHz (damped, Q = 1); one 100 uF per bridge. "
-           "Sized for 0.57 A V_ANODE peaks and 30 ms ramps (bridge current 1.25 A, trip 2.0 A). Outputs: V_ANODE (W04-a) "
+           "Sized for V_ANODE 0.7 A continuous / 0.8 A peaks, V_SCREEN 0.18 A (trips 2.0 A). Outputs: V_ANODE (W04-a) "
            "and V_SCREEN (W05-a). f_sw 50 kHz recommended.", 0, -1.0, 2)
-    bridge(d, 1, 0, "V_ANODE", "V_ANODE 0-400 V, 0.57 A peak (about 403 V at 420 V raw, D_max 0.97)")
-    bridge(d, 2, 11, "V_SCREEN", "V_SCREEN 0-~400 V, 100 mA average / 0.25 A peak")
+    bridge(d, 1, 0, "V_ANODE", "V_ANODE 0-400 V, 0.7 A continuous (about 401 V at 420 V raw, D_max 0.97)")
+    bridge(d, 2, 11, "V_SCREEN", "V_SCREEN 0-~400 V, 0.18 A continuous / 0.25 A peak")
     # V_SCREEN <= V_ANODE in hardware. 1N5408 (IFSM 200 A): in a V_ANODE short or arc the screen capacitor
-    # dumps through R210 (2.2 ohm) and this diode, ~180 A peak, tau 0.2 ms (S1M's 30 A was too small)
+    # dumps through R212 (2.2 ohm) and this diode, ~180 A peak, tau 0.2 ms (S1M's 30 A was too small)
     d.part("D", "D1", 9, 9, {1: "V_ANODE", 2: "V_SCREEN"}, value="1N5408 (clamp: V_SCREEN <= V_ANODE + 0.7 V)",
            rot=0, fp="Diode_THT:D_DO-201AD_P15.24mm_Horizontal", mpn="1N5408")
     TAB(d, "J1", 3, 10, ["V_ANODE", "GND_STAR"], "V_ANODE / GND_PWR (W04-a, 4.8 mm tabs)")
@@ -419,10 +422,10 @@ def sheet04(d):
     R(d, "R3", 13, 13, "ADC_SDO_L", "ADC_SDO", "33", rot=0)
     # returned ADC clock (interfaces.md 9: one back channel reserved, pad OPEN). Proposed pad 16; the
     # resistor is taken from the AD7689's SCK pin and stays unfitted until the pad is agreed.
-    R(d, "R4", 13, 14, "ADC_SCK", "ADC_SCK_RET", "33 (DNP: returned SCK, J1 pad 16 proposed)", rot=0, dnp=True,
-      note="fit only when the returned clock is agreed (proposal N1)")
+    R(d, "R4", 13, 14, "ADC_SCK", "ADC_SCK_RET", "33 (returned SCK, J1 pad 16)", rot=0,
+      note="pad 16 = ADC_SCK_RET accepted 2026-11-23 (V9)")
     d.text("SPI on J1 (IF-2): ADC_DIN pad 11, ADC_SDO pad 12, ADC_CNV pad 13, ADC_SCK pad 14; returned SCK pad 16 "
-           "(proposed, R444 unfitted)", 10, 15.0)
+           "(ADC_SCK_RET, accepted 2026-11-23)", 10, 15.0)
 
 
 # ------------------------------------------------------------------ sheet 05
@@ -438,7 +441,8 @@ def sheet05(d):
            "V_ANODE / V_SCREEN over-voltage). Drivers run only when HV_PERMIT loop on AND HV_ENABLE high AND no "
            "latched fault. IF-2: never with the v2.5 control card (pad 25 contention).", 0, -1.0, 2)
     d.part("Conn_02x20_Odd_Even", "=J1", 0, 3, J1MAP, value="CONTROL 40-pin IF-2 (W17-b, isolated on the control board)",
-           mpn="", note="1.27 mm 2x20 shrouded header (part TBD), silkscreen IF-2; pad 16 N/C until N1 is agreed")
+           mpn="Samtec SHF-120-01-L-D-TH", note="1.27 mm 2x20 shrouded THT header (5.33 mm body, 1.91 mm tail); "
+           "stock pin-header footprint, the shroud outline to add at layout; silkscreen IF-2")
     for i, n in enumerate(("+3V3", "+12V", "GND")):
         d.part("PWR_FLAG", f"#FLG50{i}", 2, 8 + i * 0.6, {1: n}, value="PWR_FLAG")
     C(d, "C1", 3, 7, "+3V3", "GND", "10u", fp="Capacitor_SMD:C_0805_2012Metric")

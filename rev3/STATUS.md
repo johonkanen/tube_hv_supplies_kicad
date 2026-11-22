@@ -1,5 +1,172 @@
 # Status: HV supplies rev 3
 
+**Third pass (2026-11-23): user decisions applied** (coordinator's `decisions_1123.md`: V6 outline,
+V7 raw rail, V8 no active discharge, V9 pad 16; DAB up to 1 A; power amp current figures from
+tube_power_amp_kicad 99cff1f). The second pass (S1-S9) and the first pass stay below as history;
+where they differ, this section is current.
+
+**State:** 200 parts, 113 nets, **ERC 0 errors / 2 warnings** (the expected UCC21520 VSSA on the
+switch node, `reports/erc.rpt`); BOM `bom/bom.csv` 79 lines / 204 pieces, 22 lines with a part
+number, one line still TBD (R303 / R311 dead-time resistor). Chosen floorplan
+`mechanical/floorplan_chosen.md` / `.svg`; KiCad outline `mechanical/outline_edge_cuts.kicad_pcb`.
+
+## T1. Outline (accepted L shape, trimmed for the rear panel)
+
+What D748 shows behind the rear strip (rear panel strip of the flat pattern, y 210.2-292.7 =
+0-82.5 mm below the plate): the **mains inlet cutout x 633.6-661.1, 32.2-52.2 mm below the plate**,
+no flange drawn; **Ø4 fixing screws at x 627.3 and 667.3, 42.2 mm below the plate** (a screw-flange
+IEC inlet: flange about 50 x 30 mm outside, screw and nut 8-10 mm inside, so to about y 200);
+and **four Ø13 holes at x 597.6, 10 / 30 / 50 / 70 mm below the plate** (old supply; a panel fuse
+holder reaches 30-45 mm inside). So the rear strip is kept **only for x 560-585** (the board's rear
+edge stays 10 mm from the panel there and clear of x 591-604). That costs 820 mm² of the accepted L.
+Condition: the four Ø13 holes are plugged or empty (the rear I/O's hole list plugs seven holes; to
+confirm these are among them). If a part stays in the top one (10 mm below the plate, it would reach
+the board plane), the main body needs a notch x 589-606, y 160-180 (−340 mm², L203 moves 5 mm west).
+
+**Outline** (chassis frame, mm; counter-clockwise from the front-west corner), area 19,224 mm²:
+`(560, 30) (649, 30) (649, 39) (668, 39) (668, 30) (675, 30) (675, 145) (649, 145) (649, 180)
+(585, 180) (585, 200) (525, 200) (525, 127) (560, 127)`.
+**KiCad Edge.Cuts** (origin at chassis (525, 30), KiCad x = x − 525, KiCad y = y − 30, i.e. seen from
+the plate with the front panel at the top): `(35, 0) (124, 0) (124, 9) (143, 9) (143, 0) (150, 0)
+(150, 115) (124, 115) (124, 150) (60, 150) (60, 170) (0, 170) (0, 97) (35, 97)`; written as a
+`gr_poly` on Edge.Cuts, with the standoff positions on Dwgs.User, in `outline_edge_cuts.kicad_pcb`.
+If the THT (downward) side is made F.Cu in the layout, mirror x.
+
+- Front notch x 649-668, y 30-39 for the hole at (658.5, 28.6): **W01 (raw HV) assumed down the
+  front hole**, J101 next to it. The rear hole (658.5, 154.6) sits in a corner cut out of the board
+  (x 649-675, y 145-180), left to the **mains wiring** from the inlet below it (no HV tab near it).
+- Gaps: control board 5.0 mm (arm, y 127) and 8.0 mm (main body, x 560); power amp 5.9 mm (arm,
+  x 525 against 519.1); inlet: the outline ends at x 585 in the rear strip, 42 mm from its screw.
+
+**Plate side** (the board hangs 15 mm under the plate): **SMD only, ≤ 3 mm tall** (drawn: the control
+and measurement block, the four HV dividers, both UCC21520 with bootstrap and gate parts, the
+2512 shunts, the threshold network, and the 100 nF 630 V (now 1812 X7R) and 1 nF 1 kV ceramics).
+Rule: HV copper and joints ≥ 5 mm from the plate and from the PSU's screw tips through it (taken as
+≤ 5 mm); with THT leads clipped to ≤ 2.5 mm and SMD ≤ 3 mm there are 12 mm to the plate and ≥ 7 mm
+to a screw tip. An LV part on the plate side could be up to 10 mm, but none is.
+
+**Control board ribbons (J7 x 529-550, J5 x 506-527 at its rear edge y 122):** a **ribbon corridor
+under the arm, y 127-147 across its full width (x 525-560), with no bottom-side parts** (plate-side
+parts also keep 4 mm off the arm's front edge). Behind it every bottom part on the arm is ≤ 20 mm
+tall (tabs; ≤ 30 mm with the mated insulated receptacles and the wire bend at the west edge), so
+below about 35 mm under the arm the ribbons can pass anywhere. **No HV within reach of the control
+board:** the arm's front edge has nothing for 20 mm (the nearest HV is the J202 tab at y 150, 28 mm
+from the control board), the main body's west 10 mm (x 560-570) carries only J1 and J501 on the
+bottom (HV parts start 18 mm from the control board's DGND edge), and Q201's heatsink is now
+**insulated** (pad + bush, not live). HV tabs J201 / J202 sit on the arm's west edge, facing the
+power amp (5.9 mm, its own HV side) with insulated receptacles. Area cost of the corridor: 700 mm²
+of the bottom side; the floorplan closes with it.
+
+## T2. Chosen floorplan
+
+`mechanical/floorplan_chosen.py` (hand placement of the big parts in power-flow order, small parts
+packed in zones; the old `floorplan.py` / `floorplan.md` is the second-pass study). **Bottom-side
+bodies 11,658 mm² in 18,140 mm² usable = 64 % fill, every block placed, no conflicts.**
+
+| Where | What |
+|---|---|
+| Front edge, west → east | J103 (RAW_SS2 → PI + FX) at x 572, J102 (RAW_SS1 → preamp) at x 598: their cables go west in the strip in front of the control board; R101 / R102 links behind them; FAULT (GBU8J, Y2, 100 Ω) at x 624 with **H101 (plated) at (617, 50)**; **J101 raw in at x 651-661, y 41-65, by the front notch** |
+| East column (x 653-673) | C101, L101, raw bleeder R103 / R104 + R105 / D101 |
+| Front half | bridge 1: Q201 on SK 104 (x 570-605, y 63-78), Q202, C201, R201 link, L201 (ETD39) at x 607-649, y 58-100, C204, L202, R204, C205 |
+| West edge | **J1 at x 562-569, y 80-114, opposite J11 (y 84-110)**; J501 (HV_PERMIT, W16 along the control board's east edge) at y 48 |
+| Rear half | bridge 2: L203 (ETD39) x 562-604, y 134-176, Q203 / Q204, C209, C210; C206 in the rear strip |
+| Arm (behind the corridor) | **J202 V_SCREEN at (527, 150), J201 V_ANODE / GND_PWR at (527, 166-190) toward the power amp**; L204, R208 link, D201, R205 / R212 fusibles, R211 |
+| Standoffs | (605.0, 124.7) existing; new (671, 48), (646, 140), (550, 194), (566, 122); H101 plated (617, 50). The old (590.0, 87.0) falls under C201 and (605.0, 166.6) under L203: not used. Four of the new ones are under the PSU (clearance on top to check, open from the second pass) |
+
+## T3. V_ANODE 0.7 A continuous, V_SCREEN 0.18 A, at 70 °C
+
+Figures used (coordinator, power amp 99cff1f): V_ANODE 0.59-0.66 A average, **0.7 A for minutes**
+(the KT88 model reads 12 % low), **0.8 A peaks**; V_SCREEN **0.12-0.18 A** average, 0.25 A peak.
+Datasheet values now confirmed: IKP08N65F5 **R_thJC 2.20 K/W (IGBT), 2.90 K/W (diode), R_thJA
+62 K/W, Q_G 22 nC** (520 V, 8 A, 15 V). Switching energy: Eon 0.10 + Eoff 0.03 mJ at 150 °C, taken
+conservatively as at 4 A and scaled with current (32.5 µJ/A + 3 µJ capacitive), f_sw 50 kHz. Local
+air 80 °C (70 °C plus 10 K under the board, an estimate).
+
+| Part | At 0.7 A / 0.18 A | Tj / hot spot | Continuous limit (Tj 150 °C, local air 80 °C) |
+|---|---|---|---|
+| Q201 (bridge 1 high side), SK 104 38.1 mm (~12 K/W) + 1 K/W insulating pad | 0.70 W conduction + 1.29 W switching = **2.0 W** | **110 °C** (40 K to 150, 65 K to Tvj max 175) | 1.7 A |
+| Q202 (bridge 1 low side / diode), free | 0.55 W at full output (D 0.95: mostly the diode's recovery) | **114 °C** | about 0.75 A even at D 0.5; **no heatsink needed** (power scaling lowers the current with the voltage) |
+| Q203 (bridge 2 high side), free | 0.61 W | **118 °C** | **0.38 A** free-standing (2x the 0.18 A); 1.7 A with an SK 104 |
+| Q204, free | ≈ 0.3 W | 99 °C | — |
+| L201 ETD39, 1.55 Ω hot | 0.76 W copper + ≈ 0.2 W core | ≈ 96 °C (≈ 16 K/W) | ≈ 1.35 A at a 130 °C hot spot |
+| R205 (1.0 Ω ULW2, was 2.2 Ω) | 0.49 W | — | **0.9 A** at 50 % of its 80 °C rating: **this sets bridge 1's continuous limit (0.9 A, 30 % margin)**; 1.3 A with a 3 W part |
+| R212 (2.2 Ω, screen) | 0.07 W | — | 0.6 A |
+| C201 input ripple | 0.35 A rms (worst, D 0.5) | 105 °C part | ≈ 1.6 A |
+
+**Q201's heatsink is enough** (2.0 W, 110 °C); **no other device needs one** at these currents.
+Continuous limits as designed: **bridge 1 ≈ 0.9 A** (R205), **bridge 2 ≈ 0.38 A** (Q203 free
+standing). Board total ≈ 8.7 W at 0.7 A / 0.18 A.
+
+- **Inductor current:** 0.7 A + 0.36 A half ripple = 1.06 A in steady state; a 30 ms 200 → 400 V ramp
+  at the full 0.7 A load needs **1.38 A** (`sim/loop_digital.py`), 1.74 A with ripple, under the 2.0 A
+  trip and the **2.4 A Isat** of the ETD39 design. Trips unchanged: 2.0 A forward / reverse, 475 / 440 /
+  420 V.
+- **Loop** (re-run with R205 = 1.0 Ω and the ETD39 DCR): PM 56°, GM 9.3 dB at every corner, **Zout
+  ≤ 2.8 Ω from 20 Hz to 5 kHz** (was 4.1 Ω with 2.2 Ω); overdrive load 0.6-0.8 A at 400 V: **±0.2 V**;
+  step 0.1 → 0.8 A: −2.9 V. D14: about **404 V at 420 V raw** at 0.7 A (D_max 0.97, 1 V IGBT, 1.9 V in
+  the inductor, shunt and R205).
+- **Shunts:** 50 mΩ, ±2.5 A range (0.5 V/A): 25 mW at 0.7 A; the 2.0 A trips sit at 0.25 / 2.25 V.
+- **Raw input:** (0.7 x 400 + 0.18 x 390) / 0.97 = 361 W → **0.86 A at 420 V + RAW_SS 35 mA = 0.89 A**,
+  inside the PSU's 1 A; momentary ≈ 1.0 A at 0.8 A anode peaks. **A full up-step inside the 1 A
+  needs ≥ 45 ms at idle and ≥ 0.3 s at full overdrive load** (the board itself takes 30 ms): a
+  firmware rule for the programmable ramp.
+- **Tabs and copper:** 4.8 mm tabs carry ≥ 10 A, no change. Power copper: ≥ 1.5 mm in 1 oz (0.7 A,
+  1.75 A peaks, < 10 K), 2 oz preferred for the switching loops; creepage 2.5 mm at 480 V. W01 and
+  W04 wire ≥ 0.5 mm² with 600 V insulation. Bridge fuses: see T5.
+- **+12V:** ≈ 10 mA (gate charge 4 x 18 nC at 12 V x 50 kHz = 3.6 mA + driver quiescent ≈ 6 mA);
+  **3V3** ≈ 9 mA.
+
+## T4. Pad 16, discharge, raw rail ≥ 500 V
+
+- **R444 fitted**: pad 16 = ADC_SCK_RET (V9).
+- **No active discharge** (V8): unchanged from S1 row 7.
+- **Raw-rail parts against "≥ 500 V, 480 V transient, ≤ 450 V sustained"** (V7): C101 / C201 / C206
+  47 µF 500 V ✓; C102 / C202 / C207 100 nF 630 V ✓; C103 / C203 / C208 1 nF 1 kV ✓; Q201-Q204 650 V
+  (≈ 170 V for ringing) ✓; ES1J 600 V ✓; UCC21520 high side ✓; raw dividers 3 x 1 MΩ 1206 (160 V each)
+  ✓; R103 / R104 2 x 75 kΩ MOX (240 V each, rating ≥ 350 V) ✓; R105 1 MΩ VR37 class ✓; L101 winding
+  (no rating given: specify ≥ 600 V insulation) ✓; **R101 / R102 / R201 / R208 links:** as wire links
+  nothing sees voltage; **a fusible resistor fitted there sees the full 480 V when it opens: it must
+  have a ≥ 500 V rating** (the 2 W ULW2 / FKN class lists ≈ 350-500 V: check before fitting one).
+  Output side (≤ 440 V trip): C204 / C209 100 µF 500 V, C205 / C210 1 µF 630 V, D201 1000 V,
+  bleeders 110 kΩ 1 W (220 V each) ✓.
+
+## T5. Part choices
+
+| Item | Result |
+|---|---|
+| 3 mH inductor | **Closed as a buildable design** (no catalogue part found with 3 mH and ≥ 2.4 A; the nearest catalogue toroids are 1.8 mH / 2.5 A): ETD39 N87 (TDK B66363G0000X187 core set, to verify), 192 turns of 0.5 mm grade-2 wire, 1.9 mm total gap (AL ≈ 81 nH), B ≈ 0.3 T at 2.4 A, DCR 1.2 Ω cold / 1.55 Ω hot, 600 V winding-to-core insulation (tape). Footprint `L_ETD39_2pin_custom`: pad positions to the chosen bobbin |
+| Bridge fuses ≥ 500 VDC | **No 5 x 20 or 6.3 x 32 time-lag fuse with ≥ 500 VDC found** (Littelfuse 477: 400 VDC; 977: 450 VDC; Schurter 8020: 400 VDC). The one confirmed part is the **Eaton PV-2A10/1P (2 A, 1000 VDC, 10 x 38, PCB tab)**, about 50 x 12 mm per bridge. **Drawn instead: R201 / R208 link footprints** (proposal N7, below) |
+| 2.2 Ω fusible | **TT Electronics Welwyn ULW2-2R2JA25** (2 W fusible, pulse withstanding) for R212; **ULW2-1R0JA25** (1.0 Ω) for R205 at 0.7 A. Arc pulse rating stays M20 |
+| Y2 capacitor | **TDK B32023A3104M** (100 nF Y2 300 VAC, 22.5 mm pitch); body width to check against the drawing |
+| J1 shrouded header | **Samtec SHF-120-01-L-D-TH** (1.27 mm 2x20 THT, four-wall shroud, 5.33 mm body); stock pin-header footprint, shroud outline at layout |
+| IGBT data | **Confirmed:** R_thJC 2.20 K/W, diode 2.90 K/W, R_thJA 62 K/W, Q_G 22 nC |
+| Still open | 3 mH bobbin and pin positions; dead-time resistor R303 / R311 (33k TBD with the PWM timing); 500 V electrolytic series (105 °C, long life); the SK 104's real R_th (≈ 12 K/W assumed); a 125 °C grade for LMV339I / AD7689B / LM4040A..I (85 °C parts); fusible-resistor voltage rating if one is ever fitted in a link footprint |
+
+Sources: [IKP08N65F5 datasheet (Arrow copy)](https://static6.arrow.com/aropdfconversion/ae3d46f3260342cf655f85b6f467c66dd59fab85/39137696509122968ds_ikp08n65f51.1.pdffileiddb3a30433af5291e013af9bac1de5da9folder..pdf),
+[Littelfuse 477](https://littelfuse.com/products/fuses/cartridge-fuses/5x20mm-fuses/477/477002.aspx),
+[Littelfuse 0977002.MXEP](https://www.digikey.com/en/products/detail/littelfuse-inc/0977002-MXEP/2664870),
+[Schurter 8020](https://www.digikey.fr/en/products/detail/schurter-inc/8020-5014/5051478),
+[Eaton PV-2A10F](https://www.eaton.com/za/en-gb/skuPage.PV-2A10F.html) and the PV-xA10/1P, -2P PCB variants,
+[Welwyn ULW2-2R2JA25](https://www.digikey.de/en/products/detail/tt-electronics-welwyn/ULW2-2R2JA25/25324972),
+[TDK B32023A3104M](https://sg.element14.com/tdk/b32023a3104m189/cap-0-1uf-class-y2-300v-rad/dp/3518771),
+[Samtec SHF-120-01-L-D-TH](https://www.digikey.at/en/products/detail/samtec-inc/SHF-120-01-L-D-TH/6613746).
+
+## T6. New in this pass (to the coordinating session)
+
+| # | What | Why | Boards | interfaces.md |
+|---|---|---|---|---|
+| N7 | **No fuses at the bridge inputs either:** link footprints R201 / R208 (0 Ω; the Eaton PV-2A10/1P as the fused option, about 50 x 12 mm each) | No ≥ 500 VDC fuse in 5 x 20 / 6.3 x 32; a failed IGBT pair is a short on the raw rail that the PSU's own protection stops (the same layer as U19), and shoot-through trips the 2.0 A reverse comparator first | HV supplies (user decision) | 3.1 (HV supplies internal) |
+| N8 | **Rear strip trimmed to x 560-585**; the four Ø13 rear-panel holes at x 597.6 must stay plugged or empty, else a notch x 589-606, y 160-180 | D748 rear panel | HV supplies, mechanical, rear I/O (hole list) | 12.1 |
+| N9 | **W01 down the front PSU hole** (658.5, 28.6); the rear hole left to the mains wiring | J101 / H101 at the front notch, mains kept away from the HV tabs | tube PSU (which lead goes where), wiring table | 12.1, 2.1 |
+| N10 | **Ramp rule within the PSU's 1 A:** a full up-step ≥ 45 ms at idle, ≥ 0.3 s at full overdrive load (firmware) | raw input current | control board (firmware) | 8 |
+| N11 | **Continuous limits:** V_ANODE bridge 0.9 A, V_SCREEN bridge 0.38 A (at 70 °C) | for the power amp's budget figures | power amp (informative) | 3.1, 3.2 |
+| N12 | **Ribbon corridor** under the arm, y 127-147, no bottom parts; arm parts ≤ 20 mm (≤ 30 mm with receptacles) | control board J7 / J5 ribbons | control board | 12.3 |
+
+---
+
+# Second pass (2026-11-23): history
+
+
 **Second pass (2026-11-23): consistent first draft.** Contract: tube_amplifier_kicad
 `docs/interfaces.md` IF-1.2 with IF-2 on W17 (read at 3883bc7), the review
 `docs/revb_first_pass_review.md` (7.1 decisions, K12, M16, M19, E28), SPECIFICATION ENV-2 (70 °C).

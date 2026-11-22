@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="740" font-family="sans-serif" font-size="9">
+<rect width="660" height="740" fill="white"/>
+<polygon points="160,700 516,700 516,664 592,664 592,700 620,700 620,240 516,240 516,100 260,100 260,20 20,20 20,312 160,312" fill="#eef5e9" stroke="#2d572c" stroke-width="2"/>
+<rect x="20" y="232" width="140" height="80" fill="#ddd" stroke="#888" stroke-dasharray="4"/><text x="23" y="272.0">ribbon corridor</text>
+<circle cx="554.0" cy="705.6" r="30.0" fill="none" stroke="black" stroke-dasharray="3"/>
+<circle cx="554.0" cy="201.60000000000002" r="30.0" fill="none" stroke="black" stroke-dasharray="3"/>
+<circle cx="340.0" cy="321.2" r="6.4" fill="white" stroke="black"/>
+<circle cx="604.0" cy="628.0" r="6.4" fill="white" stroke="black"/>
+<circle cx="504.0" cy="260.0" r="6.4" fill="white" stroke="black"/>
+<circle cx="120.0" cy="44.0" r="6.4" fill="white" stroke="black"/>
+<circle cx="184.0" cy="332.0" r="6.4" fill="white" stroke="black"/>
+<circle cx="388.0" cy="620.0" r="6.4" fill="#c0392b" stroke="black"/>
+<rect x="168" y="364" width="28" height="136" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="170" y="374">J1</text>
+<rect x="208" y="652" width="96" height="40" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="210" y="662">J103</text>
+<rect x="312" y="652" width="96" height="40" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="314" y="662">J102</text>
+<rect x="416" y="600" width="92" height="92" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="418" y="610">FAULT</text>
+<rect x="524" y="560" width="40" height="96" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="526" y="570">J101</text>
+<rect x="532" y="468" width="80" height="80" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="534" y="478">C101</text>
+<rect x="532" y="408" width="52" height="52" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="534" y="418">L101</text>
+<rect x="532" y="308" width="64" height="88" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="534" y="318">BLD_RAW</text>
+<rect x="200" y="508" width="140" height="60" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="202" y="518">HS201_Q201</text>
+<rect x="208" y="476" width="48" height="24" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="210" y="486">Q202</text>
+<rect x="208" y="368" width="80" height="80" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="210" y="378">C201</text>
+<rect x="348" y="420" width="168" height="168" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="350" y="430">L201</text>
+<rect x="368" y="316" width="96" height="96" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="370" y="326">C204</text>
+<rect x="472" y="360" width="52" height="52" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="474" y="370">L202</text>
+<rect x="344" y="248" width="132" height="48" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="346" y="258">C205</text>
+<rect x="168" y="116" width="168" height="168" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="170" y="126">L203</text>
+<rect x="172" y="28" width="80" height="80" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="174" y="38">C206</text>
+<rect x="344" y="212" width="104" height="28" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="346" y="222">Q203_Q204</text>
+<rect x="344" y="108" width="96" height="96" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="346" y="118">C209</text>
+<rect x="456" y="108" width="48" height="124" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="458" y="118">C210</text>
+<rect x="28" y="60" width="40" height="96" fill="#8e44ad" fill-opacity="0.55" stroke="black"/><text x="30" y="70">J201</text>
+<rect x="28" y="180" width="40" height="40" fill="#8e44ad" fill-opacity="0.55" stroke="black"/><text x="30" y="190">J202</text>
+<rect x="168" y="600" width="28" height="28" fill="#2e86c1" fill-opacity="0.55" stroke="black"/><text x="170" y="610">J501</text>
+<rect x="208" y="580" width="96" height="64" fill="#c0392b" fill-opacity="0.55" stroke="black"/><text x="210" y="590">LINKS</text>
+<rect x="208" y="304" width="104" height="56" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="210" y="314">BLD_OUT</text>
+<rect x="76" y="172" width="52" height="52" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="78" y="182">L204</text>
+<rect x="296" y="412" width="28" height="88" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="298" y="422">R201</text>
+<rect x="76" y="76" width="28" height="88" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="78" y="86">R208</text>
+<rect x="136" y="144" width="24" height="80" fill="#7f8c8d" fill-opacity="0.55" stroke="black"/><text x="138" y="154">D201</text>
+<rect x="28" y="32" width="64" height="20" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="30" y="42">R205</text>
+<rect x="112" y="72" width="20" height="64" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="114" y="82">R212</text>
+<rect x="484" y="288" width="20" height="64" fill="#d9822b" fill-opacity="0.55" stroke="black"/><text x="486" y="298">R204</text>
+<rect x="140" y="72" width="20" height="64" fill="#c9a227" fill-opacity="0.55" stroke="black"/><text x="142" y="82">R211</text>
+<rect x="168" y="572" width="144" height="120" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="170" y="689" fill="#2e86c1">CTRL (plate side)</text>
+<rect x="412" y="600" width="104" height="56" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="414" y="653" fill="#2e86c1">DIV (plate side)</text>
+<rect x="524" y="524" width="64" height="80" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="526" y="601" fill="#2e86c1">DRV1 (plate side)</text>
+<rect x="320" y="516" width="64" height="80" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="322" y="593" fill="#2e86c1">DRV2 (plate side)</text>
+<rect x="320" y="644" width="80" height="48" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="322" y="689" fill="#2e86c1">PROT (plate side)</text>
+<rect x="392" y="552" width="80" height="40" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="394" y="589" fill="#2e86c1">SHUNTS (plate side)</text>
+<rect x="168" y="532" width="96" height="32" fill="none" stroke="#2e86c1" stroke-dasharray="5"/><text x="170" y="561" fill="#2e86c1">HVCAPS (plate side)</text>
+<text x="8" y="732">HV supplies rev 3, chosen floorplan, view from above (front panel at the bottom); dashed blue = plate side</text></svg>

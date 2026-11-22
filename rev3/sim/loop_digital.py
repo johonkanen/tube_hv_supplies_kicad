@@ -244,15 +244,15 @@ def main():
     # time domain, variant B (the drawn one) and A for comparison
     lines += ["", "## Time domain (raw 420 V unless stated, the low end of the rail: D14 headroom)", "",
               "| Case | Variant | V_tab min / max (V) | Bridge current iL1 min / max (A) | Note |", "|---|---|---|---|---|"]
-    aud = lambda t: 0.10 + 0.47 * abs(np.sin(2 * np.pi * 82.4 * t))
-    step = lambda t: 0.10 if t < 10e-3 else 0.57
+    aud = lambda t: 0.60 + 0.20 * abs(np.sin(2 * np.pi * 82.4 * t))
+    step = lambda t: 0.10 if t < 10e-3 else 0.80
     cases = [
-        ("Audio load 0.10 + 0.47 |sin(2 pi 82 Hz t)| (0.57 A peaks) at 400 V", 400.0, lambda t: 400.0, aud, 4000.0, 100e-3, 40e-3, 420.0),
+        ("Overdrive load 0.60 + 0.20 |sin(2 pi 82 Hz t)| (0.7 A average, 0.8 A peaks) at 400 V", 400.0, lambda t: 400.0, aud, 4000.0, 100e-3, 40e-3, 420.0),
         ("Same at 430 V raw", 400.0, lambda t: 400.0, aud, 4000.0, 100e-3, 40e-3, 430.0),
         ("Same at 380 V setpoint", 380.0, lambda t: 380.0, aud, 4000.0, 100e-3, 40e-3, 420.0),
-        ("Load step 0.10 -> 0.57 A at 380 V", 380.0, lambda t: 380.0, step, 4000.0, 40e-3, 5e-3, 420.0),
-        ("Ramp up 200 -> 400 V in 30 ms, load 700 ohm (0.57 A at 400 V)", 200.0,
-         lambda t: 200.0 + 200.0 * min(max((t - 5e-3) / 30e-3, 0), 1), lambda t: 0.0, 700.0, 60e-3, 0.0, 430.0),
+        ("Load step 0.10 -> 0.80 A at 380 V", 380.0, lambda t: 380.0, step, 4000.0, 40e-3, 5e-3, 420.0),
+        ("Ramp up 200 -> 400 V in 30 ms, load 570 ohm (0.7 A at 400 V)", 200.0,
+         lambda t: 200.0 + 200.0 * min(max((t - 5e-3) / 30e-3, 0), 1), lambda t: 0.0, 570.0, 60e-3, 0.0, 430.0),
         ("Ramp down 400 -> 200 V in 30 ms, load 2 kohm (idle)", 400.0,
          lambda t: 400.0 - 200.0 * min(max((t - 5e-3) / 30e-3, 0), 1), lambda t: 0.0, 2000.0, 60e-3, 0.0, 430.0),
         ("Ramp down 400 -> 200 V in 30 ms, no load", 400.0,

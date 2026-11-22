@@ -4432,6 +4432,15 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "Samtec SHF-120-01-L-D-TH"
+			(at 30.48 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f80ff0ae-bc01-52f0-9421-67a764a19bf5")
 		)

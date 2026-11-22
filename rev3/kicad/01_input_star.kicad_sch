@@ -2502,7 +2502,7 @@
 				)
 			)
 		)
-		(property "Value" "100n/630V film"
+		(property "Value" "100n/630V X7R 1812"
 			(at 71.12 109.22 270)
 			(effects
 				(font
@@ -2510,7 +2510,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 74.93 105.7148 0)
 			(effects
 				(font
@@ -3674,7 +3674,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3"
+		(property "Footprint" "Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4"
 			(at 156.21 176.8348 0)
 			(effects
 				(font
@@ -3693,6 +3693,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 152.4 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TDK B32023A3104M"
 			(at 152.4 177.8 0)
 			(effects
 				(font
