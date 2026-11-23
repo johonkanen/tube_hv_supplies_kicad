@@ -47,6 +47,11 @@ def chain(name):
         "recommended: L2 68 uH, C2 4.7 uF film, Rd-Cd leg 22 uF + 1.5 ohm (f2 8.9 kHz)": dict(
             base, L2=68e-6, RL2=0.06, damp=None, C2=[(4.7e-6, 0.01, 15e-9), (22e-6, 1.5, 20e-9)],
             C1=[(100e-6, "E", 20e-9), (4.7e-6, 0.01, 15e-9)]),
+        # recommended second stage, and the first resonance damped passively as well: the electrolytic in
+        # series with a resistor (1.0 ohm + its ESR) behind 10 uF of film that takes the ripple
+        "recommended + passive first-stage damping: C1 = 10 uF film || (100 uF + 1.0 ohm)": dict(
+            base, L2=68e-6, RL2=0.06, damp=None, C2=[(4.7e-6, 0.01, 15e-9), (22e-6, 1.5, 20e-9)],
+            C1=[(100e-6, ("E", 1.0), 20e-9), (10e-6, 0.005, 15e-9)]),
         # the same L2 / C2 damped by Rd + Ld across L2 (keeps the -40 dB/decade asymptote with a
         # smaller inductance)
         "same L2 / C2, Rd-Ld across L2 (3.3 ohm + 22 uH)": dict(
@@ -64,8 +69,10 @@ NAMES = ["drawn, 3 mH", "220 uH + drawn 2nd stage (33 uH || 5.6 ohm, 1 uF: 27.7 
          "user: f2 = 200 kHz > f_sw (6.8 uH, 100 nF, undamped)", "user: f2 = 200 kHz > f_sw, damped (6.8 uH || 8.2 ohm)",
          "f2 = 60 kHz, inside the f_sw band (10 uH || 4.7 ohm, 0.68 uF)",
          "recommended: L2 68 uH, C2 4.7 uF film, Rd-Cd leg 22 uF + 1.5 ohm (f2 8.9 kHz)",
+         "recommended + passive first-stage damping: C1 = 10 uF film || (100 uF + 1.0 ohm)",
          "same L2 / C2, Rd-Ld across L2 (3.3 ohm + 22 uH)", "same L2 / C2, Rd straight across L2 (3.9 ohm)"]
 REC = NAMES[6]
+REC_P = NAMES[7]
 
 
 def scaled(p, kL1=1.0, kC1=1.0, kL2=1.0, kC2=1.0):
@@ -78,10 +85,17 @@ def scaled(p, kL1=1.0, kC1=1.0, kL2=1.0, kC2=1.0):
     return q
 
 
+def _r(r, esr):
+    """ESR entry: a number, "E" (the electrolytic's ESR corner) or ("E", x) (that plus a series resistor x)."""
+    if isinstance(r, tuple):
+        return esr + r[1]
+    return esr if r == "E" else r
+
+
 def _y_caps(lst, s, esr):
     y = 0
     for c, r, l in lst:
-        r = esr if r == "E" else r
+        r = _r(r, esr)
         y = y + 1.0 / (r + s * l + 1.0 / (s * c))
     return y
 
@@ -97,7 +111,7 @@ def network(p, f, r_load=None, esr=0.1):
     s = 2j * np.pi * f
     yl1 = 1.0 / (p["RL1"] + s * p["L1"]) + s * p["Cw1"]
     yc1 = _y_caps(p["C1"], s, esr)
-    yel = 1.0 / ((esr if p["C1"][0][1] == "E" else p["C1"][0][1]) + s * p["C1"][0][2] + 1.0 / (s * p["C1"][0][0]))
+    yel = 1.0 / (_r(p["C1"][0][1], esr) + s * p["C1"][0][2] + 1.0 / (s * p["C1"][0][0]))
     if p["L2"]:
         y2 = 1.0 / (p["RL2"] + s * p["L2"]) + s * 5e-12
         d = p["damp"]
