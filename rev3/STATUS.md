@@ -208,6 +208,23 @@ Seen from the front (x to the right, plate at the top, both boards parts down):
 
 **Verdict: J11 OK as placed** (our J1 takes the same rotation, 16 mm east).
 
+## T8. User decisions of 2026-11-23 (note)
+
+- **No fuses at the bridge inputs:** R201 / R208 stay as drawn, 0 Ω link footprints (N7 accepted).
+  Protection: the 2.0 A forward / reverse trips and the tube PSU's own short-circuit protection.
+- **The four Ø13 rear-panel holes at x 597.6 stay empty:** the trimmed outline of T1 stands, no notch
+  (N8 closed).
+- **Chassis 2 mm aluminium (plate and panels).** Checked: the standoffs are 15 mm M3 (female-female
+  or male-female) under the plate, fixed from the top with M3 x 6 screws (2 mm plate + 4 mm into the
+  standoff; heads about 2 mm above the plate, under the PSU at the new holes, as noted in T2). The
+  board sits 15 mm below the plate's underside, so the plate-side clearance is unchanged: SMD ≤ 3 mm
+  and THT leads ≤ 2.5 mm leave **12 mm** to the plate, and ≥ 7 mm to PSU screw tips if they protrude
+  ≤ 5 mm below a 2 mm plate (the PSU's screw length to check). H101, the one plated standoff, must
+  bond to bare aluminium: a serrated / star washer under the screw head and under the standoff on a
+  cleaned (unpainted, unanodised) spot, so the fault / RF network has a low-resistance chassis
+  contact; the other standoffs stay on non-plated holes as drawn.
+- **Temperature under the plate:** unmeasured; 70 °C stays the design figure (T3 unchanged).
+
 ---
 
 # Second pass (2026-11-23): history
