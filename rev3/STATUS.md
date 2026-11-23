@@ -162,6 +162,52 @@ Sources: [IKP08N65F5 datasheet (Arrow copy)](https://static6.arrow.com/aropdfcon
 | N11 | **Continuous limits:** V_ANODE bridge 0.9 A, V_SCREEN bridge 0.38 A (at 70 °C) | for the power amp's budget figures | power amp (informative) | 3.1, 3.2 |
 | N12 | **Ribbon corridor** under the arm, y 127-147, no bottom parts; arm parts ≤ 20 mm (≤ 30 mm with receptacles) | control board J7 / J5 ribbons | control board | 12.3 |
 
+## T7. The J11 ↔ J1 cable (W17), checked against the control board's placement
+
+J11 (control board, downward face): pin 1 (550.37, 108.86), pin 2 (549.10, 108.86), pin 40
+(549.10, 84.73); odd row on its east edge, pin 1 at the rear end. **Our J1 is defined as J11 moved
+16 mm east, same rotation** (not laid out yet, so this sets it; it stays inside the floorplan's J1
+block x 562-569, y 80-114 and the LV strip x 560-570):
+
+| | J11 (control board) | J1 (HV supplies, Samtec SHF-120-01-L-D-TH) |
+|---|---|---|
+| pin 1 | (550.37, 108.86) | **(566.37, 108.86)** |
+| pin 2 | (549.10, 108.86) | **(565.10, 108.86)** |
+| pin 39 | (550.37, 84.73) | (566.37, 84.73) |
+| pin 40 | (549.10, 84.73) | **(565.10, 84.73)** |
+| odd row | east side (x 550.37) | east side (x 566.37) |
+| pin 1 end | rear (y 108.86) | rear (y 108.86) |
+| key (shroud slot) | as placed | **same side as J11's** (same rotation, pure translation) |
+
+Seen from the front (x to the right, plate at the top, both boards parts down):
+
+```
+   plate ────────────────────────────────────────────────
+   control board (y 30-122)  ║  8 mm  ║  HV supplies (x 560 →)
+          J11 ▼ (x 549-550)            J1 ▼ (x 565-566)
+          [socket]                     [socket]          sockets plugged from below,
+            └──── cable, top face up ───┘                both on the cable's top face
+                 \__________________/                    slack hangs as a U, no twist, no fold
+```
+
+- **A straight 1:1 cable with standard sockets lands conductor 1 on pin 1 at both ends.** The flat
+  cable runs east-west under the two sockets; every conductor keeps its y, so conductor 1 is the rear
+  edge (y 108.86) at both ends, and with both sockets on the same face of the cable and the two
+  headers in the same rotation, conductor k meets pin k at both ends (odd / even rows in the same
+  place). The cable leaves J11 over its east (odd-row) side and enters J1 over its west (even-row)
+  side, as a simple U below the boards.
+- **Cable:** 40-way, 1.27 mm (0.635 mm conductors), headers 16 mm apart (centre to centre), about
+  10 mm between the socket bodies; **overall length 2.00 in (50.8 mm)** so each socket can be plugged
+  with the other already in place and the slack hangs as a U (≥ 45 mm; 3.00 in also works if the
+  boards go in in either order). **FFSD option: both sockets on the same side of the cable, no
+  polarity reversal** (the standard "same side" end option; check the code on Samtec's FFSD drawing,
+  e.g. FFSD-20-D-02.00-01-N if "-01" is the same-side, unreversed option).
+- **Isolation:** the cable carries only the isolated side of the control board's ADuM14x isolators
+  and its isolated 3V3 / 12 V, referred to this board's power ground (pads 33 / 34); no DGND conductor.
+  It hangs over our west LV strip (no HV within 10 mm of x 560) and in the 8 mm gap.
+
+**Verdict: J11 OK as placed** (our J1 takes the same rotation, 16 mm east).
+
 ---
 
 # Second pass (2026-11-23): history
