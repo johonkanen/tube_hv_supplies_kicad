@@ -435,12 +435,19 @@ def main():
     a = R["A full load: 400 V, 0.70 A"]
     aj = R["J full load, Qrr linear trend (floor 0.11 uC)"]
     s = R["L screen bridge: 390 V, 0.18 A, 2.2 ohm"]
-    L += ["", "## Thermal (local air 80 C)", "",
-          "| Part | Loss, model (W) | Loss, Qrr linear trend (W) | STATUS T3 figure (W) | Tj (C) | Tj, Qrr linear trend (C) |", "|---|---|---|---|---|---|",
-          f"| Q201 on SK 104 (12 K/W + 1 K/W pad) | {a['p1']:.2f} | {aj['p1']:.2f} | 2.0 | {thermal(a['p1'], 12):.0f} | {thermal(aj['p1'], 12):.0f} |",
-          f"| Q202 free | {a['p2']:.2f} | {aj['p2']:.2f} | 0.55 | {thermal(a['p2'], None):.0f} | {thermal(aj['p2'], None):.0f} |",
-          f"| Q203 free (screen, 0.18 A) | {s['p1']:.2f} | — | 0.61 | {thermal(s['p1'], None):.0f} | — |",
-          f"| Q204 free | {s['p2']:.2f} | — | 0.3 | {thermal(s['p2'], None):.0f} | — |"]
+    ql = R["L2 screen bridge, Qrr linear trend"]
+    dsa = datasheet_losses(a["p"])[0] + a["p1c"]
+    dss = datasheet_losses(s["p"])[0] + s["p1c"]
+    L += ["", "## Thermal (local air 80 C; IGBT R_thJC 2.2 K/W, pad 1 K/W, SK 104 38.1 mm ~12 K/W, free-standing 62 K/W)", "",
+          "Three loss estimates for each high side: the switching model (diode Qrr by the power-law trend), the same with the "
+          "linear Qrr trend (pessimistic), and the datasheet curves extrapolated below 2 A (switching) plus the model's conduction.", "",
+          "| Part | Loss: model / Qrr linear / datasheet curves (W) | STATUS T3 figure (W) | Tj: model / Qrr linear / datasheet curves (C) |",
+          "|---|---|---|---|",
+          f"| Q201 on SK 104 (0.70 A, 400 V) | {a['p1']:.2f} / {aj['p1']:.2f} / {dsa:.2f} | 2.0 | {thermal(a['p1'], 12):.0f} / {thermal(aj['p1'], 12):.0f} / {thermal(dsa, 12):.0f} |",
+          f"| Q202 free | {a['p2']:.2f} / {aj['p2']:.2f} / — | 0.55 | {thermal(a['p2'], None):.0f} / {thermal(aj['p2'], None):.0f} / — |",
+          f"| Q203 free-standing, as drawn before (0.18 A, 390 V) | {s['p1']:.2f} / {ql['p1']:.2f} / {dss:.2f} | 0.61 | {thermal(s['p1'], None):.0f} / {thermal(ql['p1'], None):.0f} / {thermal(dss, None):.0f} |",
+          f"| Q203 on SK 104 (now drawn: HS202) | {s['p1']:.2f} / {ql['p1']:.2f} / {dss:.2f} | — | {thermal(s['p1'], 12):.0f} / {thermal(ql['p1'], 12):.0f} / {thermal(dss, 12):.0f} |",
+          f"| Q204 free | {s['p2']:.2f} / {ql['p2']:.2f} / — | 0.3 | {thermal(s['p2'], None):.0f} / {thermal(ql['p2'], None):.0f} / — |"]
     open(os.path.join(HERE, "m15_results.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 

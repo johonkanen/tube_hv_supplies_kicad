@@ -6090,8 +6090,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 301.03 54.61 0)
+		(property "Value" "10k 0.1%"
+			(at 301.58 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6209,7 +6209,7 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
+		(property "Value" "100k 0.1%"
 			(at 314.96 73.66 270)
 			(effects
 				(font
@@ -6316,8 +6316,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 301.03 97.79 0)
+		(property "Value" "10k 0.1%"
+			(at 301.58 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6435,8 +6435,8 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
-			(at 321.9 115.57 0)
+		(property "Value" "100k 0.1%"
+			(at 322.45 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6554,7 +6554,7 @@
 				)
 			)
 		)
-		(property "Value" "1n"
+		(property "Value" "100p C0G"
 			(at 331.47 73.66 270)
 			(effects
 				(font
@@ -7321,8 +7321,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 361.99 54.61 0)
+		(property "Value" "10k 0.1%"
+			(at 362.54 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7440,7 +7440,7 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
+		(property "Value" "100k 0.1%"
 			(at 375.92 73.66 270)
 			(effects
 				(font
@@ -7547,8 +7547,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 361.99 97.79 0)
+		(property "Value" "10k 0.1%"
+			(at 362.54 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7666,8 +7666,8 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
-			(at 382.86 115.57 0)
+		(property "Value" "100k 0.1%"
+			(at 383.41 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7785,7 +7785,7 @@
 				)
 			)
 		)
-		(property "Value" "1n"
+		(property "Value" "100p C0G"
 			(at 392.43 73.66 270)
 			(effects
 				(font
@@ -8326,8 +8326,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 422.95 54.61 0)
+		(property "Value" "10k 0.1%"
+			(at 423.5 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8445,7 +8445,7 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
+		(property "Value" "100k 0.1%"
 			(at 436.88 73.66 270)
 			(effects
 				(font
@@ -8552,8 +8552,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 422.95 97.79 0)
+		(property "Value" "10k 0.1%"
+			(at 423.5 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8671,8 +8671,8 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
-			(at 443.82 115.57 0)
+		(property "Value" "100k 0.1%"
+			(at 444.37 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8751,15 +8751,27 @@
 		)
 		(uuid "96631401-51e3-5e31-b8fe-2575514ec9f9")
 	)
-	(label "IM_C24"
+	(global_label "IM_C24"
+		(shape passive)
 		(at 436.88 120.65 270)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify right)
 		)
 		(uuid "a67fab7d-163f-5d22-8e57-6cf0631115ac")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 436.88 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
@@ -8778,7 +8790,7 @@
 				)
 			)
 		)
-		(property "Value" "1n"
+		(property "Value" "100p C0G"
 			(at 453.39 73.66 270)
 			(effects
 				(font
@@ -8999,15 +9011,27 @@
 		)
 		(uuid "2f7ca9b1-9825-5ffc-8478-71e7ce78be6a")
 	)
-	(label "IM_C24"
+	(global_label "IM_C24"
+		(shape passive)
 		(at 447.04 133.35 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify left)
 		)
 		(uuid "070684d9-22b8-5b7d-a551-e669c9d01e13")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 447.04 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -9086,15 +9110,27 @@
 		)
 		(uuid "71d849b0-f941-560a-b483-1d12e52a0b18")
 	)
-	(label "IM_C24"
+	(global_label "IM_C24"
+		(shape passive)
 		(at 457.2 162.56 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify left)
 		)
 		(uuid "3c1526fd-f98c-557c-bddd-dfd989b85b0a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 457.2 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -9295,8 +9331,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 483.91 54.61 0)
+		(property "Value" "10k 0.1%"
+			(at 484.46 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9414,7 +9450,7 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
+		(property "Value" "100k 0.1%"
 			(at 497.84 73.66 270)
 			(effects
 				(font
@@ -9521,8 +9557,8 @@
 				)
 			)
 		)
-		(property "Value" "1k 0.1%"
-			(at 483.91 97.79 0)
+		(property "Value" "10k 0.1%"
+			(at 484.46 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9640,8 +9676,8 @@
 				)
 			)
 		)
-		(property "Value" "10k 0.1%"
-			(at 504.78 115.57 0)
+		(property "Value" "100k 0.1%"
+			(at 505.33 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9720,15 +9756,27 @@
 		)
 		(uuid "f5d64465-ab5c-519b-97a6-908a41fa955c")
 	)
-	(label "IM_C14"
+	(global_label "IM_C14"
+		(shape passive)
 		(at 497.84 120.65 270)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify right)
 		)
 		(uuid "3f91574d-6c6b-5613-9340-19766ef70433")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 497.84 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
@@ -9747,7 +9795,7 @@
 				)
 			)
 		)
-		(property "Value" "1n"
+		(property "Value" "100p C0G"
 			(at 514.35 73.66 270)
 			(effects
 				(font
@@ -9968,15 +10016,27 @@
 		)
 		(uuid "6a7dc7c1-8807-5e54-9cc9-add6899862fc")
 	)
-	(label "IM_C14"
+	(global_label "IM_C14"
+		(shape passive)
 		(at 508 133.35 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify left)
 		)
 		(uuid "b2a3114c-23b4-56f2-9128-788e08579b3f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 508 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -10055,15 +10115,27 @@
 		)
 		(uuid "71833c0d-d939-53e1-b174-cda974f725ca")
 	)
-	(label "IM_C14"
+	(global_label "IM_C14"
+		(shape passive)
 		(at 518.16 162.56 90)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify left)
 		)
 		(uuid "11f87da3-d7b1-531a-bb92-30c7046a4a20")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 518.16 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts

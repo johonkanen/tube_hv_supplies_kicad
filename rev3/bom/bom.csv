@@ -5,11 +5,13 @@ C103 C203 C208,3,1n/1kV C0G,Capacitor_SMD:C_1206_3216Metric,,,,
 C104,1,100n Y2 300VAC,Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4,TDK B32023A3104M,,,"Y2 film, P22.5 (body width to check against the TDK drawing)"
 C204 C209,2,100u/500V 105C,Capacitor_THT:CP_Radial_D22.0mm_P10.00mm_SnapIn,,,,snap-in D22
 C205 C210,2,1u/630V MKP,Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4,,,,
-C301 C303 C305 C306 C308 C310 C419 C421 C504 C506 C507 C509 C510,13,100n,Capacitor_SMD:C_0603_1608Metric,,,,
-C302 C307,2,1u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
-C304 C309,2,10u/25V X7R,Capacitor_SMD:C_1206_3216Metric,,,,
-C401 C403 C405 C407 C409 C411 C413 C415,8,1n,Capacitor_SMD:C_0603_1608Metric,,,,
+C301 C303 C305 C308 C310 C312 C419 C421 C504 C506 C507 C509 C510 C511,14,100n,Capacitor_SMD:C_0603_1608Metric,,,,
+C302 C309,2,1u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
+C304 C311,2,10u/25V X7R,Capacitor_SMD:C_1206_3216Metric,,,,
+C306 C307 C313 C314,4,1n C0G 50V,Capacitor_SMD:C_0603_1608Metric,,,,at the IGBT's gate / emitter pins (Q201 / Q203); at the IGBT's gate / emitter pins (Q202 / Q204)
+C401 C403 C405 C407,4,1n,Capacitor_SMD:C_0603_1608Metric,,,,
 C402 C404 C406 C408 C410 C412 C414 C416,8,2.7n C0G,Capacitor_SMD:C_0603_1608Metric,,,,
+C409 C411 C413 C415,4,100p C0G,Capacitor_SMD:C_0603_1608Metric,,,,
 C417 C508,2,1u,Capacitor_SMD:C_0603_1608Metric,,,,
 C418,1,10u X7R,Capacitor_SMD:C_0805_2012Metric,,,,
 C420 C501,2,10u,Capacitor_SMD:C_0805_2012Metric,,,,
@@ -26,7 +28,8 @@ D502,1,1N4148W (reverse),Diode_SMD:D_SOD-123,1N4148W,,,
 D503,1,LM4040DBZ-2.5,Package_TO_SOT_SMD:SOT-23,LM4040A25IDBZR,,,
 H101,1,"CHASSIS standoff, plated (fault / RF network)",MountingHole:MountingHole_3.2mm_M3_DIN965_Pad,,,,new plate hole next to J101 (mechanical/floorplan.md)
 H102 H103 H104 H105 H106,5,"M3, non-plated (no chassis contact)",MountingHole:MountingHole_3.2mm_M3,,,,"plate holes (590.0, 87.0) (605.0, 124.7) (605.0, 166.6), new (671, 48) (671, 128)"
-HS201,1,"SK 104 38.1 mm (Q201, ~12 K/W, insulated mounting)",Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3,"Fischer SK 104 38,1 STC",,,"Q201 on an insulating pad + bush (~1 K/W), heatsink not live; Q202-Q204 free (STATUS T3)"
+HS201,1,"SK 104 38.1 mm (Q201, ~12 K/W, insulated mounting)",Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3,"Fischer SK 104 38,1 STC",,,"high side on an insulating pad + bush (~1 K/W), heatsink not live; the low sides stand free (STATUS simulation pass)"
+HS202,1,"SK 104 38.1 mm (Q203, ~12 K/W, insulated mounting)",Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3,"Fischer SK 104 38,1 STC",,,"high side on an insulating pad + bush (~1 K/W), heatsink not live; the low sides stand free (STATUS simulation pass)"
 J1,1,"CONTROL 40-pin IF-2 (W17-b, isolated on the control board)",Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical,Samtec SHF-120-01-L-D-TH,,,"1.27 mm 2x20 shrouded THT header (5.33 mm body, 1.91 mm tail); stock pin-header footprint, the shroud outline to add at layout; silkscreen IF-2"
 J101,2,"HV IN: B_P / B_N (W01-b, 4.8 mm tabs)",tube_hv_supplies_rev3:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
 J102,2,RAW OUT 1 to preamp J501 (W02-a): RAW_SS1 / GND_PRE1,tube_hv_supplies_rev3:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
@@ -44,20 +47,20 @@ R103 R104,2,75k 2W MOX,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Hori
 R105 R215,2,1M 1W HV (VR37 class),Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal,,,,
 R106,1,100 2W,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,
 R201 R208,2,"0R link (bridge input; fuse option: Eaton PV-2A10/1P, 2 A 1000 VDC)",Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,"proposal N7: no fuse, like RAW_SS (PSU short-circuit protection + 2.0 A trips); the 10x38 PV fuse needs about 50 x 12 mm per bridge and a PCB-tab footprint"
-R202 R203 R209 R210,4,50m 1W 2512 (Kelvin),Resistor_SMD:R_2512_6332Metric,,,,
+R202 R203 R209 R210,4,50m 1W 2512 metal strip (Kelvin),Resistor_SMD:R_2512_6332Metric,Vishay WSL2512R0500FEA,,,metal element: M20 pulses up to 220 A / 0.29 J in 0.2 ms on the I_C shunt (pulse rating to confirm)
 R204 R211,2,"5.6 1W (damping, Q = 1)",Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal,,,,
-R205,1,"1.0 2W fusible, pulse (ULW2)",Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal,TT Welwyn ULW2-1R0JA25,,,pulse rating against an arc (8 J in 0.1-0.2 ms) is M20
+R205,1,"1.0 5W fusible, pulse (ULW5)",Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal,TT Welwyn ULW5-1R0J (ordering suffix to confirm),,,"M20: a hard short or external arc puts 5.8-6.7 J into it in 0.2 ms; ULW5 short-pulse capacity ~19 J (1R0) / ~13 J (2R2), 500 V isolation (ULW2: 2.5 J, 250 V)"
 R206 R207 R213 R214,4,110k 1W HV,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal,,,,
-R212,1,"2.2 2W fusible, pulse (ULW2)",Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal,TT Welwyn ULW2-2R2JA25,,,pulse rating against an arc (8 J in 0.1-0.2 ms) is M20
+R212,1,"2.2 5W fusible, pulse (ULW5)",Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal,TT Welwyn ULW5-2R2J (ordering suffix to confirm),,,"M20: a hard short or external arc puts 5.8-6.7 J into it in 0.2 ms; ULW5 short-pulse capacity ~19 J (1R0) / ~13 J (2R2), 500 V isolation (ULW2: 2.5 J, 250 V)"
 R301 R302 R306 R308 R309 R310 R314 R316 R504 R506 R507,11,10k,Resistor_SMD:R_0603_1608Metric,,,,
-R303 R311,2,"33k (DT ~330 ns, TBD)",Resistor_SMD:R_0603_1608Metric,,,yes,
+R303 R311,2,20k (DT 200 ns),Resistor_SMD:R_0603_1608Metric,,,,
 R304 R312,2,2.2,Resistor_SMD:R_0603_1608Metric,,,,
 R305 R307 R313 R315,4,15,Resistor_SMD:R_0805_2012Metric,,,,
 R401 R402 R403 R406 R407 R408 R411 R412 R413 R416 R417 R418,12,1M 0.1% 1206,Resistor_SMD:R_1206_3216Metric,,,,<= 167 V each at 500 V (1206: 200 V)
 R404 R409 R414 R419,4,15k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R405 R410 R415 R420 R425 R430 R435 R440,8,100,Resistor_SMD:R_0603_1608Metric,,,,
-R421 R423 R426 R428 R431 R433 R436 R438 R510 R511,10,1k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
-R422 R424 R427 R429 R432 R434 R437 R439 R441 R442,10,10k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R421 R423 R426 R428 R431 R433 R436 R438 R441 R442,10,10k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R422 R424 R427 R429 R432 R434 R437 R439,8,100k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R443,1,33,Resistor_SMD:R_0603_1608Metric,,,,
 R444,1,"33 (returned SCK, J1 pad 16)",Resistor_SMD:R_0603_1608Metric,,,,pad 16 = ADC_SCK_RET accepted 2026-11-23 (V9)
 R501,1,100k,Resistor_SMD:R_0603_1608Metric,,,,
@@ -65,6 +68,7 @@ R502,1,47,Resistor_SMD:R_0603_1608Metric,,,,
 R503,1,680 (threshold ~2 mA),Resistor_SMD:R_0603_1608Metric,,,,
 R505 R508,2,1k,Resistor_SMD:R_0603_1608Metric,,,,
 R509 R512 R518,3,9.09k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R510 R511,2,1k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R513,1,1.1k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R514,1,19.1k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R515,1,1.58k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
@@ -77,4 +81,4 @@ U501,1,TLP293 (CTR >= 50 %),Package_SO:SOIC-4_4.55x2.6mm_P1.27mm,"TLP293(GB-TPL,
 U502,1,74LVC1G17,Package_TO_SOT_SMD:SOT-23-5,SN74LVC1G17DBVR,,,
 U503,1,74AUP1G74,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,SN74AUP1G74DCUR,,,
 U504,1,74LVC1G10 (DIS = NAND),Package_TO_SOT_SMD:SOT-23-6,SN74LVC1G10DBVR,,,
-U505 U506,2,LMV339,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,LMV339IDR,,,
+U505 U506 U507,3,LMV339,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,LMV339IDR,,,

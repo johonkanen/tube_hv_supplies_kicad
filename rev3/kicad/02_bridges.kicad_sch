@@ -2632,7 +2632,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 2512 (Kelvin)"
+		(property "Value" "50m 1W 2512 metal strip (Kelvin)"
 			(at 50.8 172.72 270)
 			(effects
 				(font
@@ -2659,6 +2659,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 50.8 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay WSL2512R0500FEA"
 			(at 50.8 170.18 0)
 			(effects
 				(font
@@ -3034,7 +3043,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 2512 (Kelvin)"
+		(property "Value" "50m 1W 2512 metal strip (Kelvin)"
 			(at 111.76 166.37 270)
 			(effects
 				(font
@@ -3061,6 +3070,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 111.76 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay WSL2512R0500FEA"
 			(at 111.76 163.83 0)
 			(effects
 				(font
@@ -3522,7 +3540,7 @@
 				)
 			)
 		)
-		(property "Value" "1.0 2W fusible, pulse (ULW2)"
+		(property "Value" "1.0 5W fusible, pulse (ULW5)"
 			(at 170.34 107.95 0)
 			(effects
 				(font
@@ -3530,7 +3548,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal"
 			(at 150.622 106.68 0)
 			(effects
 				(font
@@ -3557,7 +3575,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "TT Welwyn ULW2-1R0JA25"
+		(property "MPN" "TT Welwyn ULW5-1R0J (ordering suffix to confirm)"
 			(at 152.4 106.68 0)
 			(effects
 				(font
@@ -4701,6 +4719,76 @@
 		)
 	)
 	(symbol
+		(lib_id "tube_hv_supplies_rev3:Heatsink")
+		(at 298.45 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "927b6762-cdbf-5ab6-a7e0-b47efb764b6c")
+		(property "Reference" "HS202"
+			(at 298.45 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SK 104 38.1 mm (Q203, ~12 K/W, insulated mounting)"
+			(at 298.45 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3"
+			(at 298.7548 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 298.7548 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Heatsink"
+			(at 298.45 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Fischer SK 104 38,1 STC"
+			(at 298.45 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "HS202")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
 		(at 274.32 170.18 90)
 		(unit 1)
@@ -4717,7 +4805,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 2512 (Kelvin)"
+		(property "Value" "50m 1W 2512 metal strip (Kelvin)"
 			(at 274.32 172.72 270)
 			(effects
 				(font
@@ -4744,6 +4832,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 274.32 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay WSL2512R0500FEA"
 			(at 274.32 170.18 0)
 			(effects
 				(font
@@ -5095,7 +5192,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 2512 (Kelvin)"
+		(property "Value" "50m 1W 2512 metal strip (Kelvin)"
 			(at 335.28 166.37 270)
 			(effects
 				(font
@@ -5122,6 +5219,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 335.28 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay WSL2512R0500FEA"
 			(at 335.28 163.83 0)
 			(effects
 				(font
@@ -5559,7 +5665,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2 2W fusible, pulse (ULW2)"
+		(property "Value" "2.2 5W fusible, pulse (ULW5)"
 			(at 393.86 107.95 0)
 			(effects
 				(font
@@ -5567,7 +5673,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal"
 			(at 374.142 106.68 0)
 			(effects
 				(font
@@ -5594,7 +5700,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "TT Welwyn ULW2-2R2JA25"
+		(property "MPN" "TT Welwyn ULW5-2R2J (ordering suffix to confirm)"
 			(at 375.92 106.68 0)
 			(effects
 				(font

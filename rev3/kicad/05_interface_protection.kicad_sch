@@ -13702,17 +13702,97 @@
 		)
 		(uuid "3724e24a-c01c-5d85-b9a5-67a50f15296e")
 	)
+	(global_label "IM_C14"
+		(shape passive)
+		(at 447.04 210.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c00ba5a6-5a43-5ef8-add5-452d49822332")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 447.04 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 449.58 215.9) (xy 447.04 215.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c1598bd-62a2-5d64-9185-4b7eea3f73f4")
+	)
+	(label "TH_OC"
+		(at 447.04 215.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3977cc51-46be-5ebe-aa3a-7083ae2f5b6a")
+	)
+	(wire
+		(pts
+			(xy 464.82 213.36) (xy 467.36 213.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "864d8375-e0e5-5921-8165-6644867e5b5e")
+	)
+	(label "FAULT_N"
+		(at 467.36 213.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c79bc4d8-226b-520f-a84b-d8339b3fd4b7")
+	)
 	(symbol
-		(lib_id "tube_hv_supplies_rev3:GND")
-		(at 447.04 210.82 0)
+		(lib_id "tube_hv_supplies_rev3:LMV339")
+		(at 518.16 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7881e52a-ded3-5cdf-bed6-b84333c43c77")
-		(property "Reference" "#PWR548"
-			(at 447.04 217.17 0)
+		(uuid "bd3595b1-b0aa-5cc2-86fd-d9eb73fe63b1")
+		(property "Reference" "U507"
+			(at 518.16 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV339"
+			(at 518.16 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 516.89 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13720,8 +13800,229 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 447.04 214.63 0)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lmv331.pdf"
+			(at 519.43 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad General-Purpose Low-Voltage Comparator, SOIC-14/TSSOP-14"
+			(at 518.16 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "LMV339IDR"
+			(at 518.16 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e2a2867e-d395-5b49-81e1-77b925922ea1")
+		)
+		(pin "4"
+			(uuid "e8b598ce-6775-5605-be71-8000b03c1c55")
+		)
+		(pin "5"
+			(uuid "4f381ce7-5eb0-5520-8cf3-14b28e70f0dd")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "U507")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 510.54 175.26) (xy 508 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "81acb7fc-87b7-56fe-9f24-e46554a646f5")
+	)
+	(global_label "IM_C24"
+		(shape passive)
+		(at 508 175.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "39b322d1-d417-55d3-aa10-20853afed81c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 508 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 510.54 180.34) (xy 508 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e6a4ee08-ad0f-589e-ad92-9c3fbf836a7e")
+	)
+	(label "TH_OC"
+		(at 508 180.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "991cf00f-dc1d-59cf-97c1-eaa630b65f79")
+	)
+	(wire
+		(pts
+			(xy 525.78 177.8) (xy 528.32 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6912cba4-8ae8-5d2b-87ec-06627a46374d")
+	)
+	(label "FAULT_N"
+		(at 528.32 177.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e5b64a6a-f106-550b-a365-dd03bc704f6a")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:LMV339")
+		(at 518.16 205.74 0)
+		(unit 5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5c19fce7-ed58-5450-b456-a92c693d7f42")
+		(property "Reference" "U507"
+			(at 522.9 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LMV339"
+			(at 524 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 516.89 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lmv331.pdf"
+			(at 519.43 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad General-Purpose Low-Voltage Comparator, SOIC-14/TSSOP-14"
+			(at 518.16 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "LMV339IDR"
+			(at 518.16 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "bbbd2cad-1a55-57f5-8aa2-8a6d0fe27b7e")
+		)
+		(pin "12"
+			(uuid "927e7c69-4898-5128-9313-d013e7a9b617")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "U507")
+					(unit 5)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 515.62 198.12) (xy 515.62 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3536ee5a-6353-54f4-ac39-344cc29e0ff7")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:+3V3")
+		(at 515.62 195.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7881e52a-ded3-5cdf-bed6-b84333c43c77")
+		(property "Reference" "#PWR548"
+			(at 515.62 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 515.62 192.024 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13729,7 +14030,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 447.04 210.82 0)
+			(at 515.62 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13738,7 +14039,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 447.04 210.82 0)
+			(at 515.62 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13746,8 +14047,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 447.04 210.82 0)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 515.62 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13769,17 +14070,17 @@
 	)
 	(wire
 		(pts
-			(xy 449.58 215.9) (xy 447.04 215.9)
+			(xy 515.62 213.36) (xy 515.62 215.9)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c00ba5a6-5a43-5ef8-add5-452d49822332")
+		(uuid "f559e334-710e-5e00-bb2e-64a8f1754c97")
 	)
 	(symbol
-		(lib_id "tube_hv_supplies_rev3:+3V3")
-		(at 447.04 215.9 0)
+		(lib_id "tube_hv_supplies_rev3:GND")
+		(at 515.62 215.9 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13787,7 +14088,7 @@
 		(dnp no)
 		(uuid "6bad88a4-c02a-5c1f-b25a-7fc0266cb874")
 		(property "Reference" "#PWR549"
-			(at 447.04 219.71 0)
+			(at 515.62 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13795,8 +14096,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3V3"
-			(at 447.04 212.344 0)
+		(property "Value" "GND"
+			(at 515.62 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13804,7 +14105,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 447.04 215.9 0)
+			(at 515.62 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13813,7 +14114,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 447.04 215.9 0)
+			(at 515.62 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13821,8 +14122,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 447.04 215.9 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 515.62 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13842,9 +14143,927 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:LMV339")
+		(at 518.16 213.36 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5e63b851-be56-5ac7-a72a-998c7176b8bd")
+		(property "Reference" "U507"
+			(at 518.16 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV339"
+			(at 518.16 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 516.89 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lmv331.pdf"
+			(at 519.43 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad General-Purpose Low-Voltage Comparator, SOIC-14/TSSOP-14"
+			(at 518.16 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "LMV339IDR"
+			(at 518.16 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d3243648-53a6-5e26-8bb7-3e80b07994e9")
+		)
+		(pin "6"
+			(uuid "15102be6-6765-5b82-9e0a-0a135be5546f")
+		)
+		(pin "7"
+			(uuid "842bd284-bc40-5eaf-a5d0-19bd4f4ae22c")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "U507")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 510.54 210.82) (xy 508 210.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5495d64-4600-5149-b25f-cde1f041dec2")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:GND")
+		(at 508 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8ad80545-8aae-58f7-be3c-ee2571cd2c0d")
+		(property "Reference" "#PWR550"
+			(at 508 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 508 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 508 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 508 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 508 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1c09ba4c-1f34-533f-9a42-8170dc165793")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR550")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 510.54 215.9) (xy 508 215.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59865df7-eb50-58e0-8563-b33ab40eb71d")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:+3V3")
+		(at 508 215.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "798809dc-d2f8-5bbb-b452-cf65d0754fec")
+		(property "Reference" "#PWR551"
+			(at 508 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 508 212.344 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 508 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 508 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 508 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c62afd60-11d2-58d9-b146-fb1ee1f542a7")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR551")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(no_connect
-		(at 464.82 213.36)
-		(uuid "2c1598bd-62a2-5d64-9185-4b7eea3f73f4")
+		(at 525.78 213.36)
+		(uuid "04139331-bb1f-5452-8b62-a3037f58defd")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:LMV339")
+		(at 579.12 177.8 0)
+		(unit 3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d0f41b6c-d579-597e-9612-c4acc217e0c0")
+		(property "Reference" "U507"
+			(at 579.12 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV339"
+			(at 579.12 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 577.85 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lmv331.pdf"
+			(at 580.39 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad General-Purpose Low-Voltage Comparator, SOIC-14/TSSOP-14"
+			(at 579.12 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "LMV339IDR"
+			(at 579.12 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "10"
+			(uuid "58204b7a-9670-59f4-8785-b4def4793e8d")
+		)
+		(pin "11"
+			(uuid "371d5327-6712-5070-ab69-6dfa548b079e")
+		)
+		(pin "13"
+			(uuid "bf21b5e7-d95c-59dc-b2a5-23294a957b59")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "U507")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 571.5 175.26) (xy 568.96 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5dd16417-bd42-5a4b-b64f-5802e97af7c5")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:GND")
+		(at 568.96 175.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6d79c851-5687-5a80-a3c9-352391c81ec8")
+		(property "Reference" "#PWR552"
+			(at 568.96 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 568.96 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 568.96 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 568.96 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 568.96 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "546d088e-6d04-5c60-9694-83e248dcf868")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR552")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 571.5 180.34) (xy 568.96 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4adb77b6-2cf5-5278-bb3b-1f0c43b9173d")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:+3V3")
+		(at 568.96 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "10ed478d-aeb0-5de0-8816-1eee1cd82140")
+		(property "Reference" "#PWR553"
+			(at 568.96 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 568.96 176.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 568.96 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 568.96 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 568.96 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a8900638-dcd1-55bb-b93d-c4f57308a4eb")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR553")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 586.74 177.8)
+		(uuid "a0d5c054-d224-5bf3-9308-ecf6a9125fc0")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:LMV339")
+		(at 579.12 213.36 0)
+		(unit 4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b42d96fd-743c-5237-9a3e-d095bbb394c4")
+		(property "Reference" "U507"
+			(at 579.12 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LMV339"
+			(at 579.12 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 577.85 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lmv331.pdf"
+			(at 580.39 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad General-Purpose Low-Voltage Comparator, SOIC-14/TSSOP-14"
+			(at 579.12 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "LMV339IDR"
+			(at 579.12 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "8"
+			(uuid "5931a54d-db71-5a76-b2ce-7fc93ea80049")
+		)
+		(pin "9"
+			(uuid "f38bfc73-5f42-5294-a0df-9c572df492c8")
+		)
+		(pin "14"
+			(uuid "09ae0191-08a0-5b2c-976c-dff3104ffd48")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "U507")
+					(unit 4)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 571.5 210.82) (xy 568.96 210.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b022fd4-e9c6-5374-9b8f-bee4671d60d9")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:GND")
+		(at 568.96 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ee81ca54-b51b-5ece-aa1b-733a35f6f1f8")
+		(property "Reference" "#PWR554"
+			(at 568.96 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 568.96 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 568.96 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 568.96 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 568.96 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f50c8068-cadd-587c-ac56-684de361a7cc")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR554")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 571.5 215.9) (xy 568.96 215.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7135c364-07ff-51e4-be87-4feac402bc18")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:+3V3")
+		(at 568.96 215.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7fdf8118-e4cd-570d-939b-b35836d7dfa6")
+		(property "Reference" "#PWR555"
+			(at 568.96 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 568.96 212.344 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 568.96 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 568.96 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 568.96 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9e80d7e4-6f23-5acd-8d39-7d774afe95d7")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR555")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 586.74 213.36)
+		(uuid "1561136e-5428-53d1-8f42-efc9e94867a9")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 307.34 257.81 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9cf208cd-3756-588f-95b0-4429b8607876")
+		(property "Reference" "C509"
+			(at 307.34 255.27 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n"
+			(at 307.34 260.35 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 311.15 256.8448 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 307.34 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 307.34 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "47582252-5b5b-5f1c-b061-3ff4bbd98d23")
+		)
+		(pin "2"
+			(uuid "5068b630-78f4-5d6d-a07b-76d0af76cc8d")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "C509")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 303.53 257.81) (xy 300.99 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8eb4c36b-ca34-5df3-8c8d-eff9f59058b7")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:+3V3")
+		(at 300.99 257.81 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ea3d4144-ab07-5014-8308-1dc1bac627fb")
+		(property "Reference" "#PWR556"
+			(at 300.99 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 300.99 254.254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 300.99 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 300.99 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 300.99 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d5ee427e-7706-58f8-8cac-a1ffee66b55b")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR556")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 311.15 257.81) (xy 313.69 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac3aff48-0800-5bff-8415-0aa3482bbd40")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:GND")
+		(at 313.69 257.81 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1c0ba3c8-a6ab-5735-901f-cdf8dbb3b167")
+		(property "Reference" "#PWR557"
+			(at 313.69 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 313.69 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 313.69 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 313.69 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 313.69 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "91d5ff2b-c93c-5f64-8d20-42e5031de31a")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
+					(reference "#PWR557")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
@@ -13854,8 +15073,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9cf208cd-3756-588f-95b0-4429b8607876")
-		(property "Reference" "C509"
+		(uuid "9a39b665-4940-52ef-8b44-bd9d8859e828")
+		(property "Reference" "C510"
 			(at 274.32 255.27 270)
 			(effects
 				(font
@@ -13899,15 +15118,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "47582252-5b5b-5f1c-b061-3ff4bbd98d23")
+			(uuid "b24ee2ef-cd34-5a38-b954-7e828c4e7925")
 		)
 		(pin "2"
-			(uuid "5068b630-78f4-5d6d-a07b-76d0af76cc8d")
+			(uuid "be3d5177-6d10-53c5-9382-c1b6fdfc53cc")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
-					(reference "C509")
+					(reference "C510")
 					(unit 1)
 				)
 			)
@@ -13921,7 +15140,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3977cc51-46be-5ebe-aa3a-7083ae2f5b6a")
+		(uuid "eebb4a4a-e21d-5ae8-9ef8-43b53a9875f3")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+3V3")
@@ -13931,8 +15150,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8ad80545-8aae-58f7-be3c-ee2571cd2c0d")
-		(property "Reference" "#PWR550"
+		(uuid "0b31beaa-1df9-5f3a-978b-3fb571a96b4a")
+		(property "Reference" "#PWR558"
 			(at 267.97 261.62 0)
 			(effects
 				(font
@@ -13977,12 +15196,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1c09ba4c-1f34-533f-9a42-8170dc165793")
+			(uuid "44991490-0054-56ba-b2f1-4cda463d3355")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
-					(reference "#PWR550")
+					(reference "#PWR558")
 					(unit 1)
 				)
 			)
@@ -13996,7 +15215,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "864d8375-e0e5-5921-8165-6644867e5b5e")
+		(uuid "228e742d-e9a3-5b2b-a4cb-8b8465bb3cdd")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -14006,8 +15225,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "798809dc-d2f8-5bbb-b452-cf65d0754fec")
-		(property "Reference" "#PWR551"
+		(uuid "a4fde921-7d13-5ba8-bbd7-099343b3c993")
+		(property "Reference" "#PWR559"
 			(at 280.67 264.16 0)
 			(effects
 				(font
@@ -14052,12 +15271,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "c62afd60-11d2-58d9-b146-fb1ee1f542a7")
+			(uuid "140ee5ec-3381-5a50-982a-08e74df1324b")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
-					(reference "#PWR551")
+					(reference "#PWR559")
 					(unit 1)
 				)
 			)
@@ -14071,8 +15290,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9a39b665-4940-52ef-8b44-bd9d8859e828")
-		(property "Reference" "C510"
+		(uuid "9aa0add0-22c8-50b5-996d-20436459c779")
+		(property "Reference" "C511"
 			(at 290.83 255.27 270)
 			(effects
 				(font
@@ -14116,15 +15335,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "b24ee2ef-cd34-5a38-b954-7e828c4e7925")
+			(uuid "ae7c33e8-eb24-5d8e-8653-403ef5d40951")
 		)
 		(pin "2"
-			(uuid "be3d5177-6d10-53c5-9382-c1b6fdfc53cc")
+			(uuid "5bbfc296-44f8-54f0-973f-74d37f28bbcf")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
-					(reference "C510")
+					(reference "C511")
 					(unit 1)
 				)
 			)
@@ -14138,7 +15357,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c79bc4d8-226b-520f-a84b-d8339b3fd4b7")
+		(uuid "206cb8ce-8ad6-5e11-aa12-6e6890019d54")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+3V3")
@@ -14148,8 +15367,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6d79c851-5687-5a80-a3c9-352391c81ec8")
-		(property "Reference" "#PWR552"
+		(uuid "d95244d1-a495-5b84-9d34-b642ac07380c")
+		(property "Reference" "#PWR560"
 			(at 284.48 261.62 0)
 			(effects
 				(font
@@ -14194,12 +15413,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "546d088e-6d04-5c60-9694-83e248dcf868")
+			(uuid "163d9630-d7df-5993-bc32-b3c5e13a322e")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
-					(reference "#PWR552")
+					(reference "#PWR560")
 					(unit 1)
 				)
 			)
@@ -14213,7 +15432,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "81acb7fc-87b7-56fe-9f24-e46554a646f5")
+		(uuid "6eca285e-e527-5571-b28c-3b99037a2990")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -14223,8 +15442,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "10ed478d-aeb0-5de0-8816-1eee1cd82140")
-		(property "Reference" "#PWR553"
+		(uuid "343ed62d-b9ea-57d3-a330-f04b2c511479")
+		(property "Reference" "#PWR561"
 			(at 297.18 264.16 0)
 			(effects
 				(font
@@ -14269,12 +15488,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "a8900638-dcd1-55bb-b93d-c4f57308a4eb")
+			(uuid "6da3effa-43f3-5dce-bd28-5c91a8d2f829")
 		)
 		(instances
 			(project "tube_hv_supplies_rev3"
 				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/b0237d6c-9d07-5511-aa07-2e7d80cc2a2a"
-					(reference "#PWR553")
+					(reference "#PWR561")
 					(unit 1)
 				)
 			)

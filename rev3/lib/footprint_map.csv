@@ -20,10 +20,14 @@ C303,Capacitor_SMD:C_0603_1608Metric
 C304,Capacitor_SMD:C_1206_3216Metric
 C305,Capacitor_SMD:C_0603_1608Metric
 C306,Capacitor_SMD:C_0603_1608Metric
-C307,Capacitor_SMD:C_0805_2012Metric
+C307,Capacitor_SMD:C_0603_1608Metric
 C308,Capacitor_SMD:C_0603_1608Metric
-C309,Capacitor_SMD:C_1206_3216Metric
+C309,Capacitor_SMD:C_0805_2012Metric
 C310,Capacitor_SMD:C_0603_1608Metric
+C311,Capacitor_SMD:C_1206_3216Metric
+C312,Capacitor_SMD:C_0603_1608Metric
+C313,Capacitor_SMD:C_0603_1608Metric
+C314,Capacitor_SMD:C_0603_1608Metric
 C401,Capacitor_SMD:C_0603_1608Metric
 C402,Capacitor_SMD:C_0603_1608Metric
 C403,Capacitor_SMD:C_0603_1608Metric
@@ -55,6 +59,7 @@ C507,Capacitor_SMD:C_0603_1608Metric
 C508,Capacitor_SMD:C_0603_1608Metric
 C509,Capacitor_SMD:C_0603_1608Metric
 C510,Capacitor_SMD:C_0603_1608Metric
+C511,Capacitor_SMD:C_0603_1608Metric
 D101,LED_SMD:LED_0805_2012Metric
 D102,Diode_THT:Diode_Bridge_Vishay_GBU
 D201,Diode_THT:D_DO-201AD_P15.24mm_Horizontal
@@ -71,6 +76,7 @@ H104,MountingHole:MountingHole_3.2mm_M3
 H105,MountingHole:MountingHole_3.2mm_M3
 H106,MountingHole:MountingHole_3.2mm_M3
 HS201,Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3
+HS202,Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3
 J1,Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical
 J101,tube_hv_supplies_rev3:Blade_Tab_4.8mm_2x_P12mm
 J102,tube_hv_supplies_rev3:Blade_Tab_4.8mm_2x_P12mm
@@ -99,14 +105,14 @@ R201,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal
 R202,Resistor_SMD:R_2512_6332Metric
 R203,Resistor_SMD:R_2512_6332Metric
 R204,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
-R205,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
+R205,Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal
 R206,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
 R207,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
 R208,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal
 R209,Resistor_SMD:R_2512_6332Metric
 R210,Resistor_SMD:R_2512_6332Metric
 R211,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
-R212,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
+R212,Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal
 R213,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
 R214,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
 R215,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal
@@ -200,3 +206,4 @@ U503,Package_SO:VSSOP-8_2.3x2mm_P0.5mm
 U504,Package_TO_SOT_SMD:SOT-23-6
 U505,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm
 U506,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm
+U507,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm

@@ -46,6 +46,7 @@ FP_R1206 = "Resistor_SMD:R_1206_3216Metric"
 FP_R2512 = "Resistor_SMD:R_2512_6332Metric"
 FP_AX1W = "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 FP_AX2W = "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
+FP_AX5W = "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal"   # ULW5 (16.5 x 7.2 mm, >= 22 mm pitch)
 FP_C = "Capacitor_SMD:C_0603_1608Metric"
 FP_C1206 = "Capacitor_SMD:C_1206_3216Metric"
 FP_EL47 = "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
@@ -293,21 +294,25 @@ def bridge(d, k, c0, out, tag):
     C(d, f"C{k}3", c0 + 3, 2, f"UIN{t}", "PGND", "1n/1kV C0G", fp=FP_C1206, mpn="")
     d.part("Q_NIGBT_GCE", f"Q{k}1", c0 + 1, 4, {1: f"GH{t}", 2: f"UIN{t}", 3: f"SW{t}"}, value="IKP08N65F5")
     d.part("Q_NIGBT_GCE", f"Q{k}2", c0 + 1, 6, {1: f"GL{t}", 2: f"SW{t}", 3: f"IS{t}"}, value="IKP08N65F5")
-    if k == 1:
-        d.part("Heatsink", "HS1", c0 + 2.2, 4, {}, value="SK 104 38.1 mm (Q201, ~12 K/W, insulated mounting)",
-               mpn="Fischer SK 104 38,1 STC", note="Q201 on an insulating pad + bush (~1 K/W), heatsink not live; Q202-Q204 free (STATUS T3)")
-    R(d, f"R{k}1", c0 + 1, 7.6, f"IS{t}", "PGND", "50m 1W 2512 (Kelvin)", fp=FP_R2512, mpn="")
+    # both high sides on a heatsink (sim/m15_bridge.py: Q201 2.3-4.1 W, Q203 1.2 W at 0.18 A, 155 C free-standing)
+    d.part("Heatsink", f"HS{k}", c0 + 2.2, 4, {}, value=f"SK 104 38.1 mm ({'Q201' if k == 1 else 'Q203'}, ~12 K/W, insulated mounting)",
+           mpn="Fischer SK 104 38,1 STC", note="high side on an insulating pad + bush (~1 K/W), heatsink not live; the low sides stand free (STATUS simulation pass)")
+    R(d, f"R{k}1", c0 + 1, 7.6, f"IS{t}", "PGND", "50m 1W 2512 metal strip (Kelvin)", fp=FP_R2512, mpn="Vishay WSL2512R0500FEA",
+      note="metal element: M20 pulses up to 220 A / 0.29 J in 0.2 ms on the I_C shunt (pulse rating to confirm)")
     d.part("L", f"L{k}1", c0 + 3, 4.5, {1: f"SW{t}", 2: f"UC{t}"}, value="3mH ETD39 N87, 192t 0.5mm, gap 1.9mm (Isat 2.4A, DCR 1.2R)",
            rot=90, fp=f"{LOCAL_LIB}:L_ETD39_2pin_custom", mpn="TDK B66363G0000X187 core set + ETD39 bobbin",
            note="custom-wound (no catalogue part found); pin positions to the chosen bobbin; 600 V winding-core insulation")
     CP(d, f"C{k}4", c0 + 4, 5.5, f"UC{t}", f"IC{t}", "100u/500V 105C", fp=FP_EL100, note="snap-in D22")
-    R(d, f"R{k}2", c0 + 4, 7.2, f"IC{t}", "PGND", "50m 1W 2512 (Kelvin)", fp=FP_R2512, mpn="")
+    R(d, f"R{k}2", c0 + 4, 7.2, f"IC{t}", "PGND", "50m 1W 2512 metal strip (Kelvin)", fp=FP_R2512, mpn="Vishay WSL2512R0500FEA",
+      note="metal element: M20 pulses up to 220 A / 0.29 J in 0.2 ms on the I_C shunt (pulse rating to confirm)")
     d.part("L", f"L{k}2", c0 + 5, 4.5, {1: f"UC{t}", 2: f"VO{t}"}, value="33uH 2A", rot=90,
            fp="Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P", mpn="")
     R(d, f"R{k}6", c0 + 5, 3.2, f"UC{t}", f"VO{t}", "5.6 1W (damping, Q = 1)", rot=0, fp=FP_AX1W, mpn="")
     C(d, f"C{k}5", c0 + 6, 5.5, f"VO{t}", "GND_STAR", "1u/630V MKP", fp=FP_FILM1U, mpn="")
-    R(d, f"R{k}3", c0 + 6, 4, f"VO{t}", out, ("1.0" if k == 1 else "2.2") + " 2W fusible, pulse (ULW2)", rot=0, fp=FP_AX1W,
-      mpn=f"TT Welwyn ULW2-{'1R0' if k == 1 else '2R2'}JA25", note="pulse rating against an arc (8 J in 0.1-0.2 ms) is M20")
+    R(d, f"R{k}3", c0 + 6, 4, f"VO{t}", out, ("1.0" if k == 1 else "2.2") + " 5W fusible, pulse (ULW5)", rot=0, fp=FP_AX5W,
+      mpn=f"TT Welwyn ULW5-{'1R0' if k == 1 else '2R2'}J (ordering suffix to confirm)",
+      note="M20: a hard short or external arc puts 5.8-6.7 J into it in 0.2 ms; ULW5 short-pulse capacity ~19 J (1R0) / ~13 J (2R2), "
+           "500 V isolation (ULW2: 2.5 J, 250 V)")
     R(d, f"R{k}4", c0 + 8, 5.5, out, f"BL{t}", "110k 1W HV", fp=FP_AX1W, mpn="")
     R(d, f"R{k}5", c0 + 8, 7, f"BL{t}", "GND_STAR", "110k 1W HV", fp=FP_AX1W, mpn="")
 
@@ -340,7 +345,7 @@ def driver(d, k, c0):
                                               14: f"SW{t}", 15: f"GHD{t}", 16: f"BOOT{t}"}, value="UCC21520DW")
     R(d, f"R{k}1", c0, 5.5, hi, "GND", "10k")
     R(d, f"R{k}2", c0 + 0.8, 5.5, lo, "GND", "10k")
-    R(d, f"R{k}3", c0 + 1.6, 5.5, f"DT{t}", "GND", "33k (DT ~330 ns, TBD)")
+    R(d, f"R{k}3", c0 + 1.6, 5.5, f"DT{t}", "GND", "20k (DT 200 ns)")
     C(d, f"C{k}1", c0 + 2.4, 5.5, "+3V3", "GND", "100n")
     # bootstrap (ultrafast 600 V diode)
     d.part("D", f"D{k}1", c0 + 4.5, 1.5, {2: f"BS{t}", 1: f"BOOT{t}"}, value="ES1J (600 V ultrafast)", rot=0,
@@ -354,6 +359,10 @@ def driver(d, k, c0):
     R(d, f"R{k}6", c0 + 5.5, 4.0, f"GH{t}", f"SW{t}", "10k")
     R(d, f"R{k}7", c0 + 4.5, 6.4, f"GLD{t}", f"GL{t}", "15", rot=0, fp="Resistor_SMD:R_0805_2012Metric")
     R(d, f"R{k}8", c0 + 5.5, 7.0, f"GL{t}", f"IS{t}", "10k")
+    # gate-emitter capacitors at the IGBT pins: Miller-induced turn-on margin (sim/m15_bridge.py: the bump at
+    # 20-50 V/ns falls from 5-9 V to 0.3-0.4 V; losses +3 %)
+    C(d, f"C{k}6", c0 + 8.0, 4.0, f"GH{t}", f"SW{t}", "1n C0G 50V", note="at the IGBT's gate / emitter pins (Q201 / Q203)")
+    C(d, f"C{k}7", c0 + 8.0, 7.0, f"GL{t}", f"IS{t}", "1n C0G 50V", note="at the IGBT's gate / emitter pins (Q202 / Q204)")
     d.part("PWR_FLAG", f"#FLG30{2 * k - 1}", c0 + 7.2, 1.5, {1: f"BOOT{t}"}, value="PWR_FLAG")
     d.part("PWR_FLAG", f"#FLG30{2 * k}", c0 + 7.2, 3.5, {1: f"SW{t}"}, value="PWR_FLAG")
 
@@ -364,8 +373,8 @@ def sheet03(d):
            "drivers unpowered, PWM inputs pulled down.", 0, -1.0, 2)
     driver(d, 1, 0)
     driver(d, 2, 9)
-    d.text("High side from a bootstrap: D_max about 0.97 at 50 kHz (TBD with the PWM period); an isolated DC/DC per high "
-           "side would allow 100 % duty (V_ANODE max ~ raw - 3 V) if D14 needs it.", 0, 8.5)
+    d.text("High side from a bootstrap: duty up to 0.985 at 50 kHz with DT 200 ns (sim/m15_bridge.py: the switch node "
+           "falls to the low-side diode in every dead time and recharges the bootstrap); 100 % duty holds 0.5-1 ms.", 0, 8.5)
 
 
 # ------------------------------------------------------------------ sheet 04
@@ -393,11 +402,13 @@ def sheet04(d):
     for i, (src, buf, ch) in enumerate(ICH):
         c0 = 13 + i * 3
         ret = "PGND"
-        R(d, f"R{i}6", c0, 1, src, f"IA{i}P", "1k 0.1%", rot=0)
-        R(d, f"R{i}7", c0 + 1, 2, f"IA{i}P", "IBIAS", "10k 0.1%")
-        R(d, f"R{i}8", c0, 3.4, ret, f"IA{i}N", "1k 0.1%", rot=0)
-        R(d, f"R{i}9", c0 + 1, 4.4, f"IA{i}N", buf, "10k 0.1%", rot=0)
-        C(d, f"C{i}3", c0 + 1.8, 2, f"IA{i}P", f"IA{i}N", "1n")
+        # 10k / 100k (was 1k / 10k): same gain, but a short (220 A in the I_C shunt, 11 V) drives < 1 mA into the
+        # op amp's input clamps instead of 9.7 mA (sim/m20_short_arc.py); 100 pF keeps the 2 us input filter
+        R(d, f"R{i}6", c0, 1, src, f"IA{i}P", "10k 0.1%", rot=0)
+        R(d, f"R{i}7", c0 + 1, 2, f"IA{i}P", "IBIAS", "100k 0.1%")
+        R(d, f"R{i}8", c0, 3.4, ret, f"IA{i}N", "10k 0.1%", rot=0)
+        R(d, f"R{i}9", c0 + 1, 4.4, f"IA{i}N", buf, "100k 0.1%", rot=0)
+        C(d, f"C{i}3", c0 + 1.8, 2, f"IA{i}P", f"IA{i}N", "100p C0G")
         opamp(d, "UI", c0 + 1, 5.5, f"IA{i}P", f"IA{i}N", buf)
         R(d, f"R{i}10", c0 + 2, 7.5, buf, f"ADC_IN{ch}", "100", rot=0)
         C(d, f"C{i}4", c0 + 2.6, 8.5, f"ADC_IN{ch}", "GND", "2.7n C0G")
@@ -496,7 +507,14 @@ def sheet05(d):
     comp(d, "UC2", 18, 8, "TH_OVR", "VM_RAW", "FAULT_N")      # raw over-voltage (475 V)
     comp(d, "UC2", 18, 10, "TH_OVA", "VM_A", "FAULT_N")       # V_ANODE over-voltage
     comp(d, "UC2", 21, 8, "TH_OVS", "VM_S", "FAULT_N")        # V_SCREEN over-voltage
-    comp(d, "UC2", 21, 10, "GND", "+3V3", "NC")               # spare
+    # output short / arc: the electrolytic discharging faster than 2.0 A (I_C reading below TH_OC); the low-side
+    # forward trip only sees the current during (1 - D) of each period and is blind near full duty (sim/m20_short_arc.py)
+    comp(d, "UC2", 21, 10, "IM_C14", "TH_OC", "FAULT_N")      # bridge 1 capacitor discharge (short / arc)
+    comp(d, "UC3", 24, 8, "IM_C24", "TH_OC", "FAULT_N")       # bridge 2 capacitor discharge (short / arc)
+    comp(d, "UC3", 24, 10, "GND", "+3V3", "NC")               # spare
+    comp(d, "UC3", 27, 8, "GND", "+3V3", "NC")                # spare
+    comp(d, "UC3", 27, 10, "GND", "+3V3", "NC")               # spare
+    C(d, "C11", 13.6, 12.5, "+3V3", "GND", "100n")
     C(d, "C9", 12, 12.5, "+3V3", "GND", "100n")
     C(d, "C10", 12.8, 12.5, "+3V3", "GND", "100n")
 
