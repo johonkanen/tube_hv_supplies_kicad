@@ -106,6 +106,21 @@ def models(tt_hi=60e-9, tt_lo=60e-9, temp=HOT, k=4.0, tail_a=0.40, tail_tau=80e-
     return txt
 
 
+def inductor_par(name, a, b, l0=3e-3, isat=2.4, soft=0.4, ratio=30.0, dcr=1.55, cw=25e-12, i0=0.0):
+    """Same saturation law as inductor(), built as a linear ngspice inductor (the state) with a
+    parallel current branch that is a function of the linear inductor's current (= flux / L0):
+    i = iL + (ratio - 1) softplus(|iL| - isat) sgn(iL). Better conditioned when the external
+    current is forced to zero (both switches and diodes off)."""
+    n = name
+    return "\n".join([
+        f"R{n} {a} {n}_m {dcr}",
+        f"L{n}lin {n}_m {n}_x {l0} IC={i0}",
+        f"V{n}p {n}_x {b} 0",
+        f"B{n}s {n}_m {b} I = {ratio - 1}*{soft}*(ln(1+exp((I(V{n}p)-{isat})/{soft})) - ln(1+exp((-I(V{n}p)-{isat})/{soft})))",
+        f"C{n}w {a} {b} {cw}",
+    ])
+
+
 def inductor(name, a, b, l0=3e-3, isat=2.4, soft=0.4, ratio=30.0, dcr=1.55, cw=25e-12, i0=0.0, scale=1e3):
     """Saturating inductor between a and b: flux node phi (V = flux x scale) integrates the
     voltage across the ideal part, the current is i(phi). Below the knee i = phi / L0; above
@@ -113,9 +128,9 @@ def inductor(name, a, b, l0=3e-3, isat=2.4, soft=0.4, ratio=30.0, dcr=1.55, cw=2
     ps = l0 * isat * scale
     sm = l0 * soft * scale
     n = name
-    # i(phi) = phi/L0 + (ratio-1)/L0 * softplus(|phi| - ps) * sign(phi)
-    expr = (f"(V({n}_phi)/{l0 * scale}) + ({ratio - 1}/{l0 * scale})*"
-            f"({sm}*ln(1+exp((abs(V({n}_phi))-{ps})/{sm})))*sgn(V({n}_phi))")
+    # i(phi) = phi/L0 + (ratio-1)/L0 * [softplus(phi - ps) - softplus(-phi - ps)]: odd and smooth
+    expr = (f"(V({n}_phi)/{l0 * scale}) + ({ratio - 1}/{l0 * scale})*{sm}*"
+            f"(ln(1+exp((V({n}_phi)-{ps})/{sm})) - ln(1+exp((-V({n}_phi)-{ps})/{sm})))")
     phi0 = i0 * l0 * scale
     return "\n".join([
         f"R{n} {a} {n}_m {dcr}",
@@ -127,7 +142,7 @@ def inductor(name, a, b, l0=3e-3, isat=2.4, soft=0.4, ratio=30.0, dcr=1.55, cw=2
     ])
 
 
-def run(netlist, outvecs, tstop, tstep, tmax, uic=True, timeout=1800, opts=""):
+def run(netlist, outvecs, tstop, tstep, tmax, uic=True, timeout=1800, opts="", allow_abort=False):
     """Run a transient and return a dict of numpy arrays (time + outvecs)."""
     with tempfile.TemporaryDirectory() as d:
         out = os.path.join(d, "o.txt")
@@ -139,7 +154,7 @@ def run(netlist, outvecs, tstop, tstep, tmax, uic=True, timeout=1800, opts=""):
                  f"wrdata {out} " + " ".join(outvecs), "quit", ".endc", ".end"]
         open(cir, "w").write("\n".join(lines) + "\n")
         r = subprocess.run(["ngspice", "-b", cir], capture_output=True, text=True, timeout=timeout)
-        if not os.path.exists(out) or "aborted" in r.stdout + r.stderr:
+        if not os.path.exists(out) or ("aborted" in r.stdout + r.stderr and not allow_abort):
             raise RuntimeError(r.stdout[-3000:] + r.stderr[-3000:])
         a = np.loadtxt(out, skiprows=1)
     res = {"t": a[:, 0]}
