@@ -1,5 +1,160 @@
 # Status: HV supplies rev 3
 
+**Simulation pass (2026-11-23): M15, M17, M18, M20, M21 and the start-up / fail-safe cases run;
+the clear-cut changes are drawn** (section "Simulation pass" below). The third pass (T1-T8) and the
+earlier passes stay below as history; where they differ, the simulation pass is current.
+
+**State:** 207 parts, 113 nets, **ERC 0 errors / 2 warnings** (the expected UCC21520 VSSA on the
+switch node, `reports/erc.rpt`); BOM `bom/bom.csv` 83 lines / 211 pieces, 24 lines with a part
+number, none TBD (R303 / R311 dead-time resistor now 20k). **The floorplan has to be re-run before
+layout** (a second SK 104 for Q203, ULW5 output resistors, one more SOIC-14).
+
+# Simulation pass (2026-11-23)
+
+Scripts in `sim/` (each writes a `*_results.md` and plots): `swmodel.py` (device models),
+`m15_bridge.py`, `m17_ramp_down.py`, `m18_power_stage.py`, `m20_short_arc.py`,
+`m21_channel_change.py`, `m22_startup_failsafe.py`. Sources: IKP08N65F5 datasheet Rev 2.1
+(tables and Figs. 9-17), TT Welwyn ULW series datasheet (short-pulse energy graph, isolation voltage),
+the power amp's `rev_b/sim/power_stage/stage.py` and `anode_current.md` (99cff1f, read only),
+master `docs/tube_psu_questions.md` and interfaces.md 3, 8, 9.
+
+## M15: switching-level model of one bridge (`sim/m15_results.md`)
+
+Model: behavioural IGBT (MOS channel + PNP knee + nonlinear Cgc + tail, 7 nH internal emitter
+inductance) and SPICE diode, **calibrated to the datasheet's double-pulse test** (150 °C, 48 Ω:
+Eon 95 / 65 µJ at 4 / 2 A against 100 / 60; Eoff 31 / 19 against 30 / 20); diode Qrr from the
+datasheet trend (power law through 0.19 / 0.27 µC at 2 / 4 A; a linear trend with a 0.11 µC floor
+as the pessimistic case); the drawn gate drive (15 Ω, 10 kΩ G-E, bootstrap 2.2 Ω / ES1J / 0.9 µF
+effective, 2 mA VDDA), dead time and 11 ns driver skew; ETD39 3 mH (1.55 Ω, 25 pF, knee 2.4 A);
+the output filter as drawn, shunts, W04 and the power amp's 100 nF. Limits: Tj 125 °C only; the
+SPICE diode snaps where the Rapid 1 diode is soft (a model overshoot on the switch node and HF
+spikes through the winding capacitance, not real: the ripple is therefore taken from the linear
+network driven by the PWM waveform); no IGBT physical model was available.
+
+| Question | Result | Margin | What must change |
+|---|---|---|---|
+| Losses at 0.7 A / 400 V vs the averaged figures | **Q201 3.5 W** (model; 4.1 W pessimistic Qrr; 2.3 W from the datasheet curves extrapolated below 2 A) against **2.0 W** in T3. The turn-on energy is the diode's recovered charge x 420 V: **about 45 µJ per period, nearly independent of the current** (T3 scaled it with the current). Q202 0.27 W (T3: 0.55 W) | Q201 on the SK 104: **Tj 134 °C** (115-142 °C), 16 K to 150 °C (8 K pessimistic) | none drawn; **measure Q201's case temperature on the prototype**; option: SK 104 50.8 mm (if the 66 mm height allows) |
+| Screen bridge, 0.18 A / 390 V | **Q203 1.1-1.2 W** (2.0 W pessimistic) against 0.61 W: **148-153 °C free-standing** (T3: 118 °C) | none | **Q203 on a second SK 104 (HS202, drawn): 97-110 °C** |
+| Board loss, 0.7 A / 0.18 A, 70 °C | **about 10 W** (T3: 8.7 W); raw input still 0.89 A | — | interfaces 3.2 figure |
+| Light load / zero current | Always continuous conduction: the inductor ripples around the average in both directions. At 400 V the ripple is 0.14 A p-p (-0.07 A reverse at no load), at 200 V 0.78 A p-p (±0.39 A circulating, soft turn-ons). No-load loss 0.3 + 0.3 W. Ramp-down (sinking 0.6-0.8 A): Q202 hard-switches, **1.7-2.5 W for the length of the ramp** (≤ 1 s: a few K in a TO-220) | sustained sinking is never needed | none |
+| Ripple | tab: **7 mV p-p** at 400 V / 0.7 A, **59 mV** at 200 V (linear network); C204 ripple current 0.02-0.2 A rms | R8 (0.5 V / 0.2 V) met by 30x | none |
+| Bootstrap, maximum duty | D = 0.97-0.99 at +12 V = 11.5 V: bootstrap ≥ **10.65 V** (UVLO 8.2 / 8.7 V max): with forward current the switch node falls to the low-side diode in every dead time and recharges it, so the limit is the minimum off time, not the bootstrap. **V_tab 402.8 / 405.2 V at D 0.97 / 0.99** from 420 V raw at 0.7 A. 100 % duty holds 0.5-1 ms (m22) | D14: 403 V reached with 2 V to spare | **firmware D_MAX = 0.985** (was 0.97) |
+| Dead time, shoot-through | DT 200 ns: **170 ns** margin between one channel current ending and the other gate reaching Vth (125 °C, 11 ns skew included); 150 ns with the 1 nF G-E caps; DT 100 ns: 70 ns | ≥ 150 ns | **R303 / R311 = 20k (DT 200 ns), drawn** |
+| Miller-induced turn-on of the off IGBT | collector edge 20-50 V/ns (datasheet tr 4-6 ns): gate bump **5-9 V** through 15 Ω against VGE(th) min about 2 V hot (Fig. 11) | none | **1 nF C0G gate-emitter at each IGBT (C306 / C307 / C313 / C314, drawn): bump 0.3-0.4 V**, losses +3 %, +12 V +2.4 mA |
+| Switch-node overshoot | model artefact (diode snap); with the real dirr/dt (-134 to -300 A/µs) and 15 nH: ≈ 5 V | 650 V device at 420 V | layout rule: commutation loop (C202 / C203, Q201, Q202, shunt) ≤ 15-20 nH |
+
+## M17: ramp-down into the PSU's DC link (`sim/m17_results.md`)
+
+Model: outputs track the setpoint (loop_digital: 6.1 J returned for 6.06 J ideal); raw node = this
+board's 141 µF + C_psu 0 / 100 / 470 µF, RAW_SS 25 mA, bleeder; DAB as a current source regulating
+430 V with a sink limit 0 / 0.1 / 0.25 / 0.5 / 1 A behind a 2 or 10 ms lag and a DC-link budget of
+5-10 J above the 47 W heaters; "PSU off" = neither source nor sink. Converter losses ignored (worst).
+Steps: full 400 → 150 V / 390 → 150 V (13.4 J), the PSU note's 10 J step, and the **shutdown ramp to
+0 V before HV_ENABLE low (15.7 J)**.
+
+| Case | Result | Margin | What must change |
+|---|---|---|---|
+| Full step, 30 ms, no governor | trips (475 V) unless the DAB sinks **1 A within about 2 ms** (peak 439-464 V) or ≥ 0.5 A with 470 µF (455 V) | none for most PSU corners | rule below |
+| Full step, 100 ms | ≤ 452 V with ≥ 0.25 A sink; trips with 0.1 A or a forward-only DAB | small | rule below |
+| Full step, 300 ms / 1 s | ≤ 436 V with any sinking DAB; forward-only / PSU off: trips at 300 ms, 444-474 V at 1 s (the RAW_SS loads take 11 W) | — | — |
+| Shutdown ramp to 0 V (15.7 J, more than the 10 J told to the PSU) | needs ≥ 0.5 A sink at 100 ms; PSU off: trips at any ramp ≤ 1 s with C_psu ≤ 100 µF | — | **PSU owner: 15.7 J, not 10 J**; the governor |
+| **Firmware governor** (scale the ramp-down slope by clamp((440 V − V_raw) / 5 V, 0, 1) from the raw channel, 1 ms response) | **raw peak 436-447 V in every case**, including forward-only DAB and PSU off; the ramp then takes as long as the sink allows (30 ms asked: 32-229 ms with a sinking DAB, about 1 s forward-only / off) | 3-14 V to 450 V | **firmware rule (interfaces 8): governor on every ramp-down** |
+| What happens at the trip | latched; both bridges stop within about 3 µs (the inductors return about 1 mJ); the outputs stop where they are; the raw rail sits at ≤ 480 V until the DAB pulls it back or RAW_SS (28 mA with the bleeder) discharges 141 µF: 475 → 450 V in 0.13 s (0.55 s with 470 µF). The firmware reads HV_FAULT_N, waits for raw < 440 V, restarts at the feed-forward duty (m22) from the measured outputs and finishes the ramp slower | — | firmware sequence (interfaces 8) |
+
+## M18: the power stage fed from this converter (`sim/m18_results.md`)
+
+The power amp's stage.py (4 tubes, 1650TA, 220 nF / 91k, 1k screen resistors, idle 70 %) with only
+its 100 nF decoupling, the tube currents driving the closed loop (Kp 2, Ki 1000, Kc 20 Ω, 60 µs +
+ZOH), raw 420 V; V_SCREEN 390 V (KT88) / 382 V (EL34). Coupling check: the converter's output
+waveforms fed back into the stage change the currents by < 0.1 %.
+
+| Case | Result | Margin | What must change |
+|---|---|---|---|
+| KT88 / EL34, sine and square overdrive, 82 Hz and 1 kHz (0.54-0.65 A average, 0.65-0.81 A peak; screen 0.12-0.17 A) | V_ANODE **−0.5 / +2.3 V**, V_SCREEN **−0.8 / +0.6 V**; bridge 1 ≤ 0.82 A, bridge 2 ≤ 0.26 A | R2 (±5 V) by 2x; 2.0 A trips far | none |
+| Note burst (82 Hz square from idle, 300 ms) | V_ANODE −1.0 / **+2.9 V** (the load dump at the end), V_SCREEN −2.1 / +0.9 V; the screen current peaks 0.77 A at the onset (C209 supplies it, bridge 2 0.27-0.32 A) | — | none |
+| Raw input | **0.83 A average** (KT88 square), **0.98 A peak** (1 ms average) at the burst onset; the KT88 model reads about 12 % low, so real peaks can exceed 1 A for milliseconds | 0-2 % | PSU owner: is the 1 A an average (behind its output capacitance) or instantaneous? |
+| Screen tracking | V_SCREEN stays 9-18 V below V_ANODE: D201 never conducts. With V_SCREEN = V_ANODE (the power amp's KT88 run: 400 / 400 V) D201 would conduct on every anode sag and the screen bridge would feed the anode | — | **power amp / D13: V_SCREEN ≤ V_ANODE − 5 V** (interfaces 3.1) |
+
+## M20: output short and tube arc (`sim/m20_results.md`)
+
+Switching-level ngspice model of both bridges (ideal switches, saturating ETD39, D201, W04 / W05, the
+power amp's 100 nF), the sense chain as drawn (1k / 10k difference amplifiers with 1 nF, MCP6004
+slew and input clamps, LMV339 1 µs, latch + DIS 0.2 µs); the loop at its duty limit 60 µs after
+the fault; firmware stops the PWM at 100 µs. Faults: 50 mΩ short at a tab, 20-50 V arcs for 1-10 ms at
+the supply end, a plate-to-cathode arc inside a tube through the output transformer.
+
+| Case | As drawn | With the I_C discharge trip (drawn now) | Rating / verdict |
+|---|---|---|---|
+| V_ANODE hard short: trip | **the low-side forward trip is blind at full duty** (it sees the current only during the 0.3 µs off-time): trip at **92 µs**, firmware at 100 µs | **2.1 µs** (I_C14 reading below 0.25 V = 2.0 A discharge) | — |
+| L201 peak | **26.5 A, core saturated** (knee 2.4 A, then L0 / 30) | **0.40 A** | IKP08N65F5 ICpuls 24 A, **no short-circuit rating: Q201 would fail as drawn** |
+| R205 (1.0 Ω) | **362 A, 5.8-6.0 J** in about 0.2 ms (the 100 µF + 1 µF dump: independent of the trip); arcs 4.0-4.8 J | same | ULW2 short pulse ≈ 2.5 J and 250 V isolation: **would fail**; **ULW5-1R0 (≈ 19 J, 500 V), drawn** |
+| R212 (2.2 Ω) | V_ANODE short (screen capacitor through D201): 160 A, 6.4 J; V_SCREEN short 171 A, 6.7 J | same | ULW2-2R2 ≈ 2.3 J: **ULW5-2R2 (≈ 13 J), drawn** |
+| D201 1N5408 | 285 A peak (R212 path + the power amp's 100 nF on V_SCREEN through W05), **2.9 A²s** | same | I²t 166 A²s: **survives** |
+| Shunts | I_C 219 A / **0.29 J**, I_C24 128 A / 0.14 J; low side 26.6 A as drawn, 0.3 A with the trip | same | **metal-strip 2512 (WSL2512R0500FEA candidate), drawn as a note; pulse rating to confirm** |
+| Sense amplifier inputs | **9.7 mA** into the MCP6004 input clamps (11 V across the I_C shunt through 1 kΩ) | **< 1 mA with 10k / 100k / 100 pF (drawn)** | abs max ±2 mA |
+| V_SCREEN short | L203 11.5 A (saturated) as drawn, 0.4 A with the trip | — | Q203 survives either way (24 A) |
+| Arc inside a tube (plate-cathode, 30 V, 10 ms, through the OT half primary) | < 2.5 A in L201, 1.4 A in R205 (0.02 J), no trip: a load step for the loop | — | benign for this board (the cathode shunt and the speaker are the power amp's side) |
+| What survives / what is sacrificial | as drawn: Q201 / Q203 at risk (saturated inductor, ~100 µs), R205 / R212 overstressed 2.5x, op amp inputs 5x abs max | **everything survives**; nothing is sacrificial except by design intent | — |
+
+Trip timing (drawn now): output short or arc: 2-3 µs (I_C); forward over-current at duties below
+about 0.9 (low side conducting long enough): a few µs; reverse / shoot-through: a few µs; the
+over-voltage trips: comparator + latch ≈ 1-2 µs after the divider filter (τ 15 µs).
+
+## M21: channel change 400 ↔ 150 V (`sim/m21_results.md`)
+
+The converter's loop following a linear ramp (screen in proportion 390 ↔ 146 V), its output
+waveforms supplying stage.py (4x KT88) with the bias following V_SCREEN (the tracking law's
+feed-forward; the current-loop trim not modelled); ±5 % idle mismatch between the sides.
+
+| Case | Result | Margin | What must change |
+|---|---|---|---|
+| Thump, matched tubes | 0 V at the speaker (common mode cancels) | — | — |
+| Thump, ±5 % mismatch | down 30 ms: **0.32 V peak** (0.18 V below 20 Hz), ≈ 70 dB at 1 m (100 dB/W cabinet, unweighted: mostly subsonic); down 300 ms: 0.02 V (≈ 43 dB); up 45 ms: 0.11 V (56 dB); up 300 ms 0.02 V | — | **firmware: ramps ≥ 100-300 ms where the 30 ms mute does not cover them** (PS-4 "chosen by test": these are the numbers to start from) |
+| Bias interaction | with feed-forward only, the idle current falls from 0.30 A to **0.063 A** after 400 → 150 V (the V^1.5 law) until the power amp's current loop trims it back; on the way up it returns to 0.30 A | — | power amp: the trim loop's speed decides the crossover distortion after a step down |
+| Raw current on an up-step 150 → 400 V | **the T3 rule is not enough**: 45 ms at idle → **1.39 A**; 0.3 s at full overdrive → **1.05 A** (1 ms averages, linear ramps: the charging power peaks at the end) | — | **new rule (supersedes N10): ≥ 100 ms at idle, ≥ 0.5 s at full overdrive load; start-up 0 → 400 V with cold tubes ≥ 80 ms** (m22: 0.99 A); or a constant-power ramp (V² linear in time) within 400 W less the load: 55 ms / 0.5 s |
+
+## Item 6: start-up, restart, loss of +12 V or the link (`sim/m22_results.md`)
+
+| Case | Result | What must change |
+|---|---|---|
+| Start-up 0 → 400 / 390 V, tubes cold | raw peak 2.53 / 1.71 / 1.30 / **0.99** / 0.80 A for 30 / 45 / 60 / **80** / 100 ms | firmware: start-up ramp ≥ 80 ms (linear) |
+| Restart with charged outputs | starting at duty 0 puts −V_out over 3 mH for 19.8 µs: **−2.64 A at 400 V (reverse trip)**; at the feed-forward duty −0.1 to −0.63 A | **firmware: (re)start at D = V_out / V_raw**; low-side-only precharge only below 20 V |
+| Bootstrap hold-up | 0.5-1 ms from the charged level to UVLO without low-side conduction | none (UVLO stops the high side) |
+| +12 V lost / 3V3 + 12 V lost / both PWM high / HV_PERMIT open | UVLO per channel, input-side dead time stays active; gates held by 10 kΩ; both outputs low with both inputs high (DT resistor) | none |
+| PWM frozen (firmware or FPGA hang) | open loop at the last duty: outputs drift to at most 0.985 x 420 = **414 V, below the 440 / 420 V trips** | **control board: its watchdog drops HV_ENABLE** (not only BIAS_EN) |
+| ADC link fails while the PWM runs | reads 0 V: duty to the limit, outputs to ≈ 414 V without a trip | **firmware: AD7689 CFG read-back (RB = 0) checked every conversion, the returned clock (pad 16) present, the raw channel within 380-480 V; else HV_ENABLE low** |
+
+## Changes drawn in this pass (ERC 0 errors / 2 warnings, 207 parts)
+
+| Part | Was | Now | Why |
+|---|---|---|---|
+| HS202 (new) | Q203 free-standing | SK 104 38.1 mm, insulated like HS201 | M15: Q203 148-153 °C free |
+| C306 / C307 / C313 / C314 (new) | — | 1 nF C0G 50 V gate-emitter at each IGBT | M15 Miller margin |
+| R303 / R311 | 33k TBD | **20k (DT 200 ns)** | M15 dead-time margin |
+| U507 (new LMV339; UC2 spare used) | — | I_C14 / I_C24 discharge comparators (below TH_OC = 2.0 A) into FAULT_N | M20: forward trip blind at full duty |
+| R421-R439 current amplifiers | 1k / 10k, 1 nF | **10k / 100k, 100 pF C0G** (same gain and 2 µs filter) | M20: input clamp current |
+| R205 / R212 | ULW2-1R0 / -2R2 (2 W, DIN0414) | **ULW5-1R0 / -2R2 (5 W, DIN0918 25.4 mm)** | M20: 5.8-6.7 J pulses, 500 V isolation |
+| R202 / R203 / R209 / R210 | 50 mΩ 2512 | 50 mΩ 2512 **metal strip** (WSL2512R0500FEA candidate) | M20: 0.29 J pulses |
+
+## Proposals and open items (to the coordinating session)
+
+| # | What | Boards | interfaces.md |
+|---|---|---|---|
+| N13 | **Ramp rule revised** (supersedes N10): up-steps ≥ 100 ms at idle, ≥ 0.5 s at full overdrive load (linear), start-up 0 → 400 V ≥ 80 ms; or constant-power ramps; **ramp-down governor** (pause above 440 V raw, resume below 435 V) on every ramp-down; restart at the feed-forward duty; D_MAX 0.985 | control board (firmware) | 8 |
+| N14 | **Hardware trips: add "output capacitor discharge > 2.0 A" per bridge** (I_C channels) to the trip list | HV supplies (power amp informative) | 3.1, 8 |
+| N15 | **ADC link integrity and watchdog**: AD7689 CFG read-back every conversion, returned clock present, raw within 380-480 V, else HV_ENABLE low; the control board's watchdog drops HV_ENABLE | control board | 9 |
+| N16 | **Figures**: board loss ≈ 10 W at 0.7 / 0.18 A; +12 V ≈ 12.5 mA (+2.4 mA for the gate capacitors; budget 25 mA); continuous limits now **bridge 1 ≈ 0.95 A** (Q201 at 150 °C with the model's losses, +0.42 W per 0.1 A; R205 no longer limits) and **bridge 2 ≈ 0.95 A** (Q203 on HS202 like Q201; R212 ULW5 at 50 % of its 80 °C rating) (was 0.9 / 0.38 A) | power amp (informative), control board | 3.1, 3.2, 9 |
+| N17 | **V_SCREEN ≤ V_ANODE − 5 V** as a setpoint rule (D201 conducts otherwise) | power amp, control board | 3.1 (D13) |
+| N18 | **Tell the PSU owner**: a shutdown ramp returns 15.7 J (not 10 J); without the governor a 30 ms full step needs a 1 A sink within 2 ms; the governor makes any PSU behaviour safe (raw ≤ 447 V); is the 1 A forward limit an average or instantaneous (M18 peaks 0.98 A, about 1.1 A with the KT88 model's error) | tube PSU | 3.1, 8 |
+| N19 | **Floorplan re-run**: HS202 (35 x 13 mm, 51 mm tall) at Q203, ULW5 bodies (16.5 x 7.2 mm, 25.4 mm pitch) on the arm, U507 (SOIC-14, plate side); layout rule: commutation loop ≤ 15-20 nH, gate capacitors at the IGBT pins, Kelvin shunt taps | HV supplies | 12.1 (if the outline changes) |
+
+Needs the user: Q201's thermal margin (134 °C model, 142 °C pessimistic, on the SK 104 38.1 mm):
+accept and measure on the prototype, or a 50.8 mm SK 104 (height); the ULW5 choice (drawn) instead of
+treating R205 / R212 as sacrificial. Needs the PSU owner: N18 and the unknowns of M17 (C_psu, sink
+current and response time, DC-link budget, OVP level).
+
+# Third pass (2026-11-23): history
+
 **Third pass (2026-11-23): user decisions applied** (coordinator's `decisions_1123.md`: V6 outline,
 V7 raw rail, V8 no active discharge, V9 pad 16; DAB up to 1 A; power amp current figures from
 tube_power_amp_kicad 99cff1f). The second pass (S1-S9) and the first pass stay below as history;
