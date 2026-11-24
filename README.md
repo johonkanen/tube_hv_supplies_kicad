@@ -10,6 +10,15 @@ power section) starts from it. The amplifier project, its specification and the 
 are in [tube_amplifier_kicad](https://github.com/johonkanen/tube_amplifier_kicad), which includes
 this repo as a submodule once the conversion is verified.
 
+## Latest renders
+
+Rendered by CI (`.github/workflows/renders.yml`) on every push to main that changes a `.kicad_pcb`. Every copper layer, an isometric 3D view and the commit the images were made from are on the [`renders` branch](https://github.com/johonkanen/tube_hv_supplies_kicad/tree/renders) (force-pushed by CI, never merged).
+
+<img src="https://github.com/johonkanen/tube_hv_supplies_kicad/raw/renders/tube_hv_supplies_rev3/assembly_top.png" alt="top: copper and silk" width="49%">
+<img src="https://github.com/johonkanen/tube_hv_supplies_kicad/raw/renders/tube_hv_supplies_rev3/assembly_bottom.png" alt="bottom: copper and silk" width="49%">
+<img src="https://github.com/johonkanen/tube_hv_supplies_kicad/raw/renders/tube_hv_supplies_rev3/3d_top.png" alt="3D top" width="49%">
+<img src="https://github.com/johonkanen/tube_hv_supplies_kicad/raw/renders/tube_hv_supplies_rev3/3d_bottom.png" alt="3D bottom" width="49%">
+
 ## Method
 
 The shared [proteus2kicad](https://github.com/johonkanen/proteus2kicad) tools, a submodule in
