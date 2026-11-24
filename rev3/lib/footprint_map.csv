@@ -115,12 +115,12 @@ L201,tube_hv_supplies_rev3:L_ETD39_2pin_custom
 L202,Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1
 L203,tube_hv_supplies_rev3:L_ETD39_2pin_custom
 L204,Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1
-NT101,NetTie:NetTie-2_SMD_Pad0.5mm
+NT101,NetTie:NetTie-2_SMD_Pad2.0mm
 NT501,NetTie:NetTie-2_SMD_Pad0.5mm
-Q201,Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp
-Q202,Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp
-Q203,Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp
-Q204,Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp
+Q201,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar
+Q202,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar
+Q203,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar
+Q204,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar
 R101,Resistor_SMD:R_2512_6332Metric
 R102,Resistor_SMD:R_2512_6332Metric
 R103,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal

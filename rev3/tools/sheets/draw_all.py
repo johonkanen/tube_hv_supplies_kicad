@@ -57,7 +57,7 @@ FP_FILM100N = "Capacitor_SMD:C_1812_4532Metric"
 FP_FILM1U = "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
 FP_FILM4U7 = "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4"   # TDK B32674D6475K class (4.7 uF 630 V DC-link MKP, P27.5)
 FP_EL22 = "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
-FP_TO220 = "Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp"   # lying on the plate (aluminium bar), leads bent down into the board
+FP_TO220 = f"{LOCAL_LIB}:TO-220-3_Horizontal_TabUp_Bar"   # lying on the plate (aluminium bar), leads bent down into the board (no board hole)
 FP_Y2 = "Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4"
 FP_TAB1 = f"{LOCAL_LIB}:Blade_Tab_4.8mm_1x"
 FP_TAB2 = f"{LOCAL_LIB}:Blade_Tab_4.8mm_2x_P12mm"
@@ -273,7 +273,8 @@ def sheet01(d):
     R(d, "R5", 9, 4, "UIN", "LED_RAW", "1M 1W HV (VR37 class)", fp=FP_AX1W, mpn="")
     d.part("LED", "D1", 9, 5.5, {2: "LED_RAW", 1: "PGND"}, value="red, 0.4 mA (HV PRESENT)", rot=90, mpn="")
     # power star: the one tie between PGND and GND_STAR
-    d.part("NetTie_2", "NT1", 1, 7, {1: "PGND", 2: "GND_STAR"}, value="STAR POINT (power star)", mpn="")
+    d.part("NetTie_2", "NT1", 1, 7, {1: "PGND", 2: "GND_STAR"}, value="STAR POINT (power star)", mpn="",
+           fp="NetTie:NetTie-2_SMD_Pad2.0mm")   # carries the whole return current (about 1 A)
     d.text("Power star (GND_STAR): output film capacitors and bleeders (sheet 02), GND_PWR / GND_PRE1 / GND_PRE2 tabs, "
            "fault network", 0, 6.4)
     # fault / RF network: anti-parallel diodes (bridge, + and - joined) || 100 nF Y2 || 100 ohm, to the plated
