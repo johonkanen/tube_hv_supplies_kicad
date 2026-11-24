@@ -20,7 +20,7 @@ GROUPS = [
     ("gate", ["GH1", "GHD1", "BOOT1", "GH2", "GHD2", "BOOT2", "GL1", "GLD1", "GL2", "GLD2", "BS1", "BS2"]),
     ("hvsmall", ["RAW_SS1", "RAW_SS2", "BLD1", "LED_RAW", "DS0A", "DS0B", "DS1A", "DS1B", "DV0A", "DV0B", "DV1A",
                  "DV1B", "BL1", "BL2", "LED_VA", "CD1", "CD2"]),
-    ("ground", ["PGND", "GND_STAR", "CHASSIS", "BR_DC", "+12V"]),
+    ("ground", ["PGND", "GND_STAR", "CHASSIS", "BR_DC"]),
     ("kelvin", ["KS0P", "KS0N", "KS1P", "KS1N", "KS2P", "KS2N", "KS3P", "KS3N"]),
     ("spi", ["ADC_SCK", "ADC_SCK_RET", "CS_FAST", "SDO_VA", "SDO_VS", "SDO_IC1", "SDO_IL1", "SDO_IC2", "SDO_IL2",
              "SDO_VA_L", "SDO_VS_L", "SDO_IC1_L", "SDO_IL1_L", "SDO_IC2_L", "SDO_IL2_L", "ADC_SDO", "ADC_SDO_L",
@@ -30,7 +30,7 @@ GROUPS = [
                 "IA3N", "DV0", "DV1", "DS0", "DS1", "IBIAS", "IBIAS_D", "VREF", "+3V3_REF", "ADC_REFIN", "UBSP0",
                 "ADC_IN0", "ADC_IN1", "ADC_IN2", "ADC_IN3", "ADC_IN4", "ADC_IN5", "ADC_IN6", "ADC_IN7"]),
 ]
-POUR = ["GND", "+3V3"]
+POUR = ["GND", "+3V3", "+12V"]
 
 
 def main():

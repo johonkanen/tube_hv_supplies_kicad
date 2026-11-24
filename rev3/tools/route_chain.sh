@@ -40,13 +40,13 @@ HV=(--keepout --keepout-layer User.2 --board-edge-clearance 2.6 --layer-costs 1 
 HVG=()
 step hvpow hvpow "${HV[@]}" --max-iterations 20000000 --power-nets '*/UC2' 'IC2' '*/IC2' '*' --power-nets-widths 1.5 1.5 1.5 1.0
 step hvsmall hvsmall "${HV[@]}" --power-nets '*/CD1' '*/CD2' '*' --power-nets-widths 0.8 0.8 0.5
-step ground ground --power-nets 'PGND' 'GND_STAR' '*CHASSIS' '*BR_DC' '+12V' --power-nets-widths 1.5 1.5 1.0 1.0 0.5
-step gate gate --track-width 0.5 "${HVG[@]}"
-step kelvin kelvin --track-width 0.3
-step spi spi --track-width 0.25
-step analog analog --track-width 0.25
-step lv lv --track-width 0.25
-step supply pour --power-nets 'GND' '+3V3' --power-nets-widths 0.4 0.4
+step ground ground --keepout --keepout-layer User.2 --escalation board --max-iterations 5000000 --power-nets 'PGND' 'GND_STAR' '*CHASSIS' '*BR_DC' --power-nets-widths 1.2 1.2 1.0 1.0
+step gate gate --track-width 0.5 --escalation board "${HVG[@]}"
+step kelvin kelvin --track-width 0.3 --escalation board
+step spi spi --track-width 0.25 --escalation board
+step analog analog --track-width 0.25 --escalation board
+step lv lv --track-width 0.25 --escalation board
+step supply pour,+12V --escalation board --power-nets 'GND' '+3V3' '+12V' --power-nets-widths 0.4 0.4 0.5
 # pours (star island, control ground), fill, then whatever is still open
 N=$((N + 1)); P="$W/$(printf %02d "$N")_pour.kicad_pcb"
 "$KIPY" "$R/tools/make_pcb.py" --zones "$CUR" "$P" 2>&1 | grep -v "memory leak" | tail -1
