@@ -13,10 +13,12 @@ from p2k.sexpr import Sym, find, find_all, load, save  # noqa: E402
 KICAD = os.environ.get("KICAD_SYMBOLS", "/mnt/c/Program Files/KiCad/10.0/share/kicad/symbols")
 WANT = [
     ("Device", "R"), ("Device", "C"), ("Device", "C_Polarized"), ("Device", "D"), ("Device", "D_TVS"),
-    ("Device", "L"), ("Device", "LED"), ("Device", "Fuse"), ("Device", "NetTie_2"), ("Device", "Q_NIGBT_GCE"),
+    ("Device", "L"), ("Device", "FerriteBead"), ("Device", "LED"), ("Device", "Fuse"), ("Device", "NetTie_2"), ("Device", "Q_NIGBT_GCE"),
     ("Diode_Bridge", "GBU8J"), ("Driver_FET", "UCC21520DW"), ("Analog_ADC", "AD7689xCP"),
     ("Amplifier_Operational", "MCP6004"), ("Comparator", "LMV339"), ("Isolator", "TLP293"),
     ("74xGxx", "74LVC1G10"), ("74xGxx", "74LVC1G17"), ("74xGxx", "74AUP1G74"),
+    ("Reference_Voltage", "REF3030"), ("Amplifier_Operational", "OPA2356xxD"),
+    ("74xGxx", "74LVC1G07"), ("74xGxx", "74LVC1G08"),
     ("Mechanical", "MountingHole_Pad"), ("Mechanical", "MountingHole"), ("Mechanical", "Heatsink"), ("Reference_Voltage", "LM4040DBZ-2.5"),
     ("Connector_Generic", "Conn_02x20_Odd_Even"), ("Connector_Generic", "Conn_01x02"), ("Connector_Generic", "Conn_01x01"),
     ("power", "GND"), ("power", "+3V3"), ("power", "+12V"), ("power", "PWR_FLAG"),
@@ -49,11 +51,37 @@ def flat(libname, name):
     return out
 
 
+# board-local symbols derived from stock ones: (lib, source, new name, {old pin number: new pin number})
+# ADS7056 (TI SBAS769, X2QFN-8 RUG): 1 CS, 2 SDO, 3 SCLK, 4 DVDD, 5 GND, 6 AVDD (= reference), 7 AINP, 8 AINM;
+# drawn from the ADS7049 symbol (pins 1 DVDD, 2 SCLK, 3 SDO, 4 CS, 5 AINM, 6 AINP, 7 AVDD, 8 GND)
+DERIVED = [("Analog_ADC", "ADS7049", "ADS7056", {"1": "4", "2": "3", "3": "2", "4": "1", "5": "8", "6": "7", "7": "6", "8": "5"})]
+
+
+def derived(libname, src, new, pinmap):
+    s = flat(libname, src)
+    s[1] = new
+    for sub in find_all(s, "symbol"):
+        sub[1] = sub[1].replace(src + "_", new + "_", 1)
+        for p in find_all(sub, "pin"):
+            num = find(p, "number")
+            num[1] = pinmap.get(str(num[1]), num[1])
+    for p in find_all(s, "property"):
+        if p[1] == "Value":
+            p[2] = new
+        if p[1] == "Footprint":
+            p[2] = "Package_DFN_QFN:Texas_UQFN-8_1.5x1.5mm_P0.5mm"
+        if p[1] == "Datasheet":
+            p[2] = "https://www.ti.com/lit/ds/symlink/ads7056.pdf"
+    return s
+
+
 def main():
     lib = [Sym("kicad_symbol_lib"), [Sym("version"), 20251024], [Sym("generator"), "make_lib"],
            [Sym("generator_version"), "10.0"]]
     for libname, name in WANT:
         lib.append(flat(libname, name))
+    for libname, src, new, pm in DERIVED:
+        lib.append(derived(libname, src, new, pm))
     save(os.path.join(HERE, "lib", "tube_hv_supplies_rev3.kicad_sym"), lib)
     for libname, name in WANT:
         s = flat(libname, name)

@@ -1931,15 +1931,15 @@
 				)
 			)
 		)
-		(property "Value" "0R link (option 10-47R 2W flameproof fusible)"
-			(at 118.73 45.72 0)
+		(property "Value" "0R jumper 2512 (link)"
+			(at 105.53 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 89.662 44.45 0)
 			(effects
 				(font
@@ -2038,15 +2038,15 @@
 				)
 			)
 		)
-		(property "Value" "0R link (option 10-47R 2W flameproof fusible)"
-			(at 118.73 81.28 0)
+		(property "Value" "0R jumper 2512 (link)"
+			(at 105.53 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 89.662 80.01 0)
 			(effects
 				(font

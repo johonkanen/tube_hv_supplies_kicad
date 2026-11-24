@@ -3141,7 +3141,7 @@
 				)
 			)
 		)
-		(property "Value" "20k (DT 200 ns)"
+		(property "Value" "20k (DT 200 ns floor)"
 			(at 63.5 135.89 270)
 			(effects
 				(font
@@ -4868,268 +4868,6 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_hv_supplies_rev3:C")
-		(at 193.04 106.68 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "112c96f0-a9b7-50b2-adb7-a870c3bede4d")
-		(property "Reference" "C306"
-			(at 193.04 104.14 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1n C0G 50V"
-			(at 193.04 109.22 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 196.85 105.7148 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 193.04 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 193.04 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f22ad220-8f6c-555f-8330-f25da6c5425a")
-		)
-		(pin "2"
-			(uuid "719ecaf9-c17f-5c36-8967-485684f110f9")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/db218c57-fce2-5029-b7fb-e41a4af8aa9b"
-					(reference "C306")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 189.23 106.68) (xy 186.69 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "136ac1ca-3bd2-5c19-a38a-67fbc3e88ea9")
-	)
-	(global_label "GH1"
-		(shape passive)
-		(at 186.69 106.68 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "03651a90-7252-5677-bdd5-3141b4bbc495")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 186.69 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 196.85 106.68) (xy 199.39 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "38f991c3-b2de-5563-9f21-c234547da14a")
-	)
-	(global_label "SW1"
-		(shape passive)
-		(at 199.39 106.68 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "769c7e8c-9c1b-524e-bb1a-5130b99d076c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 199.39 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:C")
-		(at 193.04 160.02 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4b037342-e470-5c30-a565-6edd374fee37")
-		(property "Reference" "C307"
-			(at 193.04 157.48 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1n C0G 50V"
-			(at 193.04 162.56 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 196.85 159.0548 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 193.04 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 193.04 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "38234b69-8011-5290-a1c8-635625a0d7d1")
-		)
-		(pin "2"
-			(uuid "c936b62b-ed27-5ba4-ac77-00835e5f19bb")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/db218c57-fce2-5029-b7fb-e41a4af8aa9b"
-					(reference "C307")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 189.23 160.02) (xy 186.69 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4b777666-d0f8-5171-aca1-a529c3ea9cd3")
-	)
-	(global_label "GL1"
-		(shape passive)
-		(at 186.69 160.02 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "0e5b36cd-1007-5f0d-ad3c-6d065aacd6f0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 186.69 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 196.85 160.02) (xy 199.39 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "05ccebc0-a57a-52c7-929f-3cd371b42ba2")
-	)
-	(global_label "IS1"
-		(shape passive)
-		(at 199.39 160.02 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "bbcae50f-3132-578f-8035-968be0c9f48d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 199.39 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
 		(lib_id "tube_hv_supplies_rev3:PWR_FLAG")
 		(at 176.53 62.23 0)
 		(unit 1)
@@ -5202,7 +4940,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "66e229f4-b5ef-5ff1-b393-0117253cc4f2")
+		(uuid "136ac1ca-3bd2-5c19-a38a-67fbc3e88ea9")
 	)
 	(label "BOOT1"
 		(at 176.53 64.77 270)
@@ -5212,7 +4950,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "f814b499-b6e4-5cdc-8e10-d6547dd9be69")
+		(uuid "03651a90-7252-5677-bdd5-3141b4bbc495")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:PWR_FLAG")
@@ -5287,7 +5025,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e227350c-49d8-559a-820a-06fd4eff8b49")
+		(uuid "38f991c3-b2de-5563-9f21-c234547da14a")
 	)
 	(global_label "SW1"
 		(shape passive)
@@ -5299,7 +5037,7 @@
 			)
 			(justify right)
 		)
-		(uuid "2795e583-d372-50cf-932b-48e1990700fe")
+		(uuid "769c7e8c-9c1b-524e-bb1a-5130b99d076c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 176.53 100.33 0)
 			(effects
@@ -5320,7 +5058,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "16b4ca52-95d8-5e2a-b2c8-253f4d926cc2")
+		(uuid "4b777666-d0f8-5171-aca1-a529c3ea9cd3")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:UCC21520DW")
@@ -5448,7 +5186,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "da66fb30-d62c-53e2-ad2b-3c4a24206dc1")
+		(uuid "0e5b36cd-1007-5f0d-ad3c-6d065aacd6f0")
 	)
 	(global_label "PWM_H2"
 		(shape passive)
@@ -5460,7 +5198,7 @@
 			)
 			(justify right)
 		)
-		(uuid "d28c2bde-4822-5c47-8449-ed015ebd717b")
+		(uuid "05ccebc0-a57a-52c7-929f-3cd371b42ba2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 238.76 86.36 0)
 			(effects
@@ -5480,7 +5218,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2ed1f784-8ab4-5b90-bbf5-18742abdffcd")
+		(uuid "bbcae50f-3132-578f-8035-968be0c9f48d")
 	)
 	(global_label "PWM_L2"
 		(shape passive)
@@ -5492,7 +5230,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ba00b5f1-089c-517d-b25a-2b565856d4a5")
+		(uuid "66e229f4-b5ef-5ff1-b393-0117253cc4f2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 238.76 88.9 0)
 			(effects
@@ -5512,7 +5250,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c0166385-061c-527f-87fe-ca14cce842a5")
+		(uuid "f814b499-b6e4-5cdc-8e10-d6547dd9be69")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+3V3")
@@ -5587,7 +5325,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9ca3a758-9c29-544a-800a-9a2abdd6adec")
+		(uuid "e227350c-49d8-559a-820a-06fd4eff8b49")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+3V3")
@@ -5662,7 +5400,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "566e16b5-ec9d-558b-8d9c-fc6959211e42")
+		(uuid "2795e583-d372-50cf-932b-48e1990700fe")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -5737,7 +5475,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6fa2df4b-aaca-53da-8fa3-b2a98f849681")
+		(uuid "16b4ca52-95d8-5e2a-b2c8-253f4d926cc2")
 	)
 	(global_label "DRV_DIS"
 		(shape passive)
@@ -5749,7 +5487,7 @@
 			)
 			(justify right)
 		)
-		(uuid "1f76407d-b219-5eca-915e-e12bc530d752")
+		(uuid "da66fb30-d62c-53e2-ad2b-3c4a24206dc1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 238.76 91.44 0)
 			(effects
@@ -5769,7 +5507,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c8af841e-dd10-5f49-80f4-8031a4befa73")
+		(uuid "d28c2bde-4822-5c47-8449-ed015ebd717b")
 	)
 	(label "DT2"
 		(at 238.76 96.52 180)
@@ -5779,19 +5517,19 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "a1e86cc5-b62d-5ffd-81b6-2b241e0c9512")
+		(uuid "2ed1f784-8ab4-5b90-bbf5-18742abdffcd")
 	)
 	(no_connect
 		(at 243.84 93.98)
-		(uuid "8bd1954d-3755-5c33-a7b4-8343bf02976d")
+		(uuid "ba00b5f1-089c-517d-b25a-2b565856d4a5")
 	)
 	(no_connect
 		(at 264.16 91.44)
-		(uuid "57c292a4-da07-5dc9-9dd2-dcc2c4c974fc")
+		(uuid "c0166385-061c-527f-87fe-ca14cce842a5")
 	)
 	(no_connect
 		(at 264.16 86.36)
-		(uuid "0cca413e-c338-57ff-acad-a6ccc34063e2")
+		(uuid "9ca3a758-9c29-544a-800a-9a2abdd6adec")
 	)
 	(wire
 		(pts
@@ -5801,7 +5539,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6cc7499f-b4d7-50ec-9a6f-18b5edbedfc7")
+		(uuid "566e16b5-ec9d-558b-8d9c-fc6959211e42")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -5813,7 +5551,7 @@
 			)
 			(justify left)
 		)
-		(uuid "0b5ed0f2-cd61-558c-8119-a3eaab4d774d")
+		(uuid "6fa2df4b-aaca-53da-8fa3-b2a98f849681")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 269.24 99.06 0)
 			(effects
@@ -5833,7 +5571,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c57c2513-371e-569d-8d39-cd288375dc3d")
+		(uuid "1f76407d-b219-5eca-915e-e12bc530d752")
 	)
 	(label "GLD2"
 		(at 269.24 96.52 0)
@@ -5843,7 +5581,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e7ffb69f-9844-5f87-b43e-68ed772e5261")
+		(uuid "c8af841e-dd10-5f49-80f4-8031a4befa73")
 	)
 	(wire
 		(pts
@@ -5853,7 +5591,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a3f507f2-137d-5c94-a44c-ab0efc935a82")
+		(uuid "a1e86cc5-b62d-5ffd-81b6-2b241e0c9512")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+12V")
@@ -5928,7 +5666,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cb73b849-e364-5a92-9564-8909d4f956e1")
+		(uuid "8bd1954d-3755-5c33-a7b4-8343bf02976d")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -5940,7 +5678,7 @@
 			)
 			(justify left)
 		)
-		(uuid "e85d53ec-cf59-5880-975a-5bfcc3419f65")
+		(uuid "57c292a4-da07-5dc9-9dd2-dcc2c4c974fc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 269.24 83.82 0)
 			(effects
@@ -5960,7 +5698,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "239f8b3f-9a56-5125-b970-5655dad1114e")
+		(uuid "0cca413e-c338-57ff-acad-a6ccc34063e2")
 	)
 	(label "GHD2"
 		(at 269.24 81.28 0)
@@ -5970,7 +5708,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "81c30494-e6d8-5d47-adbd-f75d8667adf9")
+		(uuid "6cc7499f-b4d7-50ec-9a6f-18b5edbedfc7")
 	)
 	(wire
 		(pts
@@ -5980,7 +5718,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1d642e59-febb-569f-84ad-afe709819f9a")
+		(uuid "0b5ed0f2-cd61-558c-8119-a3eaab4d774d")
 	)
 	(label "BOOT2"
 		(at 269.24 78.74 0)
@@ -5990,7 +5728,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "67d5f9d0-f9c8-5195-ba1b-10bba7a7638e")
+		(uuid "c57c2513-371e-569d-8d39-cd288375dc3d")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -6067,7 +5805,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4a7a8036-15a8-5d53-8ae3-a42498cbd1d8")
+		(uuid "e7ffb69f-9844-5f87-b43e-68ed772e5261")
 	)
 	(global_label "PWM_H2"
 		(shape passive)
@@ -6079,7 +5817,7 @@
 			)
 			(justify right)
 		)
-		(uuid "c0cd6256-9624-5ce9-9f0c-9822b6a1a16c")
+		(uuid "a3f507f2-137d-5c94-a44c-ab0efc935a82")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 207.01 133.35 0)
 			(effects
@@ -6099,7 +5837,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "79d1391c-1574-5625-8651-e02396dbf2d6")
+		(uuid "cb73b849-e364-5a92-9564-8909d4f956e1")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -6241,7 +5979,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "65eadaf6-6e76-5d98-a8c0-080ea2993c7f")
+		(uuid "e85d53ec-cf59-5880-975a-5bfcc3419f65")
 	)
 	(global_label "PWM_L2"
 		(shape passive)
@@ -6253,7 +5991,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a3e363b6-6fff-51c3-adf1-cf6a176f61f7")
+		(uuid "239f8b3f-9a56-5125-b970-5655dad1114e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 223.52 133.35 0)
 			(effects
@@ -6273,7 +6011,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "793c1e84-002c-5447-87f8-b83fcc07122a")
+		(uuid "81c30494-e6d8-5d47-adbd-f75d8667adf9")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -6357,7 +6095,7 @@
 				)
 			)
 		)
-		(property "Value" "20k (DT 200 ns)"
+		(property "Value" "20k (DT 200 ns floor)"
 			(at 246.38 135.89 270)
 			(effects
 				(font
@@ -6415,7 +6153,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "63573866-e734-5685-9751-e0b35feddff2")
+		(uuid "1d642e59-febb-569f-84ad-afe709819f9a")
 	)
 	(label "DT2"
 		(at 240.03 133.35 180)
@@ -6425,7 +6163,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "f0cbaff2-cd6a-5b9a-99d0-0c0568f6f553")
+		(uuid "67d5f9d0-f9c8-5195-ba1b-10bba7a7638e")
 	)
 	(wire
 		(pts
@@ -6435,7 +6173,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fb4a5c5a-4be5-5897-8e32-5573d5bb4f1b")
+		(uuid "4a7a8036-15a8-5d53-8ae3-a42498cbd1d8")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -6577,7 +6315,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c888a705-eddc-5478-964a-7055398ea810")
+		(uuid "c0cd6256-9624-5ce9-9f0c-9822b6a1a16c")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+3V3")
@@ -6652,7 +6390,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "80877e80-67af-5531-ac3a-34d20397819c")
+		(uuid "79d1391c-1574-5625-8651-e02396dbf2d6")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:GND")
@@ -6803,7 +6541,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1dde9ac6-55db-5cfb-8b2e-275896db58a9")
+		(uuid "65eadaf6-6e76-5d98-a8c0-080ea2993c7f")
 	)
 	(label "BS2"
 		(at 311.15 62.23 0)
@@ -6813,7 +6551,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "74af400f-b494-5f32-bd1a-74e8314ebcc7")
+		(uuid "a3e363b6-6fff-51c3-adf1-cf6a176f61f7")
 	)
 	(wire
 		(pts
@@ -6823,7 +6561,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5359180d-5345-5865-92b2-9382669aa4e6")
+		(uuid "793c1e84-002c-5447-87f8-b83fcc07122a")
 	)
 	(label "BOOT2"
 		(at 298.45 62.23 180)
@@ -6833,7 +6571,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "0831727e-5672-5f58-894f-af803a214cc5")
+		(uuid "63573866-e734-5685-9751-e0b35feddff2")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -6910,7 +6648,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f115b182-51da-521f-ab6f-1afa6ff89e57")
+		(uuid "f0cbaff2-cd6a-5b9a-99d0-0c0568f6f553")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+12V")
@@ -6985,7 +6723,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7b40a2a1-38c2-5e6c-a9c3-ea342731c3f1")
+		(uuid "fb4a5c5a-4be5-5897-8e32-5573d5bb4f1b")
 	)
 	(label "BS2"
 		(at 284.48 68.58 270)
@@ -6995,7 +6733,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "f1d09bcc-7ec3-5e2c-a60c-25324c098985")
+		(uuid "c888a705-eddc-5478-964a-7055398ea810")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
@@ -7072,7 +6810,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "41b2a9f1-c123-506e-b37c-6ec6760fffe3")
+		(uuid "80877e80-67af-5531-ac3a-34d20397819c")
 	)
 	(label "BOOT2"
 		(at 318.77 80.01 180)
@@ -7082,7 +6820,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "20ce37bd-dfcd-5acc-b896-eb426717f3fe")
+		(uuid "1dde9ac6-55db-5cfb-8b2e-275896db58a9")
 	)
 	(wire
 		(pts
@@ -7092,7 +6830,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f2756eda-82c8-57d9-a1bc-d3c1e2f3ebd7")
+		(uuid "74af400f-b494-5f32-bd1a-74e8314ebcc7")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -7104,7 +6842,7 @@
 			)
 			(justify left)
 		)
-		(uuid "238733eb-bba8-5ff5-9c87-bd885ea23735")
+		(uuid "5359180d-5345-5865-92b2-9382669aa4e6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 331.47 80.01 0)
 			(effects
@@ -7191,7 +6929,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "545a3394-e116-5f1a-b922-a63bd011b578")
+		(uuid "0831727e-5672-5f58-894f-af803a214cc5")
 	)
 	(label "BOOT2"
 		(at 335.28 80.01 180)
@@ -7201,7 +6939,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "c9bcbd28-f55b-5175-bff2-3cc5b2518d53")
+		(uuid "f115b182-51da-521f-ab6f-1afa6ff89e57")
 	)
 	(wire
 		(pts
@@ -7211,7 +6949,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f08f69c7-ee9c-5a54-8ada-b855aa3a59a9")
+		(uuid "7b40a2a1-38c2-5e6c-a9c3-ea342731c3f1")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -7223,7 +6961,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c1bb9ea4-40b6-5e06-84a4-fb8048c2bd54")
+		(uuid "f1d09bcc-7ec3-5e2c-a60c-25324c098985")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 347.98 80.01 0)
 			(effects
@@ -7310,7 +7048,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1447a4c1-922e-5410-9f98-8f9748d464fa")
+		(uuid "41b2a9f1-c123-506e-b37c-6ec6760fffe3")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+12V")
@@ -7385,7 +7123,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7288d7c7-e827-5c20-baee-3db804fa1d14")
+		(uuid "20ce37bd-dfcd-5acc-b896-eb426717f3fe")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -7397,7 +7135,7 @@
 			)
 			(justify left)
 		)
-		(uuid "4318ca0e-4864-5465-b8ee-a1f560ca6912")
+		(uuid "f2756eda-82c8-57d9-a1bc-d3c1e2f3ebd7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 331.47 124.46 0)
 			(effects
@@ -7484,7 +7222,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ee422b72-b885-56d9-8f1d-7de32a682bf1")
+		(uuid "238733eb-bba8-5ff5-9c87-bd885ea23735")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:+12V")
@@ -7559,7 +7297,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "885497be-b4c3-5473-b1ce-5cbc67afff4d")
+		(uuid "545a3394-e116-5f1a-b922-a63bd011b578")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -7571,7 +7309,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c1d09f33-8d11-5a9d-aa2d-1734e110ca10")
+		(uuid "c9bcbd28-f55b-5175-bff2-3cc5b2518d53")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 347.98 124.46 0)
 			(effects
@@ -7658,7 +7396,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "054c5dd9-1203-5b1d-88b0-f9a13c9a3ecb")
+		(uuid "f08f69c7-ee9c-5a54-8ada-b855aa3a59a9")
 	)
 	(label "GHD2"
 		(at 304.8 86.36 90)
@@ -7668,7 +7406,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b71bd817-9373-583a-9bbe-b75db3485487")
+		(uuid "c1bb9ea4-40b6-5e06-84a4-fb8048c2bd54")
 	)
 	(wire
 		(pts
@@ -7678,7 +7416,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f091729e-f100-50da-ac95-36fefc09100a")
+		(uuid "1447a4c1-922e-5410-9f98-8f9748d464fa")
 	)
 	(global_label "GH2"
 		(shape passive)
@@ -7690,7 +7428,7 @@
 			)
 			(justify right)
 		)
-		(uuid "9e3267b0-16ba-5562-b84f-ab563da39073")
+		(uuid "7288d7c7-e827-5c20-baee-3db804fa1d14")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 304.8 99.06 0)
 			(effects
@@ -7777,7 +7515,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "79084c29-90ed-51ec-a2d4-15cc98bcb457")
+		(uuid "4318ca0e-4864-5465-b8ee-a1f560ca6912")
 	)
 	(global_label "GH2"
 		(shape passive)
@@ -7789,7 +7527,7 @@
 			)
 			(justify right)
 		)
-		(uuid "7ed278d0-ad5b-5a02-b877-e45d71c16555")
+		(uuid "ee422b72-b885-56d9-8f1d-7de32a682bf1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 318.77 106.68 0)
 			(effects
@@ -7809,7 +7547,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a1285831-2e6a-5b49-b024-cceeabdc4fc9")
+		(uuid "885497be-b4c3-5473-b1ce-5cbc67afff4d")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -7821,7 +7559,7 @@
 			)
 			(justify left)
 		)
-		(uuid "9a1f794a-8b21-566a-bb8c-7f3d10a4da5c")
+		(uuid "c1d09f33-8d11-5a9d-aa2d-1734e110ca10")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 331.47 106.68 0)
 			(effects
@@ -7908,7 +7646,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f2e88995-8e7b-5702-b3e0-3e64de9c7f08")
+		(uuid "054c5dd9-1203-5b1d-88b0-f9a13c9a3ecb")
 	)
 	(label "GLD2"
 		(at 304.8 143.51 90)
@@ -7918,7 +7656,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "390d8918-4fef-545e-bb68-5f28f38d472c")
+		(uuid "b71bd817-9373-583a-9bbe-b75db3485487")
 	)
 	(wire
 		(pts
@@ -7928,7 +7666,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ea506916-63f6-5406-85ce-6c8f586fdf66")
+		(uuid "f091729e-f100-50da-ac95-36fefc09100a")
 	)
 	(global_label "GL2"
 		(shape passive)
@@ -7940,7 +7678,7 @@
 			)
 			(justify right)
 		)
-		(uuid "8a19e557-cd5f-5127-99d8-d28cdc1a3151")
+		(uuid "9e3267b0-16ba-5562-b84f-ab563da39073")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 304.8 156.21 0)
 			(effects
@@ -8027,7 +7765,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "439af0f2-e421-5321-bcac-3eb90351db8b")
+		(uuid "79084c29-90ed-51ec-a2d4-15cc98bcb457")
 	)
 	(global_label "GL2"
 		(shape passive)
@@ -8039,7 +7777,7 @@
 			)
 			(justify right)
 		)
-		(uuid "9c3d38c5-2c37-5944-b5cc-5fa24001f4d3")
+		(uuid "7ed278d0-ad5b-5a02-b877-e45d71c16555")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 318.77 160.02 0)
 			(effects
@@ -8059,7 +7797,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ca21cac7-5b08-59a4-a97c-78c00b16de14")
+		(uuid "a1285831-2e6a-5b49-b024-cceeabdc4fc9")
 	)
 	(global_label "IS2"
 		(shape passive)
@@ -8071,271 +7809,9 @@
 			)
 			(justify left)
 		)
-		(uuid "8876c375-4d00-57c2-aad9-d9352bfab50a")
+		(uuid "9a1f794a-8b21-566a-bb8c-7f3d10a4da5c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 331.47 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:C")
-		(at 375.92 106.68 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c9e871f4-e0f9-5745-b74b-5089398defc7")
-		(property "Reference" "C313"
-			(at 375.92 104.14 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1n C0G 50V"
-			(at 375.92 109.22 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 379.73 105.7148 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 375.92 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 375.92 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c50e1068-b63c-55cb-8558-63d813cf38c1")
-		)
-		(pin "2"
-			(uuid "e1eb51f2-557a-5bbf-95f6-d983c6f04fab")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/db218c57-fce2-5029-b7fb-e41a4af8aa9b"
-					(reference "C313")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 372.11 106.68) (xy 369.57 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "28492d1b-e4a4-55c6-935c-20cf579bb666")
-	)
-	(global_label "GH2"
-		(shape passive)
-		(at 369.57 106.68 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "fa24f629-f748-5db3-b5f3-4d950ed9b8b5")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 369.57 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 379.73 106.68) (xy 382.27 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "be0ada2d-ab05-5414-89b0-f1b0dbf67074")
-	)
-	(global_label "SW2"
-		(shape passive)
-		(at 382.27 106.68 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "6d3469aa-6913-5b16-ac26-ac2cf7ac16af")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 382.27 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:C")
-		(at 375.92 160.02 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "506c7439-5640-5be5-83bc-fd607a43b817")
-		(property "Reference" "C314"
-			(at 375.92 157.48 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1n C0G 50V"
-			(at 375.92 162.56 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 379.73 159.0548 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 375.92 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 375.92 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2fe74bde-023f-5e9f-9673-fded39a1db8d")
-		)
-		(pin "2"
-			(uuid "5b37b9bd-962d-5c61-acc4-459072512e17")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/db218c57-fce2-5029-b7fb-e41a4af8aa9b"
-					(reference "C314")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 372.11 160.02) (xy 369.57 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ec2dae1-751c-50a3-baca-07ab2a8d4368")
-	)
-	(global_label "GL2"
-		(shape passive)
-		(at 369.57 160.02 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "5538f94b-1826-5136-93d2-fb002e582f7c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 369.57 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 379.73 160.02) (xy 382.27 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f150eb78-7c49-5b85-a04a-8f095bff4983")
-	)
-	(global_label "IS2"
-		(shape passive)
-		(at 382.27 160.02 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "aa104745-3267-5366-9761-50a1c06faa84")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 382.27 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8418,7 +7894,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f9a56d47-de54-5268-bc68-33a573d142d7")
+		(uuid "f2e88995-8e7b-5702-b3e0-3e64de9c7f08")
 	)
 	(label "BOOT2"
 		(at 359.41 64.77 270)
@@ -8428,7 +7904,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "4a192f6d-89eb-5e03-bb77-cd4f55acf176")
+		(uuid "390d8918-4fef-545e-bb68-5f28f38d472c")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:PWR_FLAG")
@@ -8503,7 +7979,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cdb19663-b8dd-5c02-9906-f37f0afe2ee6")
+		(uuid "ea506916-63f6-5406-85ce-6c8f586fdf66")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -8515,7 +7991,7 @@
 			)
 			(justify right)
 		)
-		(uuid "815fb882-6c89-55eb-8bf7-7eb6c924fc10")
+		(uuid "8a19e557-cd5f-5127-99d8-d28cdc1a3151")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 359.41 100.33 0)
 			(effects
@@ -8527,7 +8003,7 @@
 			)
 		)
 	)
-	(text "High side from a bootstrap: duty up to 0.985 at 50 kHz with DT 200 ns (sim/m15_bridge.py: the switch node falls to the low-side diode in every dead time and recharges the bootstrap); 100 % duty holds 0.5-1 ms."
+	(text "High side from a bootstrap: in TCM the low side conducts every period (>= 1 us), so the bootstrap is refreshed every cycle (>= 10.8 V, sim/r1); 100 % duty holds 0.5-1 ms. +12 V: 4 x 22 nC x f + 6 mA = 10-19 mA at 40-150 kHz."
 		(exclude_from_sim no)
 		(at 30.48 186.69 0)
 		(effects
@@ -8536,7 +8012,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "bbb0564a-786f-5346-8a60-d9b1fc9d3939")
+		(uuid "439af0f2-e421-5321-bcac-3eb90351db8b")
 	)
 	(sheet_instances
 		(path "/"

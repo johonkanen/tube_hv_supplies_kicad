@@ -738,118 +738,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_hv_supplies_rev3:Heatsink"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "HS"
-				(at 0 5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Heatsink"
-				(at 0 -1.27 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.3048 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0.3048 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Heatsink"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "thermal heat temperature"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Heatsink_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Heatsink_0_1"
-				(polyline
-					(pts
-						(xy -0.3302 1.27) (xy -0.9652 1.27) (xy -0.9652 3.81) (xy -1.6002 3.81) (xy -1.6002 1.27) (xy -2.2352 1.27) (xy -2.2352 3.81) (xy -2.8702 3.81) (xy -2.8702 0) (xy -0.9652 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.3302 1.27) (xy -0.3302 3.81) (xy 0.3048 3.81) (xy 0.3048 1.27) (xy 0.9398 1.27) (xy 0.9398 3.81) (xy 1.5748 3.81) (xy 1.5748 1.27) (xy 2.2098 1.27) (xy 2.2098 3.81) (xy 2.8448 3.81) (xy 2.8448 0) (xy -0.9652 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "tube_hv_supplies_rev3:L"
 			(pin_numbers
 				(hide yes)
@@ -1705,7 +1593,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "02 Two half-bridge synchronous bucks (IKP08N65F5, 3 mH, shunts in the low-side emitter and in the electrolytic's return). Second stage moved from 4 kHz to 27.7 kHz (damped, Q = 1); one 100 uF per bridge. Sized for V_ANODE 0.7 A continuous / 0.8 A peaks, V_SCREEN 0.18 A (trips 2.0 A). Outputs: V_ANODE (W04-a) and V_SCREEN (W05-a). f_sw 50 kHz recommended."
+	(text "02 Two half-bridge synchronous bucks in triangular-current mode (TCM, zero-voltage turn-on on both edges; f 40-150 kHz, both bridges at one frequency, interleaved; STATUS fourth pass). IKP08N65F5 on the chassis plate, 220 pF snubbers, 220 / 470 uH, C1 = 100 uF + 4.7 uF film through the I_C shunt, second stage 68 uH / 4.7 uF film / 22 uF + 1.0 ohm leg. Sized for V_ANODE 0.7 A continuous / 0.8 A peaks, V_SCREEN 0.18 A (trips +-3.0 A). Outputs: V_ANODE (W04-a) and V_SCREEN (W05-a)."
 		(exclude_from_sim no)
 		(at 30.48 17.78 0)
 		(effects
@@ -1744,7 +1632,7 @@
 				)
 			)
 		)
-		(property "Value" "0R link (bridge input; fuse option: Eaton PV-2A10/1P, 2 A 1000 VDC)"
+		(property "Value" "0R jumper 2512 (bridge input link)"
 			(at 30.48 64.77 270)
 			(effects
 				(font
@@ -1752,7 +1640,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 30.48 64.008 0)
 			(effects
 				(font
@@ -2230,7 +2118,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp"
 			(at 55.88 104.14 0)
 			(effects
 				(font
@@ -2395,7 +2283,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp"
 			(at 55.88 139.7 0)
 			(effects
 				(font
@@ -2542,76 +2430,6 @@
 				)
 				(justify right)
 				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:Heatsink")
-		(at 74.93 106.68 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8432b753-3be2-512a-b0e7-03830c9064ee")
-		(property "Reference" "HS201"
-			(at 74.93 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SK 104 38.1 mm (Q201, ~12 K/W, insulated mounting)"
-			(at 74.93 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3"
-			(at 75.2348 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 75.2348 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Heatsink"
-			(at 74.93 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "Fischer SK 104 38,1 STC"
-			(at 74.93 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "HS201")
-					(unit 1)
-				)
 			)
 		)
 	)
@@ -2772,7 +2590,7 @@
 				)
 			)
 		)
-		(property "Value" "3mH ETD39 N87, 192t 0.5mm, gap 1.9mm (Isat 2.4A, DCR 1.2R)"
+		(property "Value" "220uH ETD39 N97, 50t litz 0.8mm2, gap ~1.8mm (Isat >= 10A, DCR ~0.1R hot)"
 			(at 91.44 118.11 270)
 			(effects
 				(font
@@ -2807,7 +2625,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "TDK B66363G0000X187 core set + ETD39 bobbin"
+		(property "MPN" "TDK B66363G0000X197 (N97) core set + ETD39 bobbin"
 			(at 91.44 115.57 0)
 			(effects
 				(font
@@ -2912,8 +2730,8 @@
 				)
 			)
 		)
-		(property "Value" "100u/500V 105C"
-			(at 122 134.62 0)
+		(property "Value" "100u/500V 105C 5000h snap-in"
+			(at 129.7 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2939,6 +2757,15 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
+			(at 111.76 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay MAL215919101E3 (PUL-SI, 22 x 40)"
 			(at 111.76 133.35 0)
 			(effects
 				(font
@@ -3183,7 +3010,7 @@
 				)
 			)
 		)
-		(property "Value" "33uH 2A"
+		(property "Value" "68uH >= 2A"
 			(at 132.08 118.11 270)
 			(effects
 				(font
@@ -3191,7 +3018,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P"
+		(property "Footprint" "Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1"
 			(at 132.08 115.57 0)
 			(effects
 				(font
@@ -3210,6 +3037,15 @@
 			)
 		)
 		(property "Description" "Inductor"
+			(at 132.08 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay IHB-1 68 uH (current rating to confirm >= 2 A)"
 			(at 132.08 115.57 0)
 			(effects
 				(font
@@ -3286,125 +3122,6 @@
 		(uuid "4a77c4b4-0b6a-5aa5-b1cb-8f65c7c914b1")
 	)
 	(symbol
-		(lib_id "tube_hv_supplies_rev3:R")
-		(at 132.08 92.71 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c1c90660-4ea8-5eb1-b9df-2489db145825")
-		(property "Reference" "R204"
-			(at 136.82 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5.6 1W (damping, Q = 1)"
-			(at 147.27 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
-			(at 130.302 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 132.08 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 132.08 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "29c8a1cd-4545-5aca-a813-072f2a68acad")
-		)
-		(pin "2"
-			(uuid "81d0b53d-5b95-58bb-84ea-5c96dcbb254b")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R204")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 132.08 88.9) (xy 132.08 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c5f2a27e-e8b0-5e2e-a09c-4f7a9a6242d4")
-	)
-	(global_label "UC1"
-		(shape passive)
-		(at 132.08 86.36 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "63634114-56ca-5934-b910-1ac8b88e8b53")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 132.08 96.52) (xy 132.08 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00d926c6-6dab-536c-bd3c-7d4bc4e20743")
-	)
-	(label "VO1"
-		(at 132.08 99.06 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3d357df9-d18f-5414-9677-8c4ea95c823f")
-	)
-	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
 		(at 152.4 133.35 90)
 		(unit 1)
@@ -3421,7 +3138,7 @@
 				)
 			)
 		)
-		(property "Value" "1u/630V MKP"
+		(property "Value" "4.7u/630V MKP DC-link"
 			(at 152.4 135.89 270)
 			(effects
 				(font
@@ -3429,7 +3146,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4"
 			(at 156.21 132.3848 0)
 			(effects
 				(font
@@ -3448,6 +3165,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 152.4 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TDK B32674D6475K"
 			(at 152.4 133.35 0)
 			(effects
 				(font
@@ -3479,7 +3205,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "006d7512-2850-59d0-a582-e9311767ce27")
+		(uuid "c5f2a27e-e8b0-5e2e-a09c-4f7a9a6242d4")
 	)
 	(label "VO1"
 		(at 146.05 133.35 180)
@@ -3489,7 +3215,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "a05ff891-9a4a-5bff-85ec-da28b37f068c")
+		(uuid "63634114-56ca-5934-b910-1ac8b88e8b53")
 	)
 	(wire
 		(pts
@@ -3499,7 +3225,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "106bc7ce-afa8-533f-8478-78914b4819be")
+		(uuid "00d926c6-6dab-536c-bd3c-7d4bc4e20743")
 	)
 	(global_label "GND_STAR"
 		(shape passive)
@@ -3511,7 +3237,7 @@
 			)
 			(justify left)
 		)
-		(uuid "6eefe495-0023-5cfc-bcab-c38442274218")
+		(uuid "3d357df9-d18f-5414-9677-8c4ea95c823f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 158.75 133.35 0)
 			(effects
@@ -3548,7 +3274,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P7.62mm_Vertical"
 			(at 150.622 106.68 0)
 			(effects
 				(font
@@ -3607,7 +3333,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f411dc79-7460-5d73-a711-ba31de5a1ed4")
+		(uuid "006d7512-2850-59d0-a582-e9311767ce27")
 	)
 	(label "VO1"
 		(at 152.4 100.33 90)
@@ -3617,7 +3343,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c3466cff-fc18-5f21-a8df-664afa52a28a")
+		(uuid "a05ff891-9a4a-5bff-85ec-da28b37f068c")
 	)
 	(wire
 		(pts
@@ -3627,7 +3353,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1966b3c6-6475-52c4-ba86-86c9aed40ab2")
+		(uuid "106bc7ce-afa8-533f-8478-78914b4819be")
 	)
 	(global_label "V_ANODE"
 		(shape passive)
@@ -3639,7 +3365,7 @@
 			)
 			(justify right)
 		)
-		(uuid "2c7c11a0-5d42-5e2e-aaac-fcdc93505cbe")
+		(uuid "6eefe495-0023-5cfc-bcab-c38442274218")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 152.4 113.03 0)
 			(effects
@@ -3668,7 +3394,7 @@
 				)
 			)
 		)
-		(property "Value" "110k 1W HV"
+		(property "Value" "110k 2512 1W (500 V limiting)"
 			(at 193.04 135.89 270)
 			(effects
 				(font
@@ -3676,7 +3402,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 193.04 135.128 0)
 			(effects
 				(font
@@ -3695,6 +3421,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 193.04 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay CRCW2512 class (to confirm)"
 			(at 193.04 133.35 0)
 			(effects
 				(font
@@ -3726,7 +3461,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fed4fe51-dfef-511c-b12c-ac56bc981cf6")
+		(uuid "f411dc79-7460-5d73-a711-ba31de5a1ed4")
 	)
 	(global_label "V_ANODE"
 		(shape passive)
@@ -3738,7 +3473,7 @@
 			)
 			(justify right)
 		)
-		(uuid "0a6b6a59-7ccf-5982-8163-efce6f64aefa")
+		(uuid "c3466cff-fc18-5f21-a8df-664afa52a28a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 186.69 133.35 0)
 			(effects
@@ -3758,7 +3493,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3b6c83cc-c0c3-5283-bff8-7de05e7077c1")
+		(uuid "1966b3c6-6475-52c4-ba86-86c9aed40ab2")
 	)
 	(label "BL1"
 		(at 199.39 133.35 0)
@@ -3768,7 +3503,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6598955e-a478-5b02-878d-21462c9ea099")
+		(uuid "2c7c11a0-5d42-5e2e-aaac-fcdc93505cbe")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -3787,7 +3522,7 @@
 				)
 			)
 		)
-		(property "Value" "110k 1W HV"
+		(property "Value" "110k 2512 1W (500 V limiting)"
 			(at 193.04 162.56 270)
 			(effects
 				(font
@@ -3795,7 +3530,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 193.04 161.798 0)
 			(effects
 				(font
@@ -3814,6 +3549,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 193.04 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay CRCW2512 class (to confirm)"
 			(at 193.04 160.02 0)
 			(effects
 				(font
@@ -3845,7 +3589,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4db64e2e-6299-52c2-ad83-b9b27b7f960a")
+		(uuid "fed4fe51-dfef-511c-b12c-ac56bc981cf6")
 	)
 	(label "BL1"
 		(at 186.69 160.02 180)
@@ -3855,7 +3599,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "714c3a78-59d0-528e-8a28-9c00c4175cf6")
+		(uuid "0a6b6a59-7ccf-5982-8163-efce6f64aefa")
 	)
 	(wire
 		(pts
@@ -3865,7 +3609,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e0ed7f78-6257-5959-af60-99465f7eff15")
+		(uuid "3b6c83cc-c0c3-5283-bff8-7de05e7077c1")
 	)
 	(global_label "GND_STAR"
 		(shape passive)
@@ -3877,7 +3621,7 @@
 			)
 			(justify left)
 		)
-		(uuid "4b35e927-a337-5c4a-bfed-34e7ea60c4ec")
+		(uuid "6598955e-a478-5b02-878d-21462c9ea099")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 199.39 160.02 0)
 			(effects
@@ -3898,7 +3642,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7336a66a-8553-5511-a221-fceec42adabb")
+		(uuid "4db64e2e-6299-52c2-ad83-b9b27b7f960a")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -3917,7 +3661,7 @@
 				)
 			)
 		)
-		(property "Value" "0R link (bridge input; fuse option: Eaton PV-2A10/1P, 2 A 1000 VDC)"
+		(property "Value" "0R jumper 2512 (bridge input link)"
 			(at 254 64.77 270)
 			(effects
 				(font
@@ -3925,7 +3669,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 254 64.008 0)
 			(effects
 				(font
@@ -3975,7 +3719,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c8f3e382-158a-54b9-98d8-b036a0107ce9")
+		(uuid "714c3a78-59d0-528e-8a28-9c00c4175cf6")
 	)
 	(global_label "UIN"
 		(shape passive)
@@ -3987,7 +3731,7 @@
 			)
 			(justify right)
 		)
-		(uuid "4321a70f-c9e1-5540-914f-396c059a62a9")
+		(uuid "e0ed7f78-6257-5959-af60-99465f7eff15")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 247.65 62.23 0)
 			(effects
@@ -4007,7 +3751,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f66e5ff0-f608-50ff-9a2d-7a9f1062c5e7")
+		(uuid "4b35e927-a337-5c4a-bfed-34e7ea60c4ec")
 	)
 	(label "UIN2"
 		(at 260.35 62.23 0)
@@ -4017,7 +3761,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7f1e8e5f-9e9b-5331-acd2-b271c5df1048")
+		(uuid "7336a66a-8553-5511-a221-fceec42adabb")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C_Polarized")
@@ -4094,7 +3838,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d763013d-4b77-5a69-b3f3-0c324e7c7b29")
+		(uuid "c8f3e382-158a-54b9-98d8-b036a0107ce9")
 	)
 	(label "UIN2"
 		(at 274.32 64.77 90)
@@ -4104,7 +3848,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "579cb80b-4024-5fab-8b9b-c26e7af22a56")
+		(uuid "4321a70f-c9e1-5540-914f-396c059a62a9")
 	)
 	(wire
 		(pts
@@ -4114,7 +3858,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c9d68e4c-681b-516c-8929-984acfb6ef5d")
+		(uuid "f66e5ff0-f608-50ff-9a2d-7a9f1062c5e7")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -4126,7 +3870,7 @@
 			)
 			(justify right)
 		)
-		(uuid "9d7c01ec-ce7d-5ce1-b5c5-507fe7eb7a76")
+		(uuid "7f1e8e5f-9e9b-5331-acd2-b271c5df1048")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 274.32 77.47 0)
 			(effects
@@ -4213,7 +3957,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9d093526-22c3-5c20-95f3-cb27c1fe9538")
+		(uuid "d763013d-4b77-5a69-b3f3-0c324e7c7b29")
 	)
 	(label "UIN2"
 		(at 288.29 71.12 180)
@@ -4223,7 +3967,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "d856428c-6119-5da6-b832-5e46cc92730e")
+		(uuid "579cb80b-4024-5fab-8b9b-c26e7af22a56")
 	)
 	(wire
 		(pts
@@ -4233,7 +3977,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "594610cc-7746-5c2f-855e-6f28559623c9")
+		(uuid "c9d68e4c-681b-516c-8929-984acfb6ef5d")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -4245,7 +3989,7 @@
 			)
 			(justify left)
 		)
-		(uuid "2b86ad67-bdb3-5f91-a8ae-ea1f66e504cc")
+		(uuid "9d7c01ec-ce7d-5ce1-b5c5-507fe7eb7a76")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 300.99 71.12 0)
 			(effects
@@ -4332,7 +4076,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0f78a97b-91b7-5bf0-b070-7c1a746e1aee")
+		(uuid "9d093526-22c3-5c20-95f3-cb27c1fe9538")
 	)
 	(label "UIN2"
 		(at 308.61 71.12 180)
@@ -4342,7 +4086,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "d5a1bb55-768c-52db-906e-411299f34f0f")
+		(uuid "d856428c-6119-5da6-b832-5e46cc92730e")
 	)
 	(wire
 		(pts
@@ -4352,7 +4096,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3f07a7a8-bd83-5d7e-aced-9dd9da1fcda2")
+		(uuid "594610cc-7746-5c2f-855e-6f28559623c9")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -4364,7 +4108,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7956f8f0-a025-58c8-97e7-9224b1078087")
+		(uuid "2b86ad67-bdb3-5f91-a8ae-ea1f66e504cc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 321.31 71.12 0)
 			(effects
@@ -4403,7 +4147,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp"
 			(at 279.4 104.14 0)
 			(effects
 				(font
@@ -4465,7 +4209,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bbc6c145-584d-597f-80b4-68c656f4c2c3")
+		(uuid "0f78a97b-91b7-5bf0-b070-7c1a746e1aee")
 	)
 	(global_label "GH2"
 		(shape passive)
@@ -4477,7 +4221,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f1258b5a-b749-5929-810e-5f2112bb7d1d")
+		(uuid "d5a1bb55-768c-52db-906e-411299f34f0f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 266.7 106.68 0)
 			(effects
@@ -4497,7 +4241,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e19d89b9-f3fc-55ab-a9eb-e804699a2985")
+		(uuid "3f07a7a8-bd83-5d7e-aced-9dd9da1fcda2")
 	)
 	(label "UIN2"
 		(at 276.86 99.06 90)
@@ -4507,7 +4251,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4c5721b8-e383-5f3a-8df8-6a4928f71440")
+		(uuid "7956f8f0-a025-58c8-97e7-9224b1078087")
 	)
 	(wire
 		(pts
@@ -4517,7 +4261,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d66e356f-1f6b-5c3b-9af7-fc11ced0bc0a")
+		(uuid "bbc6c145-584d-597f-80b4-68c656f4c2c3")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -4529,7 +4273,7 @@
 			)
 			(justify right)
 		)
-		(uuid "08b2d27a-f866-55af-804c-fac6926db82b")
+		(uuid "f1258b5a-b749-5929-810e-5f2112bb7d1d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 276.86 114.3 0)
 			(effects
@@ -4568,7 +4312,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp"
 			(at 279.4 139.7 0)
 			(effects
 				(font
@@ -4630,7 +4374,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1c05055a-7cc2-55fd-8ef0-1bcce427973a")
+		(uuid "e19d89b9-f3fc-55ab-a9eb-e804699a2985")
 	)
 	(global_label "GL2"
 		(shape passive)
@@ -4642,7 +4386,7 @@
 			)
 			(justify right)
 		)
-		(uuid "41090e26-30b5-535f-ba9f-b2c070954e51")
+		(uuid "4c5721b8-e383-5f3a-8df8-6a4928f71440")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 266.7 142.24 0)
 			(effects
@@ -4662,7 +4406,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "abaf2979-ac52-5351-a283-b296508cbcbd")
+		(uuid "d66e356f-1f6b-5c3b-9af7-fc11ced0bc0a")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -4674,7 +4418,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ac4d4c1c-5469-50e3-a52c-20bb39c0911c")
+		(uuid "08b2d27a-f866-55af-804c-fac6926db82b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 276.86 134.62 0)
 			(effects
@@ -4694,7 +4438,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e8db6ed8-fabb-58a9-a7d8-f1abd5cd9cb4")
+		(uuid "1c05055a-7cc2-55fd-8ef0-1bcce427973a")
 	)
 	(global_label "IS2"
 		(shape passive)
@@ -4706,7 +4450,7 @@
 			)
 			(justify right)
 		)
-		(uuid "0a32a2f9-a146-5e53-9429-d8c7352e3185")
+		(uuid "41090e26-30b5-535f-ba9f-b2c070954e51")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 276.86 149.86 0)
 			(effects
@@ -4715,76 +4459,6 @@
 				)
 				(justify right)
 				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:Heatsink")
-		(at 298.45 106.68 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "927b6762-cdbf-5ab6-a7e0-b47efb764b6c")
-		(property "Reference" "HS202"
-			(at 298.45 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SK 104 38.1 mm (Q203, ~12 K/W, insulated mounting)"
-			(at 298.45 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Heatsink:Heatsink_Fischer_SK104-STCB_35x13mm__2xDrill3.5mm_ScrewM3"
-			(at 298.7548 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 298.7548 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Heatsink"
-			(at 298.45 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "Fischer SK 104 38,1 STC"
-			(at 298.45 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "HS202")
-					(unit 1)
-				)
 			)
 		)
 	)
@@ -4872,7 +4546,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9bcfb1ea-4e86-5e1d-964e-435460488a5a")
+		(uuid "abaf2979-ac52-5351-a283-b296508cbcbd")
 	)
 	(global_label "IS2"
 		(shape passive)
@@ -4884,7 +4558,7 @@
 			)
 			(justify right)
 		)
-		(uuid "dab599e5-f781-5ff6-adf2-f52e57edc9a7")
+		(uuid "ac4d4c1c-5469-50e3-a52c-20bb39c0911c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 267.97 170.18 0)
 			(effects
@@ -4904,7 +4578,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7dd171e0-3e4e-5e0f-8dae-8a77707508d8")
+		(uuid "e8db6ed8-fabb-58a9-a7d8-f1abd5cd9cb4")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -4916,7 +4590,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f42093ae-44df-531d-bb00-3bf91e5f8b81")
+		(uuid "0a32a2f9-a146-5e53-9429-d8c7352e3185")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 280.67 170.18 0)
 			(effects
@@ -4945,7 +4619,7 @@
 				)
 			)
 		)
-		(property "Value" "3mH ETD39 N87, 192t 0.5mm, gap 1.9mm (Isat 2.4A, DCR 1.2R)"
+		(property "Value" "470uH ETD39 N97, 64t litz 0.5mm2, gap ~1.4mm (Isat >= 6A, DCR ~0.2R hot)"
 			(at 314.96 118.11 270)
 			(effects
 				(font
@@ -4980,7 +4654,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "TDK B66363G0000X187 core set + ETD39 bobbin"
+		(property "MPN" "TDK B66363G0000X197 (N97) core set + ETD39 bobbin"
 			(at 314.96 115.57 0)
 			(effects
 				(font
@@ -5012,7 +4686,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1692f207-caa6-56cf-a6df-53da6f3d9b6f")
+		(uuid "9bcfb1ea-4e86-5e1d-964e-435460488a5a")
 	)
 	(global_label "SW2"
 		(shape passive)
@@ -5024,7 +4698,7 @@
 			)
 			(justify right)
 		)
-		(uuid "69653572-d8d0-590a-84da-6d091abdf2a4")
+		(uuid "dab599e5-f781-5ff6-adf2-f52e57edc9a7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 308.61 115.57 0)
 			(effects
@@ -5044,7 +4718,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d474ca58-5c2b-5c83-99b6-36f370728fa0")
+		(uuid "7dd171e0-3e4e-5e0f-8dae-8a77707508d8")
 	)
 	(label "UC2"
 		(at 321.31 115.57 0)
@@ -5054,7 +4728,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5d2b72cd-6341-5cd4-9091-b643b5dfa5a5")
+		(uuid "f42093ae-44df-531d-bb00-3bf91e5f8b81")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C_Polarized")
@@ -5073,8 +4747,8 @@
 				)
 			)
 		)
-		(property "Value" "100u/500V 105C"
-			(at 345.52 134.62 0)
+		(property "Value" "100u/500V 105C 5000h snap-in"
+			(at 353.22 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5108,6 +4782,15 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "Vishay MAL215919101E3 (PUL-SI, 22 x 40)"
+			(at 335.28 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "492a38ca-3d97-58fd-8370-9fad9ca27114")
 		)
@@ -5131,7 +4814,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e1298130-3155-5323-bdcf-5d270d7ac99c")
+		(uuid "1692f207-caa6-56cf-a6df-53da6f3d9b6f")
 	)
 	(label "UC2"
 		(at 335.28 127 90)
@@ -5141,7 +4824,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "fe232fa4-ab2a-5f67-a58d-68bb9ce1cdfe")
+		(uuid "69653572-d8d0-590a-84da-6d091abdf2a4")
 	)
 	(wire
 		(pts
@@ -5151,7 +4834,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "987c5784-b719-51fe-8cab-b04647eb1feb")
+		(uuid "d474ca58-5c2b-5c83-99b6-36f370728fa0")
 	)
 	(global_label "IC2"
 		(shape passive)
@@ -5163,7 +4846,7 @@
 			)
 			(justify right)
 		)
-		(uuid "40317fe2-bebc-554c-9d84-850977202411")
+		(uuid "5d2b72cd-6341-5cd4-9091-b643b5dfa5a5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 335.28 139.7 0)
 			(effects
@@ -5259,7 +4942,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b9d394a5-69ed-5047-8c36-b7d4f769f04c")
+		(uuid "e1298130-3155-5323-bdcf-5d270d7ac99c")
 	)
 	(global_label "IC2"
 		(shape passive)
@@ -5271,7 +4954,7 @@
 			)
 			(justify right)
 		)
-		(uuid "aa595b90-4d18-5fd3-992c-3b4e1c612db6")
+		(uuid "fe232fa4-ab2a-5f67-a58d-68bb9ce1cdfe")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 328.93 163.83 0)
 			(effects
@@ -5291,7 +4974,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "421ea019-1628-5c76-b5d8-ad4d61e58c7d")
+		(uuid "987c5784-b719-51fe-8cab-b04647eb1feb")
 	)
 	(global_label "PGND"
 		(shape passive)
@@ -5303,7 +4986,7 @@
 			)
 			(justify left)
 		)
-		(uuid "8122ad93-c93e-5081-80f4-c66542e7ac8e")
+		(uuid "40317fe2-bebc-554c-9d84-850977202411")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 341.63 163.83 0)
 			(effects
@@ -5332,7 +5015,7 @@
 				)
 			)
 		)
-		(property "Value" "33uH 2A"
+		(property "Value" "68uH >= 2A"
 			(at 355.6 118.11 270)
 			(effects
 				(font
@@ -5340,7 +5023,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P"
+		(property "Footprint" "Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1"
 			(at 355.6 115.57 0)
 			(effects
 				(font
@@ -5359,6 +5042,15 @@
 			)
 		)
 		(property "Description" "Inductor"
+			(at 355.6 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay IHB-1 68 uH (current rating to confirm >= 2 A)"
 			(at 355.6 115.57 0)
 			(effects
 				(font
@@ -5390,7 +5082,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a473d473-2479-5f89-9e6f-295162b69b59")
+		(uuid "b9d394a5-69ed-5047-8c36-b7d4f769f04c")
 	)
 	(label "UC2"
 		(at 349.25 115.57 180)
@@ -5400,7 +5092,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "18509742-28d3-5bfc-a6bd-35867b3a05fb")
+		(uuid "aa595b90-4d18-5fd3-992c-3b4e1c612db6")
 	)
 	(wire
 		(pts
@@ -5410,7 +5102,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ee4b75cc-34bc-58c1-ac6c-fd68fca220cc")
+		(uuid "421ea019-1628-5c76-b5d8-ad4d61e58c7d")
 	)
 	(label "VO2"
 		(at 361.95 115.57 0)
@@ -5420,114 +5112,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ac92b036-13d2-5a9c-9886-6656ad1319e5")
-	)
-	(symbol
-		(lib_id "tube_hv_supplies_rev3:R")
-		(at 355.6 92.71 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ef70d997-5e34-58b0-ba67-4cd91867b8c9")
-		(property "Reference" "R211"
-			(at 360.34 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5.6 1W (damping, Q = 1)"
-			(at 370.79 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
-			(at 353.822 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 355.6 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 355.6 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "91f2c4fc-9bbc-564f-aee4-f8ec0b6b11e5")
-		)
-		(pin "2"
-			(uuid "c65618e1-410f-5978-8a0f-d7622a9166ea")
-		)
-		(instances
-			(project "tube_hv_supplies_rev3"
-				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
-					(reference "R211")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 355.6 88.9) (xy 355.6 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a5c8e20-cc52-58da-8f77-68cc066adae3")
-	)
-	(label "UC2"
-		(at 355.6 86.36 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1efdd601-6fc2-52fb-ba9f-3c864be078a8")
-	)
-	(wire
-		(pts
-			(xy 355.6 96.52) (xy 355.6 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "15623c40-d07e-5f40-9123-dec1e026e63f")
-	)
-	(label "VO2"
-		(at 355.6 99.06 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d9588f4d-6d02-5414-a88e-b40981e488e6")
+		(uuid "8122ad93-c93e-5081-80f4-c66542e7ac8e")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C")
@@ -5546,7 +5131,7 @@
 				)
 			)
 		)
-		(property "Value" "1u/630V MKP"
+		(property "Value" "4.7u/630V MKP DC-link"
 			(at 375.92 135.89 270)
 			(effects
 				(font
@@ -5554,7 +5139,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4"
 			(at 379.73 132.3848 0)
 			(effects
 				(font
@@ -5573,6 +5158,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 375.92 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TDK B32674D6475K"
 			(at 375.92 133.35 0)
 			(effects
 				(font
@@ -5604,7 +5198,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "141564c9-6c7f-5925-aba7-fefe71e0c21b")
+		(uuid "a473d473-2479-5f89-9e6f-295162b69b59")
 	)
 	(label "VO2"
 		(at 369.57 133.35 180)
@@ -5614,7 +5208,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "fd48150d-56b0-5218-9f29-c00fd85a3de5")
+		(uuid "18509742-28d3-5bfc-a6bd-35867b3a05fb")
 	)
 	(wire
 		(pts
@@ -5624,7 +5218,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7f99607a-9b42-51fe-a44e-4e428a272b97")
+		(uuid "ee4b75cc-34bc-58c1-ac6c-fd68fca220cc")
 	)
 	(global_label "GND_STAR"
 		(shape passive)
@@ -5636,7 +5230,7 @@
 			)
 			(justify left)
 		)
-		(uuid "e11748dc-2466-5866-a430-075a5f41fc19")
+		(uuid "ac92b036-13d2-5a9c-9886-6656ad1319e5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 382.27 133.35 0)
 			(effects
@@ -5673,7 +5267,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P25.40mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0918_L18.0mm_D9.0mm_P7.62mm_Vertical"
 			(at 374.142 106.68 0)
 			(effects
 				(font
@@ -5732,7 +5326,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f2f817d7-df5d-5027-b1b6-bdc6cb10eb12")
+		(uuid "1a5c8e20-cc52-58da-8f77-68cc066adae3")
 	)
 	(label "VO2"
 		(at 375.92 100.33 90)
@@ -5742,7 +5336,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "97778662-63c0-5bbf-a4dc-dc5bc47ae4b4")
+		(uuid "1efdd601-6fc2-52fb-ba9f-3c864be078a8")
 	)
 	(wire
 		(pts
@@ -5752,7 +5346,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3cd99d55-e416-55bc-aad6-edadbea3cb2f")
+		(uuid "15623c40-d07e-5f40-9123-dec1e026e63f")
 	)
 	(global_label "V_SCREEN"
 		(shape passive)
@@ -5764,7 +5358,7 @@
 			)
 			(justify right)
 		)
-		(uuid "70e09ce6-1fbe-56db-9db4-ad34190445aa")
+		(uuid "d9588f4d-6d02-5414-a88e-b40981e488e6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 375.92 113.03 0)
 			(effects
@@ -5793,7 +5387,7 @@
 				)
 			)
 		)
-		(property "Value" "110k 1W HV"
+		(property "Value" "110k 2512 1W (500 V limiting)"
 			(at 416.56 135.89 270)
 			(effects
 				(font
@@ -5801,7 +5395,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 416.56 135.128 0)
 			(effects
 				(font
@@ -5820,6 +5414,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 416.56 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay CRCW2512 class (to confirm)"
 			(at 416.56 133.35 0)
 			(effects
 				(font
@@ -5851,7 +5454,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f947a034-1d95-5ccf-885a-7de4de8c9abb")
+		(uuid "141564c9-6c7f-5925-aba7-fefe71e0c21b")
 	)
 	(global_label "V_SCREEN"
 		(shape passive)
@@ -5863,7 +5466,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a3efa061-93ba-51c3-9ae9-7655aa121d0a")
+		(uuid "fd48150d-56b0-5218-9f29-c00fd85a3de5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 410.21 133.35 0)
 			(effects
@@ -5883,7 +5486,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4c617d70-632f-5a74-aa5d-1a14840aa885")
+		(uuid "7f99607a-9b42-51fe-a44e-4e428a272b97")
 	)
 	(label "BL2"
 		(at 422.91 133.35 0)
@@ -5893,7 +5496,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c292a05f-631d-5328-8188-2f100635c983")
+		(uuid "e11748dc-2466-5866-a430-075a5f41fc19")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:R")
@@ -5912,7 +5515,7 @@
 				)
 			)
 		)
-		(property "Value" "110k 1W HV"
+		(property "Value" "110k 2512 1W (500 V limiting)"
 			(at 416.56 162.56 270)
 			(effects
 				(font
@@ -5920,7 +5523,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 416.56 161.798 0)
 			(effects
 				(font
@@ -5939,6 +5542,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 416.56 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "Vishay CRCW2512 class (to confirm)"
 			(at 416.56 160.02 0)
 			(effects
 				(font
@@ -5970,7 +5582,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "97923b4f-a1cd-5bd3-ac01-3963346a0609")
+		(uuid "f2f817d7-df5d-5027-b1b6-bdc6cb10eb12")
 	)
 	(label "BL2"
 		(at 410.21 160.02 180)
@@ -5980,7 +5592,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "eea26714-5d61-5711-b0bd-d20fee84eb21")
+		(uuid "97778662-63c0-5bbf-a4dc-dc5bc47ae4b4")
 	)
 	(wire
 		(pts
@@ -5990,7 +5602,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1419d14b-5ef1-55c1-87d7-8f8b0a362e7e")
+		(uuid "3cd99d55-e416-55bc-aad6-edadbea3cb2f")
 	)
 	(global_label "GND_STAR"
 		(shape passive)
@@ -6002,7 +5614,7 @@
 			)
 			(justify left)
 		)
-		(uuid "60126d78-e68f-51a4-8b2d-756b33258cdb")
+		(uuid "70e09ce6-1fbe-56db-9db4-ad34190445aa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 422.91 160.02 0)
 			(effects
@@ -6039,7 +5651,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-201AD_P15.24mm_Horizontal"
+		(property "Footprint" "Diode_THT:D_DO-201AD_P5.08mm_Vertical_CathodeUp"
 			(at 213.36 195.58 0)
 			(effects
 				(font
@@ -6098,7 +5710,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "07f6c59c-2eed-5912-bfa5-6917a2d08315")
+		(uuid "f947a034-1d95-5ccf-885a-7de4de8c9abb")
 	)
 	(global_label "V_ANODE"
 		(shape passive)
@@ -6110,7 +5722,7 @@
 			)
 			(justify right)
 		)
-		(uuid "1b67015d-0325-50bc-a828-0648cb72ec35")
+		(uuid "a3efa061-93ba-51c3-9ae9-7655aa121d0a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 207.01 195.58 0)
 			(effects
@@ -6130,7 +5742,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6d53a9d5-54b4-50ef-a6dc-57b81adaeb25")
+		(uuid "4c617d70-632f-5a74-aa5d-1a14840aa885")
 	)
 	(global_label "V_SCREEN"
 		(shape passive)
@@ -6142,7 +5754,7 @@
 			)
 			(justify left)
 		)
-		(uuid "4acc782b-75ac-5cb8-af7b-a506957442b6")
+		(uuid "c292a05f-631d-5328-8188-2f100635c983")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 219.71 195.58 0)
 			(effects
@@ -6229,7 +5841,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c5caa86d-96af-5bc5-bd13-f04ed61bac20")
+		(uuid "97923b4f-a1cd-5bd3-ac01-3963346a0609")
 	)
 	(global_label "V_ANODE"
 		(shape passive)
@@ -6241,7 +5853,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f6b717f9-b313-59a3-97c4-8e1e2b9d5580")
+		(uuid "eea26714-5d61-5711-b0bd-d20fee84eb21")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 83.82 213.36 0)
 			(effects
@@ -6261,7 +5873,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1e0d8f4d-771e-5b7d-a465-e627ac051466")
+		(uuid "1419d14b-5ef1-55c1-87d7-8f8b0a362e7e")
 	)
 	(global_label "GND_STAR"
 		(shape passive)
@@ -6273,7 +5885,7 @@
 			)
 			(justify right)
 		)
-		(uuid "aa4872f1-4fc5-5dbe-a663-8c846b990ca0")
+		(uuid "60126d78-e68f-51a4-8b2d-756b33258cdb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 83.82 215.9 0)
 			(effects
@@ -6357,7 +5969,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "da15a137-ece9-56a7-a44f-7e7e598879a9")
+		(uuid "07f6c59c-2eed-5912-bfa5-6917a2d08315")
 	)
 	(global_label "V_SCREEN"
 		(shape passive)
@@ -6369,7 +5981,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ecee1211-adaa-5417-88df-654583f909b6")
+		(uuid "1b67015d-0325-50bc-a828-0648cb72ec35")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 307.34 213.36 0)
 			(effects
@@ -6398,7 +6010,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 1W HV (VR37 class)"
+		(property "Value" "1M 2512 (500 V limiting)"
 			(at 152.4 215.9 270)
 			(effects
 				(font
@@ -6406,7 +6018,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 152.4 215.138 0)
 			(effects
 				(font
@@ -6456,7 +6068,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bf6d950a-26b3-5ee8-9afa-217615e9f144")
+		(uuid "6d53a9d5-54b4-50ef-a6dc-57b81adaeb25")
 	)
 	(global_label "V_ANODE"
 		(shape passive)
@@ -6468,7 +6080,7 @@
 			)
 			(justify right)
 		)
-		(uuid "dd43e4e7-1add-5c00-822c-f1a7a1f204c3")
+		(uuid "4acc782b-75ac-5cb8-af7b-a506957442b6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 146.05 213.36 0)
 			(effects
@@ -6488,7 +6100,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "65bb4e22-81b8-5ad0-9d72-64fe6e3cc25a")
+		(uuid "c5caa86d-96af-5bc5-bd13-f04ed61bac20")
 	)
 	(label "LED_VA"
 		(at 158.75 213.36 0)
@@ -6498,7 +6110,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e7f7ce8d-6c92-540a-9e25-b22e1ae27667")
+		(uuid "f6b717f9-b313-59a3-97c4-8e1e2b9d5580")
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:LED")
@@ -6575,7 +6187,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3b1a3754-2f23-59b3-a9db-b7b40c0c058c")
+		(uuid "1e0d8f4d-771e-5b7d-a465-e627ac051466")
 	)
 	(label "LED_VA"
 		(at 172.72 215.9 90)
@@ -6585,7 +6197,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d9d0c569-f349-5dad-8f3a-c17741324155")
+		(uuid "aa4872f1-4fc5-5dbe-a663-8c846b990ca0")
 	)
 	(wire
 		(pts
@@ -6595,7 +6207,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3e05f8af-c382-56b9-9941-8993a8654ebe")
+		(uuid "da15a137-ece9-56a7-a44f-7e7e598879a9")
 	)
 	(global_label "GND_STAR"
 		(shape passive)
@@ -6607,7 +6219,7 @@
 			)
 			(justify right)
 		)
-		(uuid "635a911c-0617-515b-b808-599354030aa6")
+		(uuid "ecee1211-adaa-5417-88df-654583f909b6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 172.72 228.6 0)
 			(effects
@@ -6615,6 +6227,1098 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 128.27 151.13 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b7fd9c77-21bb-5643-a053-1daee0b9fe5e")
+		(property "Reference" "C211"
+			(at 128.27 148.59 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7u/630V MKP DC-link"
+			(at 128.27 153.67 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4"
+			(at 132.08 150.1648 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 128.27 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TDK B32674D6475K"
+			(at 128.27 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "21fac090-b7f8-5a28-aa62-a1d94b23878e")
+		)
+		(pin "2"
+			(uuid "0ed49016-dcd6-5854-bdec-56d09a0ddcbc")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C211")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 124.46 151.13) (xy 121.92 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf6d950a-26b3-5ee8-9afa-217615e9f144")
+	)
+	(global_label "UC1"
+		(shape passive)
+		(at 121.92 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "dd43e4e7-1add-5c00-822c-f1a7a1f204c3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 121.92 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 132.08 151.13) (xy 134.62 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65bb4e22-81b8-5ad0-9d72-64fe6e3cc25a")
+	)
+	(global_label "IC1"
+		(shape passive)
+		(at 134.62 151.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e7f7ce8d-6c92-540a-9e25-b22e1ae27667")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 134.62 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C_Polarized")
+		(at 172.72 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6434b6af-9363-5a4e-8b6e-ac17f2f01e59")
+		(property "Reference" "C212"
+			(at 177.46 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22u/500V 105C"
+			(at 182.41 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
+			(at 173.6852 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 172.72 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "df7dd4de-1e43-5e7e-9c3d-f76f13baa1fa")
+		)
+		(pin "2"
+			(uuid "55984447-6359-5dd1-a067-32944fda25a7")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C212")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 172.72 147.32) (xy 172.72 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b1a3754-2f23-59b3-a9db-b7b40c0c058c")
+	)
+	(label "VO1"
+		(at 172.72 144.78 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d9d0c569-f349-5dad-8f3a-c17741324155")
+	)
+	(wire
+		(pts
+			(xy 172.72 154.94) (xy 172.72 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e05f8af-c382-56b9-9941-8993a8654ebe")
+	)
+	(label "CD1"
+		(at 172.72 157.48 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "635a911c-0617-515b-b808-599354030aa6")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:R")
+		(at 172.72 177.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0f7a9c99-1b0a-5e2f-af59-3d62eedf64af")
+		(property "Reference" "R216"
+			(at 172.72 175.26 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1.0 1W (damping leg)"
+			(at 172.72 180.34 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical"
+			(at 172.72 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 172.72 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ee74f9c6-8150-5007-ba4a-f94c68f145fa")
+		)
+		(pin "2"
+			(uuid "6fd72f5e-c432-5513-ab9c-a1e9ec5272ad")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "R216")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 168.91 177.8) (xy 166.37 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20729871-6fda-5bd3-a758-3c0e6bfead61")
+	)
+	(label "CD1"
+		(at 166.37 177.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "129c106a-a466-5aff-9f92-dba0668c35b3")
+	)
+	(wire
+		(pts
+			(xy 176.53 177.8) (xy 179.07 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "941ca9f2-a546-5389-ba38-36c8bb2baf54")
+	)
+	(global_label "GND_STAR"
+		(shape passive)
+		(at 179.07 177.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8d62fa5d-062c-5727-b507-844424e7bd28")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 179.07 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 74.93 97.79 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "70611fdb-4a57-590f-a2f1-5a670aa68914")
+		(property "Reference" "C213"
+			(at 74.93 95.25 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220p/1kV C0G (snubber, high side)"
+			(at 74.93 100.33 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+			(at 78.74 96.8248 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 74.93 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "349836f2-de97-584a-aa56-66f880cf6721")
+		)
+		(pin "2"
+			(uuid "17812736-6bd8-56ed-b45e-dc02b0d17ad9")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C213")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 71.12 97.79) (xy 68.58 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e67d9ca2-57dd-5a8a-9783-1fb51f4ccd57")
+	)
+	(label "UIN1"
+		(at 68.58 97.79 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1d5a0046-9500-54e9-af09-65907a61c16e")
+	)
+	(wire
+		(pts
+			(xy 78.74 97.79) (xy 81.28 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "141708e8-d842-5551-9049-732af2f4a2b7")
+	)
+	(global_label "SW1"
+		(shape passive)
+		(at 81.28 97.79 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f3310035-0084-5f98-87cf-7f058c890465")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.28 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 74.93 151.13 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bb38d08e-d82f-5200-8130-2652361e8f0b")
+		(property "Reference" "C214"
+			(at 74.93 148.59 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220p/1kV C0G (snubber, low side)"
+			(at 74.93 153.67 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+			(at 78.74 150.1648 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 74.93 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2996d9e3-75a8-5828-8c6e-d8de14ee63dc")
+		)
+		(pin "2"
+			(uuid "671292ae-278e-5853-97d3-b24677338056")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C214")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 71.12 151.13) (xy 68.58 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "976d96c8-d0f1-5805-978f-06490aef4587")
+	)
+	(global_label "SW1"
+		(shape passive)
+		(at 68.58 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7482e167-00dd-5d7f-aadb-58b433d8010a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 68.58 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 78.74 151.13) (xy 81.28 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c338b37-ae61-5229-ae01-93f400110772")
+	)
+	(global_label "PGND"
+		(shape passive)
+		(at 81.28 151.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8304121d-c76f-578c-a32e-0f16c3a80507")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.28 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C_Polarized")
+		(at 396.24 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e7e0be15-ca44-5b08-9389-8b8630c99593")
+		(property "Reference" "C216"
+			(at 400.98 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22u/500V 105C"
+			(at 405.93 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
+			(at 397.2052 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 396.24 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 396.24 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "20a33f39-c6d0-57ad-83a6-a3333760feb8")
+		)
+		(pin "2"
+			(uuid "4076928b-d67e-52d2-b940-f17eb7c4cef5")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C216")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 396.24 147.32) (xy 396.24 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebbc1f3e-d675-55b7-9330-c0dfa257978c")
+	)
+	(label "VO2"
+		(at 396.24 144.78 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "18374cee-95b0-5e7f-a1ad-e3bbd60ac11e")
+	)
+	(wire
+		(pts
+			(xy 396.24 154.94) (xy 396.24 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2af42db0-29fc-5413-9caa-3fe9e6c18f97")
+	)
+	(label "CD2"
+		(at 396.24 157.48 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "005b820c-91a7-5641-a7ee-ef585997b658")
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:R")
+		(at 396.24 177.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7177d053-799a-5293-86fd-6c5c53db613c")
+		(property "Reference" "R217"
+			(at 396.24 175.26 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1.0 1W (damping leg)"
+			(at 396.24 180.34 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical"
+			(at 396.24 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 396.24 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 396.24 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c9df833d-86e8-574d-826c-2a286b72ded0")
+		)
+		(pin "2"
+			(uuid "f5614bec-9e0c-5eb2-9cf8-72f586db052e")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "R217")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 392.43 177.8) (xy 389.89 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21255180-2df7-5d16-9b0d-6f706bddf4c8")
+	)
+	(label "CD2"
+		(at 389.89 177.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "810d9034-d3bd-5c42-85cf-507c74ef571e")
+	)
+	(wire
+		(pts
+			(xy 400.05 177.8) (xy 402.59 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0542fd47-5621-5035-9e2a-0276fd1e6f51")
+	)
+	(global_label "GND_STAR"
+		(shape passive)
+		(at 402.59 177.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6f6a0f66-c5df-5d44-a3a3-158662559919")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 402.59 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 298.45 97.79 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ea96db20-9068-5d70-b147-20281959261d")
+		(property "Reference" "C217"
+			(at 298.45 95.25 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220p/1kV C0G (snubber, high side)"
+			(at 298.45 100.33 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+			(at 302.26 96.8248 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 298.45 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 298.45 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4be5c4ce-b008-532e-8319-00291b3cf2aa")
+		)
+		(pin "2"
+			(uuid "1b682817-d27b-50ab-9e42-4f25c39adee7")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C217")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 294.64 97.79) (xy 292.1 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "527986a3-5eda-54b3-9831-1e58dfc5bb57")
+	)
+	(label "UIN2"
+		(at 292.1 97.79 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d19e4e7-2cf9-55a3-bf34-dead207731de")
+	)
+	(wire
+		(pts
+			(xy 302.26 97.79) (xy 304.8 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "84d5d9fd-b10e-5727-bab4-14c64225c1f5")
+	)
+	(global_label "SW2"
+		(shape passive)
+		(at 304.8 97.79 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "295a733e-614b-563b-966a-f2170250232e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 304.8 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_hv_supplies_rev3:C")
+		(at 298.45 151.13 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "da1d27d3-c287-5f9e-a6d5-b3b0c469efdc")
+		(property "Reference" "C218"
+			(at 298.45 148.59 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "220p/1kV C0G (snubber, low side)"
+			(at 298.45 153.67 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+			(at 302.26 150.1648 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 298.45 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 298.45 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "26e6a096-d2a7-55ed-b7be-a28b673e8eab")
+		)
+		(pin "2"
+			(uuid "e51bc000-5c1c-5e8e-8919-607ae8b9ce55")
+		)
+		(instances
+			(project "tube_hv_supplies_rev3"
+				(path "/03f0c202-7f3b-5886-8b65-7114de9c723e/23e44fdf-1b14-5c93-bd53-42eb317cabba"
+					(reference "C218")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 294.64 151.13) (xy 292.1 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9af7034c-657b-580f-8d9b-cf8f74116a61")
+	)
+	(global_label "SW2"
+		(shape passive)
+		(at 292.1 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "70aca95d-1a77-5371-95f8-20b8c4b7d9c0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 292.1 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 302.26 151.13) (xy 304.8 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56109278-8ff0-5e97-af44-59b0c418069c")
+	)
+	(global_label "PGND"
+		(shape passive)
+		(at 304.8 151.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f7cff649-4d24-51f3-bc40-ebb62c8a14a0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 304.8 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
