@@ -116,6 +116,14 @@ L202,Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1
 L203,tube_hv_supplies_rev3:L_ETD39_2pin_custom
 L204,Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1
 NT101,NetTie:NetTie-2_SMD_Pad2.0mm
+NT401,NetTie:NetTie-2_SMD_Pad0.5mm
+NT402,NetTie:NetTie-2_SMD_Pad0.5mm
+NT403,NetTie:NetTie-2_SMD_Pad0.5mm
+NT404,NetTie:NetTie-2_SMD_Pad0.5mm
+NT405,NetTie:NetTie-2_SMD_Pad0.5mm
+NT406,NetTie:NetTie-2_SMD_Pad0.5mm
+NT407,NetTie:NetTie-2_SMD_Pad0.5mm
+NT408,NetTie:NetTie-2_SMD_Pad0.5mm
 NT501,NetTie:NetTie-2_SMD_Pad0.5mm
 Q201,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar
 Q202,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar

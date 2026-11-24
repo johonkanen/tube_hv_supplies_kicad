@@ -109,13 +109,19 @@ AT = {
     "C102": ("F", 663.0, 66.0, 0), "C103": ("B", 663.5, 102.5, 0),
     "R101": ("B", 606.0, 47.5, 90), "R102": ("B", 586.0, 47.5, 90),
     "R201": ("B", 612.0, 92.0, 90), "R208": ("B", 613.0, 141.0, 90),
-    "NT101": ("F", 650.5, 47.0, 90), "NT501": ("B", 590.0, 110.0, 0),
+    "NT101": ("F", 650.5, 47.0, 90),
     "D101": ("F", 673.0, 129.5, 90),
     # output bleeders (plate side, over L203's rear half) and the V_ANODE lamp (bottom side, between J202 / J201)
     "R206": ("B", 575.0, 168.0, 0), "R207": ("B", 583.5, 168.0, 0),
     "R213": ("B", 575.0, 174.0, 0), "R214": ("B", 583.5, 174.0, 0),
     "R215": ("B", 575.0, 162.0, 0), "D202": ("F", 531.5, 162.4, 0),
 }
+# Kelvin net ties (schematic sheet 04): pad 1 laid on the shunt's pad edge, pad 2 outward.
+# ref -> (shunt, shunt pad, direction out of the pad, coordinate along the edge)
+KELVIN = {"NT401": ("R203", "1", "-x", 105.4), "NT402": ("R203", "2", "-x", 100.6), "NT501": ("R203", "2", "-x", 99.5),
+          "NT403": ("R202", "1", "+x", 85.1), "NT404": ("R202", "2", "+x", 89.9),
+          "NT407": ("R209", "1", "-x", 151.0), "NT408": ("R209", "2", "-x", 146.2),
+          "NT405": ("R210", "1", "-x", 195.4), "NT406": ("R210", "2", "-x", 190.6)}
 for _r, (_x, _y) in HOLES.items():
     AT[_r] = ("F", _x, _y, 0)
 
@@ -175,6 +181,7 @@ HV_SW = HV_SW1 + HV_SW2
 HV_OUT = ["UC1", "UC2", "VO1", "VO2", "V_ANODE", "V_SCREEN", "DV0A", "DV1A", "DS1A", "DS0A"]
 HV_MID = ["BLD1", "BL1", "BL2", "DV0B", "DV1B", "DS0B", "DS1B"]       # <= 250 V from the next net
 PWR = ["PGND", "GND_STAR", "IS1", "IS2", "IC1", "IC2", "CD1", "CD2"]
+KELVIN_NETS = ["KS0P", "KS0N", "KS1P", "KS1N", "KS2P", "KS2N", "KS3P", "KS3N"]
 CHASSIS = ["CHASSIS", "BR_DC"]
 SUPPLY = ["+12V", "+3V3", "GND", "+3V3_REF", "VREF"]
 HV_ALL = HV_RAW + HV_SW + HV_OUT
@@ -768,13 +775,29 @@ def main():
                 p.SetNet(ni)
         board.Add(f)
         fps[ref] = f
-    unplaced = [r for r in fps if r not in PADS and r not in AT and r not in PACKED]
+    unplaced = [r for r in fps if r not in PADS and r not in AT and r not in PACKED and r not in KELVIN]
     if unplaced:
         raise SystemExit(f"no position for {sorted(unplaced)}")
     for ref, (side, tg) in PADS.items():
         place_pads(fps[ref], side, tg)
     for ref, (side, x, y, rot) in AT.items():
         place_at(fps[ref], side, x, y, rot)
+    for ref, (sh, pnum, d, along) in KELVIN.items():
+        f, shf = fps[ref], fps[sh]
+        side = "B" if shf.IsFlipped() else "F"
+        pr = [p for p in shf.Pads() if p.GetNumber() == pnum][0]
+        x0, y0, x1, y1 = pad_rect(pr)
+        if d == "+x":
+            place_at(f, side, x1 - 0.3 + 0.5, along, 0)
+        elif d == "-x":
+            place_at(f, side, x0 + 0.3 - 0.5, along, 0 if ref == "NT501" else 180)   # NT501: pad 2 is PGND
+        elif d == "+y":
+            place_at(f, side, along, y1 - 0.3 + 0.5, 270)
+        else:
+            place_at(f, side, along, y0 + 0.3 - 0.5, 90)
+        c1 = pad_centre(f, "2" if ref == "NT501" else "1")
+        if not (x0 <= c1[0] <= x1 and y0 <= c1[1] <= y1):
+            raise SystemExit(f"{ref}: pad 1 at {c1} not on {sh} pad {pnum} {x0, y0, x1, y1}")
     for ref in PACKED:                          # park the packed parts off the board first
         place_at(fps[ref], "B", 700, 100, 0)
     missing = []

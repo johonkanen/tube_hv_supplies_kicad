@@ -47,6 +47,11 @@ L201,1,"220uH ETD39 N97, 50t litz 0.8mm2, gap ~1.8mm (Isat >= 10A, DCR ~0.1R hot
 L202 L204,2,68uH >= 2A,Inductor_THT:L_Radial_D16.8mm_P11.43mm_Vishay_IHB-1,Vishay IHB-1 68 uH (current rating to confirm >= 2 A),,,"second stage: carries the DC output current and the audio current, almost no ripple"
 L203,1,"470uH ETD39 N97, 64t litz 0.5mm2, gap ~1.4mm (Isat >= 6A, DCR ~0.2R hot)",tube_hv_supplies_rev3:L_ETD39_2pin_custom,TDK B66363G0000X197 (N97) core set + ETD39 bobbin,,,custom-wound; litz 0.1 mm strands; gap split or winding kept 3 mm from the gap (fringing); 600 V winding-core insulation; pin positions to the chosen bobbin
 NT101,1,STAR POINT (power star),NetTie:NetTie-2_SMD_Pad2.0mm,,,,
+NT401,1,Kelvin tap IC1 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT402 NT404 NT406 NT408,4,Kelvin tap PGND (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT403,1,Kelvin tap IS1 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT405,1,Kelvin tap IC2 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT407,1,Kelvin tap IS2 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
 NT501,1,GND to PGND at the shunts (Kelvin),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
 Q201 Q202 Q203 Q204,4,IKP08N65F5,tube_hv_supplies_rev3:TO-220-3_Horizontal_TabUp_Bar,IKP08N65F5XKSA1,,,"lies on the chassis plate: 6 mm aluminium bar, 1.5 mm Al2O3 washer, PEEK shoulder bush, M3 countersunk from the plate's top with a nut on the tab (fitted before the board); leads bent down 90 deg about 5 mm into the board (STATUS fourth pass). Collector tab live: raw rail (high side); lies on the chassis plate: 6 mm aluminium bar, 1.5 mm Al2O3 washer, PEEK shoulder bush, M3 countersunk from the plate's top with a nut on the tab (fitted before the board); leads bent down 90 deg about 5 mm into the board (STATUS fourth pass). Collector tab live: switch node (low side)"
 R101 R102,2,0R jumper 2512 (link),Resistor_SMD:R_2512_6332Metric,,,,"link (interfaces.md 4.2), plate side; the fusible-resistor option of the 0617 footprint is dropped (board area, fourth pass)"

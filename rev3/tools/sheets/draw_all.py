@@ -495,9 +495,14 @@ def sheet04(d):
     amps = ["UF1", "UF2", "UF3", "UF3"]
     for i, (src, buf, ain, sdo, ch) in enumerate(FAST_I):
         c0 = 14 + i * 4
-        R(d, f"RI{i}1", c0, 1, src, f"IA{i}P", "10k 0.1%", rot=0)
+        # Kelvin taps (layout first pass): each sense leg is its own net from a net tie placed on the shunt's pad,
+        # so the router can't join a sense resistor to the power copper anywhere but at the shunt
+        R(d, f"RI{i}1", c0, 1, f"KS{i}P", f"IA{i}P", "10k 0.1%", rot=0)
         R(d, f"RI{i}2", c0 + 1, 2, f"IA{i}P", "IBIAS", "68k 0.1%")
-        R(d, f"RI{i}3", c0, 3.4, "PGND", f"IA{i}N", "10k 0.1%", rot=0)
+        R(d, f"RI{i}3", c0, 3.4, f"KS{i}N", f"IA{i}N", "10k 0.1%", rot=0)
+        d.part("NetTie_2", f"NT{2 * i + 1}", c0 + 2, 1, {1: src, 2: f"KS{i}P"}, value=f"Kelvin tap {src} (at the shunt)", mpn="")
+        d.part("NetTie_2", f"NT{2 * i + 2}", c0 + 2, 3.4, {1: "PGND", 2: f"KS{i}N"}, value="Kelvin tap PGND (at the shunt)",
+               mpn="")
         R(d, f"RI{i}4", c0 + 1, 4.4, f"IA{i}N", buf, "68k 0.1%", rot=0)
         opa2(d, amps[i], c0 + 1, 5.5, f"IA{i}P", f"IA{i}N", buf)
         R(d, f"RI{i}5", c0 + 2, 7.5, buf, f"ADC_IN{ch}", "100", rot=0)
