@@ -1,6 +1,9 @@
 # Status: HV supplies rev 3
 
-**Ripple filter and soft switching (2026-11-24): a study, nothing redrawn** (section below:
+**Device choice and sampling for the loop (2026-11-24): study, nothing redrawn** (sections below:
+cascode GaN TP65H150G4PS in TCM on the chassis, second choice the SiC cascode UF3C065080T3S; fixed
+100 kHz hard switching as the fallback; dedicated ADS7056 converters on the loop channels, IF-2.2;
+proposals N28-N33). **Ripple filter and soft switching (2026-11-24): a study, nothing redrawn** (section below:
 recommended TCM mode, 220 / 470 µH, 40-150 kHz, second stage below the band, synchronous ADC
 schedule; proposals N20-N27 for the user). The simulation pass (2026-11-23) below is still the state
 of the drawn schematic.
@@ -13,6 +16,206 @@ earlier passes stay below as history; where they differ, the simulation pass is 
 switch node, `reports/erc.rpt`); BOM `bom/bom.csv` 83 lines / 211 pieces, 24 lines with a part
 number, none TBD (R303 / R311 dead-time resistor now 20k). **The floorplan has to be re-run before
 layout** (a second SK 104 for Q203, ULW5 output resistors, one more SOIC-14).
+
+# Device choice (2026-11-24)
+
+**Study, nothing redrawn.** Inputs from the user: the TO-220s mount from the underside with their tabs
+on the 2 mm top plate (chassis heat sink); occasional hard commutation (a glitch) must be survivable,
+also repeated; no negative gate rail, ideally nothing beyond the link's +12 V (25 mA budget). Script
+`sim/r5_devices.py` → `sim/r5_results.md` (all datasheet figures with their sources there; "est." marks
+my estimates: the ZVS turn-off energies, the 0-12 V gate charge of the SiC cascode, the hard-event
+model, prices).
+
+Datasheets read: Renesas **TP65H150G4PS** (R07DS1670EU0300 Rev 3.00, 2025-11-25), onsemi
+**UF3C065080T3S** (Rev 4, 2025-03), Infineon **IPP65R190CFD7**, Infineon **IMBG65R075M2H** (Rev 2.1,
+2025-07-23), Infineon / GaN Systems **GS66504B** (Rev 200402), TI **LMG3422R050** (SNOSDA8D, 2025-05),
+IKP08N65F5 (M15). No 650 V cascode GaN in a drain-tab TO-220 was found (the Renesas Gen IV TO-220s are
+source-tab), and no CoolSiC G2 in TO-220 (TO-247-3, D2PAK-7, TOLL only).
+
+## Comparison (TCM at the recommended point: 220 µH, 40-150 kHz; losses per bridge Q_hs + Q_ls)
+
+| Device (package, tab) | Drive | 400 V / 0.7 A | idle 0.3 A | 150-250 V | ramp-down −0.8 A | +12 V, 4 devices 40 / 150 kHz | Forced hard commutation, 2.5 A, 40 nH (peak V / energy) | Ratings that matter | Verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| IGBT IKP08N65F5 (TO-220, collector) | 0/12 V | 1.18 W | 0.96 W | 3.2-3.5 W | 3.05 W | 11 / 26 mA (with the 1 nF caps) | 41-49 µJ (M15), Qrr-driven | no SC rating | reference; mid-voltage losses (r1) |
+| SJ CFD7 IPP65R190CFD7 (TO-220, drain) | 0/12 V | 0.30 W | 0.29 W | 0.27-0.34 W | 0.68 W | 10 / 23 mA | **≈ 270-290 µJ, 1100-1400 V (snappy diode model)**; Qrr 0.4 / 0.8 µC (typ / max, 100 A/µs), diode dv/dt ≤ 70 V/ns | — | **out**: the hard event is the known SJ body-diode failure |
+| **GaN cascode TP65H150G4PS** (TO-220, **source**) | **0/12 V**, Vth 3.3-4.8 V, ±20 V | **0.22 W** | 0.06 W | 0.24-0.31 W | 0.37 W | **8 / 12 mA** | **530 V / 35 µJ** at the maker's test drive (RG 70 Ω + 240 Ω bead, 50-65 V/ns); every cycle 1.4 / 5.2 W at 40 / 150 kHz | 650 V, **800 V transient (< 30 µs)**, Qrr negligible, IDM 60 A; no avalanche, no SC rating | **recommended** |
+| SiC cascode UF3C065080T3S (TO-220, drain) | 0/12 V, Vth 4-6 V, ±25 V | 0.11 W | 0.05 W | 0.12-0.14 W | 0.17 W | 12 / **27 mA** (Qg ≈ 35 nC at 0-12 V, est.) | 600-680 V / 58-68 µJ with the required RC snubber (5 Ω + 100 pF) | **avalanche rated (EAS 33 mJ)**, 175 °C, IDM 65 A | **second choice** (most robust; gate charge forces f_max ≈ 120 kHz or a bigger +12 V budget) |
+| SiC MOSFET IMBG65R075M2H (D2PAK-7) | 0/**18 V** (boost from +12 V) | 0.10 W | 0.04 W | 0.14-0.18 W | 0.19 W | 10 / 23 mA (incl. boost) | 810-830 V at the datasheet's 5 ns rise (over 650 V), 508 V slowed to 20 ns; 21-34 µJ | 0 V off recommended by Infineon; body diode 4.3 V | no TO-220; needs the 18 V boost; SMD heat path |
+| e-mode GaN GS66504B (GaNPX SMD) | 0/6 V, Vth 1.1 V min, +7 V max | 0.19 W | 0.06 W | 0.21-0.27 W | 0.32 W | 6 / 7 mA | 860-880 V at 5 ns (over the 750 V < 1 µs rating), 503 V slowed; 19-33 µJ | last-time-buy at DigiKey | out: SMD only, 1.1 V threshold, no TO-220, LTB |
+| GaN + driver LMG3422R050 (VQFN 12×12) | 12 V VDD, own −14 V by an internal buck-boost | 0.08 W | 0.05 W | 0.11-0.13 W | 0.15 W | 11 / **40 mA** (9 mA each at 140 kHz, datasheet) | internal SC trip 65-100 ns, 720 V surge | the only part with built-in short-circuit protection | out: over the +12 V budget, SMD, needs isolated or bootstrapped VDD and isolator inputs per device |
+
+Prices (est., single units): IGBT ~1.5, CFD7 ~2.5, TP65H150G4PS ~4-6, UF3C065080T3S ~6-8, IMBG65R075M2H
+~5-7, GS66504B ~7, LMG3422R050 ~15-20 USD. Sourcing: TP65H150G4PS single-source (Renesas, Gen IV
+TO-220 family TP65H070 / 100 / 150G4PS); UF3C065080T3S single-source (onsemi, ex UnitedSiC /
+Qorvo; drop-in TO-220 siblings UF3C065040T3S / 030T3S); neither has a pin-compatible second source.
+
+## Hard commutation, overvoltage, short circuit, gate margin
+
+- **Forced hard turn-on** (the high side turns on into the low side's reverse path at 0.8 / 2.5 A, and
+  the mirror case on ramp-down; r5 section 2): with the cascode GaN 27-35 µJ per event, 9.5-12 A peak,
+  50-65 V/ns, 490-530 V at the switch node with 20-40 nH of loop. **Once:** nothing. **Every cycle for a
+  second:** 1.4 W at 40 kHz, 5.2 W at 150 kHz on top of 0.2 W; on the plate (R_thJC 1.5 + washer ≈ 1 +
+  plate ≈ 2 K/W, est.) Tj rises 6-23 K: **it survives even continuous hard switching**; the
+  datasheet presents the part for hard-switched circuits. The SJ part would take 270-290 µJ per
+  event (10-44 W every cycle): out, as the user expected.
+- **Overvoltage:** GaN has no avalanche. Margin at 480 V raw (trip level) plus a hard-event overshoot of
+  10-50 V: 120-160 V to 650 V repetitive, 270 V to the 800 V transient rating (< 30 µs, non-repetitive).
+  Conditions: the commutation loop ≤ 20 nH (bridge 100 nF + 1 nF at the device pins), the maker's
+  turn-on RG plus a ferrite bead in the gate (their test: 70 Ω + 240 Ω at 100 MHz), and an RC snubber
+  across each device if the hard-event ringing measures above about 600 V (est. 10 Ω + 47-100 pF).
+- **Short circuit / arc** (output shorted behind 220 µH): the inductor limits the rise to
+  480 V / 220 µH = 2.2 A/µs, so the device never sees a short: about 7 A when the 2.1 µs I_C trip stops
+  it, against IDM 60 A. The tight point is the inductor's saturation (≈ 7.5 A): gap the ETD39 for ≥ 10 A
+  (N 36 → B 0.23 T at 7 A) or add a fast cycle-by-cycle comparator on the low-side shunt (≤ 300 ns).
+  **Shoot-through** (both devices on) is the one real short: no SC rating on the cascode GaN, so it rests
+  on the UCC21520's interlock (both outputs low with both inputs high, M22) and the dead time. No
+  desaturation protection is proposed; it would only add value for the shoot-through case.
+- **Spurious turn-on, no negative rail:** cascode GaN Crss / Ciss = 1 / 598 pF: a 420 V edge couples
+  0.7 V by charge division against a 3.3 V minimum threshold (≥ 3 V hot, est.); held by the driver 0.01 V
+  at TCM edges, 0.13 V at a hard edge. **0 V off is enough**, with the UCC21520 at 12 V as drawn
+  (VGS ±20 V). The same holds for the SiC cascode (Vth 4 V min). The SiC MOSFET (Crss / Ciss 3.6 / 516,
+  2.9 V by charge division against 3.5 V min) and the e-mode GaN (3.8 V against 1.1 V) need a strong
+  low-impedance sink and are marginal in a hard event without a negative rail.
+
+## Chassis mounting
+
+- Tab node: the TP65H150G4PS tab is its **source**: on the low side that is the shunt / power ground
+  (quiet), on the **high side the switch node**. (With drain-tab parts, the IGBT and the SiC cascode, it is
+  the other way round: high-side tab at raw 420 V DC, low-side tab at the switch node.) In any TO-220
+  half-bridge one tab is the switch node.
+- Insulator: **1.5 mm Al2O3 washer** under the switch-node tab: about 7 pF to the plate, ≈ 0.5 K/W plus
+  interfaces (≈ 1 K/W), kilovolts of breakdown; the quiet tab on a 0.23 mm silicone pad (≈ 21 pF, it carries
+  no dv/dt). Insulated M3 bush and screw (or a clip), creepage around the tab ≥ 2.5 mm at 480 V; the leads
+  exit about 4 mm above the plate with the thick washer, then bend down 11 mm into the board (15 mm
+  below the plate): the T1 rule "HV ≥ 5 mm from the plate" needs an exception for these leads, with
+  sleeving or an insulating sheet on the plate under the device row.
+- Common-mode current through 7 pF: **30 mA at TCM's 4 V/ns**, 0.4-0.5 A spikes (5-10 ns) in a hard event
+  (60 V/ns); with a 21 pF pad 0.08 A / 1.3 A. Return it locally: the plate near the devices to the power
+  ground through the board's existing chassis bond, so it does not circulate through W01 / W04.
+- Heat: with the GaN cascode the bridge devices dissipate 0.05-0.3 W each in TCM: the plate (under the PSU)
+  sees under 1.5 W in all. **The board heatsinks HS201 / HS202 and the proposed low-side heatsinks go**
+  (≈ 900-1,800 mm² of board back).
+
+## Recommendation
+
+1. **Cascode GaN TP65H150G4PS in TCM** (main line). Losses 0.06-0.37 W per bridge over the whole
+   map (IGBT: 0.7-3.5 W), drive 0/12 V from the UCC21520 as drawn, no negative rail, 8-12 mA of +12 V
+   for four devices, survives the forced hard commutation even every cycle, source tab gives a quiet
+   low side, standard TO-220 on the plate. Risks: single source; no avalanche (keep the 480 V trip and
+   the ≤ 20 nH loop); no SC rating (interlock).
+2. **Second choice: SiC cascode UF3C065080T3S**: avalanche rated and the most forgiving part, lowest
+   conduction loss, drain tab like the IGBT; costs: 35 nC of gate charge (≈ 27 mA at 150 kHz: limit
+   f_max to about 120 kHz or raise the +12 V budget to 30 mA) and the datasheet's required RC snubber.
+
+**Is TCM still worth it with GaN?** The fixed-frequency alternative (hard switching, 470 µH, 100 kHz, same
+filter; r5 section 4): the cascode GaN takes 1.8 W in the high side at 400 V / 0.7 A (15 µJ of Qoss × V per
+period; 2.7 W at 150 kHz), soft by itself at 150-250 V and in the screen bridge (the ripple reverses there);
+residue at the power amp 0.1-3 mV; first resonance 0.64 kHz; no frequency law, fixed dead time, centre-
+aligned sampling. Board semis ≈ 2.1 W against ≈ 0.35 W in TCM (today's IGBTs ≈ 6.2 W with inductors). Its
+cost is EMI: a hard 50-65 V/ns edge every period at 400 V puts 0.4-1.4 A common-mode spikes through the
+high-side (switch-node) tab, against 30-80 mA in TCM. **With fast synchronous ADCs on the link (next
+section) TCM's control demands are cheap, so TCM stays the recommendation; fixed 100 kHz hard
+switching with the GaN cascode is the simpler fallback that still meets every target.**
+
+## What changes in the TCM recommendation
+
+| Item | Before (IGBT TCM) | With the GaN cascode |
+|---|---|---|
+| Devices | IKP08N65F5 | **TP65H150G4PS** ×4, tabs on the plate (1.5 mm Al2O3 under the high side), leads into the board |
+| Inductor | 220 / 470 µH ETD39 N97 | same values; **gap for saturation ≥ 10 A** (the short case); (with GaN the mid-voltage loss no longer pushes L up: 150 µH would raise the frequency at 400 V to 60-90 kHz, at the cost of a new filter pass: not proposed) |
+| Snubbers | 220 pF C0G across each IGBT | **none needed for ZVS** (I_zvs 0.27 A from the devices' own 2 × 34 nC in 300 ns); footprint for an RC snubber across each device (10 Ω + 47-100 pF, est.) for hard events |
+| Dead times | 200-600 ns per edge | **100-300 ns** (Co(tr) 85 pF); the UCC21520 floor R303 / R311 20k → **10k (100 ns)** |
+| Gate | 15 Ω, 1 nF G-E | turn-on ≈ 50-70 Ω + 240 Ω-at-100 MHz bead (maker's test values; tune for ≤ 50-65 V/ns in a hard event), 1 nF G-E caps removed, 10k G-S kept |
+| Drive supply | +12 V, 19-26 mA | **+12 V, 8-12 mA**, no negative rail, bootstrap as drawn |
+| Trips | ±3.0 A low side, 3.0 A I_C | same; plus inductor saturation ≥ 10 A or a ≤ 300 ns low-side comparator |
+| Heatsinks | SK 104 ×2 (+ low sides) | **none on the board** |
+| Board loss at 0.7 / 0.18 A | ≈ 5.7 W | ≈ 4.2 W (semis ≈ 0.35 W; inductors, shunts, R205 / R212, logic) |
+
+# Sampling for the loop (2026-11-24)
+
+**Proposal (IF-2.2 on W17), study only.** User: "Fast synchronous sampling should be easy since we can
+use for example ADS7056." Script `sim/r6_sampling.py` → `sim/r6_results.md`. TI ADS7056 (SBAS769):
+14 bit, 2.5 MSPS, X2QFN-8 1.5 × 1.5 mm, input 0 V to AVDD (AVDD 2.35-3.6 V is the reference), DVDD
+1.65-3.6 V, **sampled on CS falling**, conversion and data in 18 SCLK, SPI to 60 MHz, t_ACQ ≥ 95 ns,
+I_AVDD 1.05 mA at 2.5 MSPS / 48 µA at 100 kSPS (3.3 V); switched-capacitor input: needs an op-amp driver
+with an RC charge bucket.
+
+## Channels
+
+| Channel | TCM | Fixed 100 kHz | Converter |
+|---|---|---|---|
+| V_ANODE (tab), V_SCREEN (tab) | fast | fast | ADS7056 each |
+| I_C14, I_C24 (first capacitor current: active damping) | fast, sampled mid high-side conduction (the triangle crosses its average) | fast, sampled at the period centre | ADS7056 each |
+| I_Q12, I_Q22 (low-side shunt: the bridge's average current for the TCM law and its peak cap) | fast, sampled mid low-side conduction | not needed (stay on the AD7689) | ADS7056 each (TCM only) |
+| RAW, UC1, the temperatures, the other monitors | AD7689 round robin, as today (its CNV may also be timed by the PWM to avoid aliasing) | same | AD7689 |
+
+## Link (W17, pads; isolators on the control board)
+
+- Shared **CS_FAST** (card → HV, new forward channel) and a shared SCLK: the existing ADC_SCK (pad 14)
+  serves both converters (the AD7689 read in the gaps); one **SDO per ADS7056** back to the card:
+  **6 new back channels (TCM)** / 4 (fixed). The returned clock (pad 16) is shared by all.
+- Pads: the free, non-isolated pads 1-10, 15, 17-24, 26-28 are enough. Proposed: **pad 15 CS_FAST;
+  pads 1, 3, 5, 17, 19, 21 SDO_VA, SDO_IC1, SDO_IL1, SDO_VS, SDO_IC2, SDO_IL2** (fixed: the first four
+  of them as SDO_VA, SDO_IC1, SDO_VS, SDO_IC2); **pads 2, 4, 6, 18, 20, 22 GND** between them (30 MHz
+  edges on the ribbon).
+- Isolators: today 8 forward + 4 back (ADuM140E0 + 2 × ADuM142E0). Needed: 9 forward + 10 back (TCM) /
+  9 + 8 (fixed). **Add one ADuM140E0 mounted reversed (4 back) and one ADuM142E0 (2 forward, 2 back)**
+  for TCM (one forward channel spare); for fixed frequency one reversed ADuM140E0 and one ADuM141E0 (3 forward, 1 back).
+- SCLK: frame = 18 SCLK. At 10 MHz (plain mode 0, the 50-60 ns round trip of today's isolators) the
+  frame is 1.8 µs; at 30 MHz with the returned clock (3 ns channel matching) 0.6 µs. Either fits inside
+  the shortest TCM period (6.7 µs); the returned clock is useful, not required.
+
+## Timing and loop result
+
+CS edge → conversion and read-out 0.6-1.8 µs → isolators 30 ns → FPGA ≈ 0.5 µs → new duty and
+frequency from the next TCM period (Td ≈ 0.75 T_sw + 1.5 µs: 20 µs at 40 kHz, 6.5 µs at 150 kHz), or the
+next half period at fixed 100 kHz with a double update (Td ≈ 4 µs). With r3's 32 tolerance corners:
+
+| Schedule | PM / GM (worst) | max \|Zout\| 20 Hz-20 kHz |
+|---|---|---|
+| today's AD7689 round robin (Ts 32 µs, Td 60 µs) | 75° / 19.5 dB | 11.0 Ω (fails R2) |
+| r3 synchronous AD7689 (Ts 20, Td 30 µs) | 48° / 11.9 dB | 4.1 Ω |
+| **TCM + ADS7056, 40 kHz (Ts 25, Td 20 µs)** | **52° / 13.6 dB** | **3.9 Ω** |
+| **TCM + ADS7056, 150 kHz (Ts 6.7, Td 6.5 µs)** | **64° / 24 dB** | **3.9 Ω** |
+| fixed 100 kHz + ADS7056, 470 µH (Ts 5, Td 4 µs) | 74° / 28 dB | 3.8 Ω |
+
+R2 is met comfortably; the remaining 3.8-3.9 Ω is the passive network above the crossover (the second
+stage's peak near 5 kHz), not the loop. **The first capacitor can shrink only a little:** 68 µF gives
+f1 1.1 kHz and |Zout| 4.5-4.9 Ω; 47 µF (1.3 kHz) already 6.2-20 Ω: below about 68 µF the audio-band
+reservoir, not the damping, sets the limit. Keep 100 µF.
+
+## Front end and supplies
+
+- **Current amplifiers (I_C, I_Q):** the MCP6004 (1 MHz GBW) and the 2 µs filter must go for these
+  channels: a first-order lag τ shifts a ramp of slope 1 A/µs by τ × slope (2 A at τ = 2 µs). Use a fast
+  op amp (≥ 50 MHz GBW at ≈ 1 mA, OPA836 / OPA2836 class), gain for ±4 A into 0-3 V (50 mΩ shunt:
+  0.375 V/A around 1.5 V), τ ≤ 50 ns (the charge bucket, e.g. 22 Ω + 1-2 nF), clamps as M20 (10k / 100k
+  inputs). No further anti-alias filter: the sample lands mid-conduction, away from the edges; the
+  timing error (isolator jitter < 1 ns, CS placement 20-50 ns) gives an offset of tens of mA, which the
+  integrator removes.
+- **Voltage channels:** divider and a buffer with a few hundred kHz of bandwidth (the residue is mV).
+- **Reference:** AVDD is the ADS7056's reference: one low-noise 3.0 V reference / LDO (REF35 / REF3430
+  class, buffered) for all of them.
+- **3V3 on the link:** 6 op amps × 1 mA + 6 ADS7056 at 50-150 kSPS ≈ 0.1 mA each + reference ≈ 1 mA
+  ≈ **+8 mA** (fixed: +5.5 mA): today's 12 mA → ≈ 20 mA, at the 20 mA budget: **raise the HV board's 3V3
+  budget to 30 mA** (IF-2.2). The two added isolators take ≈ 6-8 mA more on the control board's isolated
+  3V3 (its side 2). +12 V unchanged.
+
+## Proposals (new)
+
+| # | Proposal | Who |
+|---|---|---|
+| N28 | Device: **TP65H150G4PS cascode GaN** (second choice UF3C065080T3S), TO-220s on the top plate (1.5 mm Al2O3 under the switch-node tab), board heatsinks removed; T1 exception for the device leads | user, mechanical |
+| N29 | TCM stays the mode with the GaN cascode; fixed 100 kHz hard switching (470 µH) is the documented fallback | user |
+| N30 | **IF-2.2 on W17:** CS_FAST (pad 15), six SDO lines (pads 1, 3, 5, 17, 19, 21) with GND between (pads 2, 4, 6, 18, 20, 22), shared SCLK and returned clock; control board adds one reversed ADuM140E0 + one ADuM142E0; HV board 3V3 budget 30 mA | control board, interfaces 9 |
+| N31 | Fast current amplifiers (≥ 50 MHz GBW) for I_C and I_Q, a 3.0 V reference for the ADS7056s | HV supplies |
+| N32 | Inductor gapped for saturation ≥ 10 A, or a ≤ 300 ns cycle-by-cycle low-side comparator | HV supplies |
+| N33 | UCC21520 dead-time floor 100 ns (R303 / R311 10k), GaN gate network (RG + ferrite bead), RC-snubber footprints | HV supplies |
+
+Open questions for the user: is a single-source GaN part acceptable (second choice also single
+source)? Is the plate under the PSU free for the eight device positions, and can its hole pattern take
+them? Accept the T1 exception for the device leads near the plate? TCM or the simpler fixed-frequency
+fallback?
 
 # Ripple filter and soft switching (2026-11-24)
 
