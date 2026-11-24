@@ -1,5 +1,9 @@
 # Status: HV supplies rev 3
 
+**Layout sketch: interfaces (2026-11-24)**: every connector and tab that leaves the board fixed in chassis
+coordinates, cable routes to the mating boards, keep-outs both ways, block zones; no placement, no routing (section
+below; drawing `mechanical/layout_sketch.png`, routes `mechanical/layout_sketch_routes.png`).
+
 **Fourth pass (2026-11-24): soft-switched redraw**, drawn to the user's decisions (IGBTs in TCM on the chassis
 plate, the 8.9 kHz second stage, six ADS7056 on IF-2.2): 260 parts, ERC 0 errors / 2 warnings, floorplan closes
 (section below). The study sections that follow it (device choice, sampling, ripple filter) and the earlier passes
@@ -20,6 +24,131 @@ earlier passes stay below as history; where they differ, the simulation pass is 
 switch node, `reports/erc.rpt`); BOM `bom/bom.csv` 83 lines / 211 pieces, 24 lines with a part
 number, none TBD (R303 / R311 dead-time resistor now 20k). **The floorplan has to be re-run before
 layout** (a second SK 104 for Q203, ULW5 output resistors, one more SOIC-14).
+
+# Layout sketch: interfaces (2026-11-24)
+
+First layout step only: the board's connections to the other boards, so the interfaces are fixed before anyone lays
+out in detail. Script `mechanical/layout_sketch.py` → **`mechanical/layout_sketch.png`** (the board, its edges and
+the neighbours' edges) and **`mechanical/layout_sketch_routes.png`** (the cable routes across the chassis). Inputs:
+the fourth-pass floorplan (outline, standoffs, bars, plate holes and block positions unchanged), interfaces.md 2.1,
+4, 5, 12.1-12.4, chassis_fit.md, the preamp's layout (J501), the control board's placement (12.4). Chassis frame,
+mm (x from the left along the front, y from the front panel's inner face); the board hangs 15 mm under the plate,
+**every tab and header is on the downward (bottom) face**. Tab = 4.8 mm blade, 2 legs on 5.00 mm, 1.4 mm drill;
+the receptacle is fully insulated (plan about 8 mm along the blade width x 7 mm, reaching about 23 mm below the
+board, 30 mm with the wire bend). The power amp's and PI + FX's own sketches had not appeared when this was made.
+
+## Connection table
+
+| Ref (cable) | Pin / net | Position (chassis) | Footprint, orientation | Goes to | Cable leaves | Wire, length |
+|---|---|---|---|---|---|---|
+| **J101** (W01-b) | 1 B_P | (656.0, 59.0) | 2 tabs on 12 mm along y (Blade_Tab_4.8mm_2x_P12mm), legs along x; no key: red / black leads, silkscreen | tube PSU "+400V" / "GND", **down the front PSU hole (658.5, 28.6)** (as the fourth pass assumed) | down, forward (−y) under the notch (x 649-668, y 30-39), up through the hole | twisted pair ≥ 0.5 mm², silicone or PTFE ≥ 600 V; ≈ 70 mm below the plate + the PSU side (harness owner) |
+| | 2 B_N | (656.0, 47.0) | B_N in front, next to the star / FAULT zone | | | |
+| **J102** (W02-a) | 1 RAW_SS1 | (604.0, 37.0) | 2 tabs on 12 mm along x, legs along y | preamp **J501** (laid out: pin 1 BP_RAW (356.8, ≈ 81), pin 2 GND (371.8, ≈ 81)) | down, forward past the front edge (y 30), up to the plate, west | twisted pair, as W01; ≈ 380 mm, **cut 450** |
+| | 2 GND_PRE1 | (616.0, 37.0) | return to the star | | | |
+| **J103** (W03-a) | 1 RAW_SS2 | (578.0, 37.0) | 2 tabs on 12 mm along x, legs along y | PI + FX raw tabs (its J501, window below) | as J102 | twisted pair, as W01; ≈ 500 mm, **cut 600** (route a) |
+| | 2 GND_PRE2 | (590.0, 37.0) | return to the star | | | |
+| **J201** (W04-a) | 1 V_ANODE | (531.5, 170.0) | 2 tabs on 12 mm along y, legs along x, on the arm's west edge (receptacles x 527.5-535.5) | power amp V_ANODE / GND_PWR (window below) | down, then west across the 5.9 mm gap, 35-48 mm below the plate | twisted pair ≥ 0.5 mm² (2.0 A trip rating), ≥ 600 V; ≈ 80 mm, **cut 120** |
+| | 2 GND_PWR | (531.5, 182.0) | the power amp's one return (also V_SCREEN's) | | | |
+| **J202** (W05-a) | 1 V_SCREEN | (531.5, 155.0) | 1 tab (Blade_Tab_4.8mm_1x), legs along x | power amp V_SCREEN | as J201, bundled with W04 | ≥ 0.5 mm², ≥ 600 V; ≈ 80 mm, **cut 120** |
+| **J1** (W17-b) | 2x20, 1.27 mm, IF-2.2 | **pin 1 (566.37, 108.86)**, pin 2 (565.10, 108.86), pin 39 (566.37, 84.73), **pin 40 (565.10, 84.73)** | Samtec SHF-120-01-L-D-TH, shroud ≈ 5.3 x 31 mm (x 563.1-568.4, y 81.3-112.3); = control board J11 moved 16 mm east, same rotation: odd row east, pin 1 at the rear; **key slot on the same wall as J11's** | control board J11 (pin 1 (550.37, 108.86)) | socket plugged from below; cable leaves west over the even row, a U in the 8 mm gap | 40-way 0.635 mm FFSD-class, both sockets same face, 1:1, **2.00 in** |
+| **J501** (W16-b), option B (preferred) | 1 HV_PERMIT+, 2 HV_PERMIT− | **pin 1 (572.5, 117.5)**, pin 2 (575.04, 117.5) | Molex KK-254 2-pin vertical, pins along x, ramp toward the front | power amp P-J_HVINH (its east end, LV corner) | down, west along y 124-125 (between the control board's rear edge and the arm, under the corridor) | twisted pair 0.2-0.35 mm² (KK crimp); ≈ 90 mm, **cut 150** |
+| J501, option A (as floorplanned) | same | pin 1 (565.5, 50.0), pin 2 (565.5, 52.54) | pins along y | same | down, west into the 8 mm gap, rear along x 556 to y 124, west | ≈ 190 mm, cut 250 |
+
+**Ground returns and the star:** B_N comes in on J101-2; one return per tube board: **J102-2 GND_PRE1 (preamp),
+J103-2 GND_PRE2 (PI + FX), J201-2 GND_PWR (power amp; W05 has no return of its own)**. They meet on the power star
+island, sketched at the front by the FAULT block and H101 (zone x 612-648, y 32-57; B_N 8 mm east of it, GND_PRE1 /
+GND_PRE2 in front of it); GND_PWR comes back from the arm on its own copper beside V_ANODE. The fault / RF network
+goes from the star to the plated standoff **H101 (617.0, 50.0)**. Where the output capacitors' negatives join is a
+detailed-layout matter (it doesn't move a tab).
+
+**Not through this board** (interfaces.md 4.3): the heaters (W06 / W07), -80 V (W09) and the LV aux / serial (W10 /
+W18) go from the tube PSU straight to their boards. Only their wires pass this board: **W10 / W18 down the front PSU
+hole**, west in a lane at board level along our front edge (y 26-29), then rear in the 8 mm gap to the control
+board's J1 (546.54, 59.7-79.5) and J8 (548.57, 41.5-54.2); **W06 / W07 / W09 preferably down the rear hole** with
+the mains (choice C5).
+
+## Routes and what they cross (`layout_sketch_routes.png`)
+
+- **W02 (preamp):** clipped under the plate (≤ 10 mm below it) at y 18-26 from x 604 west to x 424 (in front of the
+  control board: 4 mm from the front panel board's back at y 14; **above the control board's J6 / W33 ribbon**,
+  which lies ≥ 25 mm below the plate, so no contact); rearward at plate level along x 424 (the gap between the
+  preamp and the control board) to y 70, **above W12** (J2 → J401, y 40-60, ≥ 25 mm below the plate); down at
+  (424, 70), ≥ 20 mm from the OT lead hole's centre (415.5, 90.1); west at 25-40 mm below the plate, **crossing the
+  W30-W32 pot ribbons (x 388-400) at right angles**, under the preamp's rear-east corner, up into J501 from the east.
+- **W03 (PI + FX), route (a), preferred:** with W02 to x 445 (the inner lane, y 24, so the two never cross), then
+  **at plate level over the control board's west strip, x 442-448** (between its standoff column x 432-441 and
+  J2), rear to y 120, west at plate level over the free region (x 285-426, y 105-127) to x 285, down beside the
+  PI + FX's east end into its tabs. It stays ≥ 26 mm from the OT lead hole, passes **over** W12, W13 (J3 → PI + FX),
+  W20 (Ethernet, y ≈ 96) and the OT leads, and is parallel to nothing. Route (b), not recommended: on down the gap
+  along x 423-425 past the OT lead hole's east side (1-3 mm from its edge, in the OT leads' drop), then west at
+  y 115 beside W13: ≈ 470 mm.
+- **W04 / W05 (power amp):** straight west from the receptacles, three wires bundled (V_ANODE / GND_PWR twisted),
+  across the 5.9 mm gap at 35-48 mm below the plate, into the power amp's receptacles at the same y. They cross
+  nothing; the control board's J7 ribbon passes under the arm ≥ 35 mm below our board at x 541-555 (≥ 5 mm east of
+  the receptacles, ≥ 10 mm under them).
+- **W01:** from the PSU through the front hole straight down into the notch and back 8-20 mm to J101.
+- **W16 (option B):** from J501 down, west in the 5 mm gap between the control board's rear edge and the arm
+  (y 124-125), into the power amp's east end; LV, may run beside the J5 / J7 ribbons there.
+- **W17:** a U in the 8 mm gap under J11 / J1 (y 82-112).
+
+## Block zones (rectangles; bottom unless marked)
+
+Raw input and input filter x 650-674, y 40-129; star + FAULT x 612-648, y 32-57; bridge 1 x 570-611, y 77-128
+(Q201 / Q202 leads land at y ≈ 81) with its filter x 570-607, y 44-77 and x 612-655, y 100-144; L201 x 607-649,
+y 58-100; L203 x 562-604, y 134-176; bridge 2 x 604-648, y 127-179 (Q203 / Q204 leads at y ≈ 156); bridge-2 filter
+and outputs on the arm x 527-560, y 148-199; **control block** (plate side) x 562-592, y 80-116 by J1; **fast-ADC
+block** (plate side) x 572-602, y 118-136; **no-HV strip** x 560-570, y 30-127; **ribbon corridor** x 525-560,
+y 127-147. Plate side: bar 1 x 570-608, y 62-78, bar 2 x 601-647, y 158-174, the eight countersunk plate holes and
+six standoffs as in the fourth pass.
+
+## Keep-outs (both directions)
+
+| Against | Number | Our side | Their side |
+|---|---|---|---|
+| Control board, main body | **8.0 mm** gap (x 552-560) | bottom side x 560-570 carries only J1 (+ socket inside x 562.5-569) and, option A, J501; HV copper ≥ 18 mm from its edge (x ≥ 570) | the gap stays free for the W17 U (y 82-112) and the W10 / W18 harness (y 30-80) |
+| Control board, arm | **5.0 mm** gap (y 122-127) | corridor x 525-560, y 127-147: no bottom-side parts; plate-side parts ≥ 4 mm off y 127; nearest HV tab J202 at y 155 (28 mm from its edge) | J5 / J7 ribbons pass the corridor; J7's ribbon dressed at x 541-555 under the arm, ≥ 35 mm below our board |
+| Power amp | **5.9 mm** gap (x 519.1-525) | nothing past x 525 (receptacle bodies from x 527.5) | nothing past x 519.1 (its receptacles at x ≤ 516); its 1.25 kV nets ≥ 6.3 mm from everything (its rule) |
+| Mains inlet and wiring | inlet x 633.6-661.1, 32.2-52.2 mm below the plate, screws x 627.3 / 667.3 with nuts to y ≈ 200 | rear strip ends at x 585 (42 mm to the left screw); main body's rear edge y 180 (5 mm to the inlet envelope); HV copper ≥ 5 mm and part bodies ≥ 3 mm from the corner-cut edges (x 649 for y 145-180, y 145 for x 649-675): C210 / C212 to check at layout | mains lane x 649-680, y 145-210: the mains wires sleeved, tied toward the inlet / east wall, ≥ 6 mm from our board edge |
+| PSU front hole Ø15 (658.5, 28.6) | hole edge 2 mm from the notch's x edges, 2.9 mm from y 39 | copper pulled back 2 mm at the notch; nothing but J101's receptacles (from y 43.5) within 5 mm of it | grommet; W01 + W10 / W18 only |
+| PSU rear hole Ø15 (658.5, 154.6) | hole edge 2.1 mm from y 145, 2.0 mm from x 649 | as the notch | grommet; mains (+ W06 / W07 / W09 if C5 a) |
+| Four Ø13 rear-panel holes x 597.6 | stay empty ([USER] 2026-11-23) | outline holds without the notch | nothing fitted in them |
+| Plate / PSU | SMD ≤ 3 mm on the plate side; HV ≥ 5 mm from the plate and screw tips (exception: the bridge leads, accepted) | as the fourth pass | PSU screws ≤ 5 mm below the plate |
+| Front strip y 14-30 | W02 / W03 at plate level y 18-26; W10 / W18 at board level y 26-29 | — | front panel board's parts behind y 14; the control board's J6 ribbon below 25 mm |
+
+## What I need the mating boards to do
+
+- **Power amp (W04 / W05 / W16):** tabs **V_SCREEN (512, 155), V_ANODE (512, 170), GND_PWR (512, 182)** on its
+  downward face, legs along x, fully insulated receptacles, **window x 503-516, y 148-186.5** (blade centres; same
+  y order as ours so the wires go straight across); nothing past x 519.1; its W14 / W15 headers and P-J_HVINH (W16)
+  at its east end **in front of / west of** the HV tabs, ≥ 8 mm from them, P-J_HVINH at about x 505-517,
+  y 128-140 (under the corridor, 50 mm from our J501 B). Second choice: HV tabs on its rear edge, east part (x
+  490-515, y ≈ 183, legs along y): wires 40 mm longer and in the J7 ribbon's lane: not preferred.
+- **PI + FX (W03):** raw tab pair (its J501) on its downward face, **preferred window: front-east corner x 250-276,
+  y 106-120**, BP_RAW the east tab (≈ (270, 113)), GND ≈ (258, 113), legs along y; needs its P-J_PR_* headers at
+  x ≤ 240. Second: east end behind them, x 255-276, y 125-150 (the cable then passes ≈ 15 mm under its east end).
+  Receptacles inside its outline (the power amp is 1.6 mm east).
+- **Preamp (W02):** nothing new: J501 as laid out (pin 1 BP_RAW at x 356.8, GND at x 371.8, y ≈ 81); the cable
+  arrives from the east under its rear-east corner at 25-40 mm below the plate; keep x 372-386, y 66-88 free of
+  tall parts for the receptacles and the cable bend.
+- **Control board:** J11 unchanged; **choose the key wall of J11 and tell us (J1 copies it; proposal: the east,
+  odd-row wall)**; keep the 8 mm gap free; for W03 route (a): **its plate side clear (no part > 3 mm, no plate-side
+  connector) on x 442-448 over y 30-122**, a 430 V cable (600 V insulation) clipped ≥ 5 mm above it; J7's ribbon
+  dressed east (x 541-555) where it passes our J201 / J202.
+- **Tube PSU / harness (W01, W10, W18, W06 / W07 / W09, mains):** W01 and W10 / W18 down the front hole; mains up
+  the rear hole from the inlet; W01 receptacles fully insulated, red / black; hole fill to check (choice C5).
+- **Chassis:** clip points under the plate along W02 / W03 (y 18-26, x 424-604; x 442-448; y 120): the unused D748
+  hole (605.7, 17.4) for one, the rest adhesive bases rated ≥ 85 °C or a few new M3 holes (work-list item).
+
+## Open choices (both, with my preference)
+
+| # | Choice | Preferred | Other |
+|---|---|---|---|
+| C1 | W03 route | **(a)** plate level over the control board's west strip x 442-448, then y 120: clear of the OT hole, crosses only from above | (b) down the gap past the OT lead hole (1-3 mm from it) and beside W13 |
+| C2 | PI + FX raw tab window | **front-east corner** x 250-276, y 106-120 | east end x 255-276, y 125-150 |
+| C3 | J501 (W16) | **B** (572.5, 117.5): 90 mm wire, out of the 8 mm gap | A (565.5, 50.0) as floorplanned: 190 mm along the gap past W17 and the W10 / W18 harness |
+| C4 | Power amp HV tabs | **east end**, facing ours (window above) | rear edge, east part |
+| C5 | Heaters / -80 V from the PSU (not via this board) | **rear hole** with the mains, then west behind our rear strip (y 200-208) or under it ≥ 50 mm below the plate: shortest to the power amp | front hole with W01 / W10 / W18: long, past the control board. Either way the hole fill (15 mm hole, 40 %) is for the PSU owner: a third hole may be needed |
+| C6 | J101 polarity | tabs as decided, red / black leads, silkscreen | a polarized 600 V housing (Mini-Fit Jr 2-way) instead of the two tabs (B_P / B_N swapped reverses C101) |
 
 # Fourth pass: soft-switched redraw (2026-11-24)
 

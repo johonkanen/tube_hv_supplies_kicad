@@ -28,6 +28,7 @@ cd rev3/sim && python3 r1_turnoff.py && for s in r1_softsw r2_filter r3_damping 
 cd rev3/sim && for s in m15_bridge m17_ramp_down m18_power_stage m20_short_arc m21_channel_change m22_startup_failsafe; do python3 $s.py; done
 #   (m18 / m21 import the power amp's stage.py from ~/dev/tube_power_amp_kicad read only; a few minutes each)
 python3 rev3/mechanical/floorplan_chosen.py   # chosen outline + floorplan, KiCad Edge.Cuts outline
+python3 rev3/mechanical/layout_sketch.py     # layout sketch, interfaces only: layout_sketch.png / layout_sketch_routes.png
 python3 rev3/mechanical/floorplan.py    # second-pass outline study (history)
 ```
 
