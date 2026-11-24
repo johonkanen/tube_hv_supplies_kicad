@@ -662,8 +662,8 @@ def keepouts(board, fps):
                   name=f"PF_{ref}")
 
 
-LV_AREAS = [rect_pts(560.0, 30.0, 575.0, 97.0), rect_pts(560.0, 97.0, 584.0, 136.0),
-            rect_pts(601.5, 99.0, 648.5, 127.6)]
+LV_AREAS = [rect_pts(560.0, 30.0, 575.0, 97.0), rect_pts(560.0, 97.0, 584.0, 136.0)]
+GND_AREAS = LV_AREAS + [rect_pts(601.5, 99.0, 648.5, 127.6)]     # also the measurement area, for the ground step
 
 
 def hv_keepouts(board):
@@ -675,6 +675,8 @@ def hv_keepouts(board):
     for ref, (x, y) in HOLES.items():
         if ref != "H101":
             shape_poly(board, circle_pts(x, y, 6.2), pcbnew.User_2, 0.1, fill=True)
+    for pts in GND_AREAS:
+        shape_poly(board, pts, pcbnew.User_3, 0.1, fill=True)
 
 
 def notes(board, fps):

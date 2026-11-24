@@ -166,6 +166,7 @@ def filters(d):
     d.track("F", 1.5, [(604.0, 117.0), (600.0, 118.6), (589.5, 118.6), (589.5, 122.46), "R203.1"],
             net=d.pad("C211.2").GetNet())
     d.track("F", 1.5, ["R203.2", (584.0, 113.0), (582.5, 110.0), "C201.2"])     # IC1 shunt back to bridge 1
+    d.track("B", 1.2, ["C209.2", (577.5, 197.6), (582.0, 197.6), "R210.1"])                        # IC2 to its shunt
     d.track("F", 0.8, [(630.5, 109.5), "R420.1"], net=d.pad("C211.1").GetNet())     # UC1 divider top
     d.via(608.0, 95.8, "R415.1", 0.8, 0.4)                                            # raw divider top from R201
     d.track("B", 1.0, ["R201.1", (608.0, 95.8)])

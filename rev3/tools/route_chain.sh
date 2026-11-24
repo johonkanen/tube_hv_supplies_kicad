@@ -40,7 +40,7 @@ HV=(--keepout --keepout-layer User.2 --board-edge-clearance 2.6 --layer-costs 1 
 HVG=()
 step hvpow hvpow "${HV[@]}" --max-iterations 20000000 --power-nets '*/UC2' 'IC2' '*/IC2' '*' --power-nets-widths 1.5 1.5 1.5 1.0
 step hvsmall hvsmall "${HV[@]}" --power-nets '*/CD1' '*/CD2' '*' --power-nets-widths 0.8 0.8 0.5
-step ground ground --keepout --keepout-layer User.2 --escalation board --max-iterations 5000000 --power-nets 'PGND' 'GND_STAR' '*CHASSIS' '*BR_DC' --power-nets-widths 1.2 1.2 1.0 1.0
+step ground ground --keepout --keepout-layer User.3 --escalation board --max-iterations 5000000 --power-nets 'PGND' 'GND_STAR' '*CHASSIS' '*BR_DC' --power-nets-widths 1.2 1.2 1.0 1.0
 step gate gate --track-width 0.5 --escalation board "${HVG[@]}"
 step kelvin kelvin --track-width 0.3 --escalation board
 step spi spi --track-width 0.25 --escalation board
