@@ -99,7 +99,6 @@
     "ground": [
       "/01 Raw HV input, RAW_SS feeds (links), power star, fault network, bleeder/BR_DC",
       "/01 Raw HV input, RAW_SS feeds (links), power star, fault network, bleeder/CHASSIS",
-      "GND_STAR",
       "PGND"
     ],
     "kelvin": [

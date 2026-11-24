@@ -170,7 +170,7 @@ GROUPS["drv1"] = ([("B", 583.0, 101.8, 601.0, 109.0), ("B", 569.0, 97.0, 583.0, 
                   ["R304", "C301", "R301", "R302", "R303"])
 GROUPS["drv2"] = ([("B", 634.0, 137.0, 646.0, 149.0), ("B", 612.0, 127.5, 646.0, 138.3)],
                   ["R312", "C311", "C312", "C308", "R309", "R310", "R311"])
-GROUPS["adc"] = ([("B", 603.0, 100.0, 642.0, 114.5)],
+GROUPS["adc"] = ([("B", 603.0, 99.5, 648.0, 114.5), ("B", 603.0, 114.5, 647.5, 126.3)],
                  ["C404", "C405", "C406", "R406", "R407", "C418", "C419", "C420", "R430", "R431",
                   "C422", "C423", "C424", "R437", "R438", "C410", "C411", "C412", "R413", "R414",
                   "C427", "C428", "C429", "R444", "R445", "C431", "C432", "C433", "R451", "R452"])
@@ -553,6 +553,67 @@ def pack(board, fps, name, zones, refs, gap=0.8):
     return missing
 
 
+POWER_LIKE = {"GND", "+3V3", "+12V", "PGND", "VREF", "+3V3_REF", "IBIAS"}
+
+
+def pack_near(board, fps, name, zones, refs, gap=1.1):
+    """Connectivity-driven packing: each part goes to the free spot nearest to the pads it shares a signal net
+    with (or, for a part with only supply nets, to the last IC listed before it), rotation 0 or 90."""
+    sp = build_space(board)
+    grid = []
+    for side, x0, y0, x1, y1 in zones:
+        x = x0
+        while x <= x1:
+            y = y0
+            while y <= y1:
+                grid.append((side, x, y))
+                y += 0.5
+            x += 0.5
+    placed_pads = {}
+    for f in board.GetFootprints():
+        if f.GetReference() in PACKED and f.GetReference() not in DONE:
+            continue
+        for p in f.Pads():
+            placed_pads.setdefault(p.GetNetname(), []).append(cpos(p.GetPosition()))
+    missing, anchor = [], None
+    for ref in refs:
+        f = fps[ref]
+        nets = {p.GetNetname() for p in f.Pads() if short_net(p.GetNetname()) not in POWER_LIKE and p.GetNetname()}
+        pts = [q for n in nets for q in placed_pads.get(n, [])]
+        if pts:
+            tx, ty = sum(q[0] for q in pts) / len(pts), sum(q[1] for q in pts) / len(pts)
+        elif anchor is not None:
+            tx, ty = anchor
+        else:
+            side, x0, y0, x1, y1 = zones[0]
+            tx, ty = (x0 + x1) / 2, (y0 + y1) / 2
+        done = False
+        for side, x, y in sorted(grid, key=lambda g: (g[1] - tx) ** 2 + (g[2] - ty) ** 2)[:4000]:
+            for rot in (0, 90):
+                place_at(f, side, x, y, rot)
+                cb = courtyard_box(f, side)
+                if not any(z[0] == side and z[1] <= cb[0] and z[2] <= cb[1] and cb[2] <= z[3] and cb[3] <= z[4]
+                           for z in zones):
+                    continue
+                if sp.fits(f, side, gap):
+                    sp.add_fp(f)
+                    DONE.add(ref)
+                    for p in f.Pads():
+                        placed_pads.setdefault(p.GetNetname(), []).append(cpos(p.GetPosition()))
+                    done = True
+                    break
+            if done:
+                break
+        if not done:
+            missing.append(ref)
+            place_at(f, "B", 700, 100, 0)
+        elif ref.startswith("U"):
+            anchor = cpos(f.GetPosition())
+    if missing:
+        print(f"group {name}: no room for {missing}")
+    return missing
+
+
 # ---------------------------------------------------------------- drawing helpers
 def shape_poly(board, pts, layer, w=0.1, fill=False):
     s = pcbnew.PCB_SHAPE(board)
@@ -864,7 +925,7 @@ def main():
         place_at(fps[ref], "B", 700, 100, 0)
     missing = []
     for name, (zones, refs) in GROUPS.items():
-        missing += pack(board, fps, name, zones, refs)
+        missing += pack_near(board, fps, name, zones, refs)
     keepouts(board, fps)
     hv_keepouts(board)
     notes(board, fps)

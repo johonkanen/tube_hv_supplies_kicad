@@ -40,7 +40,8 @@ HV=(--keepout --keepout-layer User.2 --board-edge-clearance 2.6 --layer-costs 1 
 HVG=()
 step hvpow hvpow "${HV[@]}" --max-iterations 20000000 --power-nets '*/UC2' 'IC2' '*/IC2' '*' --power-nets-widths 1.5 1.5 1.5 1.0
 step hvsmall hvsmall "${HV[@]}" --power-nets '*/CD1' '*/CD2' '*' --power-nets-widths 0.8 0.8 0.5
-step ground ground --keepout --keepout-layer User.3 --escalation board --max-iterations 5000000 --power-nets 'PGND' 'GND_STAR' '*CHASSIS' '*BR_DC' --power-nets-widths 1.2 1.2 1.0 1.0
+step ground ground --keepout --keepout-layer User.3 --escalation board --max-iterations 3000000 --power-nets 'PGND' '*CHASSIS' '*BR_DC' --power-nets-widths 1.2 1.0 1.0
+step star GND_STAR --keepout --keepout-layer User.2 --escalation board --max-iterations 3000000 --layer-costs 1 8 --power-nets 'GND_STAR' --power-nets-widths 1.2
 step gate gate --track-width 0.5 --escalation board "${HVG[@]}"
 step kelvin kelvin --track-width 0.3 --escalation board
 step spi spi --track-width 0.25 --escalation board
@@ -52,7 +53,7 @@ N=$((N + 1)); P="$W/$(printf %02d "$N")_pour.kicad_pcb"
 "$KIPY" "$R/tools/make_pcb.py" --zones "$CUR" "$P" 2>&1 | grep -v "memory leak" | tail -1
 for x in kicad_pro kicad_dru; do cp "$R/kicad/tube_hv_supplies_rev3.$x" "${P%.kicad_pcb}.$x"; done; CUR="$P"
 [ "$LAST" = "pour" ] && { echo "stopped after pour: $CUR"; exit 0; }
-step leftover hvpow,hvsmall,ground,gate,kelvin,spi,analog,lv,pour --track-width 0.25 --max-iterations 20000000
+step leftover hvpow,hvsmall,ground,GND_STAR,gate,kelvin,spi,analog,lv,pour --track-width 0.25 --max-iterations 20000000
 N=$((N + 1)); P="$W/$(printf %02d "$N")_refill.kicad_pcb"
 kpy "$SK/fill_zones.py" "$CUR" "$P" | tail -1; CUR="$P"
 for x in kicad_pro kicad_dru; do cp "$R/kicad/tube_hv_supplies_rev3.$x" "${P%.kicad_pcb}.$x"; done

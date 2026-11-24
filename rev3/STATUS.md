@@ -1,3 +1,27 @@
+# Where we left off (2026-11-24, layout first pass in progress)
+
+**Placed, drawn, partly routed:** `kicad/tube_hv_supplies_rev3.kicad_pcb` = chain step `04_ground` (2 layers, 1 oz,
+KiCad = chassis − (525, 30), F faces down). All 268 parts placed (`tools/make_pcb.py`); the bridges, gate drive,
+commutation loops (folded: R202 / C202 and R209 / C207 opposite the switch-node links), UC1 / IC1 / IC2 / VO1,
+divider tops and the SPI bus (SCLK daisy chain, returned clock at the far end) scripted (`tools/bridge_copper.py`);
+all HV nets, PGND, CHASSIS routed by the router. **Not yet routed:** GND_STAR, gate leftovers, Kelvin legs, SPI
+data, analog, control logic, supplies; pours not added. Schematic changes for the layout: Kelvin net ties NT401-NT408,
+NT101 on 2 mm pads, TO-220 bar footprint without board hole, 1 kV C0G in 1812 (ERC 0 errors / 2 warnings). H102 back
+on the existing D748 hole (605.0, 124.7); bridge 1 high side now on the east hole (595, 64.8).
+**DRC** (`kicad-cli pcb drc --severity-all --schematic-parity`, no refill, `reports/drc.json`): **0 errors**,
+49 warnings (25 silk overlap, 21 silk over copper, 2 dangling stubs, 1 silk to edge), **429 unconnected** (the
+steps not yet run), **parity 0**.
+**What failed and why:** routing PGND / GND_STAR before HV boxed in UIN; with HV first, PGND needs the plate-side
+keep-outs (User.3) or it cuts through the measurement area; GND_STAR's 130 mm edges fail under keep-outs (now its own
+step, User.2, plate side priced ×8). The first measurement-block placement (row packing) left ~40 analog pads
+unroutable: replaced by connectivity-driven packing (`pack_near`), not yet routed. Commutation loop estimate
+≈ 9-11 nH board + ≈ 13 nH for the two TO-220s = 22-25 nH, above the 15-20 nH asked (13 mm device pitch fixed by the
+bars). Draft report text: in progress (not committed).
+**Resume:** `cd rev3 && FROM=star tools/route_chain.sh` (reuses steps 02-04; never kill router processes by pattern).
+**Next:** (1) run star → leftover, then pours and fill; (2) look at the renders, fix the remaining opens by placement
+or scripted copper, DRC 0 / unconnected 0; (3) write "Layout, first pass" (stack-up, rules, loops, mechanical checks),
+`tools/render_docs.sh`, commit.
+
 # Status: HV supplies rev 3
 
 **Layout sketch: interfaces (2026-11-24)**: every connector and tab that leaves the board fixed in chassis
