@@ -1,5 +1,10 @@
 # Status: HV supplies rev 3
 
+**Ripple filter and soft switching (2026-11-24): a study, nothing redrawn** (section below:
+recommended TCM mode, 220 / 470 µH, 40-150 kHz, second stage below the band, synchronous ADC
+schedule; proposals N20-N27 for the user). The simulation pass (2026-11-23) below is still the state
+of the drawn schematic.
+
 **Simulation pass (2026-11-23): M15, M17, M18, M20, M21 and the start-up / fail-safe cases run;
 the clear-cut changes are drawn** (section "Simulation pass" below). The third pass (T1-T8) and the
 earlier passes stay below as history; where they differ, the simulation pass is current.
@@ -8,6 +13,128 @@ earlier passes stay below as history; where they differ, the simulation pass is 
 switch node, `reports/erc.rpt`); BOM `bom/bom.csv` 83 lines / 211 pieces, 24 lines with a part
 number, none TBD (R303 / R311 dead-time resistor now 20k). **The floorplan has to be re-run before
 layout** (a second SK 104 for Q203, ULW5 output resistors, one more SOIC-14).
+
+# Ripple filter and soft switching (2026-11-24)
+
+**A study for the user to decide on: nothing is redrawn.** Scripts and results in `sim/`:
+`r1_turnoff.py` + `tcm.py` + `r1_softsw.py` (`r1_results.md`: operating mode, losses), `filt.py` +
+`r2_filter.py` (`r2_results.md`: filter chain), `r3_damping.py` (`r3_results.md`: active damping and
+the link), `r4_residue.py` (`r4_results.md`: residue at the tubes / speaker, aliasing, conducted noise).
+The IGBT is M15's calibrated model (swmodel.py); the load is the power amp's stage.py (99cff1f).
+
+## Findings in short
+
+- **Soft switching over the whole range needs triangular-current mode (TCM) with a variable
+  frequency.** The inductor current must reverse every period (valley ≤ −I_zvs, peak ≥ +I_zvs, so
+  dI = 2(|I_o| + I_zvs)); the ripple a buck makes, V_o(1 − D)/(L f), vanishes at D → 1 and D → 0, so
+  no fixed frequency can do it near 403 V out of 420 V or near 0 V. Law: f = clamp(f_TCM, 40 kHz,
+  150 kHz), f_TCM = V_o(V_in − V_o)/(V_in L dI), from the bridge's filtered average current.
+- **For an IGBT "soft" removes the turn-on and the diode recovery (M15's 45 µJ per period) but not
+  the tail.** With the calibrated model the turn-off costs about 7-12 µJ per ampere turned off
+  (20 µJ at 2 A hard; 12 µJ with 220 pF across each IGBT; 4.6 µJ with 1 nF, but a big snubber needs
+  a big reverse current to swing the node in the dead time, which is more ripple turned off again).
+  In TCM the current turned off per second is the ripple slope V_o(1 − D)/L whatever the frequency,
+  so **the IGBT bridge's loss at mid voltage is set by L alone and falls only as L rises, while the
+  frequency at the top of the range falls as 1/L.** The bridge gets 3x cheaper at 400 V and 3-5x
+  dearer at 150-250 V than today's. The frequency does not rise where the amplifier normally runs:
+  40-60 kHz at 400 V full load, 90-150 kHz at idle and at mid voltage.
+- **Where the IGBT stops making sense:** a 650 V superjunction (CFD7 class) or SiC MOSFET turns off
+  nearly losslessly under ZVS (I² t_f² / 24 C < 0.1 µJ): the same TCM with 150 µH at 50-300 kHz costs
+  0.05-0.35 W per device everywhere (class-typical values, r1 section 4), against 0.4-2.1 W for the IGBT.
+- **The user's placement of the second resonance (above f_sw) does not filter at f_sw.** An LC section
+  only attenuates above its resonance; below it the gain is 1/(1 − (f/f2)²) ≥ 1 and it peaks at f2. With
+  f2 = 200 kHz, above the 40-150 kHz band, the second stage *amplifies* the switching ripple 1.1-4.3x
+  (1.1-1.6x damped); with f2 inside the band the moving frequency sweeps through the peak. The second
+  stage must sit **below** the lowest f_sw and above the loop's bandwidth, passively damped
+  (recommended: about 5-9 kHz, ×0.04 at 40 kHz, ×0.003 at 150 kHz). The rest of the user's picture
+  holds: the first resonance (≈ 0.93 kHz) is damped actively by the loop, the second is out of the
+  loop's reach and damped passively, and nothing resonates in the switching band.
+- **Today's 60 µs link cannot damp a 0.93 kHz first resonance well enough** (best |Zout| 11 Ω with
+  PM ≥ 45° / GM ≥ 8 dB over the tolerance corners; R2 asks ≤ 5 Ω). It damps resonances up to about
+  0.6 kHz (needs ≈ 300 µF). A **synchronous ADC schedule** (CNV timed by the PWM generator, the four
+  control channels every 20 µs, sample-to-PWM ≤ 30 µs including the PWM period) does it: |Zout|
+  4.1 Ω, PM 48°, GM 11.9 dB at every corner. Synchronous sampling is needed anyway: sampled
+  asynchronously, the TCM triangle on I_C (±1 A) folds into the audio band as a tone of up to 0.4 V
+  at the output. Fallback with today's link: passive damping (r3 table 1).
+
+## Recommended operating point and filter (V_ANODE; V_SCREEN where different)
+
+| Item | Recommended | Result |
+|---|---|---|
+| Mode | TCM, both edges zero-voltage turn-on; both bridges at one frequency (the lower of the two laws, each stays soft), interleaved 180° | Vce at turn-on 0 V at every point in the switching model (r1 sec. 3); hard edges only below about 5 V out (start-up, milliseconds) |
+| Frequency | f = clamp(f_TCM(V_o, \|I_o\| + 0.38 A), 40 kHz, 150 kHz); law caps the peak at 2.5 A (above ≈ 1.05 A average a few hard periods) | 40 kHz at 400 V / 0.7 A (raw 420 V), 59 kHz at raw 430 V, 94 kHz at idle 0.3 A, 150 kHz at 150-250 V; meets R8's ≥ 40 kHz but not "fixed" |
+| Inductor | **L201: 220 µH**, ETD39 **N97** (the drawn core set and footprint), 36 turns litz ≈ 0.8 mm² (≈ 100 × 0.1 mm), centre gap ≈ 0.9 mm (A_L ≈ 170 nH; set by measurement), 600 V winding insulation. **L203: 470 µH**, 52 turns litz ≈ 0.5 mm², same core | B_pk 0.09-0.13 T in normal use, 0.2 T at 4 A, saturation ≈ 7.5 A; copper 0.07-0.13 W, core 0.03-0.5 W (0.5 W at 150 kHz mid voltage) |
+| Snubber | 220 pF C0G 1 kV (1206) across each IGBT (C-E), 4 pieces | dv/dt 1.2-4 V/ns (today 20-50 V/ns) |
+| Dead time | per edge from the FPGA: transition time + 30 ns, 200-600 ns (valley edge up to 600 ns at I_zvs 0.38 A); R303 / R311 20k stays as the 200 ns floor | fixed 600 ns works too: +2-4 % loss, more duty distortion |
+| Gate drive | as drawn (15 Ω, 10k); the 1 nF G-E caps are not needed in TCM (off-gate bump 0.01-0.05 V) and must go for f_max 150 kHz | +12 V: 4 × 22 nC × 150 kHz + 6 mA ≈ 19 mA (25 mA budget); with the 1 nF caps 26 mA, i.e. keep them only with f_max 100 kHz (mid-voltage loss +20 %) |
+| Bootstrap | as drawn | ≥ 10.8 V at every point (r1 sec. 3) |
+| C1 (first capacitor) | 100 µF / 500 V / 105 °C electrolytic (long-life series, ≥ 10,000 h) **+ 4.7 µF / 630 V film in parallel, both returned through the I_C shunt** | electrolytic ripple 0.2-0.84 A rms at 40-150 kHz (about 35 % of its rating at 80 °C), 0.1 W, life ≈ 40,000 h with a 10,000 h part; film 0.2-0.76 A rms |
+| First resonance | L1 with C1 (+ C2 and Cd through L2): **0.93 kHz** (0.71 kHz screen) | damped actively by the I_C term (below) |
+| Second stage | **L202: 68 µH**, ≥ 2 A (radial drum); **C205: 4.7 µF / 630 V film**; damping leg **22 µF / 500 V electrolytic + 1.0 Ω** (≈ 1.5 Ω with its ESR) across C205; R204 (5.6 Ω across L202) removed. Same on bridge 2 | L2-C2 8.9 kHz, damped impedance peak 5 kHz / 3.5 Ω; **H2 = 0.042 at 40 kHz, 0.020 at 60, 0.007 at 100, 0.003 at 150 kHz; harmonics: 0.012 at 80 kHz, 0.005 at 120 kHz**; no resonance in the band at any tolerance corner (L ±20 %, C ±10 %, Cd ESR 1.1-2.5 Ω) |
+| Loop | synchronous sampling (CNV in the middle of a high-side conduction interval of the bridge being sampled), Ts 20 µs, Td ≤ 30 µs; Kp 0.75, Ki 2000 /s, Kc 2 Ω (V_ANODE); Kp 1, Ki 1000, Kc 4 Ω (V_SCREEN) | V_ANODE PM 48°, GM 11.9 dB, \|Zout\| ≤ 4.1 Ω 20 Hz-20 kHz at every corner; V_SCREEN 55° / 12.4 dB / 5.0 Ω (incl. R212 2.2 Ω); M18 load cases −0.8 / +1.8 V; 0.1 → 0.8 A step −1.8 V |
+| Residue at the power amp input | — | **≤ 16 mV p-p (V_ANODE) / 11 mV (V_SCREEN)** at nominal ESR, worst at 40 kHz; 29 mV at the cold-ESR corner (0.6 Ω); 0.2-3 mV at 78-150 kHz |
+| Residue at the speaker (±5 % tube mismatch) | target proposed: ≤ 50 µV rms ultrasonic, nothing in 20 Hz-20 kHz above 1 µV | **19 µV (KT88) / 32 µV (EL34) rms worst**, all at 40-150 kHz; beat product of two free-running bridges ≈ 0.5 nV; today's design 21-370 µV |
+
+## Comparison with the hard-switched design (70 °C ambient, 80 °C local air)
+
+| Quantity | Today (3 mH, 50 kHz, hard; M15) | Recommended TCM (220 / 470 µH, 40-150 kHz) |
+|---|---|---|
+| Q201 / Q202 at 400 V / 0.7 A | 3.54 / 0.27 W (Tj 134 °C on SK 104) | 1.08 / 0.10 W (96 °C on SK 104 / 86 °C free) |
+| 400 V / 0.8 A peak (raw 420 V) | 3.95 / 0.27 W | 1.87 / 0.07 W (40 kHz floor: valley −0.13 A, incomplete transition) |
+| Idle 400 V / 0.3 A | 1.57 / 0.26 W | 0.78 / 0.18 W |
+| 200 V / 0.35 A | 0.66 / 0.22 W | **2.10 / 1.43 W** (Q202 169 °C free: **needs a heatsink**) |
+| 200 V no load / 150 V 0.2 A | 0.43 / 0.21 W / — | **1.74 / 1.78 W / 1.71 / 1.47 W** |
+| Ramp-down 300 V, −0.8 A | 0.29 / 1.72 W | 0.89 / 2.16 W (≤ 1 s) |
+| Q203 / Q204 at 390 V / 0.18 A | 1.10 / 0.25 W | 0.40 / 0.11 W; 146 V: 0.62 / 0.57 W |
+| Inductors (anode / screen) | 0.96 / ≈ 0.1 W (1.55 Ω DCR) | 0.12 / 0.08 W at 400 V; 0.6 / 0.2 W at mid voltage |
+| Bridges + inductors at 400 V / 0.7 A + 390 V / 0.18 A | ≈ 6.2 W (board ≈ 10 W) | **≈ 1.9 W (board ≈ 5.7 W)** |
+| Same at idle (0.3 / 0.12 A) | ≈ 3.3 W | ≈ 1.5 W |
+| Same at 200 / 195 V | ≈ 1.1 W | **≈ 5.3 W** |
+| Peak inductor current | 0.97 A (0.8 A load), 1.38 A on a 30 ms ramp | 1.8-2.0 A normal, cap 2.5 A; −2.3 A on ramp-down |
+| C1 ripple current | 0.02-0.2 A rms | 0.2-0.84 A rms (electrolytic) + film |
+| Ripple at the power amp | 7 mV (400 V) / 59 mV (200 V), up to 190 mV cold ESR | ≤ 16 mV, mostly ≤ 3 mV |
+| Output impedance 20 Hz-20 kHz | ≤ 2.8 Ω to 5 kHz | ≤ 4.1 Ω (synchronous link); 11 Ω with today's link and active damping only |
+| Switch-node dv/dt, CM current through 20 pF | 20-50 V/ns, 0.4-1 A spikes | 1.2-4 V/ns, 25-80 mA |
+| Raw rail / PSU cable ripple | 0.19 V p-p / 0.7 mA rms | 0.27-0.6 V p-p / 0.4-2.1 mA (interleaved; 8 mA in phase) |
+| +12 V gate drive | ≈ 12.5 mA | ≈ 19 mA at 150 kHz without the 1 nF caps |
+
+## Consequences on the board (item 5)
+
+| Area | Change | Cost |
+|---|---|---|
+| L201 / L203 | same ETD39 core set and footprint; 36 / 52 turns of litz, gap ≈ 0.9 mm, N97 (N87 costs +3 %) | pin positions of the bobbin unchanged; litz termination |
+| Heatsinks | **Q202 and Q204 need heatsinks** for mid-voltage operation (1.4-1.8 W: 169-190 °C free). Either a second SK 104 per bridge (+2 × 455 mm², 51 mm tall) or both IGBTs of a bridge on one insulated SK 104 50.8 mm (≈ 3.5 W: Tj ≈ 130 °C; height to check against 66 mm) | +0 to 910 mm² |
+| First capacitor | + 4.7 µF / 630 V film per bridge (≈ 31.5 × 17 mm), returned through the I_C shunt | +2 × 540 mm² |
+| Second stage | C205 / C210 1 µF → 4.7 µF / 630 V (≈ +200 mm² each); + 22 µF / 500 V electrolytic (D16) + 1.0 Ω 1 W per bridge; L202 / L204 33 → 68 µH ≥ 2 A; R204 / R211 removed | ≈ +2 × 500 mm² |
+| Snubbers | 4 × 220 pF 1 kV C0G 1206 on the plate side at the IGBT pins | — |
+| Gate caps | C306 / C307 / C313 / C314 (1 nF) removed (for f_max 150 kHz) | — |
+| Area total | ≈ +2,100 to +3,000 mm² on the bottom side: fill 64 % → **76-81 %** of the 18,140 mm² usable, before N19's additions | **floorplan re-run; it may not close without the shared-heatsink option or a smaller C1 film** |
+| Trips | low-side forward / reverse trips 2.0 A → **±3.0 A** (normal TCM peaks 1.8-2.0 A, valleys to −1.6 A at mid voltage, −2.3 A on ramp-down); I_C discharge trip 2.0 A → **3.0 A** (the C1 triangle reaches ±1.6 A). The low side now conducts every period (≥ 1 µs), so **the forward trip is no longer blind at full duty**; but a short now rises at V_in / L = 1.9 A/µs (was 0.14): about 6-8 A within the 2-3 µs trip, near the ETD39's 7.5 A saturation, under ICpuls 24 A | threshold resistor changes; **M20 re-run** |
+| Control board / firmware | TCM modulator: per-period frequency and duty, per-edge dead time, common frequency of both bridges, 180° interleave, peak cap 2.5 A, 40 kHz floor; ADC CNV timed by the PWM; sample-to-PWM ≤ 30 µs; the PWM pads carry the gate edges directly, so a variable frequency needs no pad change (isolator matching 3 ns against 200-600 ns dead times) | interfaces.md 9 (schedule, timing), R8 wording |
+| Start-up and ramps | N13 ramp rules unchanged; below ≈ 5 V the 40 kHz floor leaves hard edges (milliseconds); restart at the feed-forward duty; with the TCM peak cap the 30 ms up-step is unchanged | — |
+
+Must be re-run before a redraw: M20 (short and arc with 220 µH: peak current, saturation, trip
+thresholds at 3 A), M21 / M22 with the new loop and law, T3 thermal and the floorplan with the
+heatsink option, the I_C channel's amplifier range (±2.5 A: the triangle plus a step reaches 2.2 A).
+M15's hard-switched table is superseded by r1; loop_digital.py by r3; M17's energies are unchanged.
+
+## Proposals (to the coordinating session and the user)
+
+| # | Proposal | Who |
+|---|---|---|
+| N20 | Decide the operating mode: **TCM with IGBTs as above** (3x lower loss at 400 V, 3-5x higher at 150-250 V, low sides on heatsinks), **or keep today's hard-switched 50 kHz**, **or TCM with 650 V SJ / SiC MOSFETs** (150 µH, 50-300 kHz, < 0.4 W per device everywhere; SiC wants 15-18 V gate drive: the +12 V supply would have to rise; an SJ part runs from 12 V) | user |
+| N21 | **Second resonance below the switching band**, not above it: 68 µH / 4.7 µF film / 22 µF + 1 Ω leg (H2 ×0.04 at 40 kHz); R204 / R211 out | user |
+| N22 | **R8 reworded**: "switching frequency 40-150 kHz, variable, common to both bridges, never below 40 kHz in steady state; ripple ≤ 20 mV p-p at the power amp's supply inputs" (and the proposed speaker target ≤ 50 µV rms ultrasonic, no in-band product above 1 µV) | user, interfaces 3.1 |
+| N23 | **Link: synchronous ADC schedule** (CNV from the PWM generator, mid high-side conduction, four control channels every 20 µs, sample-to-PWM ≤ 30 µs in the FPGA); else passive damping of the first stage (10 µF film ∥ 100 µF + 1 Ω, works with today's 60 µs) | control board, interfaces 9 |
+| N24 | Trips to ±3.0 A (low side) and 3.0 A (I_C discharge); TCM law with a 2.5 A peak cap; M20 re-run | HV supplies |
+| N25 | Low-side heatsinks (or one shared insulated SK 104 50.8 mm per bridge); floorplan re-run | HV supplies, mechanical |
+| N26 | +12 V: ≈ 19 mA with the gate caps removed at 150 kHz (26 mA with them: then f_max 100 kHz) | control board (informative) |
+| N27 | Raising the raw rail toward 445 V would double the frequency at the 403 V corner (more volts across the inductor); it collides with the 440 V ramp-down governor and is only noted | PSU owner (informative) |
+
+Open questions for the user: is steady operation at 150-250 V (the low-power channel) common enough
+that the IGBT TCM's 4-5 W there matters? Is a MOSFET acceptable after all? Can the control board
+give the synchronous 20 µs / 30 µs schedule? Is the variable frequency (40-150 kHz) acceptable in
+place of R8's fixed one?
 
 # Simulation pass (2026-11-23)
 
