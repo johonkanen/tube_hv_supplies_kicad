@@ -1,0 +1,55 @@
+(version 1)
+# HV supplies rev 3 rules (rev3/tools/make_pcb.py; STATUS.md "Layout, first pass").
+# Clearance basis: IPC-2221B table 6-1, external conductors, uncoated, sea level to 3050 m (B2):
+#   301-500 V 2.5 mm, 151-300 V 1.25 mm; component leads / terminations uncoated (A6): 301-500 V 0.8 mm.
+# Creepage check basis: IEC 60664-1 functional insulation, pollution degree 2, material group IIIa (FR-4,
+#   CTI >= 175): 500 V working -> 2.5 mm, 250 V -> 1.25 mm. The 2.5 mm clearance rules below give the same
+#   surface distance on the board, so creepage is met wherever clearance is (no slots needed; see STATUS).
+# Working voltages: raw rail 480 V transient / 450 V sustained (HV_RAW), switch nodes 0-480 V with their
+#   floating gate drive (HV_SW1 / HV_SW2), outputs and C1 nodes 0-440 V (trips 438 / 421 V; HV_OUT).
+# JLCPCB standard 2-layer: 0.127 / 0.127 mm, 0.3 mm via drill; this board uses 0.2 / 0.2 mm, 0.6 / 0.3 vias.
+
+(rule "HV to anything (B2, 301-500 V)"
+  (condition "(A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT') && A.NetName != B.NetName")
+  (constraint clearance (min 2.5mm)))
+
+(rule "HV mid nodes (B2, 151-300 V)"
+  (condition "A.NetClass == 'HV_MID' && A.NetName != B.NetName")
+  (constraint clearance (min 1.25mm)))
+
+(rule "HV to board edge"
+  (condition "A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT'")
+  (constraint edge_clearance (min 2.5mm)))
+
+(rule "HV to the standoff holes (metal standoff r 3 mm + 2.5 mm)"
+  (condition "(A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT') && B.Type == 'Pad' && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 4.0mm)))
+
+(rule "chassis net to anything (fault path)"
+  (condition "A.NetClass == 'CHASSIS' && A.NetName != B.NetName")
+  (constraint clearance (min 1.0mm)))
+
+# exceptions, last so they win
+(rule "terminations inside one part (IPC A6, 0.8 mm)"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && ((A.memberOfFootprint('Q201') && B.memberOfFootprint('Q201')) || (A.memberOfFootprint('Q202') && B.memberOfFootprint('Q202')) || (A.memberOfFootprint('Q203') && B.memberOfFootprint('Q203')) || (A.memberOfFootprint('Q204') && B.memberOfFootprint('Q204')) || (A.memberOfFootprint('C103') && B.memberOfFootprint('C103')) || (A.memberOfFootprint('C203') && B.memberOfFootprint('C203')) || (A.memberOfFootprint('C208') && B.memberOfFootprint('C208')) || (A.memberOfFootprint('C213') && B.memberOfFootprint('C213')) || (A.memberOfFootprint('C214') && B.memberOfFootprint('C214')) || (A.memberOfFootprint('C217') && B.memberOfFootprint('C217')) || (A.memberOfFootprint('C218') && B.memberOfFootprint('C218')) || (A.memberOfFootprint('R401') && B.memberOfFootprint('R401')) || (A.memberOfFootprint('R402') && B.memberOfFootprint('R402')) || (A.memberOfFootprint('R403') && B.memberOfFootprint('R403')) || (A.memberOfFootprint('R408') && B.memberOfFootprint('R408')) || (A.memberOfFootprint('R409') && B.memberOfFootprint('R409')) || (A.memberOfFootprint('R410') && B.memberOfFootprint('R410')) || (A.memberOfFootprint('R415') && B.memberOfFootprint('R415')) || (A.memberOfFootprint('R416') && B.memberOfFootprint('R416')) || (A.memberOfFootprint('R417') && B.memberOfFootprint('R417')) || (A.memberOfFootprint('R420') && B.memberOfFootprint('R420')) || (A.memberOfFootprint('R421') && B.memberOfFootprint('R421')) || (A.memberOfFootprint('R422') && B.memberOfFootprint('R422')) || (A.memberOfFootprint('D301') && B.memberOfFootprint('D301')) || (A.memberOfFootprint('D302') && B.memberOfFootprint('D302')) || (A.memberOfFootprint('U301') && B.memberOfFootprint('U301')) || (A.memberOfFootprint('U302') && B.memberOfFootprint('U302')) || (A.memberOfFootprint('R105') && B.memberOfFootprint('R105')) || (A.memberOfFootprint('R215') && B.memberOfFootprint('R215')) || (A.memberOfFootprint('D201') && B.memberOfFootprint('D201'))) && (A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT' || B.NetClass == 'HV_RAW' || B.NetClass == 'HV_SW1' || B.NetClass == 'HV_SW2' || B.NetClass == 'HV_OUT')")
+  (constraint clearance (min 0.8mm)))
+
+(rule "TO-220 pin fields (IPC A6: copper at the 2.54 mm lead row)"
+  (condition "((A.intersectsArea('PF_Q201') && B.intersectsArea('PF_Q201')) || (A.intersectsArea('PF_Q202') && B.intersectsArea('PF_Q202')) || (A.intersectsArea('PF_Q203') && B.intersectsArea('PF_Q203')) || (A.intersectsArea('PF_Q204') && B.intersectsArea('PF_Q204'))) && (A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT' || B.NetClass == 'HV_RAW' || B.NetClass == 'HV_SW1' || B.NetClass == 'HV_SW2' || B.NetClass == 'HV_OUT')")
+  (constraint clearance (min 0.8mm)))
+
+(rule "raw rail among itself (same potential through links / L101)"
+  (condition "A.NetClass == 'HV_RAW' && B.NetClass == 'HV_RAW'")
+  (constraint clearance (min 0.5mm)))
+
+(rule "bridge 1 floating driver domain (SW1 + 15 V)"
+  (condition "A.NetClass == 'HV_SW1' && B.NetClass == 'HV_SW1'")
+  (constraint clearance (min 0.25mm)))
+
+(rule "bridge 2 floating driver domain (SW2 + 15 V)"
+  (condition "A.NetClass == 'HV_SW2' && B.NetClass == 'HV_SW2'")
+  (constraint clearance (min 0.25mm)))
+
+(rule "floating NC pads (UCC21520 pins 12 / 13): the package's own spacing"
+  (condition "A.NetName == '*unconnected-*' || B.NetName == '*unconnected-*'")
+  (constraint clearance (min 0.15mm)))

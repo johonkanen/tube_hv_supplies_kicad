@@ -1,0 +1,15 @@
+{
+  "_comment": "HV supplies rev 3 (2 layers, JLC standard). Read by rev3/tools/route_chain.sh and the kicad-agentic-routing scripts.",
+  "project": "kicad/tube_hv_supplies_rev3",
+  "krt": "~/dev/KiCadRoutingTools",
+  "route_args": ["--layers", "F.Cu", "B.Cu",
+                 "--track-width", "0.25", "--via-size", "0.6", "--via-drill", "0.3", "--clearance", "0.2",
+                 "--grid-step", "0.05", "--board-edge-clearance", "0.5",
+                 "--fab-tier", "standard", "--escalation", "off", "--no-fix-drc-settings"],
+  "default_layer_costs": [1, 1],
+  "planes": {},
+  "signal_layers": ["F.Cu", "B.Cu"],
+  "power_nets": ["PGND", "GND_STAR", "*/GND", "GND", "+3V3", "+12V", "*/CHASSIS"],
+  "groups": {},
+  "fab": {"via": [0.6, 0.3], "fiducials_per_side": 0}
+}

@@ -4,7 +4,26 @@
     "version": 3
   },
   "schematic": {},
-  "board": {},
+  "board": {
+    "design_settings": {
+      "rules": {
+        "min_clearance": 0.15,
+        "min_track_width": 0.2,
+        "min_connection": 0.2,
+        "min_via_diameter": 0.6,
+        "min_via_annular_width": 0.15,
+        "min_through_hole_diameter": 0.3,
+        "min_hole_to_hole": 0.25,
+        "min_hole_clearance": 0.25,
+        "min_copper_edge_clearance": 0.5,
+        "min_silk_clearance": 0.0,
+        "min_text_height": 0.8,
+        "min_text_thickness": 0.12,
+        "solder_mask_to_copper_clearance": 0.0
+      },
+      "drc_exclusions": []
+    }
+  },
   "sheets": [
     [
       "03f0c202-7f3b-5886-8b65-7114de9c723e",
@@ -30,5 +49,474 @@
       "b0237d6c-9d07-5511-aa07-2e7d80cc2a2a",
       "05 J1 40-pin, HV_PERMIT, enable logic, hardware protection"
     ]
-  ]
+  ],
+  "net_settings": {
+    "classes": [
+      {
+        "name": "Default",
+        "clearance": 0.15,
+        "track_width": 0.25,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2147483647
+      },
+      {
+        "name": "HV_RAW",
+        "clearance": 2.5,
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "pcb_color": "rgba(220, 0, 0, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0
+      },
+      {
+        "name": "HV_SW1",
+        "clearance": 2.5,
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "pcb_color": "rgba(255, 120, 0, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1
+      },
+      {
+        "name": "HV_SW2",
+        "clearance": 2.5,
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "pcb_color": "rgba(255, 160, 0, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1
+      },
+      {
+        "name": "HV_OUT",
+        "clearance": 2.5,
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "pcb_color": "rgba(200, 0, 160, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2
+      },
+      {
+        "name": "HV_MID",
+        "clearance": 1.25,
+        "track_width": 0.4,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "pcb_color": "rgba(160, 80, 0, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 3
+      },
+      {
+        "name": "PWR",
+        "clearance": 0.25,
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "pcb_color": "rgba(0, 120, 200, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 4
+      },
+      {
+        "name": "CHASSIS",
+        "clearance": 1.0,
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "pcb_color": "rgba(0, 160, 0, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 5
+      },
+      {
+        "name": "SUPPLY",
+        "clearance": 0.15,
+        "track_width": 0.4,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "pcb_color": "rgba(120, 120, 0, 1.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 6
+      }
+    ],
+    "meta": {
+      "version": 4
+    },
+    "net_colors": null,
+    "netclass_assignments": null,
+    "netclass_patterns": [
+      {
+        "netclass": "HV_RAW",
+        "pattern": "B_P"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "*/B_P"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "UIN"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "*/UIN"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "UIN1"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "*/UIN1"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "UIN2"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "*/UIN2"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "RAW_SS1"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "*/RAW_SS1"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "RAW_SS2"
+      },
+      {
+        "netclass": "HV_RAW",
+        "pattern": "*/RAW_SS2"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "SW1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "*/SW1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "GH1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "*/GH1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "GHD1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "*/GHD1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "BOOT1"
+      },
+      {
+        "netclass": "HV_SW1",
+        "pattern": "*/BOOT1"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "SW2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "*/SW2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "GH2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "*/GH2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "GHD2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "*/GHD2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "BOOT2"
+      },
+      {
+        "netclass": "HV_SW2",
+        "pattern": "*/BOOT2"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "UC1"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/UC1"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "UC2"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/UC2"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "VO1"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/VO1"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "VO2"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/VO2"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "V_ANODE"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/V_ANODE"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "V_SCREEN"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/V_SCREEN"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "DV0A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/DV0A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "DV1A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/DV1A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "DS1A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/DS1A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "DS0A"
+      },
+      {
+        "netclass": "HV_OUT",
+        "pattern": "*/DS0A"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "BLD1"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/BLD1"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "BL1"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/BL1"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "BL2"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/BL2"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DV0B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DV0B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DV1B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DV1B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DS0B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DS0B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DS1B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DS1B"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "PGND"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/PGND"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "GND_STAR"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/GND_STAR"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "IS1"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/IS1"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "IS2"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/IS2"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "IC1"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/IC1"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "IC2"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/IC2"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "CD1"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/CD1"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "CD2"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "*/CD2"
+      },
+      {
+        "netclass": "CHASSIS",
+        "pattern": "CHASSIS"
+      },
+      {
+        "netclass": "CHASSIS",
+        "pattern": "*/CHASSIS"
+      },
+      {
+        "netclass": "CHASSIS",
+        "pattern": "BR_DC"
+      },
+      {
+        "netclass": "CHASSIS",
+        "pattern": "*/BR_DC"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "+12V"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "*/+12V"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "+3V3"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "*/+3V3"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "GND"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "*/GND"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "+3V3_REF"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "*/+3V3_REF"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "VREF"
+      },
+      {
+        "netclass": "SUPPLY",
+        "pattern": "*/VREF"
+      }
+    ]
+  }
 }
