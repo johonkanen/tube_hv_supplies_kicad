@@ -178,6 +178,30 @@ def filters(d):
     d.track("F", 1.0, ["C212.1", (641.25, 140.0), (646.0, 145.0), (646.0, 163.0), "R205.1"])
 
 
+ADC_ROW = ["U402", "U406", "U407", "U404", "U409", "U410"]
+
+
+def spi(d):
+    """The fast ADC bus on the plate side: SCLK daisy-chained along y 102.4 from the first ADS7056 to the AD7689
+    (pin 13), the returned clock R456 at that far end; CS_FAST along y 105.6. Stubs to pins 3 (SCLK, north) and 1
+    (CS, south); each SDO (pin 2) leaves west between them (routed by the router)."""
+    sck = d.pad("U402.3").GetNet()
+    cs = d.pad("U402.1").GetNet()
+    xs = [d.xy(f"{u}.3")[0] for u in ADC_ROW]
+    x0 = xs[0] - 1.0
+    u411 = d.xy("U411.13")
+    d.track("B", 0.2, [(x0, 102.4), (u411[0] - 0.8, 102.4), "U411.13"], net=sck)
+    for u in ADC_ROW:
+        x, y = d.xy(f"{u}.3")
+        d.track("B", 0.2, [f"{u}.3", (x - 0.35, y), (x - 0.35, 102.4)], net=sck)
+        x, y = d.xy(f"{u}.1")
+        d.track("B", 0.2, [f"{u}.1", (x - 0.35, y), (x - 0.35, 105.6)], net=cs)
+    r = d.xy("R456.1")
+    d.track("B", 0.2, [(r[0], 102.4), "R456.1"], net=sck)
+    r = d.xy("R457.1")
+    d.track("B", 0.2, [(x0, 105.6), (xs[-1] + 0.6, 105.6), (r[0] - 0.8, 105.6), (r[0], r[1])], net=cs)
+
+
 def main():
     src, dst = sys.argv[1], sys.argv[2]
     b = pcbnew.LoadBoard(src)
@@ -185,6 +209,7 @@ def main():
     bridge1(d)
     bridge2(d)
     filters(d)
+    spi(d)
     pcbnew.SaveBoard(dst, b)
     print(f"{dst}: bridge copper drawn")
 

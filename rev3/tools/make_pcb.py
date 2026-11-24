@@ -148,16 +148,19 @@ def _refs(prefix, nums):
 # divider chains (bottom side, 1206 end to end, 4.7 mm pitch). V_ANODE / V_SCREEN in the measurement area, HV end
 # east (fed from the rear through the corridor x 591-599 between the control area and H102); raw UIN and UC1 in the
 # band between L201 and C211 (y 102), UIN end west (fed from R201's side), UC1 end east (from C211's UC1 node)
-for _i, (_t, _m, _b) in enumerate((("R401", "R402", "R403"), ("R408", "R409", "R410"))):
-    _y = 120.5 + 4.5 * _i
-    AT[_t], AT[_m], AT[_b] = ("F", 594.7, _y, 180), ("F", 590.0, _y, 180), ("F", 585.3, _y, 180)
+for _x, (_t, _m, _b) in ((592.5, ("R401", "R402", "R403")), (597.0, ("R408", "R409", "R410"))):
+    AT[_t], AT[_m], AT[_b] = ("F", _x, 131.1, 90), ("F", _x, 126.4, 90), ("F", _x, 121.7, 90)   # HV end south
 AT["R415"], AT["R416"], AT["R417"] = ("F", 605.0, 102.0, 0), ("F", 609.7, 102.0, 0), ("F", 614.4, 102.0, 0)
 AT["R420"], AT["R421"], AT["R422"] = ("F", 629.0, 102.0, 180), ("F", 624.3, 102.0, 180), ("F", 619.6, 102.0, 180)
 # the six ADS7056 in a row (plate side) over C211, SCK daisy-chained along y 101.5 (tools/fast_copper.py)
 ADC_ROW = ["U402", "U406", "U407", "U404", "U409", "U410"]
 for _i, _r in enumerate(ADC_ROW):
     AT[_r] = ("B", 606.0 + 6.0 * _i, 104.0, 0)
-AT["U411"] = ("B", 651.0, 101.5, 0)      # AD7689 at the chain's far end
+AT["U411"] = ("B", 650.5, 102.2, 180)    # AD7689 at the chain's far end, SCK (pin 13) on the bus line y 102.4
+AT["R456"] = ("B", 646.2, 100.4, 0)      # returned SCLK taken at the far end (J1 pad 16)
+AT["R457"] = ("B", 633.0, 107.4, 0)      # CS_FAST pull-up at the end of the CS bus
+# lanes kept free by the packer for the scripted buses (tools/bridge_copper.py spi()): SCLK y 102.4, CS_FAST y 105.6
+RESERVED = [("B", (603.5, 101.95, 648.2, 102.85)), ("B", (603.5, 105.15, 636.2, 106.05))]
 AT["U412"] = ("B", 640.0, 121.0, 0)      # REF3030
 
 # groups: name -> (list of zones (side, x0, y0, x1, y1), refs); each part goes into the first zone with room
@@ -170,7 +173,7 @@ GROUPS["adc"] = ([("B", 603.0, 100.0, 642.0, 114.5)],
                   "C422", "C423", "C424", "R437", "R438", "C410", "C411", "C412", "R413", "R414",
                   "C427", "C428", "C429", "R444", "R445", "C431", "C432", "C433", "R451", "R452"])
 GROUPS["aux"] = ([("B", 641.0, 99.5, 647.5, 126.3), ("B", 603.0, 114.5, 647.5, 126.3)],
-                 ["C439", "FB401", "C435", "C436", "C440", "C437", "C438", "R455", "R456", "R457",
+                 ["C439", "FB401", "C435", "C436", "C440", "C437", "C438", "R455",
                   "U405", "C434", "R453", "R454", "C413", "C414", "C415", "C416", "R418", "R419", "R423", "R424"])
 GROUPS["amp"] = ([("B", 603.0, 114.5, 647.5, 126.3), ("B", 569.0, 108.0, 598.5, 134.5)],
                  ["U401", "C402", "C401", "R404", "R405", "C403", "R425", "R426", "R427", "R428", "R429", "C417",
@@ -510,6 +513,8 @@ def build_space(board):
         sp.add_fp(f)
     for x, y in TAB_SCREWS:
         sp.add_rect("B", (x - 5.0, y - 5.0, x + 5.0, y + 5.0))
+    for side, r in RESERVED:
+        sp.crt[side].append(r)
     return sp
 
 
@@ -655,8 +660,7 @@ def keepouts(board, fps):
                   name=f"PF_{ref}")
 
 
-LV_AREAS = [rect_pts(560.0, 30.0, 575.0, 97.0), rect_pts(560.0, 97.0, 591.0, 136.0),
-            rect_pts(602.0, 99.0, 657.0, 130.0)]
+LV_AREAS = [rect_pts(560.0, 30.0, 575.0, 97.0), rect_pts(560.0, 97.0, 590.8, 136.0)]
 
 
 def hv_keepouts(board):
@@ -726,12 +730,22 @@ def silk_refs(board):
 
 
 # ---------------------------------------------------------------- pours (after routing)
-ZONES = []          # (net, layer, priority, polygon) filled by tools/make_pcb.py --zones (set below)
+# (net, layer, priority, polygon): the power star island (front, both sides) and the control ground under the
+# low-voltage areas (plate side), plus the bottom-side LV strip facing the control board. The DRC rules keep every
+# pour 2.5 mm from HV copper by themselves.
+ZONES = [("GND_STAR", pcbnew.F_Cu, 1, rect_pts(586.0, 30.0, 649.0, 55.6)),
+         ("GND_STAR", pcbnew.B_Cu, 1, rect_pts(586.0, 30.0, 649.0, 55.6)),
+         ("GND", pcbnew.B_Cu, 1, rect_pts(560.0, 30.0, 576.0, 97.0)),
+         ("GND", pcbnew.B_Cu, 1, rect_pts(560.0, 97.0, 601.5, 136.5)),
+         ("GND", pcbnew.B_Cu, 1, rect_pts(601.5, 99.0, 648.5, 127.6)),
+         ("GND", pcbnew.B_Cu, 1, rect_pts(611.0, 127.6, 646.0, 141.0)),
+         ("GND", pcbnew.F_Cu, 1, rect_pts(560.0, 30.0, 570.0, 127.0))]
 
 
 def add_zones(board):
     nets = board.GetNetsByName()
     for name, layer, prio, poly in ZONES:
+        poly = list(poly)
         z = pcbnew.ZONE(board)
         z.SetLayer(layer)
         z.SetNet(nets[name])
