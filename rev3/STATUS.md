@@ -1,12 +1,16 @@
 # Status: HV supplies rev 3
 
+**Fourth pass (2026-11-24): soft-switched redraw**, drawn to the user's decisions (IGBTs in TCM on the chassis
+plate, the 8.9 kHz second stage, six ADS7056 on IF-2.2): 260 parts, ERC 0 errors / 2 warnings, floorplan closes
+(section below). The study sections that follow it (device choice, sampling, ripple filter) and the earlier passes
+are history; where they differ, the fourth pass is current.
+
 **Device choice and sampling for the loop (2026-11-24): study, nothing redrawn** (sections below:
 cascode GaN TP65H150G4PS in TCM on the chassis, second choice the SiC cascode UF3C065080T3S; fixed
 100 kHz hard switching as the fallback; dedicated ADS7056 converters on the loop channels, IF-2.2;
 proposals N28-N33). **Ripple filter and soft switching (2026-11-24): a study, nothing redrawn** (section below:
 recommended TCM mode, 220 / 470 µH, 40-150 kHz, second stage below the band, synchronous ADC
-schedule; proposals N20-N27 for the user). The simulation pass (2026-11-23) below is still the state
-of the drawn schematic.
+schedule; proposals N20-N27 for the user). (History now: the drawn state is the fourth pass.)
 
 **Simulation pass (2026-11-23): M15, M17, M18, M20, M21 and the start-up / fail-safe cases run;
 the clear-cut changes are drawn** (section "Simulation pass" below). The third pass (T1-T8) and the
@@ -16,6 +20,184 @@ earlier passes stay below as history; where they differ, the simulation pass is 
 switch node, `reports/erc.rpt`); BOM `bom/bom.csv` 83 lines / 211 pieces, 24 lines with a part
 number, none TBD (R303 / R311 dead-time resistor now 20k). **The floorplan has to be re-run before
 layout** (a second SK 104 for Q203, ULW5 output resistors, one more SOIC-14).
+
+# Fourth pass: soft-switched redraw (2026-11-24)
+
+**User decisions (2026-11-24):** keep the IGBT for now; soft switched (TCM, 40-150 kHz variable); second
+resonance at 8.9 kHz (below the switching band, passively damped); fast sampling assumed (ADS7056,
+IF-2.2); the plate under the PSU is free for the devices and their holes; the devices mount from the
+underside on the chassis plate as their heat sink. The cascode GaN (TP65H150G4PS) stays a documented
+later option.
+
+**State:** 260 parts, 139 nets, **ERC 0 errors / 2 warnings** (the expected UCC21520 VSSA on the switch
+node, `reports/erc.rpt`); BOM `bom/bom.csv` 97 lines; floorplan re-run, closes (below). Re-runs:
+`sim/r7_fourth_pass.py` → `sim/r7_results.md`. Reference numbers of the third pass are kept; removed
+parts leave their numbers unused (R204 / R211, C215, C306 / C307 / C313 / C314, R508 / C508 / D503,
+HS201 / HS202).
+
+## What was drawn
+
+| Item | As drawn now | Was |
+|---|---|---|
+| Q201-Q204 | IKP08N65F5 in TCM, footprint TO-220-3_Horizontal_TabUp: lying on the plate (below), leads bent down into the board | standing, Q201 / Q203 on SK 104 |
+| HS201 / HS202 | **removed** (no board heatsinks) | SK 104 38.1 mm |
+| L201 | **220 µH**, ETD39 **N97**, 50 turns litz 0.8 mm² (≈ 100 × 0.1 mm), centre gap ≈ 1.8 mm (A_L ≈ 88 nH, set by measurement), I_sat ≈ 10.8 A at 0.38 T | 3 mH, 192 t, N87 |
+| L203 | **470 µH**, ETD39 N97, 64 turns litz 0.5 mm², gap ≈ 1.4 mm, I_sat ≈ 6.5 A | 3 mH |
+| Snubbers | **C213 / C217 220 pF 1 kV C0G** across each high side (UIN-SW), **C214 / C218** across each low side (SW-PGND, beside the shunt so its charging current stays off the reading) | — |
+| Gate | 15 Ω, 10 kΩ as before; **1 nF G-E capacitors removed** (C306 / C307 / C313 / C314); R303 / R311 20k = **200 ns dead-time floor**, the per-edge dead time (200-600 ns) from the FPGA | 1 nF G-E, DT 200 ns fixed |
+| C1 (bridge 1) | C204 100 µF / 500 V / 105 °C 5000 h snap-in (Vishay MAL215919101E3 class, 22 × 40; ripple to confirm) **+ C211 4.7 µF / 630 V MKP (TDK B32674D6475K, ESR 7.5 mΩ), both through the I_C shunt R203** | 100 µF only |
+| C1 (bridge 2) | C209 100 µF only: **the screen bridge's film is left out for board area** (its electrolytic carries 0.32-0.39 A rms; V_SCREEN residue 5.6 mV p-p nominal, 11 mV at the cold-ESR corner) | 100 µF |
+| Second stage | **L202 / L204 68 µH ≥ 2 A** (Vishay IHB-1 class, rating to confirm); **C205 / C210 4.7 µF / 630 V MKP** (B32674D6475K); **damping leg C212 / C216 22 µF / 500 V + R216 / R217 1.0 Ω** to GND_STAR; **R204 / R211 (5.6 Ω across L2) removed** | 33 µH ∥ 5.6 Ω, 1 µF |
+| Output resistors | R205 ULW5-1R0, R212 ULW5-2R2, now **standing** (DIN0918, P7.62) | horizontal 25.4 mm |
+| Links / bleeders | R101 / R102 / R201 / R208 **0 Ω 2512 jumpers on the plate side** (the fusible-resistor option of the 0617 footprints is dropped); bleeders R206 / R207 / R213 / R214 **110 kΩ 2512 1 W (500 V limiting voltage)** and R215 1 MΩ 2512 on the plate side; D201 standing (DO-201, P5.08) | 0617 / 0414 THT |
+| Measurement | **Six ADS7056** (U402 / U404 / U406 / U407 / U409 / U410) on one CS_FAST, shared ADC_SCK, SDO each through 33 Ω; **three OPA2836** (U401 / U403 / U408): V_ANODE and V_SCREEN buffers (dividers 3 × 1 MΩ + **12.4 kΩ = 1/242.9**, 100 pF: τ 1.2 µs), four current amplifiers (gain **6.8**, 10k / 68k, **1.5 V + 0.34 V/A, ±4.4 A** into 0-3 V); charge buckets 33 Ω + 680 pF (22 ns); **REF3030 3.0 V** (U412) = the ADS7056s' AVDD, the AD7689's reference (external, CFG), the 1.5 V bias and the trip thresholds; its input through FB401 + 10 µF. The AD7689 keeps all eight channels as slow monitors (RAW and UC1 through the MCP6004 as before) | AD7689 only, 2.5 V |
+| Trips | **low side ±3.0 A** (TH_OC 0.480 V, TH_OCR 2.520 V), **I_C discharge 3.0 A** (TH_OC), raw 475 V (2.362 V), V_ANODE 438 V (1.802 V), V_SCREEN 421 V (1.732 V), all from the 3.0 V reference; LM4040 removed | ±2.0 A, 2.5 V |
+| Fault latch | new rule (below): U508 74LVC1G07, U509 / U511 74LVC1G17, U510 74LVC1G08, R530-R532, C512 / C513, D504 | rising HV_ENABLE clears |
+| J1 | IF-2.2 pad table (below) | IF-2.1 |
+
+## The devices on the chassis plate
+
+- **Stack:** plate (2 mm Al) → **aluminium bar 6 mm** (bar 1: 38 × 15 mm for Q201 / Q202; bar 2: 46 × 15 mm for
+  Q203 / Q204) → **1.5 mm Al2O3 washer** (TO-220 size, ≥ 1.5 mm larger than the tab all round) → TO-220 lying with
+  its tab on the washer. The bar exists because 15 mm between the board and the plate leaves standard TO-220
+  leads too short: with the bar the leads leave the body about 5 mm above the board and bend down 90° (bend
+  ≥ 2 mm from the body), and they reach through the board with the standard 13 mm lead length.
+- **Fixing:** M3 countersunk screws from the plate's top (flush under the PSU base) through plate, bar and washer,
+  a **PEEK shoulder bush** in the tab hole, nut and spring washer on the tab; the bars by two countersunk M3 each.
+  The devices go on before the board; their leads then go into the board and are soldered from below. Service of
+  a device means removing the PSU (the screw heads are under it).
+- **Live tabs:** collector tabs: the high sides at the raw rail (DC), **the low sides at the switch node**. Washer
+  breakdown kilovolts; creepage tab edge to bar over the washer ≥ 3 mm (1.5 mm margin + 1.5 mm thickness);
+  along the bush ≥ 2.5 mm (check the chosen bush at layout).
+- **HV-to-plate rule (T1: HV ≥ 5 mm from the plate): exception for these leads.** They run about 4 mm from the bar
+  (chassis potential) over the first 2 mm after the body; a 0.25 mm polyimide / Nomex strip on the bar's long edge
+  and heat-shrink sleeving on the bent lead section restore the margin. Everything else keeps the rule (bar to board
+  9 mm; plate-side SMD under the bar ≤ 3 mm).
+- **Capacitance and common-mode current:** 1.5 mm Al2O3 under a 130 mm² tab: **7.5 pF**; at the TCM edges
+  (4 V/ns, 100-400 ns) **30 mA peaks** into the chassis from each low-side tab (the high-side tabs are DC). It returns
+  through the plate to the board's single chassis bond, the fault / RF network at H101 (100 nF Y2 ∥ 100 Ω ∥ GBU8J)
+  into GND_STAR and PGND; the loop (bar → plate → H101) is 40-120 mm long, acceptable at 30 mA / 0.25 µs. A forced
+  hard edge (20-50 V/ns) would give 0.15-0.4 A spikes.
+- **Thermal** (plate 85 °C assumed under the PSU at 70 °C ambient; R_th junction-plate 2.2 + 0.8 + 1.0 = 4.0 K/W,
+  the last two estimates): Tj **89 / 85 °C** (high / low side) at 400 V / 0.7 A, 88 / 86 °C at idle, **93 / 91 °C at
+  200 V / 0.35 A**, 92 / 92 °C at 200 V no load, 94 °C in the low side on a ramp-down (≤ 1 s); screen 87 / 85 °C.
+  Heat into the plate ≈ 1.7 W at full load (both bridges), ≤ 4.5 W at 150-250 V.
+- **GaN later (TP65H150G4PS):** pin order G-S-D with a source tab against the IGBT's G-C-E with a collector tab:
+  pins 2 and 3 swap functions, so a dual footprint needs a second 3-hole row per device and jumpers (12 holes,
+  5-10 nH more in the commutation loop, a different tab node on the plate). Not nearly free: **not drawn**; the
+  GaN would come with a board spin (or a small adapter on the bar).
+
+## Inductor saturation and protection timing
+
+- L201 50 t / 220 µH: B = 0.09 T at the 2.5 A TCM peak cap, 0.11 T at the 3.0 A trip, saturation ≈ 10.8 A; L203
+  64 t / 470 µH: 0.07 / 0.18 T, saturation ≈ 6.5 A. Losses (copper + core) 0.12 W at 400 V / 0.7 A, 0.34 W at 200 V.
+- Comparator path: OPA2836 (≈ 10 ns) + 100 Ω / 2.7 nF (0.27 µs) + LMV339 + latch + DIS ≈ **1 µs**. A V_ANODE short
+  (M20 re-run, as drawn): **L201 4.2 A** at the I_C trip (0.15 T), 5.4 A if only the next period's low-side trip
+  acts (25 µs). Margin to saturation 2-2.6×: **no extra cycle-by-cycle comparator** is needed. Only a double failure
+  (both trips missing until the firmware at 100 µs) saturates the inductor.
+- R205 **8.2-8.3 J** (short), 6.8 J (30 V arc), against ULW5-1R0 ≈ 19 J (was 5.8-6.0 J: C1 now dumps through 68 µH
+  without the old 5.6 Ω path, and the 22 µF leg adds); R212 **8.8-8.9 J** against ULW5-2R2 ≈ 13 J; D201 4.0 A²s
+  (166 A²s); I_C shunt 211 A / 0.31 J (M20: 0.29 J); Q201 ≤ 5.4 A against ICpuls 24 A. **Everything survives.**
+
+## Fault latch rule (control board's watchdogged HV_ENABLE)
+
+HV_ENABLE low **stops the drivers at once** (U504 NAND → DIS) **and sets the latch** (U508 open drain on FAULT_N;
+also the power-on set, HV_ENABLE being pulled down). **The latch clears only on a rising HV_ENABLE that follows
+≥ 20 ms of HV_ENABLE low** (guaranteed; < 4 ms never clears: R530 100k / C512 47 nF with a fast recharge through
+R531 / D504, Schmitt U509), and only if no comparator is active (set dominates). The clock is HV_ENABLE delayed
+10 µs (R532 / C513 / U511) so FAULT_N (10k / 100 pF) has risen first. **Firmware:** to clear a fault, keep the
+heartbeat off ≥ 20 ms, then restart it; a heartbeat drop-out (fabric or PWM stop) latches and stays latched.
+HV_FAULT_N (pad 25) reports the latch as before.
+
+## J1 (W17, IF-2.2): the pad table as the control board must wire it
+
+All signals 3.3 V CMOS on the HV board's side (GND = the HV board's control ground, joined to PGND at the shunts by
+NT501); isolated on the control board.
+
+| Pad | Signal | Direction | Level / note |
+|---|---|---|---|
+| 1 | SDO_VS | HV → card | ADS7056 data, V_SCREEN (33 Ω) |
+| 2 | GND | — | ribbon return between the fast lines |
+| 3 | SDO_IC2 | HV → card | ADS7056 data, I_C24 (screen capacitor current) |
+| 4 | GND | — | |
+| 5 | SDO_IL2 | HV → card | ADS7056 data, I_Q22 (screen low-side current) |
+| 6 | GND | — | |
+| 7-10 | N/C | — | not isolated |
+| 11 | ADC_DIN | card → HV | AD7689 configuration (set external reference, 3.0 V) |
+| 12 | ADC_SDO | HV → card | AD7689 data |
+| 13 | ADC_CNV | card → HV | AD7689 convert |
+| 14 | ADC_SCK | card → HV | **shared SCLK** (AD7689 and the six ADS7056); ≤ 10 MHz plain, ≤ 30 MHz with pad 16 |
+| 15 | **CS_FAST** | card → HV | the six ADS7056 sample on its falling edge (timed by the PWM generator); 10k pull-up |
+| 16 | ADC_SCK_RET | HV → card | SCLK returned from the far end of the SCLK trace (33 Ω) |
+| 17 | SDO_VA | HV → card | ADS7056 data, V_ANODE (timing-critical: same isolator as pad 16) |
+| 18 | GND | — | |
+| 19 | SDO_IC1 | HV → card | ADS7056 data, I_C14 (timing-critical: same isolator as pad 16) |
+| 20 | GND | — | |
+| 21 | SDO_IL1 | HV → card | ADS7056 data, I_Q12 (timing-critical: same isolator as pad 16) |
+| 22 | GND | — | |
+| 23, 24 | N/C | — | not isolated |
+| 25 | HV_FAULT_N | HV → card | low = latched fault (rule above) |
+| 26-28 | N/C | — | not isolated |
+| 29 | PWM_L1 | card → HV | bridge 1 low side (10k pull-down); TCM: per-edge timing from the FPGA |
+| 30 | PWM_L2 | card → HV | bridge 2 low side |
+| 31 | PWM_H1 | card → HV | bridge 1 high side |
+| 32 | PWM_H2 | card → HV | bridge 2 high side |
+| 33, 34 | GND | — | |
+| 35, 36 | 3V3 | card → HV | **typical 16 mA, worst 26 mA (ADS7056 at 2.5 MSPS); budget 30 mA** |
+| 37 | HV_PERMIT_STAT | HV → card | high = HV_PERMIT loop present |
+| 38 | HV_ENABLE | card → HV | heartbeat monostable output; 100k pull-down; low = stop and latch |
+| 39, 40 | +12V | card → HV | **typical 9.5 mA (40 kHz) / 14 mA (idle, 94 kHz), worst 19 mA (150 kHz); budget 25 mA** |
+
+Isolator grouping (control board): the **reversed ADuM140E0 carries pads 16, 17, 19, 21** (SCK_RET with the three
+bridge-1 data lines: V_ANODE, I_C14, I_Q12, the anode loop: matched to the clock); the new ADuM142E0 carries
+CS_FAST (15) forward (one forward spare) and SDO_IC2 / SDO_IL2 (3, 5) back; the existing parts carry SDO_VS (1) in
+the back channel that pad 16 frees, ADC_SDO, HV_FAULT_N and HV_PERMIT_STAT. At ≤ 20 MHz all six data lines are
+equal (part-to-part skew of a few ns against a 50 ns period); at 30 MHz pads 17 / 19 / 21 are the critical ones.
+**3V3 noise:** the ADS7056 reference is the REF3030 (AVDD = 3.0 V); its line rejection plus FB401 / 10 µF keep
+an LDO-derived 3V3 (the control board's plan) far below one LSB (183 µV); were a buck used, ripple ≤ 20 mV p-p
+and a 10 Ω in place of FB401 (same 0603 footprint) would do.
+
+## Re-runs (`sim/r7_results.md`)
+
+| Earlier run | Result now |
+|---|---|
+| M20 short / arc | everything survives (above): L201 ≤ 5.4 A, R205 8.3 J / 19 J, R212 8.9 J / 13 J, D201 4 A²s |
+| M21 channel change | 400 → 150 V and back in 100 ms: tracking error ≤ 0.4 V, i_L1 average −0.26 … 0.63 A, TCM peak ≤ 1.6 A (ADS7056 loop, slowest TCM timing) |
+| M22 start-up / restart / fail-safe | start-up 0 → 400 V in 80 ms: error 0.8 V, TCM peak 2.0 A; restart at D = V_out / V_raw (no reverse step); link or PWM stop: HV_ENABLE drops within ≈ 20 µs, drivers off at once, latch set, ≤ 0.7 mJ of inductor energy ends in the diodes; frozen PWM with the heartbeat running: ≤ 414 V, under the 438 / 421 V trips; +12 V loss: UVLO |
+| Thermal (T3) | on the plate, Tj ≤ 94 °C everywhere (above) |
+| Residue (r2 / r4) | as drawn: V_ANODE 16.6 mV p-p at 400 V / 0.7 A (40 kHz), V_SCREEN 4.9-5.6 mV (no film), speaker ≤ 19 / 32 µV rms (KT88 / EL34) |
+| Loop (r3 / r6) | ADS7056 timing: PM 52-64°, GM 13.6-24 dB, \|Zout\| ≤ 3.9 Ω (20 Hz-20 kHz) at every corner |
+
+## Floorplan (re-run, `mechanical/floorplan_chosen.md` / `.svg`; outline unchanged)
+
+**Closes: bottom side 65 % fill (11,872 of 18,140 mm²), every block placed, no conflicts.** To make it close: the
+links and output bleeders went to SMD on the plate side, the ULW5 resistors and D201 stand, the screen bridge's
+C1 film was dropped (above). Bottom side: L201 front half (607-649, 58-100), C204 / L202 / C212 east of it, C205
+and the ULW5s in the front-west block, C211 between C201 and L203; bridge 2: L203 rear-west, C209 (612, 128), C210
+under bar 2, L204 and the damping leg on the arm by J202, D201 at the arm's rear. Plate side: **bar 1 at x 570-608,
+y 62-78** (Q201 / Q202, leads toward the rear, landing at y ≈ 81), **bar 2 at x 601-647, y 158-174** (Q203 / Q204,
+leads toward the front, landing at y ≈ 156), the control block next to J1, the fast-ADC block next to it, drivers
+beside the bars; ribbon corridor (y 127-147 under the arm) and the no-HV strip toward the control board kept.
+
+**New plate holes** (chassis frame; all M3, countersunk from the top; all under the tube PSU):
+bar 1 fixing (573.5, 69.5), (604.5, 69.5); Q201 / Q202 tab screws (582.0, 64.8), (595.0, 64.8); bar 2 fixing
+(605.0, 166.6) (the existing unused D748 Ø3.0 hole, opened to 3.4 mm) and (643.5, 166.6); Q203 / Q204 tab screws
+(618.5, 171.2), (631.5, 171.2). Board standoffs: (600.0, 98.0) new (replaces (605.0, 124.7), now under C209),
+(667.0, 138.0) (moved from 646.0, 140.0), (553.0, 195.0) (moved from 550.0, 194.0), (671.0, 48.0), (566.0, 122.0),
+H101 plated (617.0, 50.0). Checked: ≥ 6 mm from every other D748 hole and ≥ 8 mm from the standoffs; all inside the
+PSU's footprint (x 567-677, y 24-186) except (553.0, 195.0) and (566.0, 122.0), which were already planned.
+
+## Open (to the user / the control board)
+
+- Control board: wire J1 to the table above (IF-2.2), the two added isolators, CS_FAST timing (mid high-side
+  conduction for V / I_C, mid low-side for I_Q), AD7689 CFG for an external 3.0 V reference, the heartbeat rule
+  (≥ 20 ms low to clear), the 3V3 budget 30 mA.
+- Parts to confirm against datasheets: the 100 µF / 500 V electrolytic's ripple rating at 40-150 kHz (Vishay
+  PUL-SI or Rubycon VXT), B32674D6475K ripple rating, the 68 µH ≥ 2 A inductor, the 2512 1 W bleeders' limiting
+  voltage, the PEEK bush creepage, the ADS7056 footprint against TI's RUG0008A land pattern.
+- Mechanical: the two bars and the Al2O3 washers (drawing), the plate holes above (D748 frame), service with the PSU
+  removed.
+- Interfaces.md 9 / 3.2 to update by the coordinating session (IF-2.2, supply figures, R8 wording: variable 40-150 kHz).
 
 # Device choice (2026-11-24)
 

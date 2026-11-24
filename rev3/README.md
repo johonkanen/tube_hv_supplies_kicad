@@ -1,4 +1,4 @@
-# HV supplies rev 3: first draft (third pass + simulation pass, 2026-11-23)
+# HV supplies rev 3: soft-switched draft (fourth pass, 2026-11-24)
 
 The redesign of the HV supplies board (v2, converted at the repo root, frozen) for the rev B
 amplifier: two controllable outputs **V_ANODE** (0 to about 400 V, 0.5 A peak) and **V_SCREEN** (up
@@ -24,6 +24,7 @@ python3 rev3/tools/make_project.py      # project, root sheet, empty sub-sheets
 python3 rev3/tools/sheets/draw_all.py   # all five sheets + lib/footprint_map.csv + bom/bom.csv (overwrites them)
 tools/p2k/bin/kicad-cli sch erc --severity-all -o rev3/reports/erc.rpt rev3/kicad/tube_hv_supplies_rev3.kicad_sch
 cd rev3/sim && python3 lc_ac.py && python3 loop_digital.py && python3 discharge.py   # ngspice + numpy/scipy
+cd rev3/sim && python3 r1_turnoff.py && for s in r1_softsw r2_filter r3_damping r4_residue r5_devices r6_sampling r7_fourth_pass; do python3 $s.py; done   # fourth pass
 cd rev3/sim && for s in m15_bridge m17_ramp_down m18_power_stage m20_short_arc m21_channel_change m22_startup_failsafe; do python3 $s.py; done
 #   (m18 / m21 import the power amp's stage.py from ~/dev/tube_power_amp_kicad read only; a few minutes each)
 python3 rev3/mechanical/floorplan_chosen.py   # chosen outline + floorplan, KiCad Edge.Cuts outline
@@ -33,17 +34,17 @@ python3 rev3/mechanical/floorplan.py    # second-pass outline study (history)
 The sheets are generated: edit `tools/sheets/draw_all.py`, not the `.kicad_sch` files. Drawing style
 is netlist-first (parts on a grid, a wire stub and a label on every pin), as in tube_preamp_kicad
 rev_b: exact for ERC and the netlist, a tidy layout pass comes later. **ERC: 0 errors, 2 warnings**
-(both explained in STATUS.md). 207 parts, 113 nets. Footprints assigned on every part (stock KiCad
+(both explained in STATUS.md). 260 parts, 139 nets (fourth pass: TCM bridges on the chassis plate, IF-2.2 fast ADCs). Footprints assigned on every part (stock KiCad
 libraries; board-local blade tabs and the custom ETD39 inductor); BOM `bom/bom.csv`
-(83 lines, candidate part numbers where chosen, none TBD). No layout.
+(97 lines, candidate part numbers where chosen, none TBD). No layout.
 
 | Sheet | Contents |
 |---|---|
 | 01 | J101 raw HV in (B_P / B_N), R101 / R102 link footprints (0 Ω fitted, or 10-47 Ω 2 W fusible) to J102 / J103 (RAW_SS1 / RAW_SS2 with GND_PRE returns), input filter (C101 47 µF, L101 33 µH), raw bleeder 2 x 75 kΩ 2 W and HV-present LED, NT101 (the star point PGND ↔ GND_STAR), fault / RF network (GBU8J ‖ 100 nF Y2 ‖ 100 Ω) to the plated standoff H101 next to J101; H102-H106 non-plated. No brake |
-| 02 | Two synchronous bucks: input link footprint (no fuse, N7), IKP08N65F5 half-bridges (Q201 and Q203 each on an insulated SK 104 heatsink), 50 mΩ shunt in the low-side emitter, 3 mH / 2.4 A ETD39 inductor, one 100 µF / 500 V electrolytic returned through a 50 mΩ shunt, second stage 33 µH ∥ 5.6 Ω with a 1 µF film (27.7 kHz, Q 1), 1.0 Ω (V_ANODE) or 2.2 Ω (V_SCREEN) ULW5 fusible to the tab (metal-strip shunts), 220 kΩ bleeders. D201 (1N5408) clamps V_SCREEN ≤ V_ANODE. J201 V_ANODE / GND_PWR, J202 V_SCREEN |
-| 03 | One UCC21520 per bridge (dead time 200 ns (20k) + overlap block, DIS input = hardware inhibit, 8 V UVLO), bootstrap with an ultrafast diode, 15 Ω gate resistors, 10 kΩ and 1 nF gate-emitter, PWM pull-downs |
-| 04 | Four 1/201 dividers (3x 1 MΩ + 15 kΩ) and four shunt amplifiers (0.5 V/A around 1.25 V, ±2.5 A; 10k / 100k inputs), MCP6004 buffers, AD7689 (8 ch, 16 bit, SPI, internal 2.5 V reference); channel order per interfaces.md 9; R444 returns SCK to pad 16 (ADC_SCK_RET) |
-| 05 | J1 (40-pin, IF-2), J501 HV_PERMIT current-loop input (TLP293), fault latch (74AUP1G74), driver enable NAND (74LVC1G10), comparators (3x LMV339, latched): over-current 2.0 A forward and reverse per bridge, output-capacitor discharge > 2.0 A per bridge (short / arc), over-voltage raw 475 V / V_ANODE 440 V / V_SCREEN 420 V; LM4040 2.5 V reference |
+| 02 | Two synchronous bucks in triangular-current mode (40-150 kHz): IKP08N65F5 lying on the chassis plate (aluminium bars, 1.5 mm Al2O3), 220 pF snubbers, 220 / 470 µH ETD39 N97, C1 100 µF (+ 4.7 µF film on bridge 1) through the I_C shunt, second stage 68 µH / 4.7 µF film / 22 µF + 1.0 Ω leg (8.9 kHz), ULW5 fusibles standing, D201, J201 / J202 |
+| 03 | One UCC21520 per bridge (200 ns dead-time floor, per-edge dead time from the FPGA), bootstrap, 15 Ω / 10 kΩ gate parts |
+| 04 | Six ADS7056 on CS_FAST (V_ANODE, V_SCREEN, I_C14 / I_C24, I_Q12 / I_Q22) with OPA2836 front ends, REF3030 3.0 V, AD7689 for the slow monitors |
+| 05 | J1 (IF-2.2), HV_PERMIT loop input, fault latch (HV_ENABLE low sets it; clears only after >= 20 ms low), comparators: ±3.0 A low side, 3.0 A capacitor discharge, raw 475 V / V_ANODE 438 V / V_SCREEN 421 V |
 
 ## Layout
 
