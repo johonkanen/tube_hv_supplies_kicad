@@ -39,8 +39,10 @@ OX, OY = 525.0, 30.0                     # chassis -> KiCad offset
 # ---------------------------------------------------------------- outline and holes (chassis mm)
 OUTLINE = [(560, 30), (649, 30), (649, 39), (668, 39), (668, 30), (675, 30), (675, 145), (649, 145), (649, 180),
            (585, 180), (585, 200), (525, 200), (525, 127), (560, 127)]
-HOLES = {"H101": (617.0, 50.0), "H102": (602.5, 97.5), "H103": (671.0, 48.0), "H104": (667.0, 138.0),
-         "H105": (553.0, 195.0), "H106": (566.0, 122.0)}          # H101 plated (CHASSIS); H102 moved from (600, 98)
+HOLES = {"H101": (617.0, 50.0), "H102": (605.0, 124.7), "H103": (671.0, 48.0), "H104": (667.0, 138.0),
+         "H105": (553.0, 195.0), "H106": (566.0, 122.0)}
+# H101 plated (CHASSIS). H102 back on the existing D748 hole (605.0, 124.7) (the fourth pass had moved it to
+# (600, 98) because C209 sat there; C209 is now in the rear strip, and (600, 98) is the bridge-1 driver's place)
 TAB_SCREWS = [(582.0, 64.8), (595.0, 64.8), (618.5, 171.2), (631.5, 171.2)]   # in the plate; nut ~2 mm above B
 BARS = [(570, 62.5, 608, 77.5), (601, 158.5, 647, 173.5)]
 CORRIDOR = (525, 127, 560, 147)
@@ -78,7 +80,7 @@ PADS = {
     "L202": ("F", {"1": (659.5, 112.5), "2": (670.93, 112.5)}),
     "C212": ("F", {"1": (641.25, 134.0), "2": (648.75, 134.0)}),
     "R216": ("F", {"1": (657.5, 131.9), "2": (657.5, 139.52)}),
-    "C205": ("F", {"1": (636.7, 171.0), "2": (609.2, 171.0)}),
+    "C205": ("F", {"1": (604.0, 67.0), "2": (576.5, 67.0)}),     # VO1 film, front-west under bar 1
     "R205": ("F", {"1": (644.0, 166.2), "2": (644.0, 173.82)}),
     # bridge 2: devices on bar 2, input bulk, L1 (switch node pin east), C1 in the rear strip, second stage on the arm
     "Q203": ("B", {"1": (621.04, 154.54), "3": (615.96, 154.54)}),
@@ -91,45 +93,46 @@ PADS = {
     "R217": ("F", {"1": (556.5, 170.5), "2": (556.5, 178.12)}),
     "R212": ("F", {"1": (541.0, 187.5), "2": (541.0, 195.12)}),
     "D201": ("F", {"1": (529.2, 188.3), "2": (529.2, 193.38)}),
-    "C210": ("F", {"1": (576.5, 67.0), "2": (604.0, 67.0)}),
+    "C210": ("F", {"1": (609.2, 171.0), "2": (636.7, 171.0)}),   # VO2 film, rear under bar 2
     # gate drivers (plate side, outputs toward the device pins)
     "U301": ("B", {"16": (593.55, 91.35), "9": (584.66, 91.35)}),   # B mirror: OUTA (14-16) east, under Q201's gate
-    "U302": ("B", {"16": (623.25, 148.15), "9": (632.14, 148.15)}),  # OUTA west, under Q203's gate
+    "U302": ("B", {"16": (623.25, 148.15), "9": (632.14, 148.15)}),   # rows y 148.15 (outputs) / 138.85  # OUTA west, under Q203's gate
 }
 # AT: ref -> (side, x, y, rotation) of the footprint origin
 AT = {
     "J202": ("F", 531.5, 155.0, 0),
     # bridge 1 commutation parts (F, behind the pin row y 81.46; tools/bridge_copper.py draws their copper)
-    "C214": ("F", 580.3, 84.6, 180), "R202": ("F", 587.5, 86.0, 0), "C202": ("F", 594.5, 86.6, 180),
-    "C203": ("F", 594.5, 90.3, 180), "C213": ("F", 600.0, 85.5, 0),
+    "C214": ("F", 579.2, 86.2, 180), "R202": ("F", 587.5, 86.0, 0), "C202": ("F", 594.5, 86.6, 180),
+    "C203": ("F", 594.5, 91.0, 180), "C213": ("F", 600.6, 85.4, 0),
     # bridge 1 gate parts (plate side, between the pin row and U301)
     "R305": ("B", 592.46, 86.0, 90), "R306": ("B", 594.95, 83.9, 0), "R307": ("B", 579.46, 86.0, 90),
     "R308": ("B", 581.9, 84.2, 0), "C302": ("B", 598.6, 88.5, 90), "C303": ("B", 600.4, 88.5, 90),
-    "D301": ("B", 597.5, 94.0, 270),
+    "D301": ("B", 597.5, 94.0, 270), "C305": ("F", 586.0, 93.0, 180), "C304": ("F", 586.0, 95.3, 180),
     # bridge 2 commutation parts (F, in front of the pin row y 154.54)
-    "C217": ("F", 614.0, 151.0, 180), "C207": ("F", 619.5, 150.4, 0), "C208": ("F", 619.5, 147.0, 0),
-    "R209": ("F", 627.0, 150.4, 180), "C218": ("F", 634.5, 150.6, 0),
+    "C217": ("F", 613.6, 151.0, 180), "C207": ("F", 619.8, 150.4, 0), "C208": ("F", 619.8, 146.4, 0),
+    "R209": ("F", 627.0, 150.4, 180), "C218": ("F", 635.0, 150.6, 0),
     # bridge 2 gate parts (plate side)
     "R313": ("B", 621.04, 151.1, 270), "R314": ("B", 618.5, 151.3, 180), "R315": ("B", 634.04, 151.1, 270),
     "R316": ("B", 631.5, 151.3, 180), "D302": ("B", 618.6, 144.0, 90),
+    "C309": ("B", 614.6, 147.6, 270), "C310": ("B", 612.6, 147.6, 270),
     # shunts of the C1 currents
     "R203": ("B", 597.0, 105.5, 90), "R210": ("B", 582.0, 193.0, 90),
     # input HF caps, links, net ties
     "C102": ("F", 663.0, 66.0, 0), "C103": ("B", 663.5, 102.5, 0),
     "R101": ("B", 606.0, 47.5, 90), "R102": ("B", 586.0, 47.5, 90),
-    "R201": ("B", 612.0, 92.0, 90), "R208": ("B", 613.0, 141.0, 90),
+    "R201": ("B", 612.0, 92.0, 90), "R208": ("B", 613.5, 132.0, 0),
     "NT101": ("F", 650.5, 47.0, 90),
     "D101": ("F", 673.0, 129.5, 90),
     # output bleeders (plate side, over L203's rear half) and the V_ANODE lamp (bottom side, between J202 / J201)
     "R206": ("B", 575.0, 168.0, 0), "R207": ("B", 583.5, 168.0, 0),
     "R213": ("B", 575.0, 174.0, 0), "R214": ("B", 583.5, 174.0, 0),
-    "R215": ("B", 575.0, 162.0, 0), "D202": ("F", 531.5, 162.4, 0),
+    "R215": ("B", 575.0, 162.0, 0), "D202": ("F", 558.0, 160.0, 90),
 }
 # Kelvin net ties (schematic sheet 04): pad 1 laid on the shunt's pad edge, pad 2 outward.
 # ref -> (shunt, shunt pad, direction out of the pad, coordinate along the edge)
 KELVIN = {"NT401": ("R203", "1", "-x", 107.9), "NT402": ("R203", "2", "-x", 103.1), "NT501": ("R203", "2", "-x", 102.0),
-          "NT403": ("R202", "1", "+y", 584.3), "NT404": ("R202", "2", "+y", 590.9),
-          "NT407": ("R209", "1", "-y", 629.6), "NT408": ("R209", "2", "-y", 624.3),
+          "NT403": ("R202", "1", "+y", 584.9), "NT404": ("R202", "2", "+y", 590.9),
+          "NT407": ("R209", "1", "-y", 629.45), "NT408": ("R209", "2", "-y", 624.3),
           "NT405": ("R210", "1", "-x", 195.4), "NT406": ("R210", "2", "-x", 190.6)}
 for _r, (_x, _y) in HOLES.items():
     AT[_r] = ("F", _x, _y, 0)
@@ -142,12 +145,14 @@ def _refs(prefix, nums):
     return [f"{prefix}{n}" for n in nums]
 
 
-# divider chains (bottom side, so the HV feeds stay on F), HV end east: R_top, R_mid, R_bot end to end along x,
-# 4.5 mm between chains (2.7 mm between pads of neighbouring chains)
-for _i, (_t, _m, _b) in enumerate((("R420", "R421", "R422"), ("R415", "R416", "R417"), ("R401", "R402", "R403"),
-                                  ("R408", "R409", "R410"))):
-    _y = 118.5 + 4.5 * _i
+# divider chains (bottom side, 1206 end to end, 4.7 mm pitch). V_ANODE / V_SCREEN in the measurement area, HV end
+# east (fed from the rear through the corridor x 591-599 between the control area and H102); raw UIN and UC1 in the
+# band between L201 and C211 (y 102), UIN end west (fed from R201's side), UC1 end east (from C211's UC1 node)
+for _i, (_t, _m, _b) in enumerate((("R401", "R402", "R403"), ("R408", "R409", "R410"))):
+    _y = 120.5 + 4.5 * _i
     AT[_t], AT[_m], AT[_b] = ("F", 594.7, _y, 180), ("F", 590.0, _y, 180), ("F", 585.3, _y, 180)
+AT["R415"], AT["R416"], AT["R417"] = ("F", 605.0, 102.0, 0), ("F", 609.7, 102.0, 0), ("F", 614.4, 102.0, 0)
+AT["R420"], AT["R421"], AT["R422"] = ("F", 629.0, 102.0, 180), ("F", 624.3, 102.0, 180), ("F", 619.6, 102.0, 180)
 # the six ADS7056 in a row (plate side) over C211, SCK daisy-chained along y 101.5 (tools/fast_copper.py)
 ADC_ROW = ["U402", "U406", "U407", "U404", "U409", "U410"]
 for _i, _r in enumerate(ADC_ROW):
@@ -156,18 +161,18 @@ AT["U411"] = ("B", 651.0, 101.5, 0)      # AD7689 at the chain's far end
 AT["U412"] = ("B", 640.0, 121.0, 0)      # REF3030
 
 # groups: name -> (list of zones (side, x0, y0, x1, y1), refs); each part goes into the first zone with room
-GROUPS["drv1"] = ([("B", 581.0, 87.6, 590.0, 90.4), ("B", 583.0, 101.8, 601.0, 109.0), ("B", 569.0, 97.0, 583.0, 108.0)],
-                  ["C305", "C304", "R304", "C301", "R301", "R302", "R303"])
-GROUPS["drv2"] = ([("B", 612.0, 137.5, 618.0, 149.3), ("B", 634.0, 137.0, 646.0, 149.0), ("B", 612.0, 127.5, 646.0, 138.3)],
-                  ["C309", "C310", "R312", "C311", "C312", "C308", "R309", "R310", "R311"])
+GROUPS["drv1"] = ([("B", 583.0, 101.8, 601.0, 109.0), ("B", 569.0, 97.0, 583.0, 108.0)],
+                  ["R304", "C301", "R301", "R302", "R303"])
+GROUPS["drv2"] = ([("B", 634.0, 137.0, 646.0, 149.0), ("B", 612.0, 127.5, 646.0, 138.3)],
+                  ["R312", "C311", "C312", "C308", "R309", "R310", "R311"])
 GROUPS["adc"] = ([("B", 603.0, 100.0, 642.0, 114.5)],
                  ["C404", "C405", "C406", "R406", "R407", "C418", "C419", "C420", "R430", "R431",
                   "C422", "C423", "C424", "R437", "R438", "C410", "C411", "C412", "R413", "R414",
                   "C427", "C428", "C429", "R444", "R445", "C431", "C432", "C433", "R451", "R452"])
-GROUPS["aux"] = ([("B", 641.0, 100.0, 657.0, 128.0), ("B", 603.0, 114.5, 657.0, 128.0)],
+GROUPS["aux"] = ([("B", 641.0, 99.5, 647.5, 126.3), ("B", 603.0, 114.5, 647.5, 126.3)],
                  ["C439", "FB401", "C435", "C436", "C440", "C437", "C438", "R455", "R456", "R457",
                   "U405", "C434", "R453", "R454", "C413", "C414", "C415", "C416", "R418", "R419", "R423", "R424"])
-GROUPS["amp"] = ([("B", 603.0, 114.5, 657.0, 129.0), ("B", 569.0, 108.0, 598.5, 134.5)],
+GROUPS["amp"] = ([("B", 603.0, 114.5, 647.5, 126.3), ("B", 569.0, 108.0, 598.5, 134.5)],
                  ["U401", "C402", "C401", "R404", "R405", "C403", "R425", "R426", "R427", "R428", "R429", "C417",
                   "U403", "C408", "C407", "R411", "R412", "C409", "R432", "R433", "R434", "R435", "R436", "C421",
                   "U408", "C425", "R439", "R440", "R441", "R442", "R443", "C426", "R446", "R447", "R448", "R449",
@@ -185,15 +190,15 @@ HV_RAW = ["B_P", "UIN", "UIN1", "UIN2", "RAW_SS1", "RAW_SS2"]          # one pot
 HV_SW1 = ["SW1", "GH1", "GHD1", "BOOT1"]                                  # switch node + its floating driver
 HV_SW2 = ["SW2", "GH2", "GHD2", "BOOT2"]
 HV_SW = HV_SW1 + HV_SW2
-HV_OUT = ["UC1", "UC2", "VO1", "VO2", "V_ANODE", "V_SCREEN", "DV0A", "DV1A", "DS1A", "DS0A"]
-HV_MID = ["BLD1", "BL1", "BL2", "DV0B", "DV1B", "DS0B", "DS1B"]       # <= 250 V from the next net
+HV_OUT = ["UC1", "UC2", "VO1", "VO2", "V_ANODE", "V_SCREEN", "DS0A"]
+HV_MID = ["BLD1", "BL1", "BL2", "DV0B", "DV1B", "DS0B", "DS1B", "DV0A", "DV1A", "DS1A"]   # <= 300 V to anything
 PWR = ["PGND", "GND_STAR", "IS1", "IS2", "IC1", "IC2", "CD1", "CD2"]
 KELVIN_NETS = ["KS0P", "KS0N", "KS1P", "KS1N", "KS2P", "KS2N", "KS3P", "KS3N"]
 CHASSIS = ["CHASSIS", "BR_DC"]
 SUPPLY = ["+12V", "+3V3", "GND", "+3V3_REF", "VREF"]
 HV_ALL = HV_RAW + HV_SW + HV_OUT
 # parts whose own pad spacing is below 2.5 mm between HV nets (IPC-2221B A6, component terminations, 301-500 V: 0.8 mm)
-A6_PARTS = ["Q201", "Q202", "Q203", "Q204", "C103", "C203", "C208", "C213", "C214", "C217", "C218",
+A6_PARTS = ["Q201", "Q202", "Q203", "Q204",
             "R401", "R402", "R403", "R408", "R409", "R410", "R415", "R416", "R417", "R420", "R421", "R422",
             "D301", "D302", "U301", "U302", "R105", "R215", "D201"]
 
@@ -224,6 +229,10 @@ def dru():
 
 (rule "HV mid nodes (B2, 151-300 V)"
   (condition "A.NetClass == 'HV_MID' && A.NetName != B.NetName")
+  (constraint clearance (min 1.25mm)))
+
+(rule "divider tops: the top resistor's two ends (<= 160 V apart, B2 151-300 V)"
+  (condition "(A.NetName == '*V_ANODE' && B.NetName == '*/DV0A') || (A.NetName == '*V_SCREEN' && B.NetName == '*/DV1A') || (A.NetName == '*UIN' && B.NetName == '*/DS0A') || (A.NetName == '*UC1' && B.NetName == '*/DS1A') || (A.NetName == '*/DS0A' && B.NetName == '*/DS0B')")
   (constraint clearance (min 1.25mm)))
 
 (rule "HV to board edge"
@@ -646,6 +655,21 @@ def keepouts(board, fps):
                   name=f"PF_{ref}")
 
 
+LV_AREAS = [rect_pts(560.0, 30.0, 575.0, 97.0), rect_pts(560.0, 97.0, 591.0, 136.0),
+            rect_pts(602.0, 99.0, 657.0, 130.0)]
+
+
+def hv_keepouts(board):
+    """Polygons on User.2 that the router's HV steps keep out of (--keepout): the control, measurement and
+    driver-input areas, and 6.2 mm around each non-plated standoff (4.0 mm from the hole edge, rule
+    'HV to the standoff holes'). Not a DRC rule: the DRC rules above grade the result."""
+    for pts in LV_AREAS:
+        shape_poly(board, pts, pcbnew.User_2, 0.1, fill=True)
+    for ref, (x, y) in HOLES.items():
+        if ref != "H101":
+            shape_poly(board, circle_pts(x, y, 6.2), pcbnew.User_2, 0.1, fill=True)
+
+
 def notes(board, fps):
     C = pcbnew.Cmts_User
     note(board, "HV SUPPLIES rev 3, layout first pass: KiCad = chassis - (525, 30); F faces DOWN, B faces the plate",
@@ -676,6 +700,18 @@ def notes(board, fps):
                       ("W05-a V_SCREEN", 527.0, 149.6), ("W17-b IF-2.2", 561.0, 80.5), ("W16-b HV_PERMIT", 566.0, 121.6),
                       ("DANGER 480 V", 610.0, 128.0)):
         note(board, txt, x, y, 1.0, S)
+
+
+def small_fab_text(board):
+    for f in board.GetFootprints():
+        v = f.Value()
+        v.SetTextSize(pcbnew.VECTOR2I(mm(0.5), mm(0.5)))
+        v.SetTextThickness(mm(0.08))
+        v.SetVisible(False)
+        r = f.Reference()
+        if r.GetLayer() in (pcbnew.F_Fab, pcbnew.B_Fab):
+            r.SetTextSize(pcbnew.VECTOR2I(mm(0.6), mm(0.6)))
+            r.SetTextThickness(mm(0.1))
 
 
 def silk_refs(board):
@@ -811,8 +847,10 @@ def main():
     for name, (zones, refs) in GROUPS.items():
         missing += pack(board, fps, name, zones, refs)
     keepouts(board, fps)
+    hv_keepouts(board)
     notes(board, fps)
     silk_refs(board)
+    small_fab_text(board)
     pcbnew.SaveBoard(out, board)
     # report the device tabs (must sit on the plate holes) and the interface pins
     for ref, hole in zip(("Q201", "Q202", "Q203", "Q204"), TAB_SCREWS):

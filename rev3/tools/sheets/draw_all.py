@@ -51,6 +51,7 @@ FP_AX1WV = "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical"
 FP_LINK = "Resistor_SMD:R_2512_6332Metric"   # 0 ohm jumper (fourth pass: on the plate side, board area)
 FP_C = "Capacitor_SMD:C_0603_1608Metric"
 FP_C1206 = "Capacitor_SMD:C_1206_3216Metric"
+FP_HVC = "Capacitor_SMD:C_1812_4532Metric"   # 1 kV C0G across the raw rail / a switch (layout: 2.7 mm between pads)
 FP_EL47 = "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
 FP_EL100 = "Capacitor_THT:CP_Radial_D22.0mm_P10.00mm_SnapIn"
 FP_FILM100N = "Capacitor_SMD:C_1812_4532Metric"
@@ -266,7 +267,7 @@ def sheet01(d):
     C(d, "C2", 2, 4, "B_P", "PGND", "100n/630V X7R 1812", fp=FP_FILM100N, mpn="")
     d.part("L", "L1", 3, 4.5, {1: "B_P", 2: "UIN"}, value="33uH 2A", rot=90,
            fp="Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P", mpn="", note="33 uH, >= 2 A, radial D12")
-    C(d, "C3", 5, 4, "UIN", "PGND", "1n/1kV C0G", fp=FP_C1206, mpn="")
+    C(d, "C3", 5, 4, "UIN", "PGND", "1n/1kV C0G 1812", fp=FP_HVC, mpn="")
     # raw bleeder and HV-present indicator (SAFE-4: below 60 V within 60 s)
     R(d, "R3", 8, 4, "UIN", "BLD1", "75k 2W MOX", fp=FP_AX2W, mpn="", note="0.62 W each at 430 V")
     R(d, "R4", 8, 5.5, "BLD1", "PGND", "75k 2W MOX", fp=FP_AX2W, mpn="")
@@ -310,7 +311,7 @@ def bridge(d, k, c0, out, tag):
       fp=FP_LINK, mpn="", note="proposal N7: no fuse (PSU short-circuit protection + 3.0 A trips); plate side (fourth pass)")
     CP(d, f"C{k}1", c0 + 1, 2, f"UIN{t}", "PGND", "47u/500V 105C")
     C(d, f"C{k}2", c0 + 2, 2, f"UIN{t}", "PGND", "100n/630V X7R 1812", fp=FP_FILM100N, mpn="")
-    C(d, f"C{k}3", c0 + 3, 2, f"UIN{t}", "PGND", "1n/1kV C0G", fp=FP_C1206, mpn="")
+    C(d, f"C{k}3", c0 + 3, 2, f"UIN{t}", "PGND", "1n/1kV C0G 1812", fp=FP_HVC, mpn="")
     qnote = ("lies on the chassis plate: 6 mm aluminium bar, 1.5 mm Al2O3 washer, PEEK shoulder bush, M3 countersunk "
              "from the plate's top with a nut on the tab (fitted before the board); leads bent down 90 deg about 5 mm into the board "
              "(STATUS fourth pass). Collector tab live: ")
@@ -360,9 +361,9 @@ def bridge_extra(d, k, c0):
     CP(d, f"CD{k}", c0 + 7, 6.5, f"VO{t}", f"CD{t}", "22u/500V 105C", fp=FP_EL22,
        note="damping leg of the second stage (with its ESR about 1.5 ohm in all); ripple small")
     R(d, f"RD{k}", c0 + 7, 8, f"CD{t}", "GND_STAR", "1.0 1W (damping leg)", fp=FP_AX1WV, mpn="")
-    C(d, f"CSH{k}", c0 + 2.2, 3.5, f"UIN{t}", f"SW{t}", "220p/1kV C0G (snubber, high side)", fp=FP_C1206, mpn="",
+    C(d, f"CSH{k}", c0 + 2.2, 3.5, f"UIN{t}", f"SW{t}", "220p/1kV C0G 1812 (snubber, high side)", fp=FP_HVC, mpn="",
       note="lossless ZVS snubber across the IGBT (sim/r1); at the device pins")
-    C(d, f"CSL{k}", c0 + 2.2, 6.5, f"SW{t}", "PGND", "220p/1kV C0G (snubber, low side)", fp=FP_C1206, mpn="",
+    C(d, f"CSL{k}", c0 + 2.2, 6.5, f"SW{t}", "PGND", "220p/1kV C0G 1812 (snubber, low side)", fp=FP_HVC, mpn="",
       note="lossless ZVS snubber across the IGBT, returned to PGND beside the shunt (keeps its charging current off the reading)")
 
 

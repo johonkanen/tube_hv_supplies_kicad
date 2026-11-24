@@ -311,30 +311,6 @@
       },
       {
         "netclass": "HV_OUT",
-        "pattern": "DV0A"
-      },
-      {
-        "netclass": "HV_OUT",
-        "pattern": "*/DV0A"
-      },
-      {
-        "netclass": "HV_OUT",
-        "pattern": "DV1A"
-      },
-      {
-        "netclass": "HV_OUT",
-        "pattern": "*/DV1A"
-      },
-      {
-        "netclass": "HV_OUT",
-        "pattern": "DS1A"
-      },
-      {
-        "netclass": "HV_OUT",
-        "pattern": "*/DS1A"
-      },
-      {
-        "netclass": "HV_OUT",
         "pattern": "DS0A"
       },
       {
@@ -396,6 +372,30 @@
       {
         "netclass": "HV_MID",
         "pattern": "*/DS1B"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DV0A"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DV0A"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DV1A"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DV1A"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "DS1A"
+      },
+      {
+        "netclass": "HV_MID",
+        "pattern": "*/DS1A"
       },
       {
         "netclass": "PWR",

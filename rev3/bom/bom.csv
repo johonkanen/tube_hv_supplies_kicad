@@ -1,13 +1,13 @@
 refs,qty,value,footprint,candidate_mpn,dnp,placeholder,note
 C101 C201 C206,3,47u/500V 105C,Capacitor_THT:CP_Radial_D18.0mm_P7.50mm,,,,"radial D18, ripple rating at 70 C to check"
 C102 C202 C207,3,100n/630V X7R 1812,Capacitor_SMD:C_1812_4532Metric,,,,
-C103 C203 C208,3,1n/1kV C0G,Capacitor_SMD:C_1206_3216Metric,,,,
+C103 C203 C208,3,1n/1kV C0G 1812,Capacitor_SMD:C_1812_4532Metric,,,,
 C104,1,100n Y2 300VAC,Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4,TDK B32023A3104M,,,"Y2 film, P22.5 (body width to check against the TDK drawing)"
 C204 C209,2,100u/500V 105C 5000h snap-in,Capacitor_THT:CP_Radial_D22.0mm_P10.00mm_SnapIn,"Vishay MAL215919101E3 (PUL-SI, 22 x 40)",,,"TCM ripple 0.2-0.84 A rms at 40-150 kHz (sim/r2_filter.py); about 0.8 A at 120 Hz / 105 C rated, x1.4 at >= 10 kHz, more at 80 C: to confirm on the Vishay datasheet; alternative Rubycon 500VXT100MEFCSN22X25"
 C205 C210 C211,3,4.7u/630V MKP DC-link,Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4,TDK B32674D6475K,,,"C1 film, returned through the I_C shunt with the electrolytic: 0.2-0.76 A rms at 40-150 kHz (sim/r2); ripple rating to confirm on the TDK datasheet (DC-link series, ESR 7.5 mohm); C2 of the second stage (L2-C2 8.9 kHz); ESR 7.5 mohm; ripple current small (residue mV)"
 C212 C216,2,22u/500V 105C,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,,,,damping leg of the second stage (with its ESR about 1.5 ohm in all); ripple small
-C213 C217,2,"220p/1kV C0G (snubber, high side)",Capacitor_SMD:C_1206_3216Metric,,,,lossless ZVS snubber across the IGBT (sim/r1); at the device pins
-C214 C218,2,"220p/1kV C0G (snubber, low side)",Capacitor_SMD:C_1206_3216Metric,,,,"lossless ZVS snubber across the IGBT, returned to PGND beside the shunt (keeps its charging current off the reading)"
+C213 C217,2,"220p/1kV C0G 1812 (snubber, high side)",Capacitor_SMD:C_1812_4532Metric,,,,lossless ZVS snubber across the IGBT (sim/r1); at the device pins
+C214 C218,2,"220p/1kV C0G 1812 (snubber, low side)",Capacitor_SMD:C_1812_4532Metric,,,,"lossless ZVS snubber across the IGBT, returned to PGND beside the shunt (keeps its charging current off the reading)"
 C301 C303 C305 C308 C310 C312 C402 C406 C408 C412 C420 C424 C425 C429 C433 C436 C438 C504 C506 C507 C509 C512 C513 C514 C515 C516 C517,27,100n,Capacitor_SMD:C_0603_1608Metric,,,,
 C302 C309,2,1u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
 C304 C311,2,10u/25V X7R,Capacitor_SMD:C_1206_3216Metric,,,,

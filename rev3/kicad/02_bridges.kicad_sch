@@ -1989,7 +1989,7 @@
 				)
 			)
 		)
-		(property "Value" "1n/1kV C0G"
+		(property "Value" "1n/1kV C0G 1812"
 			(at 91.44 73.66 270)
 			(effects
 				(font
@@ -1997,7 +1997,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 95.25 70.1548 0)
 			(effects
 				(font
@@ -4018,7 +4018,7 @@
 				)
 			)
 		)
-		(property "Value" "1n/1kV C0G"
+		(property "Value" "1n/1kV C0G 1812"
 			(at 314.96 73.66 270)
 			(effects
 				(font
@@ -4026,7 +4026,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 318.77 70.1548 0)
 			(effects
 				(font
@@ -6614,7 +6614,7 @@
 				)
 			)
 		)
-		(property "Value" "220p/1kV C0G (snubber, high side)"
+		(property "Value" "220p/1kV C0G 1812 (snubber, high side)"
 			(at 74.93 100.33 270)
 			(effects
 				(font
@@ -6622,7 +6622,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 78.74 96.8248 0)
 			(effects
 				(font
@@ -6733,7 +6733,7 @@
 				)
 			)
 		)
-		(property "Value" "220p/1kV C0G (snubber, low side)"
+		(property "Value" "220p/1kV C0G 1812 (snubber, low side)"
 			(at 74.93 153.67 270)
 			(effects
 				(font
@@ -6741,7 +6741,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 78.74 150.1648 0)
 			(effects
 				(font
@@ -7090,7 +7090,7 @@
 				)
 			)
 		)
-		(property "Value" "220p/1kV C0G (snubber, high side)"
+		(property "Value" "220p/1kV C0G 1812 (snubber, high side)"
 			(at 298.45 100.33 270)
 			(effects
 				(font
@@ -7098,7 +7098,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 302.26 96.8248 0)
 			(effects
 				(font
@@ -7209,7 +7209,7 @@
 				)
 			)
 		)
-		(property "Value" "220p/1kV C0G (snubber, low side)"
+		(property "Value" "220p/1kV C0G 1812 (snubber, low side)"
 			(at 298.45 153.67 270)
 			(effects
 				(font
@@ -7217,7 +7217,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 302.26 150.1648 0)
 			(effects
 				(font

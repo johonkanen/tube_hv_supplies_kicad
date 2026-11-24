@@ -2740,7 +2740,7 @@
 				)
 			)
 		)
-		(property "Value" "1n/1kV C0G"
+		(property "Value" "1n/1kV C0G 1812"
 			(at 132.08 109.22 270)
 			(effects
 				(font
@@ -2748,7 +2748,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1812_4532Metric"
 			(at 135.89 105.7148 0)
 			(effects
 				(font
