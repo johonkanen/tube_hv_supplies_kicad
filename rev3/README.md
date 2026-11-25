@@ -1,4 +1,4 @@
-# HV supplies rev 3: soft-switched draft (fourth pass, 2026-11-24)
+# HV supplies rev 3: soft-switched draft (fifth pass, 2026-11-25: one multiplexed converter, 4-layer layout next)
 
 The redesign of the HV supplies board (v2, converted at the repo root, frozen) for the rev B
 amplifier: two controllable outputs **V_ANODE** (0 to about 400 V, 0.5 A peak) and **V_SCREEN** (up
@@ -44,8 +44,8 @@ libraries; board-local blade tabs and the custom ETD39 inductor); BOM `bom/bom.c
 | 01 | J101 raw HV in (B_P / B_N), R101 / R102 link footprints (0 Ω fitted, or 10-47 Ω 2 W fusible) to J102 / J103 (RAW_SS1 / RAW_SS2 with GND_PRE returns), input filter (C101 47 µF, L101 33 µH), raw bleeder 2 x 75 kΩ 2 W and HV-present LED, NT101 (the star point PGND ↔ GND_STAR), fault / RF network (GBU8J ‖ 100 nF Y2 ‖ 100 Ω) to the plated standoff H101 next to J101; H102-H106 non-plated. No brake |
 | 02 | Two synchronous bucks in triangular-current mode (40-150 kHz): IKP08N65F5 lying on the chassis plate (aluminium bars, 1.5 mm Al2O3), 220 pF snubbers, 220 / 470 µH ETD39 N97, C1 100 µF (+ 4.7 µF film on bridge 1) through the I_C shunt, second stage 68 µH / 4.7 µF film / 22 µF + 1.0 Ω leg (8.9 kHz), ULW5 fusibles standing, D201, J201 / J202 |
 | 03 | One UCC21520 per bridge (200 ns dead-time floor, per-edge dead time from the FPGA), bootstrap, 15 Ω / 10 kΩ gate parts |
-| 04 | Six ADS7056 on CS_FAST (V_ANODE, V_SCREEN, I_C14 / I_C24, I_Q12 / I_Q22) with OPA2836 front ends, REF3030 3.0 V, AD7689 for the slow monitors |
-| 05 | J1 (IF-2.2), HV_PERMIT loop input, fault latch (HV_ENABLE low sets it; clears only after >= 20 ms low), comparators: ±3.0 A low side, 3.0 A capacitor discharge, raw 475 V / V_ANODE 438 V / V_SCREEN 421 V |
+| 04 | Fifth pass: V_ANODE / V_SCREEN / RAW dividers and buffers, four OPA2836 current amplifiers (50 mohm Kelvin shunts in the low-side emitters and capacitor negatives), TMUX1308 8:1 multiplexer stepped by a 74LVC163 on CS_FAST, OPA2836 driver, one ADS7056, REF3030 3.0 V |
+| 05 | J1 (IF-2.3 proposed), HV_PERMIT loop input, DIS = NAND(HV_PERMIT, HV_ENABLE); no comparators, no latch (fifth pass) |
 
 ## Layout
 

@@ -1,3 +1,7 @@
+**2026-11-25: the fifth pass (section below) redrew sheets 04 / 05 (187 parts, one multiplexed ADS7056, no comparators,
+no latch, IF-2.3 proposed) and the board goes to 4 layers: the 2-layer layout work below is superseded except the
+power-stage placement, the bars and the holes, which the 4-layer layout reuses.**
+
 # Where we left off (2026-11-24, layout first pass in progress)
 
 **Placed, drawn, partly routed:** `kicad/tube_hv_supplies_rev3.kicad_pcb` = chain step `04_ground` (2 layers, 1 oz,
@@ -173,6 +177,83 @@ six standoffs as in the fourth pass.
 | C4 | Power amp HV tabs | **east end**, facing ours (window above) | rear edge, east part |
 | C5 | Heaters / -80 V from the PSU (not via this board) | **rear hole** with the mains, then west behind our rear strip (y 200-208) or under it ≥ 50 mm below the plate: shortest to the power amp | front hole with W01 / W10 / W18: long, past the control board. Either way the hole fill (15 mm hole, 40 %) is for the PSU owner: a third hole may be needed |
 | C6 | J101 polarity | tabs as decided, red / black leads, silkscreen | a polarized 600 V housing (Mini-Fit Jr 2-way) instead of the two tabs (B_P / B_N swapped reverses C101) |
+
+# Fifth pass (2026-11-25): one multiplexed converter, no comparators, no latch
+
+**User decisions (2026-11-25):** 4 layers (layout next); no slow converter (AD7689) and its conditioning (MCP6004);
+no trip comparators and no fault latch (protection = the control board's firmware on the fast samples, the HV_ENABLE
+heartbeat one-shot, and the PSU, which can stop the raw supply); one ADS7056 behind a multiplexer; rev A's current
+sensing (shunt in the low-side emitter and in each capacitor's negative, differential amplifier around a mid-rail bias).
+**Schematic redrawn (generator), ERC 0 errors / 2 warnings (the two UCC21520 VSSA on the switch node, as before).**
+**Parts: 268 → 187** (sheet 01: 23 → 23, 02: 44 → 44, 03: 30 → 30, **04: 118 → 70, 05: 53 → 20**). The power stage,
+bars, holes and sheets 01-03 are unchanged; sheet 04 / 05 references are renumbered. Re-runs: `sim/r8_fifth_pass.py`
+→ `sim/r8_results.md`.
+
+## What was drawn
+
+- **Measurement (sheet 04):** rev A's scheme with today's parts. Currents: 50 mΩ Kelvin shunts in the low-side emitters
+  (I_Q12, I_Q22) and in the capacitors' negatives (I_C14, I_C24), four OPA2836 differential stages 10k / 68k (gain 6.8,
+  1.5 V + 0.34 V/A, ±4.4 A), Kelvin net ties kept. Voltages: V_ANODE, V_SCREEN (3 × 1 MΩ + 12.4 kΩ, 1/242.9) and RAW
+  (3 × 1 MΩ + 15 kΩ, 1/201) with unity OPA2836 buffers. Bias 1.5 V: 1 k / 1 k from the 3.0 V reference + 1 µF (no
+  buffer: 0.5 kΩ against the amplifiers' 78 kΩ inputs; offsets calibrated on channel 7). **Multiplexer TMUX1308PW**
+  (8:1, 4051 pinout, single 3.3 V supply; drawn with the NX3L4051PW symbol, pin-compatible) → **OPA2836 unity driver**
+  → 33 Ω / 680 pF charge bucket → **one ADS7056** (AVDD = reference = REF3030 3.0 V) → 33 Ω → pad 17. **Address from a
+  74LVC163 counter** clocked by CS_FAST's falling edge (74LVC1G04): the edge that takes a sample selects the next
+  channel, so the driver settles during the following conversion frame (≥ 0.6 µs; it needs about 0.25 µs to 14 bits).
+  **Channel order (count 0-7): V_ANODE, I_C14, I_Q12, RAW, V_SCREEN, I_C24, I_Q22, bias (zero reference).**
+  MUX_CLR_N (synchronous clear) and MUX_HOLD_N (count enable) from the control board, 10k pull-ups here.
+- **What is no longer measured:** UC1 (the first-stage capacitor voltage; V_ANODE and I_C14 cover the stage), and
+  the AD7689's slow duplicate of every channel. RAW stays (needed by the TCM law and for the 475 V limit): channel 3.
+- **Enable logic (sheet 05):** HV_PERMIT loop as before; DIS = NAND(HV_PERMIT_STAT, HV_ENABLE) (74LVC1G10, third input
+  tied high); HV_ENABLE 100k pull-down: unplugged link or a dead control board → drivers disabled; the drivers also lose
+  their +12 V / +3V3 with the link (UVLO). PWM inputs keep their 10k pull-downs. **Removed:** three LMV339, the five
+  threshold dividers, the 74AUP1G74 latch and its qualification (U508-U511, RC networks), the LM4040 remnants.
+
+## Proposed IF-2.3 (W17): firmware-only on the control board
+
+| Pad | IF-2.2 | IF-2.3 | Direction | Change |
+|---|---|---|---|---|
+| 1, 3, 5, 19, 21 | SDO_VS, SDO_IC2, SDO_IL2, SDO_IC1, SDO_IL1 | **tied low on the HV board** | HV → card | data lines unused (firmware ignores; tied, not left floating at the isolator inputs) |
+| 12 | ADC_SDO (AD7689) | **tied low** | HV → card | unused |
+| 11 | ADC_DIN | **MUX_CLR_N**: low at a CS_FAST falling edge → the next conversion is channel 0 | card → HV | function only (10k pull-up here) |
+| 13 | ADC_CNV | **MUX_HOLD_N**: low = the channel does not advance (oversampling one channel) | card → HV | function only (10k pull-up here) |
+| 14 | ADC_SCK (shared) | SCLK of the one ADS7056 | card → HV | **30 MHz with the returned clock is required** (below) |
+| 15 | CS_FAST | CS of the ADS7056 and the multiplexer step (falling edge) | card → HV | each falling edge = one sample of the current channel, then advance |
+| 16 | ADC_SCK_RET | unchanged (taken past the ADS7056) | HV → card | — |
+| 17 | SDO_VA | **SDO of the one ADS7056 (every channel)** | HV → card | channel known from the count |
+| 25 | HV_FAULT_N (low = latched fault) | **DRV_DIS state: high = drivers disabled** (1k from DIS) | HV → card | the latch is gone; the firmware reads whether the gating is open. Alternative: a static high (no information) |
+| 29-32, 35-40 | PWM, power, HV_PERMIT_STAT, HV_ENABLE | unchanged | — | 3V3 load falls to about 14 mA typical / 18 mA worst (was 16 / 26) |
+
+Every pad keeps its direction, so the control board's isolators and wiring stay; only the firmware changes (one SDO,
+the count, the clear / hold, pad 25's meaning). **Alternative (needs a control-board change):** direct addressing A0-A2
+on three card-to-HV lines (the ADuM142E0's spare forward channel wired to a pad); it frees the channel order but is not
+needed by the loop.
+
+## What it does to the control scheme of 2026-11-24 (`sim/r8_results.md`)
+
+- **Sampling:** slot 0.70 µs at 30 MHz (18 SCLK + 100 ns), sweep of 8 = **5.6 µs, 179 kS/s per channel**: one sample of
+  every channel per period at 150 kHz (6.7 µs), 4.5 at 40 kHz. **Skew** inside one bridge: V to I_C 0.7 µs, V to I_Q
+  1.4 µs (sequential, no longer simultaneous). At 10 MHz plain: 1.9 µs slots, 15.2 µs sweep (0.44 per 150 kHz period).
+- **Loop and active damping of the first resonance:** unchanged in practice: PM 64° / GM 22.8 dB at 150 kHz, 51° / 13.2 dB
+  at 40 kHz, |Zout| ≤ 3.9 Ω (fourth pass: 64 / 24.0 and 52 / 13.6); even 10 MHz plain gives 54° / 14.8 dB.
+- **Soft switching (TCM):** the turn-on instants never came from synchronous inductor-current samples: they come from the
+  TCM law (V_raw, V_out, the load current, L: valley ≤ −0.38 A). The load current now comes from the I_Q sample at a
+  known offset from the period's middle, corrected by the slope V_out / L; with L ±10 % the error is ≤ 0.25 A at a 1.4 µs
+  offset (0.13 A at 0.7 µs) against the 0.38 A valley: **ZVS holds if the firmware places the I_Q conversion within
+  ±0.7 µs of the low side's middle** (it times CS_FAST freely, only the order is fixed), or with the valley target raised
+  to 0.5 A (a few % more circulating loss). RAW is in the sweep (was the slow converter).
+- **Reaction time:** the comparators acted in about **1 µs**; through the link and firmware the worst case is one sweep +
+  one slot + 0.3 µs = **6.6 µs** (30 MHz), 17.4 µs (10 MHz), and the heartbeat one-shot (about 20 µs) if the firmware hangs.
+  **Output short / arc** (the common fault): L1 4.2 A, R205 8.25 J, unchanged (C1 holds the bridge's output; even 20 µs
+  gives 4.6 A). **Over-voltage** (438 / 421 V, raw 475 V): 6.6 µs instead of 1 µs; the outputs cannot move that fast
+  behind 100 µF; raw also the PSU. **What no longer holds: a shorted first-stage capacitor (C204 / C211 failing short)**:
+  L1 peaks at **19.9 A at 6.6 µs** (7.1 A with the comparator; L1 saturates at 10.8 A, IKP08N65F5 ICpuls 24 A: survives
+  narrowly) and **> 200 A at 17 µs or with the heartbeat only: the bridge is lost**. So **30 MHz with the returned clock
+  becomes mandatory**, and a hung firmware with a shorted C1 is not covered.
+- **Cheapest remedies (not drawn, for the user):** (a) firmware: a per-period on-time cap from the RAW and V_out samples
+  and an I_C full-scale check on every sample (no parts; covers a slow fault, not a C1 short within one period);
+  (b) **one dual comparator (TLV3202 class) per board on I_Q12 / I_Q22 against one threshold divider, open-drain into
+  DRV_DIS** (3 parts + 2 resistors, no latch): back to about 1 µs for the C1-short and shoot-through cases.
 
 # Fourth pass: soft-switched redraw (2026-11-24)
 

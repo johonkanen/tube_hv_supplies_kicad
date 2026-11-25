@@ -2691,27 +2691,15 @@
 		)
 		(uuid "19f8a9c1-1b08-516c-8a85-04a855329e76")
 	)
-	(global_label "UC1"
-		(shape passive)
+	(label "UC1"
 		(at 97.79 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
 		(uuid "06eb9905-0421-5f6b-840e-ab7711f6bb99")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 97.79 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 	)
 	(symbol
 		(lib_id "tube_hv_supplies_rev3:C_Polarized")
@@ -2799,27 +2787,15 @@
 		)
 		(uuid "40c0ecf6-bc66-5eed-98db-6edc9026d476")
 	)
-	(global_label "UC1"
-		(shape passive)
+	(label "UC1"
 		(at 111.76 127 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
 		(uuid "e8a0cb03-1280-5cb1-b67a-9df4e15ff096")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 111.76 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 	)
 	(wire
 		(pts
@@ -3079,27 +3055,15 @@
 		)
 		(uuid "a817eb46-cf20-581f-8167-bd85fb2371c2")
 	)
-	(global_label "UC1"
-		(shape passive)
+	(label "UC1"
 		(at 125.73 115.57 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
 		(uuid "d7e8e317-3a91-5b2a-9dab-3fa862ea713d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 125.73 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
 	)
 	(wire
 		(pts
@@ -6317,27 +6281,15 @@
 		)
 		(uuid "bf6d950a-26b3-5ee8-9afa-217615e9f144")
 	)
-	(global_label "UC1"
-		(shape passive)
+	(label "UC1"
 		(at 121.92 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
 		(uuid "dd43e4e7-1add-5c00-822c-f1a7a1f204c3")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 121.92 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
 	)
 	(wire
 		(pts

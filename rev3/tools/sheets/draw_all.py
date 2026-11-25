@@ -431,12 +431,15 @@ def sheet03(d):
 
 
 # ------------------------------------------------------------------ sheet 04
-# Fast loop channels (IF-2.2): one ADS7056 each, all sampled on CS_FAST; (source, net at the amplifier output,
-# fast ADC input node, SDO net, AD7689 channel)
-FAST_V = [("V_ANODE", "VM_A", "FA_VA", "SDO_VA", 0, 1), ("V_SCREEN", "VM_S", "FA_VS", "SDO_VS", 3, 2)]
-FAST_I = [("IC1", "IM_C14", "FA_IC1", "SDO_IC1", 7), ("IS1", "IM_Q12", "FA_IL1", "SDO_IL1", 4),
-          ("IC2", "IM_C24", "FA_IC2", "SDO_IC2", 6), ("IS2", "IM_Q22", "FA_IL2", "SDO_IL2", 5)]
-SLOW_V = [("UIN", "VM_RAW", 1), ("UC1", "VM_UC1", 2)]
+# Fifth pass (2026-11-25, user): ONE ADS7056 behind an 8:1 multiplexer (rev A's scheme with today's parts: shunts in
+# the low-side emitter and in each capacitor's negative, differential amplifiers around a mid-rail bias, divided
+# voltages buffered), no slow converter. The multiplexer address comes from a 3-bit counter clocked by CS_FAST's
+# falling edge (the sampling instant), so each conversion selects the next channel and the buffer settles during the
+# following conversion frame; MUX_CLR_N (pad 11) and MUX_HOLD_N (pad 13) from the control board (IF-2.3).
+# Channel (count) order: the bridge-1 loop, the raw rail, the bridge-2 loop, the bias (zero reference).
+MUX_CH = ["VM_A", "IM_C14", "IM_Q12", "VM_RAW", "VM_S", "IM_C24", "IM_Q22", "IBIAS"]
+FAST_V = [("V_ANODE", "VM_A", 0), ("V_SCREEN", "VM_S", 1)]
+FAST_I = [("IC1", "IM_C14"), ("IS1", "IM_Q12"), ("IC2", "IM_C24"), ("IS2", "IM_Q22")]
 
 
 def opa2(d, ref, c, r, plus, minus, out):
@@ -451,124 +454,111 @@ def opa2(d, ref, c, r, plus, minus, out):
         C(d, f"C{ref}", c + 0.8, r + 1.6, "+3V3", "GND", "100n")
 
 
-def fast_adc(d, ref, c, r, ain, sdo):
-    d.part("ADS7056", ref, c, r, {1: "CS_FAST", 2: f"{sdo}_L", 3: "ADC_SCK", 4: "+3V3", 5: "GND", 6: "VREF",
-                                  7: ain, 8: "GND"}, value="ADS7056 (14 bit, 2.5 MSPS)",
-           note="X2QFN-8 1.5 x 1.5 mm (RUG): footprint to check against TI's RUG0008A land pattern")
-    C(d, f"CA{ref}", c + 1, r + 1.2, "VREF", "GND", "1u X7R", fp="Capacitor_SMD:C_0603_1608Metric")
-    C(d, f"CD{ref}", c + 1.8, r + 1.2, "+3V3", "GND", "100n")
-    R(d, f"RS{ref}", c + 1.5, r - 0.6, f"{sdo}_L", sdo, "33", rot=0)
+def divider(d, tag, c0, src, mid_a, mid_b, out, bottom):
+    R(d, f"R{tag}1", c0, 1, src, mid_a, "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
+    R(d, f"R{tag}2", c0, 2.3, mid_a, mid_b, "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
+    R(d, f"R{tag}3", c0, 3.6, mid_b, out, "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
+    R(d, f"R{tag}4", c0 + 1, 3.6, out, "GND", bottom + " 0.1%")
 
 
 def sheet04(d):
-    d.text("04 Measurement (IF-2.2, fourth pass): the loop's six channels on dedicated ADS7056 converters, sampled together on "
-           "CS_FAST (timed by the control board's PWM generator: mid high-side conduction for V and I_C, mid low-side for I_Q), "
-           "fast front ends (OPA2836, <= 50 ns), 3.0 V reference REF3030 as their AVDD; the AD7689 keeps all eight channels as "
-           "slow monitors (external 3.0 V reference). Channel order IN0..7 = interfaces.md 9.", 0, -1.0, 2)
-    # fast voltage channels: 3 x 1 Mohm + 12.4 kohm (1/242.9: 440 V -> 1.81 V, inside the OPA2836's 2.2 V input range at 3.3 V)
-    for i, (src, buf, ain, sdo, ch, ua) in enumerate(FAST_V):
+    d.text("04 Measurement (fifth pass, IF-2.3): one ADS7056 (14 bit, 2.5 MSPS) behind an 8:1 multiplexer (TMUX1308); "
+           "the counter U4xx steps the channel on every CS_FAST falling edge (the sample instant), so the buffer settles "
+           "during the next conversion frame. Channel order (count 0-7): V_ANODE, I_C14, I_Q12, RAW, V_SCREEN, I_C24, "
+           "I_Q22, bias (zero reference). MUX_CLR_N (pad 11) restarts at 0, MUX_HOLD_N (pad 13) holds the channel. "
+           "No slow converter: UC1 is no longer monitored.", 0, -1.0, 2)
+    # voltages: 3 x 1 Mohm + 12.4 kohm (1/242.9) for the outputs, + 15 kohm (1/201) for the raw rail; unity buffers
+    for i, (src, buf, k) in enumerate(FAST_V):
         c0 = i * 4
-        R(d, f"R{i}1", c0, 1, src, f"DV{i}A", "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
-        R(d, f"R{i}2", c0, 2.3, f"DV{i}A", f"DV{i}B", "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
-        R(d, f"R{i}3", c0, 3.6, f"DV{i}B", f"DV{i}", "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
-        R(d, f"R{i}4", c0 + 1, 3.6, f"DV{i}", "GND", "12.4k 0.1%")
-        C(d, f"C{i}1", c0 + 1.8, 3.6, f"DV{i}", "GND", "100p C0G (tau 1.2 us)")
+        divider(d, f"V{i}", c0, src, f"DV{i}A", f"DV{i}B", f"DV{i}", "12.4k")
+        C(d, f"CV{i}", c0 + 1.8, 3.6, f"DV{i}", "GND", "100p C0G (tau 1.2 us)")
         opa2(d, "UF1" if i == 0 else "UF2", c0 + 1, 5.5, f"DV{i}", buf, buf)
-        R(d, f"R{i}5", c0 + 2, 7.5, buf, f"ADC_IN{ch}", "100", rot=0)
-        C(d, f"C{i}2", c0 + 2.6, 8.5, f"ADC_IN{ch}", "GND", "2.7n C0G")
-        R(d, f"R{i}6", c0 + 3, 6.5, buf, ain, "33", rot=0)
-        C(d, f"C{i}3", c0 + 3.6, 7.5, ain, "GND", "680p C0G (charge bucket, 22 ns)")
-        fast_adc(d, f"UA{ua}", c0 + 2, 10.5, ain, sdo)
-    # slow voltage channels (MCP6004 buffers, 1/201 as before)
-    for i, (src, buf, ch) in enumerate(SLOW_V):
-        c0 = 8 + i * 3
-        R(d, f"RS{i}1", c0, 1, src, f"DS{i}A", "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
-        R(d, f"RS{i}2", c0, 2.3, f"DS{i}A", f"DS{i}B", "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
-        R(d, f"RS{i}3", c0, 3.6, f"DS{i}B", f"DS{i}", "1M 0.1% 1206", fp=FP_R1206, note="<= 167 V each at 500 V (1206: 200 V)")
-        R(d, f"RS{i}4", c0 + 1, 3.6, f"DS{i}", "GND", "15k 0.1%")
-        C(d, f"CS{i}1", c0 + 1.8, 3.6, f"DS{i}", "GND", "1n")
-        opamp(d, "UB", c0 + 1, 5.5, f"DS{i}", buf, buf)
-        R(d, f"RS{i}5", c0 + 2, 7.5, buf, f"ADC_IN{ch}", "100", rot=0)
-        C(d, f"CS{i}2", c0 + 2.6, 8.5, f"ADC_IN{ch}", "GND", "2.7n C0G")
-    # fast current channels: out = 1.5 V + 6.8 x V(shunt) = 1.5 V + 0.34 V/A (+-4.4 A into 0-3 V); 10k / 68k inputs
-    # (a short's 11 V across the I_C shunt drives about 1 mA into the input clamps); no input filter capacitor:
-    # the OPA2836 at a noise gain of 7.8 has about 15 MHz of bandwidth (tau ~10 ns), the charge bucket 22 ns
+    divider(d, "S0", 8, "UIN", "DS0A", "DS0B", "DS0", "15k")
+    C(d, "CS0", 9.8, 3.6, "DS0", "GND", "1n (tau 15 us)")
+    # current amplifiers: out = 1.5 V + 6.8 x V(shunt) = 1.5 V + 0.34 V/A (+-4.4 A into 0-3 V); Kelvin legs from net ties
     amps = ["UF1", "UF2", "UF3", "UF3"]
-    for i, (src, buf, ain, sdo, ch) in enumerate(FAST_I):
+    for i, (src, buf) in enumerate(FAST_I):
         c0 = 14 + i * 4
-        # Kelvin taps (layout first pass): each sense leg is its own net from a net tie placed on the shunt's pad,
-        # so the router can't join a sense resistor to the power copper anywhere but at the shunt
         R(d, f"RI{i}1", c0, 1, f"KS{i}P", f"IA{i}P", "10k 0.1%", rot=0)
         R(d, f"RI{i}2", c0 + 1, 2, f"IA{i}P", "IBIAS", "68k 0.1%")
         R(d, f"RI{i}3", c0, 3.4, f"KS{i}N", f"IA{i}N", "10k 0.1%", rot=0)
+        R(d, f"RI{i}4", c0 + 1, 4.4, f"IA{i}N", buf, "68k 0.1%", rot=0)
         d.part("NetTie_2", f"NT{2 * i + 1}", c0 + 2, 1, {1: src, 2: f"KS{i}P"}, value=f"Kelvin tap {src} (at the shunt)", mpn="")
         d.part("NetTie_2", f"NT{2 * i + 2}", c0 + 2, 3.4, {1: "PGND", 2: f"KS{i}N"}, value="Kelvin tap PGND (at the shunt)",
                mpn="")
-        R(d, f"RI{i}4", c0 + 1, 4.4, f"IA{i}N", buf, "68k 0.1%", rot=0)
         opa2(d, amps[i], c0 + 1, 5.5, f"IA{i}P", f"IA{i}N", buf)
-        R(d, f"RI{i}5", c0 + 2, 7.5, buf, f"ADC_IN{ch}", "100", rot=0)
-        C(d, f"CI{i}2", c0 + 2.6, 8.5, f"ADC_IN{ch}", "GND", "2.7n C0G")
-        R(d, f"RI{i}6", c0 + 3, 6.5, buf, ain, "33", rot=0)
-        C(d, f"CI{i}3", c0 + 3.6, 7.5, ain, "GND", "680p C0G (charge bucket, 22 ns)")
-        fast_adc(d, f"UA{3 + i}", c0 + 2, 10.5, ain, sdo)
-    d.text("Current amplifiers: out = 1.5 V + 0.34 V/A (50 mOhm, gain 6.8, +-4.4 A full scale); forward (freewheeling) current in "
-           "the low-side shunt and a discharging capacitor read below 1.5 V. Kelvin taps at the shunts (layout). The comparators "
-           "(sheet 05) and the AD7689 take the same amplifier outputs through 100 ohm / 2.7 nF.", 14, 9.4)
-    # 1.5 V bias from the 3.0 V reference
-    R(d, "R1", 1, 13, "VREF", "IBIAS_D", "10k 0.1%")
-    R(d, "R2", 1, 14.3, "IBIAS_D", "GND", "10k 0.1%")
-    opamp(d, "UB", 3, 13.5, "IBIAS_D", "IBIAS", "IBIAS")
-    C(d, "C1", 4, 14.5, "IBIAS", "GND", "1u")
-    opamp(d, "UB", 5, 13.5, "GND", "UBSP0", "UBSP0")
-    d.part("AD7689xCP", "U1", 10, 14, {1: "+3V3", 20: "+3V3", 2: "VREF", 3: "ADC_REFIN", 4: "GND", 5: "GND", 21: "GND",
-                                       16: "ADC_IN0", 17: "ADC_IN1", 18: "ADC_IN2", 19: "ADC_IN3", 6: "ADC_IN4",
-                                       7: "ADC_IN5", 8: "ADC_IN6", 9: "ADC_IN7", 10: "GND", 11: "ADC_CNV",
-                                       12: "ADC_DIN", 13: "ADC_SCK", 14: "ADC_SDO_L", 15: "+3V3"}, value="AD7689BCPZ",
-           note="CFG: external reference on REF (3.0 V from REF3030), internal buffer off; slow monitors only")
-    C(d, "C2", 13, 13, "VREF", "GND", "10u X7R", fp="Capacitor_SMD:C_0805_2012Metric")
-    C(d, "C3", 13.8, 13, "ADC_REFIN", "GND", "100n")
-    C(d, "C4", 14.6, 13, "+3V3", "GND", "10u", fp="Capacitor_SMD:C_0805_2012Metric")
-    C(d, "C5", 15.4, 13, "+3V3", "GND", "100n")
-    R(d, "R3", 13, 15, "ADC_SDO_L", "ADC_SDO", "33", rot=0)
-    R(d, "R4", 13, 16, "ADC_SCK", "ADC_SCK_RET", "33 (returned SCK, J1 pad 16)", rot=0,
-      note="taken at the far end of the shared SCLK trace, past the six ADS7056 (layout)")
-    R(d, "R5", 16, 16, "CS_FAST", "+3V3", "10k")
-    # 3.0 V reference: AVDD of the ADS7056s (their reference), the AD7689's reference, the bias and the trip thresholds
-    d.part("FerriteBead", "FB1", 18, 13, {1: "+3V3", 2: "+3V3_REF"}, value="600R@100MHz 0603",
-           fp="Inductor_SMD:L_0603_1608Metric", mpn="", note="with C6: the reference's input filter (LDO-derived 3V3 from the link)")
-    C(d, "C6", 19, 13.5, "+3V3_REF", "GND", "10u", fp="Capacitor_SMD:C_0805_2012Metric")
-    d.part("REF3030", "U2", 20.5, 13, {1: "+3V3_REF", 2: "VREF", 3: "GND"}, value="REF3030 (3.0 V, 25 mA)",
-           note="load about 3 mA typ (6 ADS7056 AVDD at 100-300 kSPS, ladders, bias, AD7689 REF), 9 mA worst at 2.5 MSPS")
-    C(d, "C7", 22, 13.5, "VREF", "GND", "1u X7R", fp="Capacitor_SMD:C_0603_1608Metric")
-    d.part("PWR_FLAG", "#FLG401", 18, 14.5, {1: "+3V3_REF"}, value="PWR_FLAG")
-    d.text("SPI on J1 (IF-2.2): AD7689 ADC_DIN pad 11, ADC_SDO pad 12, ADC_CNV pad 13; shared SCLK ADC_SCK pad 14; CS_FAST pad 15; "
-           "returned SCK pad 16; SDO_VS / SDO_IC2 / SDO_IL2 pads 1 / 3 / 5; SDO_VA / SDO_IC1 / SDO_IL1 pads 17 / 19 / 21.", 10, 17.0)
+    d.text("Current amplifiers (rev A's differential stage around a mid-rail bias, 50 mOhm shunts): 1.5 V + 0.34 V/A, "
+           "+-4.4 A full scale; forward (freewheeling) current in the low-side shunt and a discharging capacitor read below 1.5 V. "
+           "Kelvin taps NT4xx at the shunts.", 14, 9.4)
+    # bias 1.5 V from the 3.0 V reference: 1k / 1k + 1 uF (no buffer; 0.5 kohm against the amplifiers' 78 kohm inputs)
+    R(d, "RB1", 1, 13, "VREF", "IBIAS", "1k 0.1%")
+    R(d, "RB2", 1, 14.3, "IBIAS", "GND", "1k 0.1%")
+    C(d, "CB1", 2, 14.3, "IBIAS", "GND", "1u X7R")
+    # raw rail buffer (second half of the mux driver dual)
+    opa2(d, "UF4", 4, 13, "DS0", "VM_RAW", "VM_RAW")
+    # multiplexer, counter, driver, converter
+    mux = {13: MUX_CH[0], 14: MUX_CH[1], 15: MUX_CH[2], 12: MUX_CH[3], 1: MUX_CH[4], 5: MUX_CH[5], 2: MUX_CH[6],
+           4: MUX_CH[7], 3: "MUX_OUT", 6: "GND", 7: "NC", 8: "GND", 11: "MUX_S0", 10: "MUX_S1", 9: "MUX_S2", 16: "+3V3"}
+    d.part("NX3L4051PW", "U1", 9, 13, mux, value="TMUX1308PW (8:1, 4051 pinout, single supply)", mpn="TMUX1308PWR",
+           fp="Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
+    C(d, "CM1", 10.6, 14.6, "+3V3", "GND", "100n")
+    d.part("74LS163", "U2", 13, 13, {1: "MUX_CLR_N", 2: "MUX_CLK", 3: "GND", 4: "GND", 5: "GND", 6: "GND",
+                                     7: "MUX_HOLD_N", 8: "GND", 9: "+3V3", 10: "MUX_HOLD_N", 11: "NC", 12: "MUX_S2",
+                                     13: "MUX_S1", 14: "MUX_S0", 15: "NC", 16: "+3V3"},
+           value="74LVC163 (sync clear; counts on CS_FAST falling)", mpn="SN74LVC163APWR",
+           fp="Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
+    C(d, "CM2", 14.6, 14.6, "+3V3", "GND", "100n")
+    d.part("74LVC1G04", "U3", 16.5, 13, {1: "NC", 2: "CS_FAST", 3: "GND", 4: "MUX_CLK", 5: "+3V3"}, value="74LVC1G04",
+           mpn="SN74LVC1G04DBVR", fp="Package_TO_SOT_SMD:SOT-23-5")
+    C(d, "CM3", 18, 14.6, "+3V3", "GND", "100n")
+    R(d, "RM1", 13, 16, "MUX_CLR_N", "+3V3", "10k")
+    R(d, "RM2", 14, 16, "MUX_HOLD_N", "+3V3", "10k")
+    opa2(d, "UF4", 20, 13, "MUX_OUT", "FA_DRV", "FA_DRV")     # unity driver for the charge bucket
+    R(d, "RD2", 23, 13.5, "FA_DRV", "AIN_ADC", "33", rot=0)
+    C(d, "CD1", 24, 14.5, "AIN_ADC", "GND", "680p C0G (charge bucket, 22 ns)")
+    d.part("ADS7056", "U5", 26, 13, {1: "CS_FAST", 2: "SDO_L", 3: "ADC_SCK", 4: "VREF", 5: "GND", 6: "VREF",
+                                     7: "AIN_ADC", 8: "GND"}, value="ADS7056 (14 bit, 2.5 MSPS)",
+           note="X2QFN-8 1.5 x 1.5 mm (RUG); AVDD = reference = VREF 3.0 V")
+    C(d, "CA1", 27.5, 14.5, "VREF", "GND", "1u X7R", fp="Capacitor_SMD:C_0603_1608Metric")
+    C(d, "CA2", 28.3, 14.5, "VREF", "GND", "100n")
+    R(d, "RS1", 28, 12, "SDO_L", "SDO_ADC", "33", rot=0)
+    R(d, "R4", 30, 13, "ADC_SCK", "ADC_SCK_RET", "33 (returned SCK, J1 pad 16)", rot=0,
+      note="taken at the far end of the SCLK trace, past the ADS7056 (layout)")
+    R(d, "R5", 30, 15, "CS_FAST", "+3V3", "10k")
+    # 3.0 V reference
+    d.part("FerriteBead", "FB1", 18, 17, {1: "+3V3", 2: "+3V3_REF"}, value="600R@100MHz 0603",
+           fp="Inductor_SMD:L_0603_1608Metric", mpn="", note="with C: the reference's input filter (LDO-derived 3V3 from the link)")
+    C(d, "C6", 19, 17.5, "+3V3_REF", "GND", "10u", fp="Capacitor_SMD:C_0805_2012Metric")
+    d.part("REF3030", "U6", 20.5, 17, {1: "+3V3_REF", 2: "VREF", 3: "GND"}, value="REF3030 (3.0 V, 25 mA)",
+           note="load: ADS7056 AVDD (<= 3 mA at 2.5 MSPS), bias divider 1.5 mA, dividers")
+    C(d, "C7", 22, 17.5, "VREF", "GND", "10u X7R", fp="Capacitor_SMD:C_0805_2012Metric")
+    d.part("PWR_FLAG", "#FLG401", 18, 18.5, {1: "+3V3_REF"}, value="PWR_FLAG")
+    d.text("SPI on J1 (IF-2.3): SCLK ADC_SCK pad 14, CS_FAST pad 15, returned SCK pad 16, SDO pad 17; MUX_CLR_N pad 11, "
+           "MUX_HOLD_N pad 13 (were the AD7689's DIN / CNV).", 10, 20.0)
 
 
 # ------------------------------------------------------------------ sheet 05
 J1MAP = {k: "NC" for k in range(1, 41)}
-J1MAP.update({1: "SDO_VS", 2: "GND", 3: "SDO_IC2", 4: "GND", 5: "SDO_IL2", 6: "GND", 15: "CS_FAST",
-              17: "SDO_VA", 18: "GND", 19: "SDO_IC1", 20: "GND", 21: "SDO_IL1", 22: "GND",
-              11: "ADC_DIN", 12: "ADC_SDO", 13: "ADC_CNV", 14: "ADC_SCK", 16: "ADC_SCK_RET", 25: "HV_FAULT_N",
-              29: "PWM_L1", 30: "PWM_L2", 31: "PWM_H1", 32: "PWM_H2", 33: "GND", 34: "GND", 35: "+3V3", 36: "+3V3",
-              37: "HV_PERMIT_STAT", 38: "HV_ENABLE", 39: "+12V", 40: "+12V"})
+J1MAP.update({1: "GND", 2: "GND", 3: "GND", 4: "GND", 5: "GND", 6: "GND", 11: "MUX_CLR_N", 12: "GND", 13: "MUX_HOLD_N",
+              14: "ADC_SCK", 15: "CS_FAST", 16: "ADC_SCK_RET", 17: "SDO_ADC", 18: "GND", 19: "GND", 20: "GND", 21: "GND",
+              22: "GND", 25: "DRV_DIS_STAT", 29: "PWM_L1", 30: "PWM_L2", 31: "PWM_H1", 32: "PWM_H2", 33: "GND",
+              34: "GND", 35: "+3V3", 36: "+3V3", 37: "HV_PERMIT_STAT", 38: "HV_ENABLE", 39: "+12V", 40: "+12V"})
 
 
 def sheet05(d):
-    d.text("05 J1 (W17-b, IF-2, 2x20 1.27 mm, standard numbering; interfaces.md 9), HV_PERMIT current loop (W16-b), "
-           "driver enable logic, latched hardware protection (forward and reverse over-current per bridge, raw / "
-           "V_ANODE / V_SCREEN over-voltage). Drivers run only when HV_PERMIT loop on AND HV_ENABLE high AND no "
-           "latched fault. IF-2: never with the v2.5 control card (pad 25 contention).", 0, -1.0, 2)
-    d.part("Conn_02x20_Odd_Even", "=J1", 0, 3, J1MAP, value="CONTROL 40-pin IF-2.2 (W17-b, isolated on the control board)",
-           mpn="Samtec SHF-120-01-L-D-TH", note="1.27 mm 2x20 shrouded THT header (5.33 mm body, 1.91 mm tail); "
-           "stock pin-header footprint, the shroud outline to add at layout; silkscreen IF-2")
+    d.text("05 J1 (W17-b, IF-2.3 proposed, 2x20 1.27 mm; interfaces.md 9), HV_PERMIT current loop (W16-b), driver enable. "
+           "Fifth pass: no comparators, no latch. Drivers run only while the HV_PERMIT loop is closed AND HV_ENABLE is "
+           "high (the control board's heartbeat one-shot); HV_ENABLE is pulled down here, so an unplugged link or a dead "
+           "control board disables the drivers (DIS high), and the drivers lose +12 V / +3V3 with the link (UVLO). "
+           "Protection: the control board's firmware on the fast samples, the heartbeat, the PSU's own trip.", 0, -1.0, 2)
+    d.part("Conn_02x20_Odd_Even", "=J1", 0, 3, J1MAP, value="CONTROL 40-pin IF-2.3 (W17-b, isolated on the control board)",
+           mpn="Samtec SHF-120-01-L-D-TH", note="1.27 mm 2x20 shrouded THT header; the unused HV-to-card pads tied low")
     for i, n in enumerate(("+3V3", "+12V", "GND")):
         d.part("PWR_FLAG", f"#FLG50{i}", 2, 8 + i * 0.6, {1: n}, value="PWR_FLAG")
     C(d, "C1", 3, 7, "+3V3", "GND", "10u", fp="Capacitor_SMD:C_0805_2012Metric")
     C(d, "C2", 3.8, 7, "+12V", "GND", "10u/25V", fp=FP_C1206)
     d.part("NetTie_2", "NT1", 3, 9, {1: "GND", 2: "PGND"}, value="GND to PGND at the shunts (Kelvin)", mpn="")
     R(d, "R1", 5, 7, "HV_ENABLE", "GND", "100k")
-    # HV_PERMIT loop input: TVS, threshold resistor, reverse diode, optocoupler
     d.part("Conn_01x02", "J2", 5, 1, {1: "HVP_P", 2: "HVP_N"}, value="HV_PERMIT +/- (W16-b, Lock-2.54, twisted pair)",
            mpn="Molex 22-27-2021")
     d.part("D_TVS", "D1", 7, 1.5, {1: "HVP_P", 2: "HVP_N"}, value="SMAJ24CA", rot=90, mpn="SMAJ24CA")
@@ -581,74 +571,13 @@ def sheet05(d):
     C(d, "C3", 16, 2, "PERMIT_F", "GND", "10n")
     d.part("74LVC1G17", "U2", 17.5, 1, {1: "NC", 2: "PERMIT_F", 3: "GND", 4: "HV_PERMIT_STAT", 5: "+3V3"}, value="74LVC1G17")
     C(d, "C4", 19, 2, "+3V3", "GND", "100n")
-    # fault latch (fourth pass, with the control board's watchdogged HV_ENABLE): SET by any comparator and by
-    # HV_ENABLE low (U508 open drain on FAULT_N; also the power-on set, HV_ENABLE being pulled down); CLEARED only by
-    # a rising HV_ENABLE that follows at least about 6 ms of HV_ENABLE low (LL_RC / U509), and only if no comparator
-    # is active (set dominates). The clock is HV_ENABLE delayed 10 us (U511), so FAULT_N has risen (10k / 100p: 1 us)
-    # before the edge. A heartbeat drop-out shorter than about 4 ms latches and stays latched.
-    R(d, "R6", 5, 4, "+3V3", "FAULT_N", "10k")
-    C(d, "C5", 6, 4.5, "FAULT_N", "GND", "100p")
-    d.part("74AUP1G74", "U3", 8, 4.5, {1: "ENA_DLY", 2: "D_LATCH", 3: "HV_FAULT_N", 4: "GND", 5: "FLT_Q",
-                                       6: "+3V3", 7: "FAULT_N", 8: "+3V3"}, value="74AUP1G74")
-    C(d, "C6", 10, 5.5, "+3V3", "GND", "100n")
-    d.part("74LVC1G10", "U4", 13, 4.5, {1: "HV_PERMIT_STAT", 3: "HV_ENABLE", 6: "HV_FAULT_N", 4: "DRV_DIS", 2: "GND",
-                                        5: "+3V3"}, value="74LVC1G10 (DIS = NAND)")
+    d.part("74LVC1G10", "U4", 13, 4.5, {1: "HV_PERMIT_STAT", 3: "HV_ENABLE", 6: "+3V3", 4: "DRV_DIS", 2: "GND",
+                                        5: "+3V3"}, value="74LVC1G10 (DIS = NAND; third input tied high)")
     R(d, "R7", 15, 4.5, "DRV_DIS", "+3V3", "10k")
     C(d, "C7", 15.8, 5.5, "+3V3", "GND", "100n")
-    d.skip("R")   # R508 (LM4040 feed) removed: VREF is the REF3030 on sheet 04
-    d.skip("D")   # D503 (LM4040) removed
-    d.skip("C")   # C508 removed with it
-    # thresholds from the 3.0 V reference (VREF, REF3030 on sheet 04): top / bottom resistor, threshold
-    th = [("TH_OC", "10.5k", "2k", "0.480 V = 3.0 A forward (low side) / 3.0 A discharge (I_C)"),
-          ("TH_OCR", "2k", "10.5k", "2.520 V = 3.0 A reverse / shoot-through"),
-          ("TH_OVR", "2.7k", "10k", "2.362 V = 475 V raw (1/201)"),
-          ("TH_OVA", "6.65k", "10k", "1.802 V = 438 V V_ANODE (1/242.9)"),
-          ("TH_OVS", "7.32k", "10k", "1.732 V = 421 V V_SCREEN (1/242.9)")]
-    for i, (n, top, bot, what) in enumerate(th):
-        R(d, f"R1{i}", 3 + i * 1.6, 11, "VREF", n, top + " 0.1%")
-        R(d, f"R2{i}", 3 + i * 1.6, 12.3, n, "GND", bot + " 0.1%")
-        d.text(f"{n}: {what}", 3 + i * 1.6, 13.3, 1.0)
-    d.text("Over-voltage thresholds against the dividers (sheet 04: raw 1/201, outputs 1/242.9); current thresholds against "
-           "1.5 V +- 0.34 V/A. Comparator path: amplifier ~10 ns + 100 ohm / 2.7 nF 0.27 us + LMV339 + latch + DIS: about 1 us. "
-           "The raw trip ends a ramp too fast for the PSU (interfaces.md 8): latched, no brake, no clamp.", 3, 13.8, 1.0)
-    # comparators: open drain, wired-OR into FAULT_N (latched); output low when + < -
-    comp(d, "UC1", 12, 8, "IM_Q12", "TH_OC", "FAULT_N")       # bridge 1 forward over-current (reading below TH_OC)
-    comp(d, "UC1", 12, 10, "IM_Q22", "TH_OC", "FAULT_N")      # bridge 2 forward
-    comp(d, "UC1", 15, 8, "TH_OCR", "IM_Q12", "FAULT_N")      # bridge 1 reverse / shoot-through (reading above TH_OCR)
-    comp(d, "UC1", 15, 10, "TH_OCR", "IM_Q22", "FAULT_N")     # bridge 2 reverse
-    comp(d, "UC2", 18, 8, "TH_OVR", "VM_RAW", "FAULT_N")      # raw over-voltage (475 V)
-    comp(d, "UC2", 18, 10, "TH_OVA", "VM_A", "FAULT_N")       # V_ANODE over-voltage
-    comp(d, "UC2", 21, 8, "TH_OVS", "VM_S", "FAULT_N")        # V_SCREEN over-voltage
-    # output short / arc: the electrolytic discharging faster than 2.0 A (I_C reading below TH_OC); the low-side
-    # forward trip only sees the current during (1 - D) of each period and is blind near full duty (sim/m20_short_arc.py)
-    comp(d, "UC2", 21, 10, "IM_C14", "TH_OC", "FAULT_N")      # bridge 1 capacitor discharge (short / arc)
-    comp(d, "UC3", 24, 8, "IM_C24", "TH_OC", "FAULT_N")       # bridge 2 capacitor discharge (short / arc)
-    comp(d, "UC3", 24, 10, "GND", "+3V3", "NC")               # spare
-    comp(d, "UC3", 27, 8, "GND", "+3V3", "NC")                # spare
-    comp(d, "UC3", 27, 10, "GND", "+3V3", "NC")               # spare
-    C(d, "C11", 13.6, 12.5, "+3V3", "GND", "100n")
-    # latch qualification parts (fourth pass)
-    d.part("74LVC1G07", "U5", 5, 15.5, {1: "NC", 2: "HV_ENABLE", 3: "GND", 4: "FAULT_N", 5: "+3V3"},
-           value="74LVC1G07 (HV_ENABLE low sets the latch)")
-    R(d, "R30", 7, 15.5, "HV_ENABLE", "LL_RC", "100k")
-    R(d, "R31", 7, 17, "HV_ENABLE", "LL_D", "1k")
-    d.part("D", "D4", 8, 17, {2: "LL_D", 1: "LL_RC"}, value="1N4148W (fast recharge)", rot=0, mpn="1N4148W")
-    C(d, "C12", 9, 16, "LL_RC", "GND", "47n X7R (tau 4.7 ms)")
-    d.part("74LVC1G17", "U6", 10.5, 15.5, {1: "NC", 2: "LL_RC", 3: "GND", 4: "LL_N", 5: "+3V3"},
-           value="74LVC1G17 (LL_N low = HV_ENABLE was low > ~6 ms)")
-    d.part("74LVC1G08", "U7", 12.5, 15.5, {1: "FLT_Q", 2: "LL_N", 3: "GND", 4: "D_LATCH", 5: "+3V3"},
-           value="74LVC1G08 (D = Q AND NOT long-low)")
-    R(d, "R32", 14, 15.5, "HV_ENABLE", "ENA_RC", "10k")
-    C(d, "C13", 15, 16.5, "ENA_RC", "GND", "1n C0G (10 us)")
-    d.part("74LVC1G17", "U8", 16.5, 15.5, {1: "NC", 2: "ENA_RC", 3: "GND", 4: "ENA_DLY", 5: "+3V3"},
-           value="74LVC1G17 (clock = HV_ENABLE delayed 10 us)")
-    for i, c in enumerate((18, 18.8, 19.6, 20.4)):
-        C(d, f"C1{4 + i}", c, 16.5, "+3V3", "GND", "100n")
-    d.text("Fault latch rule (IF-2.2): HV_ENABLE low stops the drivers at once (U504) and sets the latch; the latch clears only "
-           "on a rising HV_ENABLE after >= 20 ms low (guaranteed; < 4 ms never clears) with no comparator active. Firmware: "
-           "to clear, hold the heartbeat off for >= 20 ms, then restart.", 5, 18.5, 1.0)
-    C(d, "C9", 12, 12.5, "+3V3", "GND", "100n")
-    C(d, "C10", 12.8, 12.5, "+3V3", "GND", "100n")
+    R(d, "R8", 17, 4.5, "DRV_DIS", "DRV_DIS_STAT", "1k", rot=0, note="pad 25: drivers' enable state for the firmware")
+    d.text("Pad 25 (was HV_FAULT_N, low = fault) now reports DRV_DIS: high = drivers disabled (permit open or HV_ENABLE low). "
+           "Pads 1, 3, 5, 12, 19, 21 (the AD7689's and five ADS7056's data) tied low.", 5, 8.0, 1.0)
 
 
 SHEETS = [("01_input_star.kicad_sch", sheet01), ("02_bridges.kicad_sch", sheet02),
