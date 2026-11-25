@@ -361,8 +361,8 @@ def sheet04(d):
     d.text("04 Measurement (PLAN section 3): four shunt amplifiers (50 mohm, gain 6.25 around MID = 1.5 V: 0.3125 V/A, "
            "+-4 A into 0.25-2.75 V, about 20 MHz), six dividers 1/173.4 (520 V full scale) with buffers, two TMUX1308 "
            "8:1 muxes with a shared FPGA-driven address MUX_A0..2, two ADS7056 with shared ADC_CS / ADC_SCK and their "
-           "own SDO. Mux 1 (bridge 1): 0 I_L1, 1 I_C1, 2 V_ANODE, 3 UC1, 4 RAW (B_P), 5 MID, 6 NTC1, 7 GND. Mux 2 "
-           "(bridge 2): 0 I_C2, 1 I_L2, 2 V_SCREEN, 3 UC2, 4 RAW (UIN), 5 MID, 6 NTC2, 7 GND.", 0, -1.0, 2)
+           "own SDO. Mux 1 (bridge 1): 0 I_L1, 1 I_C1, 2 V_ANODE, 3 UC1, 4 RAW (B_P), 5 MID, 6-7 GND (zero check). Mux 2 "
+           "(bridge 2): 0 I_C2, 1 I_L2, 2 V_SCREEN, 3 UC2, 4 RAW (UIN), 5 MID, 6-7 GND.", 0, -1.0, 2)
     amps = ["UA1", "UA1", "UA2", "UA2"]
     for i, (src, tag) in enumerate(SHUNTS):
         c0 = i * 4.5
@@ -381,12 +381,12 @@ def sheet04(d):
     bufs = ["UA3", "UA3", "UA4", "UA4", "UA5", "UA5"]
     for i, (src, tag) in enumerate(VOLTS):
         c0 = i * 3.5
-        for j in range(4):
+        for j in range(3):
             R(d, f"RV{i}{j + 1}", c0, 10 + j * 1.3, src if j == 0 else f"DV{i}{j}", f"DV{i}{j + 1}",
-              "750k 0.1% 1206 (>= 200 V)", fp=FP_R1206, note="<= 130 V each at 520 V")
-        R(d, f"RV{i}5", c0 + 1, 13.9, f"DV{i}4", "GND", "17.4k 0.1%")
-        C(d, f"CV{i}", c0 + 1.8, 13.9, f"DV{i}4", "GND", "100p C0G (tau 1.7 us)")
-        opa2(d, bufs[i], c0 + 1, 15.5, f"DV{i}4", f"V_{tag}", f"V_{tag}")
+              "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)", fp=FP_R1206, note="<= 175 V each at 520 V")
+        R(d, f"RV{i}5", c0 + 1, 13.9, f"DV{i}3", "GND", "17.4k 0.1%")
+        C(d, f"CV{i}", c0 + 1.8, 13.9, f"DV{i}3", "GND", "100p C0G (tau 1.7 us)")
+        opa2(d, bufs[i], c0 + 1, 15.5, f"DV{i}3", f"V_{tag}", f"V_{tag}")
         R(d, f"RV{i}6", c0 + 2.5, 17.5, f"V_{tag}", f"MX_{tag}", "47", rot=0)
     # MID = 1.5 V from the reference, buffered (feeds the eight 1.5k legs and mux channel 5)
     R(d, "RB1", 22, 10, "VREF", "MID_DIV", "10k 0.1%")
@@ -396,15 +396,9 @@ def sheet04(d):
     R(d, "RB3", 25, 13, "MID_FB", "MID", "10", rot=0)
     C(d, "CB2", 26, 14, "MID", "GND", "1u X7R")
     opa2(d, "UA7", 23.5, 16.5, "GND", "SPARE_O", "SPARE_O")     # unused half: follower at ground
-    # board temperature near each bridge's devices (mux channel 6)
-    for k in (1, 2):
-        R(d, f"RT{k}", 27 + (k - 1) * 1.6, 10, "VREF", f"MX_NTC{k}", "10k 1%")
-        d.part("Thermistor_NTC", f"TH{k}", 27 + (k - 1) * 1.6, 11.5, {1: f"MX_NTC{k}", 2: "GND"},
-               value="10k NTC B3435 0603 (next to the bridge's devices)", rot=90, mpn="")
-        C(d, f"CT{k}", 27.8 + (k - 1) * 1.6, 11.5, f"MX_NTC{k}", "GND", "100n")
     # multiplexers (4051 pinout: Y0 13, Y1 14, Y2 15, Y3 12, Y4 1, Y5 5, Y6 2, Y7 4, Z 3, E 6, S1 11, S2 10, S3 9)
-    chans = {1: ["MX_IL1", "MX_IC1", "MX_VA", "MX_VU1", "MX_VR1", "MID", "MX_NTC1", "GND"],
-             2: ["MX_IC2", "MX_IL2", "MX_VS", "MX_VU2", "MX_VR2", "MID", "MX_NTC2", "GND"]}
+    chans = {1: ["MX_IL1", "MX_IC1", "MX_VA", "MX_VU1", "MX_VR1", "MID", "GND", "GND"],
+             2: ["MX_IC2", "MX_IL2", "MX_VS", "MX_VU2", "MX_VR2", "MID", "GND", "GND"]}
     ypin = [13, 14, 15, 12, 1, 5, 2, 4]
     for k in (1, 2):
         c0 = (k - 1) * 14
@@ -432,7 +426,7 @@ def sheet04(d):
            fp="Inductor_SMD:L_0603_1608Metric", mpn="")
     C(d, "C1", 23, 25.5, "+3V3_REF", "GND", "10u", fp=FP_C0805)
     d.part("REF3030", "U5", 24.5, 25, {1: "+3V3_REF", 2: "VREF", 3: "GND"}, value="REF3030 (3.0 V)",
-           note="ADS7056 AVDD x2, MID divider, NTC dividers")
+           note="ADS7056 AVDD x2, MID divider")
     C(d, "C2", 26, 25.5, "VREF", "GND", "1u X7R")
     d.part("PWR_FLAG", "#FLG401", 22, 26.5, {1: "+3V3_REF"}, value="PWR_FLAG")
 

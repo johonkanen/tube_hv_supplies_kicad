@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/home/jari/dev/tube_hv_supplies_kicad/rev4/kicad/tube_hv_supplies_rev4.kicad_sch")
-		(date "2026-11-25T20:59:34")
+		(date "2026-11-25T21:14:16")
 		(tool "Eeschema 10.0.7")
 		(sheet
 			(number "1")
@@ -6965,7 +6965,7 @@
 		)
 		(comp
 			(ref "C429")
-			(value "100n")
+			(value "680p C0G (charge bucket)")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7019,7 +7019,7 @@
 		)
 		(comp
 			(ref "C430")
-			(value "100n")
+			(value "1u X7R")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7073,7 +7073,7 @@
 		)
 		(comp
 			(ref "C431")
-			(value "680p C0G (charge bucket)")
+			(value "100n")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7127,7 +7127,7 @@
 		)
 		(comp
 			(ref "C432")
-			(value "1u X7R")
+			(value "100n")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7181,7 +7181,7 @@
 		)
 		(comp
 			(ref "C433")
-			(value "100n")
+			(value "680p C0G (charge bucket)")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7235,7 +7235,7 @@
 		)
 		(comp
 			(ref "C434")
-			(value "100n")
+			(value "1u X7R")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7289,7 +7289,7 @@
 		)
 		(comp
 			(ref "C435")
-			(value "680p C0G (charge bucket)")
+			(value "100n")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
 			(fields
@@ -7343,12 +7343,12 @@
 		)
 		(comp
 			(ref "C436")
-			(value "1u X7R")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(value "10u")
+			(footprint "Capacitor_SMD:C_0805_2012Metric")
 			(description "Unpolarized capacitor")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -7397,114 +7397,6 @@
 		)
 		(comp
 			(ref "C437")
-			(value "100n")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
-			(description "Unpolarized capacitor")
-			(fields
-				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Unpolarized capacitor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "C")
-				(description "Unpolarized capacitor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "cap capacitor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "C_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "6acfaa8c-176a-5f02-9928-280267ac73ee")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "C438")
-			(value "10u")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
-			(description "Unpolarized capacitor")
-			(fields
-				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Unpolarized capacitor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "C")
-				(description "Unpolarized capacitor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "cap capacitor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "C_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "e22d1e0b-a563-513a-a99f-4757f7dc828b")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "C439")
 			(value "1u X7R")
 			(footprint "Capacitor_SMD:C_0603_1608Metric")
 			(description "Unpolarized capacitor")
@@ -7542,7 +7434,7 @@
 				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
 				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
 			)
-			(tstamps "8d77089e-a59b-5794-8f97-980445599588")
+			(tstamps "6acfaa8c-176a-5f02-9928-280267ac73ee")
 			(units
 				(unit
 					(name "A")
@@ -9125,7 +9017,7 @@
 		)
 		(comp
 			(ref "R421")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9179,7 +9071,7 @@
 		)
 		(comp
 			(ref "R422")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9233,7 +9125,7 @@
 		)
 		(comp
 			(ref "R423")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9287,12 +9179,12 @@
 		)
 		(comp
 			(ref "R424")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "17.4k 0.1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9341,7 +9233,7 @@
 		)
 		(comp
 			(ref "R425")
-			(value "17.4k 0.1%")
+			(value "47")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -9395,12 +9287,12 @@
 		)
 		(comp
 			(ref "R426")
-			(value "47")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9449,7 +9341,7 @@
 		)
 		(comp
 			(ref "R427")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9503,7 +9395,7 @@
 		)
 		(comp
 			(ref "R428")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9557,12 +9449,12 @@
 		)
 		(comp
 			(ref "R429")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "17.4k 0.1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9611,12 +9503,12 @@
 		)
 		(comp
 			(ref "R430")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "47")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9665,12 +9557,12 @@
 		)
 		(comp
 			(ref "R431")
-			(value "17.4k 0.1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9719,12 +9611,12 @@
 		)
 		(comp
 			(ref "R432")
-			(value "47")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9773,7 +9665,7 @@
 		)
 		(comp
 			(ref "R433")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9827,12 +9719,12 @@
 		)
 		(comp
 			(ref "R434")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "17.4k 0.1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9881,12 +9773,12 @@
 		)
 		(comp
 			(ref "R435")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "47")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -9935,7 +9827,7 @@
 		)
 		(comp
 			(ref "R436")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -9989,12 +9881,12 @@
 		)
 		(comp
 			(ref "R437")
-			(value "17.4k 0.1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10043,12 +9935,12 @@
 		)
 		(comp
 			(ref "R438")
-			(value "47")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10097,12 +9989,12 @@
 		)
 		(comp
 			(ref "R439")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "17.4k 0.1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10151,12 +10043,12 @@
 		)
 		(comp
 			(ref "R440")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "47")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10205,7 +10097,7 @@
 		)
 		(comp
 			(ref "R441")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -10259,7 +10151,7 @@
 		)
 		(comp
 			(ref "R442")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -10313,12 +10205,12 @@
 		)
 		(comp
 			(ref "R443")
-			(value "17.4k 0.1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10367,7 +10259,7 @@
 		)
 		(comp
 			(ref "R444")
-			(value "47")
+			(value "17.4k 0.1%")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -10421,12 +10313,12 @@
 		)
 		(comp
 			(ref "R445")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "47")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10475,7 +10367,7 @@
 		)
 		(comp
 			(ref "R446")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -10529,7 +10421,7 @@
 		)
 		(comp
 			(ref "R447")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -10583,7 +10475,7 @@
 		)
 		(comp
 			(ref "R448")
-			(value "750k 0.1% 1206 (>= 200 V)")
+			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
@@ -10745,12 +10637,12 @@
 		)
 		(comp
 			(ref "R451")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "10k 0.1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10799,12 +10691,12 @@
 		)
 		(comp
 			(ref "R452")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "10k 0.1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10853,12 +10745,12 @@
 		)
 		(comp
 			(ref "R453")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "10")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10907,12 +10799,12 @@
 		)
 		(comp
 			(ref "R454")
-			(value "750k 0.1% 1206 (>= 200 V)")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(value "33")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -10961,7 +10853,7 @@
 		)
 		(comp
 			(ref "R455")
-			(value "17.4k 0.1%")
+			(value "33")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11015,7 +10907,7 @@
 		)
 		(comp
 			(ref "R456")
-			(value "47")
+			(value "33")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11069,7 +10961,7 @@
 		)
 		(comp
 			(ref "R457")
-			(value "10k 0.1%")
+			(value "33")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11123,7 +11015,7 @@
 		)
 		(comp
 			(ref "R458")
-			(value "10k 0.1%")
+			(value "33 (returned SCK: far end of the SCLK trace)")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11177,7 +11069,7 @@
 		)
 		(comp
 			(ref "R459")
-			(value "10")
+			(value "10k")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11231,7 +11123,7 @@
 		)
 		(comp
 			(ref "R460")
-			(value "10k 1%")
+			(value "100k")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11285,7 +11177,7 @@
 		)
 		(comp
 			(ref "R461")
-			(value "10k 1%")
+			(value "100k")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11339,7 +11231,7 @@
 		)
 		(comp
 			(ref "R462")
-			(value "33")
+			(value "100k")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11393,7 +11285,7 @@
 		)
 		(comp
 			(ref "R463")
-			(value "33")
+			(value "100k")
 			(footprint "Resistor_SMD:R_0603_1608Metric")
 			(description "Resistor")
 			(fields
@@ -11431,546 +11323,6 @@
 				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
 			)
 			(tstamps "93a2a6fa-618e-53c5-9cf7-177d525e5a08")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R464")
-			(value "33")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "d96fab70-29ac-5bce-b90c-282f2c800324")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R465")
-			(value "33")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "eb0b4a73-7487-5341-989a-0aa11ff0d0f9")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R466")
-			(value "33 (returned SCK: far end of the SCLK trace)")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "f66ab81f-df19-5faf-8efc-48cb3a7c07c5")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R467")
-			(value "10k")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "6060138a-6f41-5f00-ac71-684a36cbe23d")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R468")
-			(value "100k")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "164626a9-efb4-5f4b-9a95-324e0245b25c")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R469")
-			(value "100k")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "8ff77aca-e90c-5b3e-90e8-e0c2bc320883")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R470")
-			(value "100k")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "74c36818-eb73-55be-b278-1cb6fc929993")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "R471")
-			(value "100k")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Resistor")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Resistor")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "R")
-				(description "Resistor")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "R res resistor")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "771e20b2-baac-594e-b6c9-6dc7b199ad29")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "T401")
-			(value "10k NTC B3435 0603 (next to the bridge's devices)")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Temperature dependent resistor, negative temperature coefficient")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Temperature dependent resistor, negative temperature coefficient")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "Thermistor_NTC")
-				(description "Temperature dependent resistor, negative temperature coefficient")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "thermistor NTC resistor sensor RTD")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_* RV_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "3798e9e2-19a6-5efb-892c-978861c1becd")
-			(units
-				(unit
-					(name "A")
-					(pins
-						(pin
-							(num "1")
-						)
-						(pin
-							(num "2")
-						)
-					)
-				)
-			)
-		)
-		(comp
-			(ref "T402")
-			(value "10k NTC B3435 0603 (next to the bridge's devices)")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
-			(description "Temperature dependent resistor, negative temperature coefficient")
-			(fields
-				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Temperature dependent resistor, negative temperature coefficient")
-			)
-			(libsource
-				(lib "tube_hv_supplies_rev4")
-				(part "Thermistor_NTC")
-				(description "Temperature dependent resistor, negative temperature coefficient")
-			)
-			(property
-				(name "Sheetname")
-				(value "04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030")
-			)
-			(property
-				(name "Sheetfile")
-				(value "04_measurement.kicad_sch")
-			)
-			(property
-				(name "ki_keywords")
-				(value "thermistor NTC resistor sensor RTD")
-			)
-			(property
-				(name "ki_fp_filters")
-				(value "R_* RV_*")
-			)
-			(sheetpath
-				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
-				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
-			)
-			(tstamps "baa96b6e-fd98-56d6-a064-d5a131fb6875")
 			(units
 				(unit
 					(name "A")
@@ -15247,41 +14599,6 @@
 				)
 			)
 		)
-		(libpart
-			(lib "tube_hv_supplies_rev4")
-			(part "Thermistor_NTC")
-			(description "Temperature dependent resistor, negative temperature coefficient")
-			(footprints
-				(fp "R_*")
-				(fp "RV_*")
-			)
-			(fields
-				(field
-					(name "Reference") "TH")
-				(field
-					(name "Value") "Thermistor_NTC")
-				(field
-					(name "Footprint")
-				)
-				(field
-					(name "Datasheet")
-				)
-				(field
-					(name "Description") "Temperature dependent resistor, negative temperature coefficient")
-			)
-			(pins
-				(pin
-					(num "1")
-					(name "")
-					(type "passive")
-				)
-				(pin
-					(num "2")
-					(name "")
-					(type "passive")
-				)
-			)
-		)
 	)
 	(libraries
 		(library
@@ -15345,27 +14662,27 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "C429")
+				(ref "C427")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "C430")
+				(ref "C428")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "C433")
+				(ref "C431")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "C434")
+				(ref "C432")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "C437")
+				(ref "C435")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -15397,7 +14714,7 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R467")
+				(ref "R459")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -15952,7 +15269,7 @@
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/+3V3_REF")
 			(class "Default")
 			(node
-				(ref "C438")
+				(ref "C436")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -15973,7 +15290,7 @@
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/ADRV1")
 			(class "Default")
 			(node
-				(ref "R462")
+				(ref "R454")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -15994,7 +15311,7 @@
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/ADRV2")
 			(class "Default")
 			(node
-				(ref "R464")
+				(ref "R456")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -16015,12 +15332,12 @@
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/AIN1")
 			(class "Default")
 			(node
-				(ref "C431")
+				(ref "C429")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "R462")
+				(ref "R454")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -16036,12 +15353,12 @@
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/AIN2")
 			(class "Default")
 			(node
-				(ref "C435")
+				(ref "C433")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "R464")
+				(ref "R456")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -16087,32 +15404,17 @@
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV03")
 			(class "Default")
 			(node
+				(ref "C415")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
 				(ref "R423")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
 				(ref "R424")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "33")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV04")
-			(class "Default")
-			(node
-				(ref "C415")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "R424")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R425")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -16124,8 +15426,23 @@
 			)
 		)
 		(net
-			(code "34")
+			(code "33")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV11")
+			(class "Default")
+			(node
+				(ref "R426")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R427")
+				(pin "1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "34")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV12")
 			(class "Default")
 			(node
 				(ref "R427")
@@ -16140,37 +15457,7 @@
 		)
 		(net
 			(code "35")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV12")
-			(class "Default")
-			(node
-				(ref "R428")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R429")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "36")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV13")
-			(class "Default")
-			(node
-				(ref "R429")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R430")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "37")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV14")
 			(class "Default")
 			(node
 				(ref "C417")
@@ -16178,12 +15465,12 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R430")
+				(ref "R428")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R431")
+				(ref "R429")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -16195,53 +15482,38 @@
 			)
 		)
 		(net
-			(code "38")
+			(code "36")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV21")
 			(class "Default")
 			(node
-				(ref "R433")
+				(ref "R431")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R434")
+				(ref "R432")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "39")
+			(code "37")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV22")
 			(class "Default")
 			(node
-				(ref "R434")
+				(ref "R432")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R435")
+				(ref "R433")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "40")
+			(code "38")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV23")
-			(class "Default")
-			(node
-				(ref "R435")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R436")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "41")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV24")
 			(class "Default")
 			(node
 				(ref "C418")
@@ -16249,12 +15521,12 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R436")
+				(ref "R433")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R437")
+				(ref "R434")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -16266,53 +15538,38 @@
 			)
 		)
 		(net
-			(code "42")
+			(code "39")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV31")
 			(class "Default")
 			(node
-				(ref "R439")
+				(ref "R436")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R440")
+				(ref "R437")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "43")
+			(code "40")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV32")
 			(class "Default")
 			(node
-				(ref "R440")
+				(ref "R437")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R441")
+				(ref "R438")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "44")
+			(code "41")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV33")
-			(class "Default")
-			(node
-				(ref "R441")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R442")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "45")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV34")
 			(class "Default")
 			(node
 				(ref "C420")
@@ -16320,12 +15577,12 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R442")
+				(ref "R438")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R443")
+				(ref "R439")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -16337,23 +15594,64 @@
 			)
 		)
 		(net
-			(code "46")
+			(code "42")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV41")
 			(class "Default")
 			(node
-				(ref "R445")
+				(ref "R441")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R446")
+				(ref "R442")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "47")
+			(code "43")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV42")
+			(class "Default")
+			(node
+				(ref "R442")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R443")
+				(pin "1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "44")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV43")
+			(class "Default")
+			(node
+				(ref "C421")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R443")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R444")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U405")
+				(pin "3")
+				(pinfunction "+_3")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "45")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV51")
 			(class "Default")
 			(node
 				(ref "R446")
@@ -16367,8 +15665,8 @@
 			)
 		)
 		(net
-			(code "48")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV43")
+			(code "46")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV52")
 			(class "Default")
 			(node
 				(ref "R447")
@@ -16382,11 +15680,11 @@
 			)
 		)
 		(net
-			(code "49")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV44")
+			(code "47")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV53")
 			(class "Default")
 			(node
-				(ref "C421")
+				(ref "C423")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -16402,84 +15700,13 @@
 			)
 			(node
 				(ref "U405")
-				(pin "3")
-				(pinfunction "+_3")
-				(pintype "input")
-			)
-		)
-		(net
-			(code "50")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV51")
-			(class "Default")
-			(node
-				(ref "R451")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R452")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "51")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV52")
-			(class "Default")
-			(node
-				(ref "R452")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R453")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "52")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV53")
-			(class "Default")
-			(node
-				(ref "R453")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R454")
-				(pin "1")
-				(pintype "passive")
-			)
-		)
-		(net
-			(code "53")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV54")
-			(class "Default")
-			(node
-				(ref "C423")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "R454")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R455")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "U405")
 				(pin "5")
 				(pinfunction "+_5")
 				(pintype "input")
 			)
 		)
 		(net
-			(code "54")
+			(code "48")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA0N")
 			(class "Default")
 			(node
@@ -16505,7 +15732,7 @@
 			)
 		)
 		(net
-			(code "55")
+			(code "49")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA0P")
 			(class "Default")
 			(node
@@ -16531,7 +15758,7 @@
 			)
 		)
 		(net
-			(code "56")
+			(code "50")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA1N")
 			(class "Default")
 			(node
@@ -16557,7 +15784,7 @@
 			)
 		)
 		(net
-			(code "57")
+			(code "51")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA1P")
 			(class "Default")
 			(node
@@ -16583,7 +15810,7 @@
 			)
 		)
 		(net
-			(code "58")
+			(code "52")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA2N")
 			(class "Default")
 			(node
@@ -16609,7 +15836,7 @@
 			)
 		)
 		(net
-			(code "59")
+			(code "53")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA2P")
 			(class "Default")
 			(node
@@ -16635,7 +15862,7 @@
 			)
 		)
 		(net
-			(code "60")
+			(code "54")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA3N")
 			(class "Default")
 			(node
@@ -16661,7 +15888,7 @@
 			)
 		)
 		(net
-			(code "61")
+			(code "55")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA3P")
 			(class "Default")
 			(node
@@ -16687,7 +15914,7 @@
 			)
 		)
 		(net
-			(code "62")
+			(code "56")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IC1")
 			(class "Default")
 			(node
@@ -16712,7 +15939,7 @@
 			)
 		)
 		(net
-			(code "63")
+			(code "57")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IC2")
 			(class "Default")
 			(node
@@ -16737,7 +15964,7 @@
 			)
 		)
 		(net
-			(code "64")
+			(code "58")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IL1")
 			(class "Default")
 			(node
@@ -16762,7 +15989,7 @@
 			)
 		)
 		(net
-			(code "65")
+			(code "59")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IL2")
 			(class "Default")
 			(node
@@ -16787,7 +16014,7 @@
 			)
 		)
 		(net
-			(code "66")
+			(code "60")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS0N")
 			(class "Default")
 			(node
@@ -16803,7 +16030,7 @@
 			)
 		)
 		(net
-			(code "67")
+			(code "61")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS0P")
 			(class "Default")
 			(node
@@ -16819,7 +16046,7 @@
 			)
 		)
 		(net
-			(code "68")
+			(code "62")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS1N")
 			(class "Default")
 			(node
@@ -16835,7 +16062,7 @@
 			)
 		)
 		(net
-			(code "69")
+			(code "63")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS1P")
 			(class "Default")
 			(node
@@ -16851,7 +16078,7 @@
 			)
 		)
 		(net
-			(code "70")
+			(code "64")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS2N")
 			(class "Default")
 			(node
@@ -16867,7 +16094,7 @@
 			)
 		)
 		(net
-			(code "71")
+			(code "65")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS2P")
 			(class "Default")
 			(node
@@ -16883,7 +16110,7 @@
 			)
 		)
 		(net
-			(code "72")
+			(code "66")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS3N")
 			(class "Default")
 			(node
@@ -16899,7 +16126,7 @@
 			)
 		)
 		(net
-			(code "73")
+			(code "67")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS3P")
 			(class "Default")
 			(node
@@ -16915,7 +16142,7 @@
 			)
 		)
 		(net
-			(code "74")
+			(code "68")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MID")
 			(class "Default")
 			(node
@@ -16964,7 +16191,7 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R459")
+				(ref "R453")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -16982,7 +16209,7 @@
 			)
 		)
 		(net
-			(code "75")
+			(code "69")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MID_DIV")
 			(class "Default")
 			(node
@@ -16991,12 +16218,12 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R457")
+				(ref "R451")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R458")
+				(ref "R452")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17008,11 +16235,11 @@
 			)
 		)
 		(net
-			(code "76")
+			(code "70")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MID_FB")
 			(class "Default")
 			(node
-				(ref "R459")
+				(ref "R453")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17029,7 +16256,7 @@
 			)
 		)
 		(net
-			(code "77")
+			(code "71")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MUXO1")
 			(class "Default")
 			(node
@@ -17046,7 +16273,7 @@
 			)
 		)
 		(net
-			(code "78")
+			(code "72")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MUXO2")
 			(class "Default")
 			(node
@@ -17063,7 +16290,7 @@
 			)
 		)
 		(net
-			(code "79")
+			(code "73")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IC1")
 			(class "Default")
 			(node
@@ -17084,7 +16311,7 @@
 			)
 		)
 		(net
-			(code "80")
+			(code "74")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IC2")
 			(class "Default")
 			(node
@@ -17105,7 +16332,7 @@
 			)
 		)
 		(net
-			(code "81")
+			(code "75")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IL1")
 			(class "Default")
 			(node
@@ -17126,7 +16353,7 @@
 			)
 		)
 		(net
-			(code "82")
+			(code "76")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IL2")
 			(class "Default")
 			(node
@@ -17147,63 +16374,11 @@
 			)
 		)
 		(net
-			(code "83")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_NTC1")
-			(class "Default")
-			(node
-				(ref "C427")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "R460")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "T401")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "U407")
-				(pin "2")
-				(pinfunction "Y6_2")
-				(pintype "bidirectional")
-			)
-		)
-		(net
-			(code "84")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_NTC2")
-			(class "Default")
-			(node
-				(ref "C428")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "R461")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "T402")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "U410")
-				(pin "2")
-				(pinfunction "Y6_2")
-				(pintype "bidirectional")
-			)
-		)
-		(net
-			(code "85")
+			(code "77")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VA")
 			(class "Default")
 			(node
-				(ref "R426")
+				(ref "R425")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -17215,8 +16390,24 @@
 			)
 		)
 		(net
-			(code "86")
+			(code "78")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VR1")
+			(class "Default")
+			(node
+				(ref "R445")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U407")
+				(pin "1")
+				(pinfunction "Y4_1")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "79")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VR2")
 			(class "Default")
 			(node
 				(ref "R450")
@@ -17224,22 +16415,6 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "U407")
-				(pin "1")
-				(pinfunction "Y4_1")
-				(pintype "bidirectional")
-			)
-		)
-		(net
-			(code "87")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VR2")
-			(class "Default")
-			(node
-				(ref "R456")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
 				(ref "U410")
 				(pin "1")
 				(pinfunction "Y4_1")
@@ -17247,11 +16422,11 @@
 			)
 		)
 		(net
-			(code "88")
+			(code "80")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VS")
 			(class "Default")
 			(node
-				(ref "R438")
+				(ref "R435")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -17263,11 +16438,11 @@
 			)
 		)
 		(net
-			(code "89")
+			(code "81")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VU1")
 			(class "Default")
 			(node
-				(ref "R432")
+				(ref "R430")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -17279,11 +16454,11 @@
 			)
 		)
 		(net
-			(code "90")
+			(code "82")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VU2")
 			(class "Default")
 			(node
-				(ref "R444")
+				(ref "R440")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -17295,11 +16470,11 @@
 			)
 		)
 		(net
-			(code "91")
+			(code "83")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/SDOL1")
 			(class "Default")
 			(node
-				(ref "R463")
+				(ref "R455")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17311,11 +16486,11 @@
 			)
 		)
 		(net
-			(code "92")
+			(code "84")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/SDOL2")
 			(class "Default")
 			(node
-				(ref "R465")
+				(ref "R457")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17327,7 +16502,7 @@
 			)
 		)
 		(net
-			(code "93")
+			(code "85")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/SPARE_O")
 			(class "Default")
 			(node
@@ -17343,36 +16518,26 @@
 			)
 		)
 		(net
-			(code "94")
+			(code "86")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/VREF")
 			(class "Default")
 			(node
-				(ref "C432")
+				(ref "C430")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "C436")
+				(ref "C434")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "C439")
+				(ref "C437")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "R457")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "R460")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "R461")
+				(ref "R451")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17396,11 +16561,11 @@
 			)
 		)
 		(net
-			(code "95")
+			(code "87")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VA")
 			(class "Default")
 			(node
-				(ref "R426")
+				(ref "R425")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17417,8 +16582,29 @@
 			)
 		)
 		(net
-			(code "96")
+			(code "88")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VR1")
+			(class "Default")
+			(node
+				(ref "R445")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U405")
+				(pin "1")
+				(pintype "output")
+			)
+			(node
+				(ref "U405")
+				(pin "2")
+				(pinfunction "-_2")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "89")
+			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VR2")
 			(class "Default")
 			(node
 				(ref "R450")
@@ -17427,27 +16613,6 @@
 			)
 			(node
 				(ref "U405")
-				(pin "1")
-				(pintype "output")
-			)
-			(node
-				(ref "U405")
-				(pin "2")
-				(pinfunction "-_2")
-				(pintype "input")
-			)
-		)
-		(net
-			(code "97")
-			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VR2")
-			(class "Default")
-			(node
-				(ref "R456")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "U405")
 				(pin "6")
 				(pinfunction "-_6")
 				(pintype "input")
@@ -17459,11 +16624,11 @@
 			)
 		)
 		(net
-			(code "98")
+			(code "90")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VS")
 			(class "Default")
 			(node
-				(ref "R438")
+				(ref "R435")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17480,11 +16645,11 @@
 			)
 		)
 		(net
-			(code "99")
+			(code "91")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VU1")
 			(class "Default")
 			(node
-				(ref "R432")
+				(ref "R430")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17501,11 +16666,11 @@
 			)
 		)
 		(net
-			(code "100")
+			(code "92")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VU2")
 			(class "Default")
 			(node
-				(ref "R444")
+				(ref "R440")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17522,7 +16687,7 @@
 			)
 		)
 		(net
-			(code "101")
+			(code "93")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HVP_A")
 			(class "Default")
 			(node
@@ -17548,7 +16713,7 @@
 			)
 		)
 		(net
-			(code "102")
+			(code "94")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HVP_N")
 			(class "Default")
 			(node
@@ -17581,7 +16746,7 @@
 			)
 		)
 		(net
-			(code "103")
+			(code "95")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HVP_P")
 			(class "Default")
 			(node
@@ -17603,7 +16768,7 @@
 			)
 		)
 		(net
-			(code "104")
+			(code "96")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HV_PERMIT_STAT")
 			(class "Default")
 			(node
@@ -17619,7 +16784,7 @@
 			)
 		)
 		(net
-			(code "105")
+			(code "97")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/PERMIT_E")
 			(class "Default")
 			(node
@@ -17639,7 +16804,7 @@
 			)
 		)
 		(net
-			(code "106")
+			(code "98")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/PERMIT_F")
 			(class "Default")
 			(node
@@ -17659,7 +16824,7 @@
 			)
 		)
 		(net
-			(code "107")
+			(code "99")
 			(name "ADC_CS")
 			(class "Default")
 			(node
@@ -17669,7 +16834,7 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R467")
+				(ref "R459")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17687,7 +16852,7 @@
 			)
 		)
 		(net
-			(code "108")
+			(code "100")
 			(name "ADC_SCK")
 			(class "Default")
 			(node
@@ -17697,12 +16862,12 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R466")
+				(ref "R458")
 				(pin "1")
 				(pintype "passive")
 			)
 			(node
-				(ref "R468")
+				(ref "R460")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -17720,7 +16885,7 @@
 			)
 		)
 		(net
-			(code "109")
+			(code "101")
 			(name "ADC_SCK_RET")
 			(class "Default")
 			(node
@@ -17730,13 +16895,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R466")
+				(ref "R458")
 				(pin "2")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "110")
+			(code "102")
 			(name "ADC_SDO1")
 			(class "Default")
 			(node
@@ -17746,13 +16911,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R463")
+				(ref "R455")
 				(pin "2")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "111")
+			(code "103")
 			(name "ADC_SDO2")
 			(class "Default")
 			(node
@@ -17762,13 +16927,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R465")
+				(ref "R457")
 				(pin "2")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "112")
+			(code "104")
 			(name "B_P")
 			(class "Default")
 			(node
@@ -17809,13 +16974,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R445")
+				(ref "R441")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "113")
+			(code "105")
 			(name "GH1")
 			(class "Default")
 			(node
@@ -17846,7 +17011,7 @@
 			)
 		)
 		(net
-			(code "114")
+			(code "106")
 			(name "GH2")
 			(class "Default")
 			(node
@@ -17877,7 +17042,7 @@
 			)
 		)
 		(net
-			(code "115")
+			(code "107")
 			(name "GL1")
 			(class "Default")
 			(node
@@ -17908,7 +17073,7 @@
 			)
 		)
 		(net
-			(code "116")
+			(code "108")
 			(name "GL2")
 			(class "Default")
 			(node
@@ -17939,7 +17104,7 @@
 			)
 		)
 		(net
-			(code "117")
+			(code "109")
 			(name "GND")
 			(class "Default")
 			(node
@@ -18108,16 +17273,6 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "C438")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "C439")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
 				(ref "C501")
 				(pin "2")
 				(pintype "passive")
@@ -18212,22 +17367,27 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R425")
+				(ref "R424")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R431")
+				(ref "R429")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R437")
+				(ref "R434")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R443")
+				(ref "R439")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R444")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -18237,32 +17397,27 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R455")
+				(ref "R452")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R458")
+				(ref "R460")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R468")
+				(ref "R461")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R469")
+				(ref "R462")
 				(pin "2")
 				(pintype "passive")
 			)
 			(node
-				(ref "R470")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "R471")
+				(ref "R463")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -18273,16 +17428,6 @@
 			)
 			(node
 				(ref "R504")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "T401")
-				(pin "2")
-				(pintype "passive")
-			)
-			(node
-				(ref "T402")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -18354,6 +17499,12 @@
 			)
 			(node
 				(ref "U407")
+				(pin "2")
+				(pinfunction "Y6_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U407")
 				(pin "4")
 				(pinfunction "Y7_4")
 				(pintype "bidirectional")
@@ -18387,6 +17538,12 @@
 				(pin "8")
 				(pinfunction "AINM_8")
 				(pintype "input")
+			)
+			(node
+				(ref "U410")
+				(pin "2")
+				(pinfunction "Y6_2")
+				(pintype "bidirectional")
 			)
 			(node
 				(ref "U410")
@@ -18432,7 +17589,7 @@
 			)
 		)
 		(net
-			(code "118")
+			(code "110")
 			(name "GND_STAR")
 			(class "Default")
 			(node
@@ -18506,7 +17663,7 @@
 			)
 		)
 		(net
-			(code "119")
+			(code "111")
 			(name "HV_ENABLE")
 			(class "Default")
 			(node
@@ -18546,7 +17703,7 @@
 			)
 		)
 		(net
-			(code "120")
+			(code "112")
 			(name "IC1")
 			(class "Default")
 			(node
@@ -18572,7 +17729,7 @@
 			)
 		)
 		(net
-			(code "121")
+			(code "113")
 			(name "IC2")
 			(class "Default")
 			(node
@@ -18598,7 +17755,7 @@
 			)
 		)
 		(net
-			(code "122")
+			(code "114")
 			(name "IS1")
 			(class "Default")
 			(node
@@ -18630,7 +17787,7 @@
 			)
 		)
 		(net
-			(code "123")
+			(code "115")
 			(name "IS2")
 			(class "Default")
 			(node
@@ -18662,7 +17819,7 @@
 			)
 		)
 		(net
-			(code "124")
+			(code "116")
 			(name "MUX_A0")
 			(class "Default")
 			(node
@@ -18672,7 +17829,7 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R469")
+				(ref "R461")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -18690,7 +17847,7 @@
 			)
 		)
 		(net
-			(code "125")
+			(code "117")
 			(name "MUX_A1")
 			(class "Default")
 			(node
@@ -18700,7 +17857,7 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R470")
+				(ref "R462")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -18718,7 +17875,7 @@
 			)
 		)
 		(net
-			(code "126")
+			(code "118")
 			(name "MUX_A2")
 			(class "Default")
 			(node
@@ -18728,7 +17885,7 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R471")
+				(ref "R463")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -18746,7 +17903,7 @@
 			)
 		)
 		(net
-			(code "127")
+			(code "119")
 			(name "PGND")
 			(class "Default")
 			(node
@@ -18891,7 +18048,7 @@
 			)
 		)
 		(net
-			(code "128")
+			(code "120")
 			(name "PWM_H1")
 			(class "Default")
 			(node
@@ -18913,7 +18070,7 @@
 			)
 		)
 		(net
-			(code "129")
+			(code "121")
 			(name "PWM_H2")
 			(class "Default")
 			(node
@@ -18935,7 +18092,7 @@
 			)
 		)
 		(net
-			(code "130")
+			(code "122")
 			(name "PWM_L1")
 			(class "Default")
 			(node
@@ -18957,7 +18114,7 @@
 			)
 		)
 		(net
-			(code "131")
+			(code "123")
 			(name "PWM_L2")
 			(class "Default")
 			(node
@@ -18979,7 +18136,7 @@
 			)
 		)
 		(net
-			(code "132")
+			(code "124")
 			(name "SW1")
 			(class "Default")
 			(node
@@ -19028,7 +18185,7 @@
 			)
 		)
 		(net
-			(code "133")
+			(code "125")
 			(name "SW2")
 			(class "Default")
 			(node
@@ -19077,7 +18234,7 @@
 			)
 		)
 		(net
-			(code "134")
+			(code "126")
 			(name "UC1")
 			(class "Default")
 			(node
@@ -19103,13 +18260,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R427")
+				(ref "R426")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "135")
+			(code "127")
 			(name "UC2")
 			(class "Default")
 			(node
@@ -19135,13 +18292,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R439")
+				(ref "R436")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "136")
+			(code "128")
 			(name "UIN")
 			(class "Default")
 			(node
@@ -19193,13 +18350,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R451")
+				(ref "R446")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "137")
+			(code "129")
 			(name "V_ANODE")
 			(class "Default")
 			(node
@@ -19236,7 +18393,7 @@
 			)
 		)
 		(net
-			(code "138")
+			(code "130")
 			(name "V_SCREEN")
 			(class "Default")
 			(node
@@ -19267,13 +18424,13 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R433")
+				(ref "R431")
 				(pin "1")
 				(pintype "passive")
 			)
 		)
 		(net
-			(code "139")
+			(code "131")
 			(name "unconnected-(J1-Pin_1-Pad1)")
 			(class "Default")
 			(node
@@ -19284,7 +18441,7 @@
 			)
 		)
 		(net
-			(code "140")
+			(code "132")
 			(name "unconnected-(J1-Pin_3-Pad3)")
 			(class "Default")
 			(node
@@ -19295,7 +18452,7 @@
 			)
 		)
 		(net
-			(code "141")
+			(code "133")
 			(name "unconnected-(J1-Pin_5-Pad5)")
 			(class "Default")
 			(node
@@ -19306,7 +18463,7 @@
 			)
 		)
 		(net
-			(code "142")
+			(code "134")
 			(name "unconnected-(J1-Pin_7-Pad7)")
 			(class "Default")
 			(node
@@ -19317,7 +18474,7 @@
 			)
 		)
 		(net
-			(code "143")
+			(code "135")
 			(name "unconnected-(J1-Pin_8-Pad8)")
 			(class "Default")
 			(node
@@ -19328,7 +18485,7 @@
 			)
 		)
 		(net
-			(code "144")
+			(code "136")
 			(name "unconnected-(J1-Pin_9-Pad9)")
 			(class "Default")
 			(node
@@ -19339,7 +18496,7 @@
 			)
 		)
 		(net
-			(code "145")
+			(code "137")
 			(name "unconnected-(J1-Pin_10-Pad10)")
 			(class "Default")
 			(node
@@ -19350,7 +18507,7 @@
 			)
 		)
 		(net
-			(code "146")
+			(code "138")
 			(name "unconnected-(J1-Pin_21-Pad21)")
 			(class "Default")
 			(node
@@ -19361,7 +18518,7 @@
 			)
 		)
 		(net
-			(code "147")
+			(code "139")
 			(name "unconnected-(J1-Pin_23-Pad23)")
 			(class "Default")
 			(node
@@ -19372,7 +18529,7 @@
 			)
 		)
 		(net
-			(code "148")
+			(code "140")
 			(name "unconnected-(J1-Pin_24-Pad24)")
 			(class "Default")
 			(node
@@ -19383,7 +18540,7 @@
 			)
 		)
 		(net
-			(code "149")
+			(code "141")
 			(name "unconnected-(J1-Pin_25-Pad25)")
 			(class "Default")
 			(node
@@ -19394,7 +18551,7 @@
 			)
 		)
 		(net
-			(code "150")
+			(code "142")
 			(name "unconnected-(J1-Pin_26-Pad26)")
 			(class "Default")
 			(node
@@ -19405,7 +18562,7 @@
 			)
 		)
 		(net
-			(code "151")
+			(code "143")
 			(name "unconnected-(J1-Pin_27-Pad27)")
 			(class "Default")
 			(node
@@ -19416,7 +18573,7 @@
 			)
 		)
 		(net
-			(code "152")
+			(code "144")
 			(name "unconnected-(J1-Pin_28-Pad28)")
 			(class "Default")
 			(node
@@ -19427,7 +18584,7 @@
 			)
 		)
 		(net
-			(code "153")
+			(code "145")
 			(name "unconnected-(U407-NC-Pad7)")
 			(class "Default")
 			(node
@@ -19438,7 +18595,7 @@
 			)
 		)
 		(net
-			(code "154")
+			(code "146")
 			(name "unconnected-(U410-NC-Pad7)")
 			(class "Default")
 			(node
@@ -19449,7 +18606,7 @@
 			)
 		)
 		(net
-			(code "155")
+			(code "147")
 			(name "unconnected-(U502-NC-Pad1)")
 			(class "Default")
 			(node

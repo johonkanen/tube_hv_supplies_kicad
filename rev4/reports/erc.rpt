@@ -1,4 +1,4 @@
-ERC report (2026-11-25T20:59:38, Encoding UTF8)
+ERC report (2026-11-25T21:14:22, Encoding UTF8)
 Report includes: Errors, Warnings, Exclusions
 
 ***** Sheet /
@@ -18,7 +18,15 @@ Report includes: Errors, Warnings, Exclusions
 ***** Sheet /04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/
 [pin_to_pin]: Pins of type Bidirectional and Power output are connected
     ; warning
+    @(40.64 mm, 421.64 mm): Symbol U407 Pin 2 [Y6, Bidirectional, Line]
+    @(71.12 mm, 199.39 mm): Symbol #FLG502 Pin 1 [Power output, Line]
+[pin_to_pin]: Pins of type Bidirectional and Power output are connected
+    ; warning
     @(40.64 mm, 424.18 mm): Symbol U407 Pin 4 [Y7, Bidirectional, Line]
+    @(71.12 mm, 199.39 mm): Symbol #FLG502 Pin 1 [Power output, Line]
+[pin_to_pin]: Pins of type Bidirectional and Power output are connected
+    ; warning
+    @(325.12 mm, 421.64 mm): Symbol U410 Pin 2 [Y6, Bidirectional, Line]
     @(71.12 mm, 199.39 mm): Symbol #FLG502 Pin 1 [Power output, Line]
 [pin_to_pin]: Pins of type Bidirectional and Power output are connected
     ; warning
@@ -27,7 +35,7 @@ Report includes: Errors, Warnings, Exclusions
 
 ***** Sheet /05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/
 
- ** ERC messages: 4  Errors 0  Warnings 4
+ ** ERC messages: 6  Errors 0  Warnings 6
 
  ** Ignored checks:
     - Global label only appears once in the schematic
