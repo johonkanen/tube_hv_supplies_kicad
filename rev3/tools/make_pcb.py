@@ -147,48 +147,39 @@ def _refs(prefix, nums):
     return [f"{prefix}{n}" for n in nums]
 
 
-# divider chains (bottom side, 1206 end to end, 4.7 mm pitch). V_ANODE / V_SCREEN in the measurement area, HV end
-# east (fed from the rear through the corridor x 591-599 between the control area and H102); raw UIN and UC1 in the
-# band between L201 and C211 (y 102), UIN end west (fed from R201's side), UC1 end east (from C211's UC1 node)
-for _x, (_t, _m, _b) in ((592.5, ("R401", "R402", "R403")), (597.0, ("R408", "R409", "R410"))):
+# divider chains (bottom side, 1206 end to end, 4.7 mm pitch). V_ANODE (R401-R403) / V_SCREEN (R405-R407) in the
+# measurement area, HV end south (fed from the rear through the corridor x 591-599 between the control area and H102);
+# raw UIN (R409-R411) in the band between L201 and C211 (y 102), UIN end west (fed from R201's side)
+for _x, (_t, _m, _b) in ((592.5, ("R401", "R402", "R403")), (597.0, ("R405", "R406", "R407"))):
     AT[_t], AT[_m], AT[_b] = ("F", _x, 131.1, 90), ("F", _x, 126.4, 90), ("F", _x, 121.7, 90)   # HV end south
-AT["R415"], AT["R416"], AT["R417"] = ("F", 605.0, 102.0, 0), ("F", 609.7, 102.0, 0), ("F", 614.4, 102.0, 0)
-AT["R420"], AT["R421"], AT["R422"] = ("F", 629.0, 102.0, 180), ("F", 624.3, 102.0, 180), ("F", 619.6, 102.0, 180)
-# the six ADS7056 in a row (plate side) over C211, SCK daisy-chained along y 101.5 (tools/fast_copper.py)
-ADC_ROW = ["U402", "U406", "U407", "U404", "U409", "U410"]
-for _i, _r in enumerate(ADC_ROW):
-    AT[_r] = ("B", 606.0 + 6.0 * _i, 104.0, 0)
-AT["U411"] = ("B", 650.5, 102.2, 180)    # AD7689 at the chain's far end, SCK (pin 13) on the bus line y 102.4
-AT["R456"] = ("B", 646.2, 100.4, 0)      # returned SCLK taken at the far end (J1 pad 16)
-AT["R457"] = ("B", 633.0, 107.4, 0)      # CS_FAST pull-up at the end of the CS bus
-# lanes kept free by the packer for the scripted buses (tools/bridge_copper.py spi()): SCLK y 102.4, CS_FAST y 105.6
-RESERVED = [("B", (603.5, 101.95, 648.2, 102.85)), ("B", (603.5, 105.15, 636.2, 106.05))]
-AT["U412"] = ("B", 640.0, 121.0, 0)      # REF3030
+AT["R409"], AT["R410"], AT["R411"] = ("F", 605.0, 102.0, 0), ("F", 609.7, 102.0, 0), ("F", 614.4, 102.0, 0)
+# fifth pass: the converter chain next to J1 (short SPI), amplifiers next to their sources (plate side)
+AT["U408"] = ("B", 572.5, 100.5, 0)      # ADS7056
+AT["U404"] = ("B", 577.8, 100.5, 0)      # OPA2836: RAW buffer + converter driver
+AT["U405"] = ("B", 583.0, 113.0, 0)      # TMUX1308
+AT["U406"] = ("B", 573.5, 112.0, 0)      # 74LVC163
+AT["U409"] = ("B", 571.5, 105.5, 0)      # REF3030
+AT["U401"] = ("B", 592.0, 124.5, 0)      # V_ANODE buffer + I_C14 amplifier
+AT["U402"] = ("B", 580.5, 119.0, 0)      # V_SCREEN buffer + I_Q12 amplifier
+AT["U403"] = ("B", 580.5, 139.0, 0)      # I_C24 + I_Q22 amplifiers
+AT["U503"] = ("B", 571.5, 128.0, 0)      # DIS gate (74LVC1G10)
+# kept free for the undecided C1-short comparator (dual comparator on I_Q12 / I_Q22 into DIS, 2026-11-25):
+# between the DIS gate and the two I_Q amplifier outputs; marked on User.4
+RESERVED = [("B", (575.5, 123.0, 584.5, 133.5))]
 
-# groups: name -> (list of zones (side, x0, y0, x1, y1), refs); each part goes into the first zone with room
 GROUPS["drv1"] = ([("B", 583.0, 101.8, 601.0, 109.0), ("B", 569.0, 97.0, 583.0, 108.0)],
                   ["R304", "C301", "R301", "R302", "R303"])
 GROUPS["drv2"] = ([("B", 634.0, 137.0, 646.0, 149.0), ("B", 612.0, 127.5, 646.0, 138.3)],
                   ["R312", "C311", "C312", "C308", "R309", "R310", "R311"])
-GROUPS["adc"] = ([("B", 603.0, 99.5, 648.0, 114.5), ("B", 603.0, 114.5, 647.5, 126.3)],
-                 ["C404", "C405", "C406", "R406", "R407", "C418", "C419", "C420", "R430", "R431",
-                  "C422", "C423", "C424", "R437", "R438", "C410", "C411", "C412", "R413", "R414",
-                  "C427", "C428", "C429", "R444", "R445", "C431", "C432", "C433", "R451", "R452"])
-GROUPS["aux"] = ([("B", 641.0, 99.5, 647.5, 126.3), ("B", 603.0, 114.5, 647.5, 126.3)],
-                 ["C439", "FB401", "C435", "C436", "C440", "C437", "C438", "R455",
-                  "U405", "C434", "R453", "R454", "C413", "C414", "C415", "C416", "R418", "R419", "R423", "R424"])
-GROUPS["amp"] = ([("B", 603.0, 114.5, 647.5, 126.3), ("B", 569.0, 108.0, 598.5, 134.5)],
-                 ["U401", "C402", "C401", "R404", "R405", "C403", "R425", "R426", "R427", "R428", "R429", "C417",
-                  "U403", "C408", "C407", "R411", "R412", "C409", "R432", "R433", "R434", "R435", "R436", "C421",
-                  "U408", "C425", "R439", "R440", "R441", "R442", "R443", "C426", "R446", "R447", "R448", "R449",
-                  "R450", "C430"])
-GROUPS["comp"] = ([("B", 569.0, 108.0, 598.5, 134.5), ("F", 569.5, 113.0, 584.0, 133.5)],
-                  ["U505", "C509", "U506", "C516", "U507", "C517", "R509", "R510", "R511", "R512", "R513", "R514",
-                   "R515", "R516", "R517", "R518"])
-GROUPS["ctrl"] = ([("B", 560.8, 31.0, 574.5, 95.0), ("B", 569.0, 97.0, 586.0, 108.0)],
+LVZ = [("B", 566.5, 96.0, 601.0, 145.0), ("B", 560.8, 31.0, 575.0, 95.0), ("B", 601.5, 99.5, 647.5, 126.3)]
+GROUPS["adc"] = (LVZ, ["R434", "R435", "R436", "C413", "C414", "C412", "R433", "C409", "U407", "C411", "R431",
+                       "R432", "C410", "FB401", "C415", "C416", "C405", "R412"])
+GROUPS["amp"] = (LVZ, ["C402", "C401", "R404", "R413", "R414", "R415", "R416", "C404", "C403", "R408", "R417",
+                       "R418", "R419", "R420", "C406", "R421", "R422", "R423", "R424", "R425", "R426", "R427", "R428",
+                       "R429", "R430", "C407", "C408"])
+GROUPS["ctrl"] = ([("B", 560.8, 31.0, 575.0, 95.0), ("B", 566.5, 96.0, 601.0, 145.0), ("B", 601.5, 99.5, 647.5, 126.3)],
                   ["U501", "D501", "D502", "R502", "R503", "R504", "R505", "C503", "U502", "C504",
-                   "U504", "C506", "U503", "C507", "U508", "C512", "U509", "C513", "U510", "C514", "U511", "C515",
-                   "R501", "R506", "R507", "R519", "R520", "R521", "C505", "C510", "C511", "D504", "C501", "C502"])
+                   "C505", "R501", "R506", "R507", "C501", "C502"])
 
 # ---------------------------------------------------------------- net classes and rules
 HV_RAW = ["B_P", "UIN", "UIN1", "UIN2", "RAW_SS1", "RAW_SS2"]          # one potential (links, L101)
@@ -204,7 +195,7 @@ SUPPLY = ["+12V", "+3V3", "GND", "+3V3_REF", "VREF"]
 HV_ALL = HV_RAW + HV_SW + HV_OUT
 # parts whose own pad spacing is below 2.5 mm between HV nets (IPC-2221B A6, component terminations, 301-500 V: 0.8 mm)
 A6_PARTS = ["Q201", "Q202", "Q203", "Q204",
-            "R401", "R402", "R403", "R408", "R409", "R410", "R415", "R416", "R417", "R420", "R421", "R422",
+            "R401", "R402", "R403", "R405", "R406", "R407", "R409", "R410", "R411",
             "D301", "D302", "U301", "U302", "R105", "R215", "D201"]
 
 
@@ -663,7 +654,7 @@ def note(board, s, x, y, size=1.2, layer=pcbnew.Cmts_User, mirror=False):
     board.Add(t)
 
 
-def rule_area(board, pts, layers=(pcbnew.F_Cu, pcbnew.B_Cu), tracks=True, vias=True, pads=False, fps=False,
+def rule_area(board, pts, layers=(pcbnew.F_Cu, pcbnew.In1_Cu, pcbnew.In2_Cu, pcbnew.B_Cu), tracks=True, vias=True, pads=False, fps=False,
               fill=True, name=None):
     z = pcbnew.ZONE(board)
     z.SetIsRuleArea(True)
@@ -742,6 +733,9 @@ def hv_keepouts(board):
 
 def notes(board, fps):
     C = pcbnew.Cmts_User
+    for side, (x0, y0, x1, y1) in RESERVED:
+        box(board, x0, y0, x1, y1, pcbnew.User_4, 0.2)
+        note(board, "RESERVED 9 x 10 mm: C1-short comparator (option b, undecided)", x0, y1 + 1.5, 0.8, pcbnew.User_4)
     note(board, "HV SUPPLIES rev 3, layout first pass: KiCad = chassis - (525, 30); F faces DOWN, B faces the plate",
          527, 28.0, 1.2)
     for x0, y0, x1, y1 in BARS:
@@ -805,7 +799,12 @@ ZONES = [("GND_STAR", pcbnew.F_Cu, 1, rect_pts(586.0, 30.0, 649.0, 55.6)),
          ("GND", pcbnew.B_Cu, 1, rect_pts(560.0, 97.0, 601.5, 136.5)),
          ("GND", pcbnew.B_Cu, 1, rect_pts(601.5, 99.0, 648.5, 127.6)),
          ("GND", pcbnew.B_Cu, 1, rect_pts(611.0, 127.6, 646.0, 141.0)),
-         ("GND", pcbnew.F_Cu, 1, rect_pts(560.0, 30.0, 570.0, 127.0))]
+         ("GND", pcbnew.F_Cu, 1, rect_pts(560.0, 30.0, 570.0, 127.0)),
+         # inner layer 1: the measurement / control ground plane under the low-voltage areas
+         ("GND", pcbnew.In1_Cu, 1, rect_pts(560.0, 30.0, 576.0, 97.0)),
+         ("GND", pcbnew.In1_Cu, 1, rect_pts(560.0, 96.0, 601.5, 146.0)),
+         ("GND", pcbnew.In1_Cu, 1, rect_pts(601.5, 99.0, 648.5, 127.6)),
+         ("GND", pcbnew.In1_Cu, 1, rect_pts(611.0, 127.6, 646.0, 141.0))]
 
 
 def add_zones(board):
@@ -850,7 +849,7 @@ def main():
     os.makedirs(os.path.dirname(out), exist_ok=True)
     project_settings()
     board = pcbnew.NewBoard(out)
-    board.SetCopperLayerCount(2)
+    board.SetCopperLayerCount(4)
     ds = board.GetDesignSettings()
     ds.SetBoardThickness(mm(1.6))
     ds.m_TrackMinWidth = mm(0.2)

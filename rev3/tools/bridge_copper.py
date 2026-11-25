@@ -167,10 +167,9 @@ def filters(d):
             net=d.pad("C211.2").GetNet())
     d.track("F", 1.5, ["R203.2", (584.0, 113.0), (582.5, 110.0), "C201.2"])     # IC1 shunt back to bridge 1
     d.track("B", 1.2, ["C209.2", (577.5, 197.6), (582.0, 197.6), "R210.1"])                        # IC2 to its shunt
-    d.track("F", 0.8, [(630.5, 109.5), "R420.1"], net=d.pad("C211.1").GetNet())     # UC1 divider top
-    d.via(608.0, 95.8, "R415.1", 0.8, 0.4)                                            # raw divider top from R201
+    d.via(608.0, 95.8, "R409.1", 0.8, 0.4)                                            # raw divider top from R201
     d.track("B", 1.0, ["R201.1", (608.0, 95.8)])
-    d.track("F", 0.8, [(608.0, 95.8), (603.5, 99.8), "R415.1"], net=d.pad("R201.1").GetNet())
+    d.track("F", 0.8, [(608.0, 95.8), (603.5, 99.8), "R409.1"], net=d.pad("R201.1").GetNet())
     vo1 = d.pad("L202.2").GetNet()
     # VO1 north (F) along the east edge, between J101's tab rows, behind the fault block to C205 (front-west)
     d.track("F", 1.0, ["L202.2", (671.9, 111.0), (671.9, 62.0), (668.0, 55.0), (651.0, 55.0), (649.5, 56.5),
@@ -214,7 +213,6 @@ def main():
     bridge1(d)
     bridge2(d)
     filters(d)
-    spi(d)
     pcbnew.SaveBoard(dst, b)
     print(f"{dst}: bridge copper drawn")
 
