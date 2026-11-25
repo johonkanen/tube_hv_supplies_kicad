@@ -1,12 +1,12 @@
 refs,qty,value,footprint,candidate_mpn,dnp,placeholder,note
-C101 C102 C104 C202 C207,5,47u/450V 105C,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,,,,"first stage; 0.23-0.31 A rms (sim/ripple.py); radial D16; radial D16, between the two high-side collectors; carries the bridges' input ripple (0.2-0.3 A rms with C5): rating to check; radial D16; ripple current small (B_P side)"
+C101 C102 C104 C202 C207,5,47u/450V 105C,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,450BXW47MEFR16X25,,,"first stage; 0.23-0.31 A rms (sim/ripple.py); radial D16; radial D16, between the two high-side collectors; the bridges' input ripple 0.2-0.3 A rms with C5 (rated 1.25 A at 100 kHz); radial D16; ripple current small (B_P side)"
 C103,1,100n/630V X7R 1812,Capacitor_SMD:C_1812_4532Metric,,,,
 C105,1,1u/630V MKP,Capacitor_THT:C_Rect_L26.5mm_W10.5mm_P22.50mm_MKS4,,,,"film, P22.5"
 C106,1,100n Y2 300VAC,Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4,TDK B32023A3104M,,,
 C201 C206,2,1n/1kV C0G 1812 (at the high-side collector),Capacitor_SMD:C_1812_4532Metric,,,,
-C203 C208,2,4.7u/500V MKP DC-link,Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4,Vishay MKP1848C class (size to confirm),,,"first stage film, 0.16-0.18 A rms"
+C203 C208,2,5u/500V MKP DC-link,Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4,MKP1848C55050JK2,,,"first stage film, 0.16-0.18 A rms"
 C204 C209,2,10u/500V MKP DC-link,Capacitor_THT:C_Rect_L31.5mm_W20.0mm_P27.50mm_MKS4,Vishay MKP1848C61050JK2,,,"output film, 32 x 18 x 28 mm"
-C205 C210,2,22u/450V 105C,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,,,,damping leg (with R)
+C205 C210,2,22u/450V 105C,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,450BXC22MEFC12.5X25,,,damping leg (with R)
 C301 C303 C305 C307 C309 C311 C313 C315 C403 C410 C416 C419 C422 C424 C425 C427 C428 C431 C432 C435 C504,21,100n,Capacitor_SMD:C_0603_1608Metric,,,,
 C302 C306 C310 C314,4,1u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
 C304 C308 C312 C316,4,"1n C0G (Miller immunity, at the IGBT)",Capacitor_SMD:C_0805_2012Metric,,,,
@@ -37,9 +37,9 @@ J103,2,RAW OUT 2 to PI + FX (W03-a): RAW_SS2 / GND_PRE2,tube_hv_supplies_rev4:Bl
 J201,2,"V_ANODE / GND_PWR (W04-a, 4.8 mm tabs)",tube_hv_supplies_rev4:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
 J202,1,"V_SCREEN (W05-a, 4.8 mm tab)",tube_hv_supplies_rev4:Blade_Tab_4.8mm_1x,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
 J501,1,"HV_PERMIT +/- (W16-b, twisted pair)",Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical,Molex 22-27-2021,,,
-L101,1,33uH >= 2A,Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P,,,,"input filter inductor, radial D12 (part to choose: >= 2 A, insulation for 430 V)"
+L101,1,33uH 2A (WE-TI),Inductor_THT:L_Radial_D8.7mm_P5.00mm_Fastron_07HCP,744772330,,,"input filter inductor, radial D 8.3 mm, 60 mohm; Isat to confirm (input DC <= 0.9 A)"
 L201 L203,2,"2mH Fe-Si-Al toroid 32x16.4 (0.8mm, 6A)",tube_hv_supplies_rev4:L_Toroid_32mm_Standing_P16.4mm,,,,"standing on edge, cable tie through the board slots"
-L202 L204,2,100uH >= 1.5A,Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R,,,,"second stage (part to choose: 1.5 A peak, insulation for 430 V)"
+L202 L204,2,100uH 1.7A (SRR1260),Inductor_SMD:L_Bourns_SRR1260,SRR1260-101M,,,second stage; 180 mohm max; ferrite core at the winding's ~400 V: HV clearance around the body
 L301,1,10uH >= 0.5 A,Inductor_SMD:L_Bourns-SRN4018,SRN4018-100M,,,
 NT101,1,STAR POINT (power star),NetTie:NetTie-2_SMD_Pad2.0mm,,,,
 NT401,1,Kelvin tap IS1 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
@@ -53,7 +53,7 @@ R101 R102,2,0R jumper 2512 (link),Resistor_SMD:R_2512_6332Metric,,,,link footpri
 R103 R104,2,75k 2W MOX,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,0.62 W each at 430 V
 R105,1,1M 2512 (500 V limiting),Resistor_SMD:R_2512_6332Metric,,,,0.18 W at 430 V
 R106,1,100 2W,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,
-R201 R202 R206 R207,4,50m 1W 1225 wide terminal (Kelvin),Resistor_SMD:R_1225_3264Metric,Susumu KRL3264 class (to choose),,,first-stage capacitor shunt: both C1 parts return through it; low-side emitter shunt: inductor current in the off-interval
+R201 R202 R206 R207,4,50m 1W 1020 wide terminal (Kelvin),Resistor_SMD:R_1020_2550Metric,ERJ-B1CFR05U,,,first-stage capacitor shunt: both C1 parts return through it; low-side emitter shunt: inductor current in the off-interval
 R203 R208,2,2.2 1W (damping leg),Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical,,,,
 R204 R205 R209 R210,4,150k 2512 (500 V limiting),Resistor_SMD:R_2512_6332Metric,,,,output bleeder
 R301 R305 R306 R309 R310 R314 R315 R318 R459 R501 R504,11,10k,Resistor_SMD:R_0603_1608Metric,,,,drivers off when the link is unplugged or the card is off
@@ -65,7 +65,7 @@ R320,1,13.3k 1%,Resistor_SMD:R_0603_1608Metric,,,,
 R401 R403 R406 R408 R411 R413 R416 R418,8,240 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R402 R404 R407 R409 R412 R414 R417 R419,8,1.5k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R405 R410 R415 R420 R425 R430 R435 R440 R445 R450 R502,11,47,Resistor_SMD:R_0603_1608Metric,,,,
-R421 R422 R423 R426 R427 R428 R431 R432 R433 R436 R437 R438 R441 R442 R443 R446 R447 R448,18,"1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)",Resistor_SMD:R_1206_3216Metric,,,,<= 175 V each at 520 V
+R421 R422 R423 R426 R427 R428 R431 R432 R433 R436 R437 R438 R441 R442 R443 R446 R447 R448,18,1M 0.1% 1206 HV thin film (700 V),Resistor_SMD:R_1206_3216Metric,TNPV12061M00BEEN,,,<= 175 V each at 520 V
 R424 R429 R434 R439 R444 R449,6,17.4k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R451 R452,2,10k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R453,1,10,Resistor_SMD:R_0603_1608Metric,,,,

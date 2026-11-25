@@ -1728,7 +1728,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 1225 wide terminal (Kelvin)"
+		(property "Value" "50m 1W 1020 wide terminal (Kelvin)"
 			(at 60.96 162.56 270)
 			(effects
 				(font
@@ -1736,7 +1736,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1225_3264Metric"
+		(property "Footprint" "Resistor_SMD:R_1020_2550Metric"
 			(at 60.96 161.798 0)
 			(effects
 				(font
@@ -1763,7 +1763,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Susumu KRL3264 class (to choose)"
+		(property "MPN" "ERJ-B1CFR05U"
 			(at 60.96 160.02 0)
 			(effects
 				(font
@@ -2034,6 +2034,15 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "450BXW47MEFR16X25"
+			(at 121.92 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8ec28806-8c01-5622-9be8-6edf2075fb03")
 		)
@@ -2130,7 +2139,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7u/500V MKP DC-link"
+		(property "Value" "5u/500V MKP DC-link"
 			(at 142.24 109.22 270)
 			(effects
 				(font
@@ -2138,7 +2147,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
 			(at 146.05 105.7148 0)
 			(effects
 				(font
@@ -2165,7 +2174,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Vishay MKP1848C class (size to confirm)"
+		(property "MPN" "MKP1848C55050JK2"
 			(at 142.24 106.68 0)
 			(effects
 				(font
@@ -2270,7 +2279,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 1225 wide terminal (Kelvin)"
+		(property "Value" "50m 1W 1020 wide terminal (Kelvin)"
 			(at 132.08 144.78 270)
 			(effects
 				(font
@@ -2278,7 +2287,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1225_3264Metric"
+		(property "Footprint" "Resistor_SMD:R_1020_2550Metric"
 			(at 132.08 144.018 0)
 			(effects
 				(font
@@ -2305,7 +2314,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Susumu KRL3264 class (to choose)"
+		(property "MPN" "ERJ-B1CFR05U"
 			(at 132.08 142.24 0)
 			(effects
 				(font
@@ -2410,7 +2419,7 @@
 				)
 			)
 		)
-		(property "Value" "100uH >= 1.5A"
+		(property "Value" "100uH 1.7A (SRR1260)"
 			(at 162.56 91.44 270)
 			(effects
 				(font
@@ -2418,7 +2427,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R"
+		(property "Footprint" "Inductor_SMD:L_Bourns_SRR1260"
 			(at 162.56 88.9 0)
 			(effects
 				(font
@@ -2437,6 +2446,15 @@
 			)
 		)
 		(property "Description" "Inductor"
+			(at 162.56 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SRR1260-101M"
 			(at 162.56 88.9 0)
 			(effects
 				(font
@@ -2708,6 +2726,15 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
+			(at 213.36 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "450BXC22MEFC12.5X25"
 			(at 213.36 106.68 0)
 			(effects
 				(font
@@ -3653,7 +3680,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 1225 wide terminal (Kelvin)"
+		(property "Value" "50m 1W 1020 wide terminal (Kelvin)"
 			(at 304.8 162.56 270)
 			(effects
 				(font
@@ -3661,7 +3688,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1225_3264Metric"
+		(property "Footprint" "Resistor_SMD:R_1020_2550Metric"
 			(at 304.8 161.798 0)
 			(effects
 				(font
@@ -3688,7 +3715,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Susumu KRL3264 class (to choose)"
+		(property "MPN" "ERJ-B1CFR05U"
 			(at 304.8 160.02 0)
 			(effects
 				(font
@@ -3959,6 +3986,15 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "450BXW47MEFR16X25"
+			(at 365.76 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d1be3c57-2447-5091-8be2-7f722e91be02")
 		)
@@ -4055,7 +4091,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7u/500V MKP DC-link"
+		(property "Value" "5u/500V MKP DC-link"
 			(at 386.08 109.22 270)
 			(effects
 				(font
@@ -4063,7 +4099,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4"
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"
 			(at 389.89 105.7148 0)
 			(effects
 				(font
@@ -4090,7 +4126,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Vishay MKP1848C class (size to confirm)"
+		(property "MPN" "MKP1848C55050JK2"
 			(at 386.08 106.68 0)
 			(effects
 				(font
@@ -4195,7 +4231,7 @@
 				)
 			)
 		)
-		(property "Value" "50m 1W 1225 wide terminal (Kelvin)"
+		(property "Value" "50m 1W 1020 wide terminal (Kelvin)"
 			(at 375.92 144.78 270)
 			(effects
 				(font
@@ -4203,7 +4239,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1225_3264Metric"
+		(property "Footprint" "Resistor_SMD:R_1020_2550Metric"
 			(at 375.92 144.018 0)
 			(effects
 				(font
@@ -4230,7 +4266,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Susumu KRL3264 class (to choose)"
+		(property "MPN" "ERJ-B1CFR05U"
 			(at 375.92 142.24 0)
 			(effects
 				(font
@@ -4335,7 +4371,7 @@
 				)
 			)
 		)
-		(property "Value" "100uH >= 1.5A"
+		(property "Value" "100uH 1.7A (SRR1260)"
 			(at 406.4 91.44 270)
 			(effects
 				(font
@@ -4343,7 +4379,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R"
+		(property "Footprint" "Inductor_SMD:L_Bourns_SRR1260"
 			(at 406.4 88.9 0)
 			(effects
 				(font
@@ -4362,6 +4398,15 @@
 			)
 		)
 		(property "Description" "Inductor"
+			(at 406.4 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SRR1260-101M"
 			(at 406.4 88.9 0)
 			(effects
 				(font
@@ -4633,6 +4678,15 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
+			(at 457.2 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "450BXC22MEFC12.5X25"
 			(at 457.2 106.68 0)
 			(effects
 				(font

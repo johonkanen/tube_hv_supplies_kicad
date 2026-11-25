@@ -32,7 +32,7 @@ LOCAL_LIB = "tube_hv_supplies_rev4"
 FP_R = "Resistor_SMD:R_0603_1608Metric"
 FP_R1206 = "Resistor_SMD:R_1206_3216Metric"
 FP_R2512 = "Resistor_SMD:R_2512_6332Metric"
-FP_SHUNT = "Resistor_SMD:R_1225_3264Metric"          # wide-terminal (long-side) shunt: low inductance
+FP_SHUNT = "Resistor_SMD:R_1020_2550Metric"          # wide-terminal (long-side) shunt: low inductance (ERJ-B1)
 FP_AX1WV = "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical"
 FP_AX2W = "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal"
 FP_LINK = "Resistor_SMD:R_2512_6332Metric"
@@ -43,13 +43,13 @@ FP_HVC = "Capacitor_SMD:C_1812_4532Metric"
 FP_EL47 = "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm"
 FP_EL22 = "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 FP_FILM1U = "Capacitor_THT:C_Rect_L26.5mm_W10.5mm_P22.50mm_MKS4"
-FP_FILM4U7 = "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4"   # MKP1848C 4.7 uF 500 V class (size to confirm)
+FP_FILM4U7 = "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4"   # MKP1848C55050JK2 5 uF 500 V: 32 x 11 x 21 mm
 FP_FILM10U = "Capacitor_THT:C_Rect_L31.5mm_W20.0mm_P27.50mm_MKS4"   # MKP1848C 10 uF 500 V: 32 x 18 x 28 mm
 FP_Y2 = "Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4"
 FP_TO220 = "Package_TO_SOT_THT:TO-220-3_Vertical"
 FP_TOROID = f"{LOCAL_LIB}:L_Toroid_32mm_Standing_P16.4mm"
-FP_L100U = "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R"      # placeholder until the 100 uH part is chosen
-FP_LIN = "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P"
+FP_L100U = "Inductor_SMD:L_Bourns_SRR1260"      # Bourns SRR1260-101M
+FP_LIN = "Inductor_THT:L_Radial_D8.7mm_P5.00mm_Fastron_07HCP"   # Wurth 744772330 (WE-TI, D 8.3 mm, P 5 mm)
 FP_TAB1 = f"{LOCAL_LIB}:Blade_Tab_4.8mm_1x"
 FP_TAB2 = f"{LOCAL_LIB}:Blade_Tab_4.8mm_2x_P12mm"
 DEFAULT_FP = {
@@ -222,13 +222,13 @@ def sheet01(d):
     TAB(d, "J2", 5, 0.5, ["RAW_SS1", "GND_STAR"], "RAW OUT 1 to preamp J501 (W02-a): RAW_SS1 / GND_PRE1")
     TAB(d, "J3", 5, 2.5, ["RAW_SS2", "GND_STAR"], "RAW OUT 2 to PI + FX (W03-a): RAW_SS2 / GND_PRE2")
     # input filter: B_P side (PSU, RAW_SS taps) - 33 uH - UIN (bridges)
-    CP(d, "C1", 0, 4.5, "B_P", "PGND", "47u/450V 105C", note="radial D16; ripple current small (B_P side)")
-    CP(d, "C2", 1, 4.5, "B_P", "PGND", "47u/450V 105C", note="radial D16")
+    CP(d, "C1", 0, 4.5, "B_P", "PGND", "47u/450V 105C", mpn="450BXW47MEFR16X25", note="radial D16; ripple current small (B_P side)")
+    CP(d, "C2", 1, 4.5, "B_P", "PGND", "47u/450V 105C", mpn="450BXW47MEFR16X25", note="radial D16")
     C(d, "C3", 2, 4.5, "B_P", "PGND", "100n/630V X7R 1812", fp=FP_HVC, mpn="")
-    d.part("L", "L1", 3, 4.5, {1: "B_P", 2: "UIN"}, value="33uH >= 2A", rot=90, fp=FP_LIN, mpn="",
-           note="input filter inductor, radial D12 (part to choose: >= 2 A, insulation for 430 V)")
-    CP(d, "C4", 4.5, 4.5, "UIN", "PGND", "47u/450V 105C", note="radial D16, between the two high-side collectors; "
-       "carries the bridges' input ripple (0.2-0.3 A rms with C5): rating to check")
+    d.part("L", "L1", 3, 4.5, {1: "B_P", 2: "UIN"}, value="33uH 2A (WE-TI)", rot=90, fp=FP_LIN, mpn="744772330",
+           note="input filter inductor, radial D 8.3 mm, 60 mohm; Isat to confirm (input DC <= 0.9 A)")
+    CP(d, "C4", 4.5, 4.5, "UIN", "PGND", "47u/450V 105C", mpn="450BXW47MEFR16X25", note="radial D16, between the two "
+       "high-side collectors; the bridges' input ripple 0.2-0.3 A rms with C5 (rated 1.25 A at 100 kHz)")
     C(d, "C5", 5.5, 4.5, "UIN", "PGND", "1u/630V MKP", fp=FP_FILM1U, mpn="", note="film, P22.5")
     # raw bleeder (SAFE-4: below 60 V within 60 s with about 200 uF on the raw side) and HV-present LED
     R(d, "R3", 7.5, 4, "UIN", "BLD1", "75k 2W MOX", fp=FP_AX2W, mpn="", note="0.62 W each at 430 V")
@@ -264,20 +264,21 @@ def bridge(d, k, c0, out):
            note=qn + "raw rail (high side)")
     d.part("Q_NIGBT_GCE", f"Q{k}2", c0 + 1.5, 5, {1: f"GL{t}", 2: f"SW{t}", 3: f"IS{t}"}, value="IKP08N65F5",
            note=qn + "switch node (low side)")
-    R(d, f"R{k}1", c0 + 1.5, 7, f"IS{t}", "PGND", "50m 1W 1225 wide terminal (Kelvin)", fp=FP_SHUNT,
-      mpn="Susumu KRL3264 class (to choose)", note="low-side emitter shunt: inductor current in the off-interval")
+    R(d, f"R{k}1", c0 + 1.5, 7, f"IS{t}", "PGND", "50m 1W 1020 wide terminal (Kelvin)", fp=FP_SHUNT,
+      mpn="ERJ-B1CFR05U", note="low-side emitter shunt: inductor current in the off-interval")
     d.part("L", f"L{k}1", c0 + 3, 3.5, {1: f"SW{t}", 2: f"UC{t}"}, value="2mH Fe-Si-Al toroid 32x16.4 (0.8mm, 6A)",
            rot=90, fp=FP_TOROID, mpn="", note="standing on edge, cable tie through the board slots")
-    CP(d, f"C{k}2", c0 + 4.5, 4, f"UC{t}", f"IC{t}", "47u/450V 105C", note="first stage; 0.23-0.31 A rms (sim/ripple.py)")
-    C(d, f"C{k}3", c0 + 5.5, 4, f"UC{t}", f"IC{t}", "4.7u/500V MKP DC-link", fp=FP_FILM4U7,
-      mpn="Vishay MKP1848C class (size to confirm)", note="first stage film, 0.16-0.18 A rms")
-    R(d, f"R{k}2", c0 + 5, 6, f"IC{t}", "PGND", "50m 1W 1225 wide terminal (Kelvin)", fp=FP_SHUNT,
-      mpn="Susumu KRL3264 class (to choose)", note="first-stage capacitor shunt: both C1 parts return through it")
-    d.part("L", f"L{k}2", c0 + 6.5, 3, {1: f"UC{t}", 2: out}, value="100uH >= 1.5A", rot=90, fp=FP_L100U, mpn="",
-           note="second stage (part to choose: 1.5 A peak, insulation for 430 V)")
+    CP(d, f"C{k}2", c0 + 4.5, 4, f"UC{t}", f"IC{t}", "47u/450V 105C", mpn="450BXW47MEFR16X25", note="first stage; 0.23-0.31 A rms (sim/ripple.py)")
+    C(d, f"C{k}3", c0 + 5.5, 4, f"UC{t}", f"IC{t}", "5u/500V MKP DC-link", fp=FP_FILM4U7,
+      mpn="MKP1848C55050JK2", note="first stage film, 0.16-0.18 A rms")
+    R(d, f"R{k}2", c0 + 5, 6, f"IC{t}", "PGND", "50m 1W 1020 wide terminal (Kelvin)", fp=FP_SHUNT,
+      mpn="ERJ-B1CFR05U", note="first-stage capacitor shunt: both C1 parts return through it")
+    d.part("L", f"L{k}2", c0 + 6.5, 3, {1: f"UC{t}", 2: out}, value="100uH 1.7A (SRR1260)", rot=90, fp=FP_L100U, mpn="SRR1260-101M",
+           note="second stage; 180 mohm max; ferrite core at the winding's ~400 V: HV clearance around the body")
     C(d, f"C{k}4", c0 + 8, 4, out, "GND_STAR", "10u/500V MKP DC-link", fp=FP_FILM10U, mpn="Vishay MKP1848C61050JK2",
       note="output film, 32 x 18 x 28 mm")
-    CP(d, f"C{k}5", c0 + 9, 4, out, f"CD{t}", "22u/450V 105C", fp=FP_EL22, note="damping leg (with R)")
+    CP(d, f"C{k}5", c0 + 9, 4, out, f"CD{t}", "22u/450V 105C", fp=FP_EL22, mpn="450BXC22MEFC12.5X25",
+       note="damping leg (with R)")
     R(d, f"R{k}3", c0 + 9, 6, f"CD{t}", "GND_STAR", "2.2 1W (damping leg)", fp=FP_AX1WV, mpn="")
     R(d, f"R{k}4", c0 + 10, 4, out, f"BL{t}", "150k 2512 (500 V limiting)", fp=FP_R2512, mpn="", note="output bleeder")
     R(d, f"R{k}5", c0 + 10, 6, f"BL{t}", "GND_STAR", "150k 2512 (500 V limiting)", fp=FP_R2512, mpn="")
@@ -401,7 +402,7 @@ def sheet04(d):
         c0 = i * 3.5
         for j in range(3):
             R(d, f"RV{i}{j + 1}", c0, 10 + j * 1.3, src if j == 0 else f"DV{i}{j}", f"DV{i}{j + 1}",
-              "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)", fp=FP_R1206, note="<= 175 V each at 520 V")
+              "1M 0.1% 1206 HV thin film (700 V)", fp=FP_R1206, mpn="TNPV12061M00BEEN", note="<= 175 V each at 520 V")
         R(d, f"RV{i}5", c0 + 1, 13.9, f"DV{i}3", "GND", "17.4k 0.1%")
         C(d, f"CV{i}", c0 + 1.8, 13.9, f"DV{i}3", "GND", "100p C0G (tau 1.7 us)")
         opa2(d, bufs[i], c0 + 1, 15.5, f"DV{i}3", f"V_{tag}", f"V_{tag}")

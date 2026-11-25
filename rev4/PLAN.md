@@ -109,8 +109,8 @@ Fewer isolator channels than IF-2.2 (9 forward / 10 back). The pad numbers come 
 y 39-127 (115 x 88 mm, 101 cm²)**, 10 mm east of the control board, 1 mm from the east wall's inner face
 (assumed x 678: 680 plate, 2 mm wall; to be measured). With filter variant D (O4) the big parts' bounding
 boxes take **57 %** of the board (39 % with the v2-like filter), no overlaps, four M3 standoff positions clear.
-Film sizes assumed: 10 µF / 500 V Vishay MKP1848C 32 x 18 mm (27.5 mm pitch, 28 mm tall); 4.7 µF / 500 V the same
-series at about 32 x 13 mm (to confirm; the TDK 4.7 µF / 630 V is 31.5 x 22 mm); 100 µH about 13 x 13 mm.
+Film sizes: 10 µF / 500 V Vishay MKP1848C61050JK2 32 x 18 mm (27.5 mm pitch, 28 mm tall); first stage 5 µF / 500 V
+MKP1848C55050JK2 32 x 11 x 21 mm (section 9); 100 µH Bourns SRR1260 12.5 x 12.5 mm SMD.
 
 - **East edge:** QL2, QH2 (bridge 2, V_SCREEN, front) and QH1, QL1 (bridge 1, V_ANODE, rear) standing with
   the tabs on the wall; the input cap between the two high-side collectors; gate drivers, bootstrap
@@ -162,7 +162,7 @@ are tied to GND, a bidirectional pin on a power net).
 ADC_SCK_RET 16, ADC_SDO1 17, ADC_SDO2 19, PWM 29-32, GND 2/4/6/18/20/22/33/34, 3V3 35/36,
 HV_PERMIT_STAT 37, HV_ENABLE 38, +12V 39/40; the other pads N/C.
 
-Placeholders: proposals in section 9 (not yet applied to the schematic). The Si8271 datasheet (Rev 0.5) does not
+Parts: section 9 (applied 2026-11-25). The Si8271 datasheet (Rev 0.5) does not
 state an internal pull on EN; the 10k pull-down on HV_ENABLE sets the default (EN low = outputs low).
 
 **Link supply budgets (ESTIMATE from datasheet figures, 2026-11-25).** +12 V: VDRV load = 4 x Si8271 output side
@@ -173,7 +173,7 @@ budget), 7 x OPA2836 ≈ 14 mA, ADCs / muxes / REF3030 / logic ≈ 5 mA: **≈ 5
 Both need the ICD change (section 7) or a cut: dropping the 1 nF G-E caps saves ≈ 4 mA of +12 V; a gate driver
 with a low-current input side (for example UCC5304 / UCC5350 class, ~2 mA) would save ≈ 25 mA of 3V3.
 
-## 9. Part proposals (2026-11-25, for the user to approve; distributor data unless noted)
+## 9. Part choices (proposed and approved by the user 2026-11-25, applied to the schematic; distributor data unless noted)
 
 | Refs | Placeholder | Proposal | Key data | Footprint |
 |---|---|---|---|---|

@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/home/jari/dev/tube_hv_supplies_kicad/rev4/kicad/tube_hv_supplies_rev4.kicad_sch")
-		(date "2026-11-25T21:29:56")
+		(date "2026-11-25T22:20:37")
 		(tool "Eeschema 10.0.7")
 		(sheet
 			(number "1")
@@ -301,6 +301,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXW47MEFR16X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm")
 				(field
 					(name "Datasheet")
@@ -312,6 +314,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXW47MEFR16X25")
 			)
 			(property
 				(name "Sheetname")
@@ -355,6 +361,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXW47MEFR16X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm")
 				(field
 					(name "Datasheet")
@@ -366,6 +374,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXW47MEFR16X25")
 			)
 			(property
 				(name "Sheetname")
@@ -463,6 +475,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXW47MEFR16X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm")
 				(field
 					(name "Datasheet")
@@ -474,6 +488,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXW47MEFR16X25")
 			)
 			(property
 				(name "Sheetname")
@@ -1100,12 +1118,14 @@
 		)
 		(comp
 			(ref "L101")
-			(value "33uH >= 2A")
-			(footprint "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P")
+			(value "33uH 2A (WE-TI)")
+			(footprint "Inductor_THT:L_Radial_D8.7mm_P5.00mm_Fastron_07HCP")
 			(description "Inductor")
 			(fields
 				(field
-					(name "Footprint") "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P")
+					(name "MPN") "744772330")
+				(field
+					(name "Footprint") "Inductor_THT:L_Radial_D8.7mm_P5.00mm_Fastron_07HCP")
 				(field
 					(name "Datasheet")
 				)
@@ -1116,6 +1136,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "L")
 				(description "Inductor")
+			)
+			(property
+				(name "MPN")
+				(value "744772330")
 			)
 			(property
 				(name "Sheetname")
@@ -1591,6 +1615,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXW47MEFR16X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm")
 				(field
 					(name "Datasheet")
@@ -1602,6 +1628,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXW47MEFR16X25")
 			)
 			(property
 				(name "Sheetname")
@@ -1640,14 +1670,14 @@
 		)
 		(comp
 			(ref "C203")
-			(value "4.7u/500V MKP DC-link")
-			(footprint "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4")
+			(value "5u/500V MKP DC-link")
+			(footprint "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4")
 			(description "Unpolarized capacitor")
 			(fields
 				(field
-					(name "MPN") "Vishay MKP1848C class (size to confirm)")
+					(name "MPN") "MKP1848C55050JK2")
 				(field
-					(name "Footprint") "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4")
+					(name "Footprint") "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4")
 				(field
 					(name "Datasheet")
 				)
@@ -1661,7 +1691,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Vishay MKP1848C class (size to confirm)")
+				(value "MKP1848C55050JK2")
 			)
 			(property
 				(name "Sheetname")
@@ -1765,6 +1795,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXC22MEFC12.5X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm")
 				(field
 					(name "Datasheet")
@@ -1776,6 +1808,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXC22MEFC12.5X25")
 			)
 			(property
 				(name "Sheetname")
@@ -1873,6 +1909,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXW47MEFR16X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm")
 				(field
 					(name "Datasheet")
@@ -1884,6 +1922,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXW47MEFR16X25")
 			)
 			(property
 				(name "Sheetname")
@@ -1922,14 +1964,14 @@
 		)
 		(comp
 			(ref "C208")
-			(value "4.7u/500V MKP DC-link")
-			(footprint "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4")
+			(value "5u/500V MKP DC-link")
+			(footprint "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4")
 			(description "Unpolarized capacitor")
 			(fields
 				(field
-					(name "MPN") "Vishay MKP1848C class (size to confirm)")
+					(name "MPN") "MKP1848C55050JK2")
 				(field
-					(name "Footprint") "Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4")
+					(name "Footprint") "Capacitor_THT:C_Rect_L31.5mm_W11.0mm_P27.50mm_MKS4")
 				(field
 					(name "Datasheet")
 				)
@@ -1943,7 +1985,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Vishay MKP1848C class (size to confirm)")
+				(value "MKP1848C55050JK2")
 			)
 			(property
 				(name "Sheetname")
@@ -2047,6 +2089,8 @@
 			(description "Polarized capacitor")
 			(fields
 				(field
+					(name "MPN") "450BXC22MEFC12.5X25")
+				(field
 					(name "Footprint") "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm")
 				(field
 					(name "Datasheet")
@@ -2058,6 +2102,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "C_Polarized")
 				(description "Polarized capacitor")
+			)
+			(property
+				(name "MPN")
+				(value "450BXC22MEFC12.5X25")
 			)
 			(property
 				(name "Sheetname")
@@ -2255,12 +2303,14 @@
 		)
 		(comp
 			(ref "L202")
-			(value "100uH >= 1.5A")
-			(footprint "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R")
+			(value "100uH 1.7A (SRR1260)")
+			(footprint "Inductor_SMD:L_Bourns_SRR1260")
 			(description "Inductor")
 			(fields
 				(field
-					(name "Footprint") "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R")
+					(name "MPN") "SRR1260-101M")
+				(field
+					(name "Footprint") "Inductor_SMD:L_Bourns_SRR1260")
 				(field
 					(name "Datasheet")
 				)
@@ -2271,6 +2321,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "L")
 				(description "Inductor")
+			)
+			(property
+				(name "MPN")
+				(value "SRR1260-101M")
 			)
 			(property
 				(name "Sheetname")
@@ -2363,12 +2417,14 @@
 		)
 		(comp
 			(ref "L204")
-			(value "100uH >= 1.5A")
-			(footprint "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R")
+			(value "100uH 1.7A (SRR1260)")
+			(footprint "Inductor_SMD:L_Bourns_SRR1260")
 			(description "Inductor")
 			(fields
 				(field
-					(name "Footprint") "Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R")
+					(name "MPN") "SRR1260-101M")
+				(field
+					(name "Footprint") "Inductor_SMD:L_Bourns_SRR1260")
 				(field
 					(name "Datasheet")
 				)
@@ -2379,6 +2435,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "L")
 				(description "Inductor")
+			)
+			(property
+				(name "MPN")
+				(value "SRR1260-101M")
 			)
 			(property
 				(name "Sheetname")
@@ -2653,14 +2713,14 @@
 		)
 		(comp
 			(ref "R201")
-			(value "50m 1W 1225 wide terminal (Kelvin)")
-			(footprint "Resistor_SMD:R_1225_3264Metric")
+			(value "50m 1W 1020 wide terminal (Kelvin)")
+			(footprint "Resistor_SMD:R_1020_2550Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "MPN") "Susumu KRL3264 class (to choose)")
+					(name "MPN") "ERJ-B1CFR05U")
 				(field
-					(name "Footprint") "Resistor_SMD:R_1225_3264Metric")
+					(name "Footprint") "Resistor_SMD:R_1020_2550Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2674,7 +2734,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Susumu KRL3264 class (to choose)")
+				(value "ERJ-B1CFR05U")
 			)
 			(property
 				(name "Sheetname")
@@ -2713,14 +2773,14 @@
 		)
 		(comp
 			(ref "R202")
-			(value "50m 1W 1225 wide terminal (Kelvin)")
-			(footprint "Resistor_SMD:R_1225_3264Metric")
+			(value "50m 1W 1020 wide terminal (Kelvin)")
+			(footprint "Resistor_SMD:R_1020_2550Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "MPN") "Susumu KRL3264 class (to choose)")
+					(name "MPN") "ERJ-B1CFR05U")
 				(field
-					(name "Footprint") "Resistor_SMD:R_1225_3264Metric")
+					(name "Footprint") "Resistor_SMD:R_1020_2550Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2734,7 +2794,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Susumu KRL3264 class (to choose)")
+				(value "ERJ-B1CFR05U")
 			)
 			(property
 				(name "Sheetname")
@@ -2935,14 +2995,14 @@
 		)
 		(comp
 			(ref "R206")
-			(value "50m 1W 1225 wide terminal (Kelvin)")
-			(footprint "Resistor_SMD:R_1225_3264Metric")
+			(value "50m 1W 1020 wide terminal (Kelvin)")
+			(footprint "Resistor_SMD:R_1020_2550Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "MPN") "Susumu KRL3264 class (to choose)")
+					(name "MPN") "ERJ-B1CFR05U")
 				(field
-					(name "Footprint") "Resistor_SMD:R_1225_3264Metric")
+					(name "Footprint") "Resistor_SMD:R_1020_2550Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2956,7 +3016,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Susumu KRL3264 class (to choose)")
+				(value "ERJ-B1CFR05U")
 			)
 			(property
 				(name "Sheetname")
@@ -2995,14 +3055,14 @@
 		)
 		(comp
 			(ref "R207")
-			(value "50m 1W 1225 wide terminal (Kelvin)")
-			(footprint "Resistor_SMD:R_1225_3264Metric")
+			(value "50m 1W 1020 wide terminal (Kelvin)")
+			(footprint "Resistor_SMD:R_1020_2550Metric")
 			(description "Resistor")
 			(fields
 				(field
-					(name "MPN") "Susumu KRL3264 class (to choose)")
+					(name "MPN") "ERJ-B1CFR05U")
 				(field
-					(name "Footprint") "Resistor_SMD:R_1225_3264Metric")
+					(name "Footprint") "Resistor_SMD:R_1020_2550Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3016,7 +3076,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Susumu KRL3264 class (to choose)")
+				(value "ERJ-B1CFR05U")
 			)
 			(property
 				(name "Sheetname")
@@ -9476,10 +9536,12 @@
 		)
 		(comp
 			(ref "R421")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -9492,6 +9554,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -9530,10 +9596,12 @@
 		)
 		(comp
 			(ref "R422")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -9546,6 +9614,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -9584,10 +9656,12 @@
 		)
 		(comp
 			(ref "R423")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -9600,6 +9674,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -9746,10 +9824,12 @@
 		)
 		(comp
 			(ref "R426")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -9762,6 +9842,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -9800,10 +9884,12 @@
 		)
 		(comp
 			(ref "R427")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -9816,6 +9902,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -9854,10 +9944,12 @@
 		)
 		(comp
 			(ref "R428")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -9870,6 +9962,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10016,10 +10112,12 @@
 		)
 		(comp
 			(ref "R431")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10032,6 +10130,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10070,10 +10172,12 @@
 		)
 		(comp
 			(ref "R432")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10086,6 +10190,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10124,10 +10232,12 @@
 		)
 		(comp
 			(ref "R433")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10140,6 +10250,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10286,10 +10400,12 @@
 		)
 		(comp
 			(ref "R436")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10302,6 +10418,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10340,10 +10460,12 @@
 		)
 		(comp
 			(ref "R437")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10356,6 +10478,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10394,10 +10520,12 @@
 		)
 		(comp
 			(ref "R438")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10410,6 +10538,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10556,10 +10688,12 @@
 		)
 		(comp
 			(ref "R441")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10572,6 +10706,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10610,10 +10748,12 @@
 		)
 		(comp
 			(ref "R442")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10626,6 +10766,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10664,10 +10808,12 @@
 		)
 		(comp
 			(ref "R443")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10680,6 +10826,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10826,10 +10976,12 @@
 		)
 		(comp
 			(ref "R446")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10842,6 +10994,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10880,10 +11036,12 @@
 		)
 		(comp
 			(ref "R447")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10896,6 +11054,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -10934,10 +11096,12 @@
 		)
 		(comp
 			(ref "R448")
-			(value "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)")
+			(value "1M 0.1% 1206 HV thin film (700 V)")
 			(footprint "Resistor_SMD:R_1206_3216Metric")
 			(description "Resistor")
 			(fields
+				(field
+					(name "MPN") "TNPV12061M00BEEN")
 				(field
 					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
 				(field
@@ -10950,6 +11114,10 @@
 				(lib "tube_hv_supplies_rev4")
 				(part "R")
 				(description "Resistor")
+			)
+			(property
+				(name "MPN")
+				(value "TNPV12061M00BEEN")
 			)
 			(property
 				(name "Sheetname")
@@ -12291,7 +12459,7 @@
 				(names "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/")
 				(tstamps "/bb87c7c4-6648-5a7d-8e1e-39561ce7cb5d/")
 			)
-			(tstamps "57cc67ce-606f-5f4e-b08b-9e444e73f9fa" "39409eae-4120-53ba-8714-ebaf8d7d3645"
+			(tstamps "39409eae-4120-53ba-8714-ebaf8d7d3645" "57cc67ce-606f-5f4e-b08b-9e444e73f9fa"
 				"31fec87b-cabe-5594-b0b2-10ac09a48ff7"
 			)
 			(units

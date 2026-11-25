@@ -8900,7 +8900,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 30.48 215.9 270)
 			(effects
 				(font
@@ -8927,6 +8927,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 30.48 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 30.48 213.36 0)
 			(effects
 				(font
@@ -9019,7 +9028,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 30.48 238.76 270)
 			(effects
 				(font
@@ -9046,6 +9055,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 30.48 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 30.48 236.22 0)
 			(effects
 				(font
@@ -9126,7 +9144,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 30.48 261.62 270)
 			(effects
 				(font
@@ -9153,6 +9171,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 30.48 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 30.48 259.08 0)
 			(effects
 				(font
@@ -10248,7 +10275,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 101.6 215.9 270)
 			(effects
 				(font
@@ -10275,6 +10302,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 101.6 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 101.6 213.36 0)
 			(effects
 				(font
@@ -10367,7 +10403,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 101.6 238.76 270)
 			(effects
 				(font
@@ -10394,6 +10430,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 101.6 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 101.6 236.22 0)
 			(effects
 				(font
@@ -10474,7 +10519,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 101.6 261.62 270)
 			(effects
 				(font
@@ -10501,6 +10546,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 101.6 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 101.6 259.08 0)
 			(effects
 				(font
@@ -11153,7 +11207,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 172.72 215.9 270)
 			(effects
 				(font
@@ -11180,6 +11234,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 172.72 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 172.72 213.36 0)
 			(effects
 				(font
@@ -11272,7 +11335,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 172.72 238.76 270)
 			(effects
 				(font
@@ -11299,6 +11362,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 172.72 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 172.72 236.22 0)
 			(effects
 				(font
@@ -11379,7 +11451,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 172.72 261.62 270)
 			(effects
 				(font
@@ -11406,6 +11478,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 172.72 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 172.72 259.08 0)
 			(effects
 				(font
@@ -12501,7 +12582,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 243.84 215.9 270)
 			(effects
 				(font
@@ -12528,6 +12609,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 243.84 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 243.84 213.36 0)
 			(effects
 				(font
@@ -12620,7 +12710,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 243.84 238.76 270)
 			(effects
 				(font
@@ -12647,6 +12737,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 243.84 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 243.84 236.22 0)
 			(effects
 				(font
@@ -12727,7 +12826,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 243.84 261.62 270)
 			(effects
 				(font
@@ -12754,6 +12853,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 243.84 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 243.84 259.08 0)
 			(effects
 				(font
@@ -13406,7 +13514,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 314.96 215.9 270)
 			(effects
 				(font
@@ -13433,6 +13541,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 314.96 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 314.96 213.36 0)
 			(effects
 				(font
@@ -13525,7 +13642,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 314.96 238.76 270)
 			(effects
 				(font
@@ -13552,6 +13669,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 314.96 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 314.96 236.22 0)
 			(effects
 				(font
@@ -13632,7 +13758,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 314.96 261.62 270)
 			(effects
 				(font
@@ -13659,6 +13785,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 314.96 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 314.96 259.08 0)
 			(effects
 				(font
@@ -14754,7 +14889,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 386.08 215.9 270)
 			(effects
 				(font
@@ -14781,6 +14916,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 386.08 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 386.08 213.36 0)
 			(effects
 				(font
@@ -14873,7 +15017,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 386.08 238.76 270)
 			(effects
 				(font
@@ -14900,6 +15044,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 386.08 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 386.08 236.22 0)
 			(effects
 				(font
@@ -14980,7 +15133,7 @@
 				)
 			)
 		)
-		(property "Value" "1M 0.1% 1206 HV thin film (TNPV1206 class, >= 400 V)"
+		(property "Value" "1M 0.1% 1206 HV thin film (700 V)"
 			(at 386.08 261.62 270)
 			(effects
 				(font
@@ -15007,6 +15160,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 386.08 259.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TNPV12061M00BEEN"
 			(at 386.08 259.08 0)
 			(effects
 				(font

@@ -2443,6 +2443,15 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "450BXW47MEFR16X25"
+			(at 30.48 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "272b1540-bccd-5f6f-a4ae-83599d4e68e3")
 		)
@@ -2566,6 +2575,15 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
+			(at 50.8 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "450BXW47MEFR16X25"
 			(at 50.8 115.57 0)
 			(effects
 				(font
@@ -2801,7 +2819,7 @@
 				)
 			)
 		)
-		(property "Value" "33uH >= 2A"
+		(property "Value" "33uH 2A (WE-TI)"
 			(at 91.44 118.11 270)
 			(effects
 				(font
@@ -2809,7 +2827,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P"
+		(property "Footprint" "Inductor_THT:L_Radial_D8.7mm_P5.00mm_Fastron_07HCP"
 			(at 91.44 115.57 0)
 			(effects
 				(font
@@ -2828,6 +2846,15 @@
 			)
 		)
 		(property "Description" "Inductor"
+			(at 91.44 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "744772330"
 			(at 91.44 115.57 0)
 			(effects
 				(font
@@ -2959,6 +2986,15 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
+			(at 121.92 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "450BXW47MEFR16X25"
 			(at 121.92 115.57 0)
 			(effects
 				(font

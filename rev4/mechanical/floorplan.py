@@ -58,11 +58,11 @@ PARTS = [
     # filter variant D (sim/ripple.py) per output: first stage 47 uF el + 4.7 uF film (I_C shunt on the plate
     # face under them), L2 100 uH, output 10 uF film + damping leg 22 uF el + 2.2 ohm
     # bridge 1 (V_ANODE), rear half
-    cap("C1_1 47u", 613.0, 110.0), film("F1_1 4u7", 571.0, 85.0, 32.0, 13.0),
+    cap("C1_1 47u", 613.0, 110.0), film("F1_1 5u", 571.0, 85.0, 32.0, 11.0),
     ind("L2_1 100u", 612.0, 92.0, 13.0), film("F2_1 10u", 571.0, 100.0, 32.0, 18.0),
     cap("Cd_1 22u", 628.0, 96.0, 12.5),
     # bridge 2 (V_SCREEN), front half
-    cap("C1_2 47u", 613.0, 75.0), film("F1_2 4u7", 571.0, 69.0, 32.0, 13.0),
+    cap("C1_2 47u", 613.0, 75.0), film("F1_2 5u", 571.0, 69.0, 32.0, 11.0),
     ind("L2_2 100u", 612.0, 59.0, 13.0), film("F2_2 10u", 571.0, 49.0, 32.0, 18.0),
     cap("Cd_2 22u", 628.0, 64.0, 12.5),
     # output tabs at the rear-west corner, toward the power amp (its tabs at x 512, y 155-182)
