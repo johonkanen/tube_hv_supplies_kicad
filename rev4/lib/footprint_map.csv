@@ -117,10 +117,10 @@ Q203,Package_TO_SOT_THT:TO-220-3_Vertical
 Q204,Package_TO_SOT_THT:TO-220-3_Vertical
 R101,Resistor_SMD:R_2512_6332Metric
 R102,Resistor_SMD:R_2512_6332Metric
-R103,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal
-R104,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal
+R103,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical
+R104,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical
 R105,Resistor_SMD:R_2512_6332Metric
-R106,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal
+R106,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical
 R201,Resistor_SMD:R_1020_2550Metric
 R202,Resistor_SMD:R_1020_2550Metric
 R203,Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical

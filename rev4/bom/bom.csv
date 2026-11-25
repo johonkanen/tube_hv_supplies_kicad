@@ -50,9 +50,9 @@ NT407,1,Kelvin tap IC2 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
 NT501,1,"GND to PGND (one tie, at the shunts)",NetTie:NetTie-2_SMD_Pad0.5mm,,,,
 Q201 Q202 Q203 Q204,4,IKP08N65F5,Package_TO_SOT_THT:TO-220-3_Vertical,IKP08N65F5XKSA1,,,"TO-220 standing on the board's east edge, tab screwed to the chassis east wall through an insulating pad and bush (PLAN D12); collector tab live: raw rail (high side); TO-220 standing on the board's east edge, tab screwed to the chassis east wall through an insulating pad and bush (PLAN D12); collector tab live: switch node (low side)"
 R101 R102,2,0R jumper 2512 (link),Resistor_SMD:R_2512_6332Metric,,,,link footprint (interfaces.md 4.2): 0 ohm fitted
-R103 R104,2,75k 2W MOX,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,0.62 W each at 430 V
+R103 R104,2,75k 2W MOX,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical,,,,0.62 W each at 430 V
 R105,1,1M 2512 (500 V limiting),Resistor_SMD:R_2512_6332Metric,,,,0.18 W at 430 V
-R106,1,100 2W,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,
+R106,1,100 2W,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical,,,,
 R201 R202 R206 R207,4,50m 1W 1020 wide terminal (Kelvin),Resistor_SMD:R_1020_2550Metric,ERJ-B1CFR05U,,,first-stage capacitor shunt: both C1 parts return through it; low-side emitter shunt: inductor current in the off-interval
 R203 R208,2,2.2 1W (damping leg),Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical,,,,
 R204 R205 R209 R210,4,150k 2512 (500 V limiting),Resistor_SMD:R_2512_6332Metric,,,,output bleeder

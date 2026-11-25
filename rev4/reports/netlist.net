@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/home/jari/dev/tube_hv_supplies_kicad/rev4/kicad/tube_hv_supplies_rev4.kicad_sch")
-		(date "2026-11-25T22:20:37")
+		(date "2026-11-25T22:27:56")
 		(tool "Eeschema 10.0.7")
 		(sheet
 			(number "1")
@@ -1341,11 +1341,11 @@
 		(comp
 			(ref "R103")
 			(value "75k 2W MOX")
-			(footprint "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal")
+			(footprint "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal")
+					(name "Footprint") "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -1395,11 +1395,11 @@
 		(comp
 			(ref "R104")
 			(value "75k 2W MOX")
-			(footprint "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal")
+			(footprint "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal")
+					(name "Footprint") "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -1503,11 +1503,11 @@
 		(comp
 			(ref "R106")
 			(value "100 2W")
-			(footprint "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal")
+			(footprint "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical")
 			(description "Resistor")
 			(fields
 				(field
-					(name "Footprint") "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal")
+					(name "Footprint") "Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P7.62mm_Vertical")
 				(field
 					(name "Datasheet")
 				)

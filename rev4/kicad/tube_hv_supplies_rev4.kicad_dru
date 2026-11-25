@@ -1,0 +1,58 @@
+(version 1)
+# HV supplies rev 4 rules (rev4/tools/make_pcb.py; from rev3's).
+# Clearance basis: IPC-2221B table 6-1, external conductors, uncoated, sea level to 3050 m (B2):
+#   301-500 V 2.5 mm, 151-300 V 1.25 mm; component leads / terminations uncoated (A6): 301-500 V 0.8 mm.
+# Creepage check basis: IEC 60664-1 functional insulation, pollution degree 2, material group IIIa (FR-4,
+#   CTI >= 175): 500 V working -> 2.5 mm, 250 V -> 1.25 mm; the clearance rules give the same surface distance.
+# Working voltages: raw rail <= 450 V (HV_RAW), switch nodes 0-450 V with their floating gate drive (HV_SW1 /
+#   HV_SW2), outputs and first-stage nodes 0-430 V (HV_OUT). No hardware trips (PLAN D2).
+# 4 layers, 0.2 / 0.2 mm, 0.6 / 0.3 mm vias.
+
+(rule "HV to anything (B2, 301-500 V)"
+  (condition "(A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT') && A.NetName != B.NetName")
+  (constraint clearance (min 2.5mm)))
+
+(rule "HV mid nodes (B2, 151-300 V)"
+  (condition "A.NetClass == 'HV_MID' && A.NetName != B.NetName")
+  (constraint clearance (min 1.25mm)))
+
+(rule "divider tops: the top resistor's two ends (<= 175 V apart, B2 151-300 V)"
+  (condition "(A.NetName == '*V_ANODE' && B.NetName == '*/DV01') || (A.NetName == '*UC1' && B.NetName == '*/DV11') || (A.NetName == '*V_SCREEN' && B.NetName == '*/DV21') || (A.NetName == '*UC2' && B.NetName == '*/DV31') || (A.NetName == '*B_P' && B.NetName == '*/DV41') || (A.NetName == '*UIN' && B.NetName == '*/DV51')")
+  (constraint clearance (min 1.25mm)))
+
+(rule "HV to board edge"
+  (condition "A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT'")
+  (constraint edge_clearance (min 2.5mm)))
+
+(rule "HV to the standoff holes (metal standoff r 3 mm + 2.5 mm)"
+  (condition "(A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT') && B.memberOfFootprint('H10*')")
+  (constraint hole_clearance (min 4.0mm)))
+
+(rule "chassis net to anything (fault path)"
+  (condition "A.NetClass == 'CHASSIS' && A.NetName != B.NetName")
+  (constraint clearance (min 1.0mm)))
+
+# exceptions, last so they win
+(rule "TO-220 leads at the east edge: the air gap that matters is pad to the wall (>= 2.5 mm), not to the edge"
+  (condition "A.memberOfFootprint('Q201') || A.memberOfFootprint('Q202') || A.memberOfFootprint('Q203') || A.memberOfFootprint('Q204')")
+  (constraint edge_clearance (min 1.0mm)))
+
+(rule "terminations inside one part (IPC A6, 0.8 mm)"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && ((A.memberOfFootprint('Q201') && B.memberOfFootprint('Q201')) || (A.memberOfFootprint('Q202') && B.memberOfFootprint('Q202')) || (A.memberOfFootprint('Q203') && B.memberOfFootprint('Q203')) || (A.memberOfFootprint('Q204') && B.memberOfFootprint('Q204')) || (A.memberOfFootprint('D301') && B.memberOfFootprint('D301')) || (A.memberOfFootprint('D302') && B.memberOfFootprint('D302')) || (A.memberOfFootprint('U301') && B.memberOfFootprint('U301')) || (A.memberOfFootprint('U303') && B.memberOfFootprint('U303')) || (A.memberOfFootprint('R105') && B.memberOfFootprint('R105')) || (A.memberOfFootprint('R421') && B.memberOfFootprint('R421')) || (A.memberOfFootprint('R422') && B.memberOfFootprint('R422')) || (A.memberOfFootprint('R423') && B.memberOfFootprint('R423')) || (A.memberOfFootprint('R426') && B.memberOfFootprint('R426')) || (A.memberOfFootprint('R427') && B.memberOfFootprint('R427')) || (A.memberOfFootprint('R428') && B.memberOfFootprint('R428')) || (A.memberOfFootprint('R431') && B.memberOfFootprint('R431')) || (A.memberOfFootprint('R432') && B.memberOfFootprint('R432')) || (A.memberOfFootprint('R433') && B.memberOfFootprint('R433')) || (A.memberOfFootprint('R436') && B.memberOfFootprint('R436')) || (A.memberOfFootprint('R437') && B.memberOfFootprint('R437')) || (A.memberOfFootprint('R438') && B.memberOfFootprint('R438')) || (A.memberOfFootprint('R441') && B.memberOfFootprint('R441')) || (A.memberOfFootprint('R442') && B.memberOfFootprint('R442')) || (A.memberOfFootprint('R443') && B.memberOfFootprint('R443')) || (A.memberOfFootprint('R446') && B.memberOfFootprint('R446')) || (A.memberOfFootprint('R447') && B.memberOfFootprint('R447')) || (A.memberOfFootprint('R448') && B.memberOfFootprint('R448'))) && (A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT' || B.NetClass == 'HV_RAW' || B.NetClass == 'HV_SW1' || B.NetClass == 'HV_SW2' || B.NetClass == 'HV_OUT')")
+  (constraint clearance (min 0.8mm)))
+
+(rule "TO-220 pin fields (IPC A6: copper at the 2.54 mm lead row)"
+  (condition "((A.intersectsArea('PF_Q201') && B.intersectsArea('PF_Q201')) || (A.intersectsArea('PF_Q202') && B.intersectsArea('PF_Q202')) || (A.intersectsArea('PF_Q203') && B.intersectsArea('PF_Q203')) || (A.intersectsArea('PF_Q204') && B.intersectsArea('PF_Q204'))) && (A.NetClass == 'HV_RAW' || A.NetClass == 'HV_SW1' || A.NetClass == 'HV_SW2' || A.NetClass == 'HV_OUT' || B.NetClass == 'HV_RAW' || B.NetClass == 'HV_SW1' || B.NetClass == 'HV_SW2' || B.NetClass == 'HV_OUT')")
+  (constraint clearance (min 0.8mm)))
+
+(rule "raw rail among itself (same potential through links / L101)"
+  (condition "A.NetClass == 'HV_RAW' && B.NetClass == 'HV_RAW'")
+  (constraint clearance (min 0.5mm)))
+
+(rule "bridge 1 floating driver domain (SW1 + 15 V)"
+  (condition "A.NetClass == 'HV_SW1' && B.NetClass == 'HV_SW1'")
+  (constraint clearance (min 0.25mm)))
+
+(rule "bridge 2 floating driver domain (SW2 + 15 V)"
+  (condition "A.NetClass == 'HV_SW2' && B.NetClass == 'HV_SW2'")
+  (constraint clearance (min 0.25mm)))

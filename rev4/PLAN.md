@@ -26,6 +26,7 @@ an L-shaped 192 cm² outline) and is kept as history only. Goal: a board close t
 | D16 | **HV dividers: 3 x 1 MΩ 0.1 % high-voltage thin-film 1206** (TNPV1206 class, ≥ 400 V working; about 173 V each at 520 V) + 17.4 kΩ, ratio 1/173.4 unchanged (user, 2026-11-25) |
 | D17 | **No NTC channels**: device temperature is not measured; mux channel 6 is tied to GND like channel 7 (zero-code check). The loss check puts Tj at ≤ 98 °C worst case, set by the wall temperature (user, 2026-11-25) |
 | D18 | **Si8271DB (12 V UVLO grade) with a 15 V gate-drive supply**: VDRV = 15.1 V from an LM2731X boost on the link's +12 V (sheet 03). The 12 V grade turns on at 11.0 / 12.2 / 13.5 V (min / typ / max) and off at 9.6 / 10.8 / 12.1 V (Si827x datasheet Rev 0.5), so the bare 12 V link (about 11 V on the bootstrap) would not start it. With VDRV the high sides get about 14.2 V (0.7 V over the worst-case turn-on); the IGBTs are now driven near their 15 V datasheet condition (closes O3) (user, 2026-11-25) |
+| D19 | **Link supply budgets raised** (user, 2026-11-25): HV supplies +12 V **40 mA** (was 25 mA; 30 mA typ / 39 mA max with the VDRV boost) and 3V3 **60 mA** (was 30 mA; 51 mA typ / 60 mA max with the Si8271 input sides). To be written into ICD section 3 through the section 13 change (section 7); the control board's TMR-1212 (2 W) has the capacity |
 
 ## 2. Block list
 
@@ -145,7 +146,7 @@ MKP1848C55050JK2 32 x 11 x 21 mm (section 9); 100 µH Bourns SRR1260 12.5 x 12.5
 - Section 12: the outline becomes the ~115 x 88 mm rectangle (D10, O1); the rev3 standoff holes are
   withdrawn; the bridge devices' chassis mounting (eight countersunk plate holes and two bars in rev3)
   is withdrawn: the devices go to the east side wall (D12), which the chassis work list gets (four tapped or M3 clearance holes in the wall).
-- Section 3 budgets (HV supplies row): **+12 V about 30 mA typ / 39 mA max** (was 25 mA budget) and **3V3 about 50 mA typ / 60 mA max** (was 30 mA); see section 8. The control board's TMR-1212 (2 W, about 167 mA at 12 V) has the capacity, but the budget lines and the LM1117 3V3 dissipation on the control board must be agreed.
+- Section 3 budgets (HV supplies row, D19): **+12 V 40 mA** (was 25 mA) and **3V3 60 mA** (was 30 mA); see section 8. The control board's TMR-1212 (2 W, about 167 mA at 12 V) has the capacity; the LM1117 3V3 dissipation on the control board to be checked by its session.
 - Sections 2 / 4 (tabs, RAW_SS, links, ratings) and 5 (grounding) stay.
 
 ## 8. Schematic (first draft, 2026-11-25)
@@ -187,3 +188,28 @@ with a low-current input side (for example UCC5304 / UCC5350 class, ~2 mA) would
 | C204 C209 | 10 µF / 500 V film | Vishay MKP1848C61050JK2 (already) | 32 x 18 x 28 mm | unchanged |
 | C101 C102 C104 C202 C207 | 47 µF / 450 V | Rubycon **450BXW47MEFR16X25** | 1.25 A rms at 100 kHz, 12 000 h at 105 °C; sim needs ≤ 0.31 A | CP D16 P7.5 unchanged |
 | C205 C210 | 22 µF / 450 V | Rubycon **450BXC22MEFC12.5X25** | 600 mA rms; the damping leg carries far less | CP D12.5 P5 unchanged |
+
+## 10. Layout (stage 0, 2026-11-25)
+
+`tools/p2k/bin/kipy rev4/tools/make_pcb.py` → `rev4/build/layout/00_placed.kicad_pcb` (rev3's generator adapted;
+frame KiCad = chassis − (525, 30), F faces down, B faces the plate); `rev4/tools/drc.sh BOARD` (DRC with the
+project rules, summary); `rev4/tools/render.sh BOARD OUTDIR [DPI] [window]` (PNG of both sides).
+
+- Outline 115 x 88 mm (x 562-677, y 39-127), 4 layers, 1.6 mm. Holes: H101 plated chassis bond (630.5, 113.5),
+  next to the fault network; H102 (566, 43), H103 (566, 123), H104 (668, 42.5) at the B_P / B_N tabs. The east
+  edge is held by the four TO-220s screwed to the wall.
+- Rules (`kicad/tube_hv_supplies_rev4.kicad_dru`, written by the script): rev3's IPC-2221B B2 / A6 set with the
+  rev4 nets; HV to standoffs only for H10x (not the toroid tie slots); TO-220 lead pads narrowed to 1.6 x 2.4 mm
+  (0.94 mm between leads, A6 0.8 mm); TO-220 pads 1.0 mm to the east edge (the air gap to the wall, ≥ 2.5 mm, is
+  what counts).
+- TO-220 lead row x 674.5 (tab face 677.65, 0.3 mm pad to the assumed wall at 678), front to rear QL2 Q204 (y 52),
+  QH2 Q203 (66), QH1 Q201 (100), QL1 Q202 (114).
+- Changes against the floorplan: the 100 µH SRR1260s are on the plate face between the toroids, next to the
+  toroids' UC pads; parts the floorplan lacked are placed: second B_P bulk C102 (east, between L101 and C104),
+  UIN film C105 (east-rear, along y), the fault network D102 / R106 / C106 (middle and rear strip, H101 next to
+  them), UIN bleeders R103 / R104 (front strip), damping resistors R203 / R208. R103 / R104 / R106 changed to
+  standing DIN0617 footprints (board area). Toroid cable ties: a no-parts band on the plate face between each
+  toroid's two slots.
+- Status: every part placed except U304 and R448, which the packer could not fit; **DRC 0 errors**
+  (486 unconnected, no routing). The plate-face SMD (gate drive, shunts and amplifiers, measurement, dividers,
+  interface) is packed provisionally by connectivity and needs hand placement: next step.
