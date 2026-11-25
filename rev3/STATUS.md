@@ -1,3 +1,19 @@
+# Where we left off (2026-11-25, 4-layer layout in progress)
+
+**Board** `kicad/tube_hv_supplies_rev3.kicad_pcb` = chain step `04_ground` on the fifth-pass schematic (187 parts),
+**4 layers** (In1 = GND plane under the low-voltage areas, poured at the pour step; In2 = routing; HV rules 2.5 mm on
+every layer, inner layers included). Placed: everything (power stage, bars, holes, connectors as before; the
+measurement block re-placed next to J1 with room; a 9 x 10 mm area kept free on the plate side at (575.5-584.5,
+123-133.5) for the undecided C1-short comparator, marked on User.4). Drawn: bridge / gate / filter copper. Routed:
+all HV nets, PGND, CHASSIS. Not yet: GND_STAR (step "star" was running when stopped), gate leftovers, Kelvin, SPI,
+analog, LV, supplies, pours. **DRC** (`--severity-all --schematic-parity`, no refill): **0 errors**, 42 warnings
+(silk), **245 unconnected** (the steps not run), **parity 0**. On this pass the HV, hvsmall and ground steps all
+closed in about 10 minutes (the 4-layer, less crowded board routes far more easily than the 2-layer one).
+**Resume:** `cd rev3 && FROM=star tools/route_chain.sh` (reuses steps 02-04; kill only your own PIDs).
+**Next:** (1) run star → leftover, pours (In1 GND), fill, DRC 0 / unconnected 0 / parity 0, save with zones filled;
+(2) review the renders (loop inductance as laid out, SPI lengths, the reserved area), `tools/render_docs.sh`;
+(3) write "Layout, first pass" (draft in the scratch notes: stack-up, rules, loops, mechanical checks), commit, push.
+
 **2026-11-25: the fifth pass (section below) redrew sheets 04 / 05 (187 parts, one multiplexed ADS7056, no comparators,
 no latch, IF-2.3 proposed) and the board goes to 4 layers: the 2-layer layout work below is superseded except the
 power-stage placement, the bars and the holes, which the 4-layer layout reuses.**
