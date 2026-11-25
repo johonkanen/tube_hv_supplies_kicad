@@ -1,0 +1,78 @@
+refs,qty,value,footprint,candidate_mpn,dnp,placeholder,note
+C101 C102 C104 C202 C207,5,47u/450V 105C,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,,,,"first stage; 0.23-0.31 A rms (sim/ripple.py); radial D16; radial D16, between the two high-side collectors; carries the bridges' input ripple (0.2-0.3 A rms with C5): rating to check; radial D16; ripple current small (B_P side)"
+C103,1,100n/630V X7R 1812,Capacitor_SMD:C_1812_4532Metric,,,,
+C105,1,1u/630V MKP,Capacitor_THT:C_Rect_L26.5mm_W10.5mm_P22.50mm_MKS4,,,,"film, P22.5"
+C106,1,100n Y2 300VAC,Capacitor_THT:C_Rect_L26.5mm_W8.5mm_P22.50mm_MKS4,TDK B32023A3104M,,,
+C201 C206,2,1n/1kV C0G 1812 (at the high-side collector),Capacitor_SMD:C_1812_4532Metric,,,,
+C203 C208,2,4.7u/500V MKP DC-link,Capacitor_THT:C_Rect_L31.5mm_W13.0mm_P27.50mm_MKS4,Vishay MKP1848C class (size to confirm),,,"first stage film, 0.16-0.18 A rms"
+C204 C209,2,10u/500V MKP DC-link,Capacitor_THT:C_Rect_L31.5mm_W20.0mm_P27.50mm_MKS4,Vishay MKP1848C61050JK2,,,"output film, 32 x 18 x 28 mm"
+C205 C210,2,22u/450V 105C,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,,,,damping leg (with R)
+C301 C303 C305 C307 C309 C311 C313 C315 C403 C410 C416 C419 C422 C424 C425 C427 C428 C429 C430 C433 C434 C437 C504,23,100n,Capacitor_SMD:C_0603_1608Metric,,,,
+C302 C306 C310 C314,4,1u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
+C304 C308 C312 C316,4,"1n C0G (Miller immunity, at the IGBT)",Capacitor_SMD:C_0805_2012Metric,,,,
+C401 C402 C405 C406 C408 C409 C412 C413,8,10p C0G,Capacitor_SMD:C_0603_1608Metric,,,,
+C404 C407 C411 C414,4,100p C0G,Capacitor_SMD:C_0603_1608Metric,,,,
+C415 C417 C418 C420 C421 C423,6,100p C0G (tau 1.7 us),Capacitor_SMD:C_0603_1608Metric,,,,
+C426 C432 C436 C439,4,1u X7R,Capacitor_SMD:C_0603_1608Metric,,,,
+C431 C435,2,680p C0G (charge bucket),Capacitor_SMD:C_0603_1608Metric,,,,
+C438 C501,2,10u,Capacitor_SMD:C_0805_2012Metric,,,,
+C502,1,10u/25V,Capacitor_SMD:C_1206_3216Metric,,,,
+C503,1,10n,Capacitor_SMD:C_0603_1608Metric,,,,
+D101,1,"red, 0.4 mA (HV PRESENT)",LED_SMD:LED_0805_2012Metric,,,,
+D102,1,GBU8J (+ and - joined: anti-parallel pair),Diode_THT:Diode_Bridge_Vishay_GBU,GBU8J,,,
+D301 D302,2,ES1J (600 V ultrafast),Diode_SMD:D_SMA,ES1J,,,
+D501,1,SMAJ24CA,Diode_SMD:D_SMA,SMAJ24CA,,,
+D502,1,1N4148W (reverse),Diode_SMD:D_SOD-123,1N4148W,,,
+FB401,1,600R@100MHz 0603,Inductor_SMD:L_0603_1608Metric,,,,
+H101,1,M3 plated: chassis bond (fault / RF network),MountingHole:MountingHole_3.2mm_M3_DIN965_Pad,,,,star washer on cleaned aluminium (interfaces.md 14)
+H102 H103 H104,3,"M3, non-plated",MountingHole:MountingHole_3.2mm_M3,,,,
+J1,1,"CONTROL 40-pin (W17-b, isolated on the control board)",Connector_PinHeader_1.27mm:PinHeader_2x20_P1.27mm_Vertical,Samtec SHF-120-01-L-D-TH,,,1.27 mm 2x20 shrouded THT header
+J101,2,"HV IN: B_P / B_N (W01-b, 4.8 mm tabs)",tube_hv_supplies_rev4:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
+J102,2,RAW OUT 1 to preamp J501 (W02-a): RAW_SS1 / GND_PRE1,tube_hv_supplies_rev4:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
+J103,2,RAW OUT 2 to PI + FX (W03-a): RAW_SS2 / GND_PRE2,tube_hv_supplies_rev4:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
+J201,2,"V_ANODE / GND_PWR (W04-a, 4.8 mm tabs)",tube_hv_supplies_rev4:Blade_Tab_4.8mm_2x_P12mm,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
+J202,1,"V_SCREEN (W05-a, 4.8 mm tab)",tube_hv_supplies_rev4:Blade_Tab_4.8mm_1x,,,,"4.8 mm PCB blade tab(s), fully insulated receptacle; qty = tabs"
+J501,1,"HV_PERMIT +/- (W16-b, twisted pair)",Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical,Molex 22-27-2021,,,
+L101,1,33uH >= 2A,Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P,,,,"input filter inductor, radial D12 (part to choose: >= 2 A, insulation for 430 V)"
+L201 L203,2,"2mH Fe-Si-Al toroid 32x16.4 (0.8mm, 6A)",tube_hv_supplies_rev4:L_Toroid_32mm_Standing_P16.4mm,,,,"standing on edge, cable tie through the board slots"
+L202 L204,2,100uH >= 1.5A,Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R,,,,"second stage (part to choose: 1.5 A peak, insulation for 430 V)"
+NT101,1,STAR POINT (power star),NetTie:NetTie-2_SMD_Pad2.0mm,,,,
+NT401,1,Kelvin tap IS1 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT402 NT404 NT406 NT408,4,Kelvin tap PGND (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT403,1,Kelvin tap IC1 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT405,1,Kelvin tap IS2 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT407,1,Kelvin tap IC2 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+NT501,1,"GND to PGND (one tie, at the shunts)",NetTie:NetTie-2_SMD_Pad0.5mm,,,,
+Q201 Q202 Q203 Q204,4,IKP08N65F5,Package_TO_SOT_THT:TO-220-3_Vertical,IKP08N65F5XKSA1,,,"TO-220 standing on the board's east edge, tab screwed to the chassis east wall through an insulating pad and bush (PLAN D12); collector tab live: raw rail (high side); TO-220 standing on the board's east edge, tab screwed to the chassis east wall through an insulating pad and bush (PLAN D12); collector tab live: switch node (low side)"
+R101 R102,2,0R jumper 2512 (link),Resistor_SMD:R_2512_6332Metric,,,,link footprint (interfaces.md 4.2): 0 ohm fitted
+R103 R104,2,75k 2W MOX,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,0.62 W each at 430 V
+R105,1,1M 2512 (500 V limiting),Resistor_SMD:R_2512_6332Metric,,,,0.18 W at 430 V
+R106,1,100 2W,Resistor_THT:R_Axial_DIN0617_L17.0mm_D6.0mm_P20.32mm_Horizontal,,,,
+R201 R202 R206 R207,4,50m 1W 1225 wide terminal (Kelvin),Resistor_SMD:R_1225_3264Metric,Susumu KRL3264 class (to choose),,,first-stage capacitor shunt: both C1 parts return through it; low-side emitter shunt: inductor current in the off-interval
+R203 R208,2,2.2 1W (damping leg),Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical,,,,
+R204 R205 R209 R210,4,150k 2512 (500 V limiting),Resistor_SMD:R_2512_6332Metric,,,,output bleeder
+R301 R305 R306 R309 R310 R314 R315 R318 R467 R501 R504,11,10k,Resistor_SMD:R_0603_1608Metric,,,,drivers off when the link is unplugged or the card is off
+R302 R311,2,2.2,Resistor_SMD:R_0603_1608Metric,,,,
+R303 R307 R312 R316,4,15 (turn-on),Resistor_SMD:R_0805_2012Metric,,,,
+R304 R308 R313 R317,4,8.2 (turn-off),Resistor_SMD:R_0805_2012Metric,,,,
+R401 R403 R406 R408 R411 R413 R416 R418,8,240 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R402 R404 R407 R409 R412 R414 R417 R419,8,1.5k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R405 R410 R415 R420 R426 R432 R438 R444 R450 R456 R502,11,47,Resistor_SMD:R_0603_1608Metric,,,,
+R421 R422 R423 R424 R427 R428 R429 R430 R433 R434 R435 R436 R439 R440 R441 R442 R445 R446 R447 R448 R451 R452 R453 R454,24,750k 0.1% 1206 (>= 200 V),Resistor_SMD:R_1206_3216Metric,,,,<= 130 V each at 520 V
+R425 R431 R437 R443 R449 R455,6,17.4k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R457 R458,2,10k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
+R459,1,10,Resistor_SMD:R_0603_1608Metric,,,,
+R460 R461,2,10k 1%,Resistor_SMD:R_0603_1608Metric,,,,
+R462 R463 R464 R465,4,33,Resistor_SMD:R_0603_1608Metric,,,,
+R466,1,33 (returned SCK: far end of the SCLK trace),Resistor_SMD:R_0603_1608Metric,,,,
+R468 R469 R470 R471,4,100k,Resistor_SMD:R_0603_1608Metric,,,,
+R503,1,680 (threshold ~2 mA),Resistor_SMD:R_0603_1608Metric,,,,
+R505,1,1k,Resistor_SMD:R_0603_1608Metric,,,,
+T401 T402,2,10k NTC B3435 0603 (next to the bridge's devices),Resistor_SMD:R_0603_1608Metric,,,,
+U301 U302 U303 U304,4,"Si8271 (isolated driver, split outputs)",Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,Si8271 (UVLO grade for a 12 V IGBT drive to choose),,,
+U401 U402 U403 U404 U405 U406 U408,7,OPA2836ID,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,OPA2836IDR,,,
+U407 U410,2,"TMUX1308PW (8:1, 4051 pinout)",Package_SO:TSSOP-16_4.4x5mm_P0.65mm,TMUX1308PWR,,,
+U409 U411,2,"ADS7056 (14 bit, 2.5 MSPS)",Package_DFN_QFN:Texas_UQFN-8_1.5x1.5mm_P0.5mm,ADS7056IRUGR,,,"X2QFN-8 (RUG); AVDD = reference = VREF 3.0 V, DVDD 3.3 V"
+U412,1,REF3030 (3.0 V),Package_TO_SOT_SMD:SOT-23,REF3030AIDBZR,,,"ADS7056 AVDD x2, MID divider, NTC dividers"
+U501,1,TLP293 (CTR >= 50 %),Package_SO:SOIC-4_4.55x2.6mm_P1.27mm,"TLP293(GB-TPL,E)",,,
+U502,1,74LVC1G17,Package_TO_SOT_SMD:SOT-23-5,SN74LVC1G17DBVR,,,

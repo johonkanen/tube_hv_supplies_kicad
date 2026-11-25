@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "kicad": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/home/jari/dev/KiCAD-MCP-Server/dist/index.js"
+      ],
+      "env": {
+        "KICAD_PYTHON": "/home/jari/dev/KiCAD-MCP-Server/kicad10_python.sh",
+        "KICAD_AUTO_LAUNCH": "false",
+        "NODE_ENV": "production",
+        "LOG_LEVEL": "error"
+      }
+    }
+  }
+}

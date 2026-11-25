@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "tube_hv_supplies_rev4")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_hv_supplies_rev4.kicad_sym")(options "")(descr "rev 4 symbols, from KiCad stock libraries (tools/make_lib.py)"))
+)
