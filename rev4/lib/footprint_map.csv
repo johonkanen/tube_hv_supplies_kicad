@@ -32,6 +32,9 @@ C313,Capacitor_SMD:C_0603_1608Metric
 C314,Capacitor_SMD:C_0805_2012Metric
 C315,Capacitor_SMD:C_0603_1608Metric
 C316,Capacitor_SMD:C_0805_2012Metric
+C317,Capacitor_SMD:C_0805_2012Metric
+C318,Capacitor_SMD:C_0603_1608Metric
+C319,Capacitor_SMD:C_1206_3216Metric
 C401,Capacitor_SMD:C_0603_1608Metric
 C402,Capacitor_SMD:C_0603_1608Metric
 C403,Capacitor_SMD:C_0603_1608Metric
@@ -77,6 +80,7 @@ D101,LED_SMD:LED_0805_2012Metric
 D102,Diode_THT:Diode_Bridge_Vishay_GBU
 D301,Diode_SMD:D_SMA
 D302,Diode_SMD:D_SMA
+D303,Diode_SMD:D_SOD-123
 D501,Diode_SMD:D_SMA
 D502,Diode_SMD:D_SOD-123
 FB401,Inductor_SMD:L_0603_1608Metric
@@ -96,6 +100,7 @@ L201,tube_hv_supplies_rev4:L_Toroid_32mm_Standing_P16.4mm
 L202,Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R
 L203,tube_hv_supplies_rev4:L_Toroid_32mm_Standing_P16.4mm
 L204,Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R
+L301,Inductor_SMD:L_Bourns-SRN4018
 NT101,NetTie:NetTie-2_SMD_Pad2.0mm
 NT401,NetTie:NetTie-2_SMD_Pad0.5mm
 NT402,NetTie:NetTie-2_SMD_Pad0.5mm
@@ -144,6 +149,8 @@ R315,Resistor_SMD:R_0603_1608Metric
 R316,Resistor_SMD:R_0805_2012Metric
 R317,Resistor_SMD:R_0805_2012Metric
 R318,Resistor_SMD:R_0603_1608Metric
+R319,Resistor_SMD:R_0603_1608Metric
+R320,Resistor_SMD:R_0603_1608Metric
 R401,Resistor_SMD:R_0603_1608Metric
 R402,Resistor_SMD:R_0603_1608Metric
 R403,Resistor_SMD:R_0603_1608Metric
@@ -216,6 +223,7 @@ U301,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
 U302,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
 U303,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
 U304,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+U305,Package_TO_SOT_SMD:SOT-23-5
 U401,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
 U402,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
 U403,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm

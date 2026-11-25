@@ -15,7 +15,7 @@ WANT = [
     ("Device", "R"), ("Device", "C"), ("Device", "C_Polarized"), ("Device", "D"), ("Device", "D_TVS"),
     ("Device", "L"), ("Device", "FerriteBead"), ("Device", "LED"), ("Device", "NetTie_2"), ("Device", "Q_NIGBT_GCE"),
     ("Device", "Thermistor_NTC"), ("Diode_Bridge", "GBU8J"), ("Isolator", "TLP293"), ("74xGxx", "74LVC1G17"),
-    ("Reference_Voltage", "REF3030"), ("Amplifier_Operational", "OPA2356xxD"), ("Analog_Switch", "NX3L4051PW"),
+    ("Reference_Voltage", "REF3030"), ("Regulator_Switching", "LM2731XMF"), ("Amplifier_Operational", "OPA2356xxD"), ("Analog_Switch", "NX3L4051PW"),
     ("Mechanical", "MountingHole_Pad"), ("Mechanical", "MountingHole"),
     ("Connector_Generic", "Conn_02x20_Odd_Even"), ("Connector_Generic", "Conn_01x02"), ("Connector_Generic", "Conn_01x01"),
     ("power", "GND"), ("power", "+3V3"), ("power", "+12V"), ("power", "PWR_FLAG"),

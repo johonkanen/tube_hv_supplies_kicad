@@ -65,7 +65,7 @@ DEFAULT_FP = {
 }
 MPN = {"74LVC1G17": "SN74LVC1G17DBVR", "TLP293": "TLP293(GB-TPL,E)", "GBU8J": "GBU8J", "Q_NIGBT_GCE": "IKP08N65F5XKSA1",
        "OPA2356xxD": "OPA2836IDR", "ADS7056": "ADS7056IRUGR", "REF3030": "REF3030AIDBZR",
-       "SI8271": "Si8271 (UVLO grade for a 12 V IGBT drive to choose)"}
+       "SI8271": "SI8271DB-IS", "LM2731XMF": "LM2731XMF/NOPB"}
 
 
 def g(v):
@@ -297,7 +297,7 @@ def sheet02(d):
 # ------------------------------------------------------------------ sheet 03
 def drv(d, ref, c, r, vin, en_out, gnd2, vdd2, on, off):
     d.part("SI8271", ref, c, r, {1: vin, 2: "+3V3", 3: "GND", 4: en_out, 5: gnd2, 6: off, 7: on, 8: vdd2},
-           value="Si8271 (isolated driver, split outputs)")
+           value="Si8271DB (12 V UVLO, split outputs)")
 
 
 def driver_pair(d, k, c0):
@@ -308,7 +308,7 @@ def driver_pair(d, k, c0):
     drv(d, f"U{k}1", c0 + 1.5, 2, hi, "HV_ENABLE", f"SW{t}", f"BOOT{t}", f"GHON{t}", f"GHOFF{t}")
     R(d, f"R{k}1", c0, 4, hi, "GND", "10k")
     C(d, f"C{k}1", c0 + 0.8, 4, "+3V3", "GND", "100n")
-    R(d, f"R{k}2", c0 + 3.5, 1, "+12V", f"BS{t}", "2.2", rot=0)
+    R(d, f"R{k}2", c0 + 3.5, 1, "VDRV", f"BS{t}", "2.2", rot=0)
     d.part("D", f"D{k}1", c0 + 4.5, 1, {2: f"BS{t}", 1: f"BOOT{t}"}, value="ES1J (600 V ultrafast)", rot=0,
            fp="Diode_SMD:D_SMA", mpn="ES1J")
     C(d, f"C{k}2", c0 + 5.5, 2, f"BOOT{t}", f"SW{t}", "1u/25V X7R", fp=FP_C0805)
@@ -317,12 +317,12 @@ def driver_pair(d, k, c0):
     R(d, f"R{k}4", c0 + 3.5, 4, f"GHOFF{t}", f"GH{t}", "8.2 (turn-off)", rot=0, fp="Resistor_SMD:R_0805_2012Metric")
     R(d, f"R{k}5", c0 + 5.5, 4, f"GH{t}", f"SW{t}", "10k")
     C(d, f"C{k}4", c0 + 6.3, 4, f"GH{t}", f"SW{t}", "1n C0G (Miller immunity, at the IGBT)", fp=FP_C0805)
-    # low side (from +12V, returned to PGND)
-    drv(d, f"U{k}2", c0 + 1.5, 6.5, lo, "HV_ENABLE", "PGND", "+12V", f"GLON{t}", f"GLOFF{t}")
+    # low side (from VDRV = 15 V, returned to PGND)
+    drv(d, f"U{k}2", c0 + 1.5, 6.5, lo, "HV_ENABLE", "PGND", "VDRV", f"GLON{t}", f"GLOFF{t}")
     R(d, f"R{k}6", c0, 8.5, lo, "GND", "10k")
     C(d, f"C{k}5", c0 + 0.8, 8.5, "+3V3", "GND", "100n")
-    C(d, f"C{k}6", c0 + 3.5, 5.5, "+12V", "PGND", "1u/25V X7R", fp=FP_C0805)
-    C(d, f"C{k}7", c0 + 4.3, 5.5, "+12V", "PGND", "100n")
+    C(d, f"C{k}6", c0 + 3.5, 5.5, "VDRV", "PGND", "1u/25V X7R", fp=FP_C0805)
+    C(d, f"C{k}7", c0 + 4.3, 5.5, "VDRV", "PGND", "100n")
     R(d, f"R{k}7", c0 + 3.5, 7.5, f"GLON{t}", f"GL{t}", "15 (turn-on)", rot=0, fp="Resistor_SMD:R_0805_2012Metric")
     R(d, f"R{k}8", c0 + 3.5, 8.5, f"GLOFF{t}", f"GL{t}", "8.2 (turn-off)", rot=0, fp="Resistor_SMD:R_0805_2012Metric")
     R(d, f"R{k}9", c0 + 5.5, 8.5, f"GL{t}", f"IS{t}", "10k")
@@ -334,10 +334,28 @@ def driver_pair(d, k, c0):
 def sheet03(d):
     d.text("03 Gate drive: one Si8271 per IGBT (PLAN D13). EN = HV_ENABLE (pulled down on sheet 05: link unplugged or "
            "control board off = drivers off); PWM inputs pulled down; 10k gate-emitter resistors keep the IGBTs off "
-           "unpowered; 1 nF C0G gate-emitter caps against Miller turn-on (hard switching, 20-50 V/ns). High sides from "
-           "a bootstrap on the link's +12 V. +12 V: about 17 mA at 50 kHz (sim/losses.py).", 0, -1.0, 2)
+           "unpowered; 1 nF C0G G-E caps against Miller turn-on. High sides: bootstrap on VDRV.", 0, -1.0, 2)
     driver_pair(d, 1, 0)
     driver_pair(d, 2, 9)
+    vdrv_boost(d, 18.5, 1)
+
+
+def vdrv_boost(d, c0, r0):
+    """12 V -> 15.1 V gate-drive supply (LM2731X, 1.6 MHz; TI SNVS217G section 8.2): R1 150k / R2 13.3k
+    (1.23 V x 12.28), Cf 180p (zero at 5.9 kHz), 10 uH, 40 V Schottky, ceramic in / out."""
+    d.text("VDRV boost 12 V -> 15.1 V. Si8271DB UVLO: on 11.0-13.5 V, off 9.6-12.1 V,", c0, r0 - 1.3, 1.6)
+    d.text("so the 12 V link cannot start it; high sides about 14.2 V. +12 V about 30 mA typ, 39 mA max.", c0, r0 - 0.7, 1.6)
+    C(d, "C1", c0, r0 + 1, "+12V", "PGND", "2.2u/25V X7R", fp=FP_C0805)
+    d.part("L", "L1", c0 + 1.5, r0, {1: "+12V", 2: "VDRV_SW"}, value="10uH >= 0.5 A", rot=90,
+           fp="Inductor_SMD:L_Bourns-SRN4018", mpn="SRN4018-100M")
+    d.part("LM2731XMF", "U1", c0 + 1.5, r0 + 2, {5: "+12V", 4: "+12V", 1: "VDRV_SW", 2: "PGND", 3: "VDRV_FB"},
+           value="LM2731XMF (1.6 MHz boost)", note="SHDN tied to VIN (datasheet 8.2.2: never floating)")
+    d.part("D", "D1", c0 + 3, r0, {2: "VDRV_SW", 1: "VDRV"}, value="MBR0540 (40 V Schottky)", rot=0, mpn="MBR0540T1G")
+    R(d, "R1", c0 + 4, r0 + 1.5, "VDRV", "VDRV_FB", "150k 1%")
+    C(d, "C2", c0 + 4.8, r0 + 1.5, "VDRV", "VDRV_FB", "180p C0G (feedforward)")
+    R(d, "R2", c0 + 4, r0 + 3, "VDRV_FB", "PGND", "13.3k 1%")
+    C(d, "C3", c0 + 5.8, r0 + 1.5, "VDRV", "PGND", "10u/35V X7R", fp=FP_C1206)
+    d.part("PWR_FLAG", "#FLG305", c0 + 6.6, r0 + 1, {1: "VDRV"}, value="PWR_FLAG")
 
 
 # ------------------------------------------------------------------ sheet 04

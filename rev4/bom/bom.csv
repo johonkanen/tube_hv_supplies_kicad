@@ -10,6 +10,9 @@ C205 C210,2,22u/450V 105C,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,,,,damping leg
 C301 C303 C305 C307 C309 C311 C313 C315 C403 C410 C416 C419 C422 C424 C425 C427 C428 C431 C432 C435 C504,21,100n,Capacitor_SMD:C_0603_1608Metric,,,,
 C302 C306 C310 C314,4,1u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
 C304 C308 C312 C316,4,"1n C0G (Miller immunity, at the IGBT)",Capacitor_SMD:C_0805_2012Metric,,,,
+C317,1,2.2u/25V X7R,Capacitor_SMD:C_0805_2012Metric,,,,
+C318,1,180p C0G (feedforward),Capacitor_SMD:C_0603_1608Metric,,,,
+C319,1,10u/35V X7R,Capacitor_SMD:C_1206_3216Metric,,,,
 C401 C402 C405 C406 C408 C409 C412 C413,8,10p C0G,Capacitor_SMD:C_0603_1608Metric,,,,
 C404 C407 C411 C414,4,100p C0G,Capacitor_SMD:C_0603_1608Metric,,,,
 C415 C417 C418 C420 C421 C423,6,100p C0G (tau 1.7 us),Capacitor_SMD:C_0603_1608Metric,,,,
@@ -21,6 +24,7 @@ C503,1,10n,Capacitor_SMD:C_0603_1608Metric,,,,
 D101,1,"red, 0.4 mA (HV PRESENT)",LED_SMD:LED_0805_2012Metric,,,,
 D102,1,GBU8J (+ and - joined: anti-parallel pair),Diode_THT:Diode_Bridge_Vishay_GBU,GBU8J,,,
 D301 D302,2,ES1J (600 V ultrafast),Diode_SMD:D_SMA,ES1J,,,
+D303,1,MBR0540 (40 V Schottky),Diode_SMD:D_SOD-123,MBR0540T1G,,,
 D501,1,SMAJ24CA,Diode_SMD:D_SMA,SMAJ24CA,,,
 D502,1,1N4148W (reverse),Diode_SMD:D_SOD-123,1N4148W,,,
 FB401,1,600R@100MHz 0603,Inductor_SMD:L_0603_1608Metric,,,,
@@ -36,6 +40,7 @@ J501,1,"HV_PERMIT +/- (W16-b, twisted pair)",Connector_Molex:Molex_KK-254_AE-641
 L101,1,33uH >= 2A,Inductor_THT:L_Radial_D12.0mm_P5.00mm_Fastron_11P,,,,"input filter inductor, radial D12 (part to choose: >= 2 A, insulation for 430 V)"
 L201 L203,2,"2mH Fe-Si-Al toroid 32x16.4 (0.8mm, 6A)",tube_hv_supplies_rev4:L_Toroid_32mm_Standing_P16.4mm,,,,"standing on edge, cable tie through the board slots"
 L202 L204,2,100uH >= 1.5A,Inductor_THT:L_Radial_D12.0mm_P6.00mm_Murata_1900R,,,,"second stage (part to choose: 1.5 A peak, insulation for 430 V)"
+L301,1,10uH >= 0.5 A,Inductor_SMD:L_Bourns-SRN4018,SRN4018-100M,,,
 NT101,1,STAR POINT (power star),NetTie:NetTie-2_SMD_Pad2.0mm,,,,
 NT401,1,Kelvin tap IS1 (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
 NT402 NT404 NT406 NT408,4,Kelvin tap PGND (at the shunt),NetTie:NetTie-2_SMD_Pad0.5mm,,,,
@@ -55,6 +60,8 @@ R301 R305 R306 R309 R310 R314 R315 R318 R459 R501 R504,11,10k,Resistor_SMD:R_060
 R302 R311,2,2.2,Resistor_SMD:R_0603_1608Metric,,,,
 R303 R307 R312 R316,4,15 (turn-on),Resistor_SMD:R_0805_2012Metric,,,,
 R304 R308 R313 R317,4,8.2 (turn-off),Resistor_SMD:R_0805_2012Metric,,,,
+R319,1,150k 1%,Resistor_SMD:R_0603_1608Metric,,,,
+R320,1,13.3k 1%,Resistor_SMD:R_0603_1608Metric,,,,
 R401 R403 R406 R408 R411 R413 R416 R418,8,240 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R402 R404 R407 R409 R412 R414 R417 R419,8,1.5k 0.1%,Resistor_SMD:R_0603_1608Metric,,,,
 R405 R410 R415 R420 R425 R430 R435 R440 R445 R450 R502,11,47,Resistor_SMD:R_0603_1608Metric,,,,
@@ -67,7 +74,8 @@ R458,1,33 (returned SCK: far end of the SCLK trace),Resistor_SMD:R_0603_1608Metr
 R460 R461 R462 R463,4,100k,Resistor_SMD:R_0603_1608Metric,,,,
 R503,1,680 (threshold ~2 mA),Resistor_SMD:R_0603_1608Metric,,,,
 R505,1,1k,Resistor_SMD:R_0603_1608Metric,,,,
-U301 U302 U303 U304,4,"Si8271 (isolated driver, split outputs)",Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,Si8271 (UVLO grade for a 12 V IGBT drive to choose),,,
+U301 U302 U303 U304,4,"Si8271DB (12 V UVLO, split outputs)",Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,SI8271DB-IS,,,
+U305,1,LM2731XMF (1.6 MHz boost),Package_TO_SOT_SMD:SOT-23-5,LM2731XMF/NOPB,,,SHDN tied to VIN (datasheet 8.2.2: never floating)
 U401 U402 U403 U404 U405 U406 U408,7,OPA2836ID,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,OPA2836IDR,,,
 U407 U410,2,"TMUX1308PW (8:1, 4051 pinout)",Package_SO:TSSOP-16_4.4x5mm_P0.65mm,TMUX1308PWR,,,
 U409 U411,2,"ADS7056 (14 bit, 2.5 MSPS)",Package_DFN_QFN:Texas_UQFN-8_1.5x1.5mm_P0.5mm,ADS7056IRUGR,,,"X2QFN-8 (RUG); AVDD = reference = VREF 3.0 V, DVDD 3.3 V"

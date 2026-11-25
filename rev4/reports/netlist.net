@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/home/jari/dev/tube_hv_supplies_kicad/rev4/kicad/tube_hv_supplies_rev4.kicad_sch")
-		(date "2026-11-25T21:14:16")
+		(date "2026-11-25T21:29:56")
 		(tool "Eeschema 10.0.7")
 		(sheet
 			(number "1")
@@ -4080,6 +4080,168 @@
 			)
 		)
 		(comp
+			(ref "C317")
+			(value "2.2u/25V X7R")
+			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(description "Unpolarized capacitor")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Unpolarized capacitor")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "c0c9b012-db62-5b3b-aaaf-229be15effb9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C318")
+			(value "180p C0G (feedforward)")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(description "Unpolarized capacitor")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Unpolarized capacitor")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "78ee5c41-c161-5f1d-996c-e5f58e75ec68")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C319")
+			(value "10u/35V X7R")
+			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(description "Unpolarized capacitor")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Unpolarized capacitor")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "C")
+				(description "Unpolarized capacitor")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "cap capacitor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "C_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "30165fd9-3462-5d27-b755-55212c8c4aba")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
 			(ref "D301")
 			(value "ES1J (600 V ultrafast)")
 			(footprint "Diode_SMD:D_SMA")
@@ -4185,6 +4347,126 @@
 				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
 			)
 			(tstamps "0cef7c3e-dcd4-54ee-a6fe-158b70c59ca2")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "D303")
+			(value "MBR0540 (40 V Schottky)")
+			(footprint "Diode_SMD:D_SOD-123")
+			(description "Diode")
+			(fields
+				(field
+					(name "MPN") "MBR0540T1G")
+				(field
+					(name "Footprint") "Diode_SMD:D_SOD-123")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Diode")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "D")
+				(description "Diode")
+			)
+			(property
+				(name "MPN")
+				(value "MBR0540T1G")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "diode")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "TO-???* *_Diode_* *SingleDiode* D_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "0b746737-a770-5cea-9b08-07adeb597ce3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "L301")
+			(value "10uH >= 0.5 A")
+			(footprint "Inductor_SMD:L_Bourns-SRN4018")
+			(description "Inductor")
+			(fields
+				(field
+					(name "MPN") "SRN4018-100M")
+				(field
+					(name "Footprint") "Inductor_SMD:L_Bourns-SRN4018")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Inductor")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "L")
+				(description "Inductor")
+			)
+			(property
+				(name "MPN")
+				(value "SRN4018-100M")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "inductor choke coil reactor magnetic")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "Choke_* *Coil* Inductor_* L_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "61353389-81dc-5330-95ce-bdad93f9001e")
 			(units
 				(unit
 					(name "A")
@@ -5172,13 +5454,121 @@
 			)
 		)
 		(comp
+			(ref "R319")
+			(value "150k 1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(description "Resistor")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Resistor")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "R")
+				(description "Resistor")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "R res resistor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "R_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "f2bb7388-2bde-5e10-a4a1-16dd167c129b")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R320")
+			(value "13.3k 1%")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(description "Resistor")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description") "Resistor")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "R")
+				(description "Resistor")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "R res resistor")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "R_*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "78f2d6ba-8744-5354-b46a-88eff21f9d3d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
 			(ref "U301")
-			(value "Si8271 (isolated driver, split outputs)")
+			(value "Si8271DB (12 V UVLO, split outputs)")
 			(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 			(description "Isolated single gate driver SOIC-8")
 			(fields
 				(field
-					(name "MPN") "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+					(name "MPN") "SI8271DB-IS")
 				(field
 					(name "Footprint") "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 				(field
@@ -5194,7 +5584,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+				(value "SI8271DB-IS")
 			)
 			(property
 				(name "Sheetname")
@@ -5243,12 +5633,12 @@
 		)
 		(comp
 			(ref "U302")
-			(value "Si8271 (isolated driver, split outputs)")
+			(value "Si8271DB (12 V UVLO, split outputs)")
 			(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 			(description "Isolated single gate driver SOIC-8")
 			(fields
 				(field
-					(name "MPN") "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+					(name "MPN") "SI8271DB-IS")
 				(field
 					(name "Footprint") "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 				(field
@@ -5264,7 +5654,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+				(value "SI8271DB-IS")
 			)
 			(property
 				(name "Sheetname")
@@ -5313,12 +5703,12 @@
 		)
 		(comp
 			(ref "U303")
-			(value "Si8271 (isolated driver, split outputs)")
+			(value "Si8271DB (12 V UVLO, split outputs)")
 			(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 			(description "Isolated single gate driver SOIC-8")
 			(fields
 				(field
-					(name "MPN") "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+					(name "MPN") "SI8271DB-IS")
 				(field
 					(name "Footprint") "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 				(field
@@ -5334,7 +5724,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+				(value "SI8271DB-IS")
 			)
 			(property
 				(name "Sheetname")
@@ -5383,12 +5773,12 @@
 		)
 		(comp
 			(ref "U304")
-			(value "Si8271 (isolated driver, split outputs)")
+			(value "Si8271DB (12 V UVLO, split outputs)")
 			(footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 			(description "Isolated single gate driver SOIC-8")
 			(fields
 				(field
-					(name "MPN") "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+					(name "MPN") "SI8271DB-IS")
 				(field
 					(name "Footprint") "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
 				(field
@@ -5404,7 +5794,7 @@
 			)
 			(property
 				(name "MPN")
-				(value "Si8271 (UVLO grade for a 12 V IGBT drive to choose)")
+				(value "SI8271DB-IS")
 			)
 			(property
 				(name "Sheetname")
@@ -5446,6 +5836,75 @@
 						)
 						(pin
 							(num "5")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U305")
+			(value "LM2731XMF (1.6 MHz boost)")
+			(footprint "Package_TO_SOT_SMD:SOT-23-5")
+			(datasheet "http://www.ti.com/lit/ds/symlink/lm2731.pdf")
+			(description "LM27313, 1.8A, 22Vout Boost Voltage Regulator, 1.6MHz Frequency, SOT-23-5")
+			(fields
+				(field
+					(name "MPN") "LM2731XMF/NOPB")
+				(field
+					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-5")
+				(field
+					(name "Datasheet") "http://www.ti.com/lit/ds/symlink/lm2731.pdf")
+				(field
+					(name "Description") "LM27313, 1.8A, 22Vout Boost Voltage Regulator, 1.6MHz Frequency, SOT-23-5")
+			)
+			(libsource
+				(lib "tube_hv_supplies_rev4")
+				(part "LM2731XMF")
+				(description "LM27313, 1.8A, 22Vout Boost Voltage Regulator, 1.6MHz Frequency, SOT-23-5")
+			)
+			(property
+				(name "MPN")
+				(value "LM2731XMF/NOPB")
+			)
+			(property
+				(name "Sheetname")
+				(value "03 Si8271 isolated gate drivers, bootstrap")
+			)
+			(property
+				(name "Sheetfile")
+				(value "03_gate_drive.kicad_sch")
+			)
+			(property
+				(name "ki_keywords")
+				(value "Miniature Step-Up Boost Voltage Regulator")
+			)
+			(property
+				(name "ki_fp_filters")
+				(value "SOT?23*")
+			)
+			(sheetpath
+				(names "/03 Si8271 isolated gate drivers, bootstrap/")
+				(tstamps "/e5e6dccc-d287-58d1-b43b-d897cf0cc446/")
+			)
+			(tstamps "b7f5de84-d030-59ab-a05d-5a9f55074c76")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "3")
 						)
 					)
 				)
@@ -14128,6 +14587,54 @@
 		)
 		(libpart
 			(lib "tube_hv_supplies_rev4")
+			(part "LM2731XMF")
+			(description "LM27313, 1.8A, 22Vout Boost Voltage Regulator, 1.6MHz Frequency, SOT-23-5")
+			(docs "http://www.ti.com/lit/ds/symlink/lm2731.pdf")
+			(footprints
+				(fp "SOT?23*")
+			)
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "LM2731XMF")
+				(field
+					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-5")
+				(field
+					(name "Datasheet") "http://www.ti.com/lit/ds/symlink/lm2731.pdf")
+				(field
+					(name "Description") "LM27313, 1.8A, 22Vout Boost Voltage Regulator, 1.6MHz Frequency, SOT-23-5")
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "SW")
+					(type "output")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "3")
+					(name "FB")
+					(type "input")
+				)
+				(pin
+					(num "4")
+					(name "EN")
+					(type "input")
+				)
+				(pin
+					(num "5")
+					(name "VIN")
+					(type "input")
+				)
+			)
+		)
+		(libpart
+			(lib "tube_hv_supplies_rev4")
 			(part "MountingHole")
 			(description "Mounting Hole without connection")
 			(footprints
@@ -14825,22 +15332,7 @@
 			(name "+12V")
 			(class "Default")
 			(node
-				(ref "C306")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "C307")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "C314")
-				(pin "1")
-				(pintype "passive")
-			)
-			(node
-				(ref "C315")
+				(ref "C317")
 				(pin "1")
 				(pintype "passive")
 			)
@@ -14862,26 +15354,22 @@
 				(pintype "passive")
 			)
 			(node
-				(ref "R302")
+				(ref "L301")
 				(pin "1")
+				(pinfunction "1_1")
 				(pintype "passive")
 			)
 			(node
-				(ref "R311")
-				(pin "1")
-				(pintype "passive")
+				(ref "U305")
+				(pin "4")
+				(pinfunction "EN_4")
+				(pintype "input")
 			)
 			(node
-				(ref "U302")
-				(pin "8")
-				(pinfunction "VDD2_8")
-				(pintype "power_in")
-			)
-			(node
-				(ref "U304")
-				(pin "8")
-				(pinfunction "VDD2_8")
-				(pintype "power_in")
+				(ref "U305")
+				(pin "5")
+				(pinfunction "VIN_5")
+				(pintype "input")
 			)
 		)
 		(net
@@ -15266,6 +15754,123 @@
 		)
 		(net
 			(code "25")
+			(name "/03 Si8271 isolated gate drivers, bootstrap/VDRV")
+			(class "Default")
+			(node
+				(ref "C306")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C307")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C314")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C315")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C318")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C319")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "D303")
+				(pin "1")
+				(pinfunction "K_1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R302")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R311")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R319")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U302")
+				(pin "8")
+				(pinfunction "VDD2_8")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U304")
+				(pin "8")
+				(pinfunction "VDD2_8")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "26")
+			(name "/03 Si8271 isolated gate drivers, bootstrap/VDRV_FB")
+			(class "Default")
+			(node
+				(ref "C318")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R319")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R320")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U305")
+				(pin "3")
+				(pinfunction "FB_3")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "27")
+			(name "/03 Si8271 isolated gate drivers, bootstrap/VDRV_SW")
+			(class "Default")
+			(node
+				(ref "D303")
+				(pin "2")
+				(pinfunction "A_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "L301")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U305")
+				(pin "1")
+				(pinfunction "SW_1")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "28")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/+3V3_REF")
 			(class "Default")
 			(node
@@ -15286,7 +15891,7 @@
 			)
 		)
 		(net
-			(code "26")
+			(code "29")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/ADRV1")
 			(class "Default")
 			(node
@@ -15307,7 +15912,7 @@
 			)
 		)
 		(net
-			(code "27")
+			(code "30")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/ADRV2")
 			(class "Default")
 			(node
@@ -15328,7 +15933,7 @@
 			)
 		)
 		(net
-			(code "28")
+			(code "31")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/AIN1")
 			(class "Default")
 			(node
@@ -15349,7 +15954,7 @@
 			)
 		)
 		(net
-			(code "29")
+			(code "32")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/AIN2")
 			(class "Default")
 			(node
@@ -15370,7 +15975,7 @@
 			)
 		)
 		(net
-			(code "30")
+			(code "33")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV01")
 			(class "Default")
 			(node
@@ -15385,7 +15990,7 @@
 			)
 		)
 		(net
-			(code "31")
+			(code "34")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV02")
 			(class "Default")
 			(node
@@ -15400,7 +16005,7 @@
 			)
 		)
 		(net
-			(code "32")
+			(code "35")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV03")
 			(class "Default")
 			(node
@@ -15426,7 +16031,7 @@
 			)
 		)
 		(net
-			(code "33")
+			(code "36")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV11")
 			(class "Default")
 			(node
@@ -15441,7 +16046,7 @@
 			)
 		)
 		(net
-			(code "34")
+			(code "37")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV12")
 			(class "Default")
 			(node
@@ -15456,7 +16061,7 @@
 			)
 		)
 		(net
-			(code "35")
+			(code "38")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV13")
 			(class "Default")
 			(node
@@ -15482,7 +16087,7 @@
 			)
 		)
 		(net
-			(code "36")
+			(code "39")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV21")
 			(class "Default")
 			(node
@@ -15497,7 +16102,7 @@
 			)
 		)
 		(net
-			(code "37")
+			(code "40")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV22")
 			(class "Default")
 			(node
@@ -15512,7 +16117,7 @@
 			)
 		)
 		(net
-			(code "38")
+			(code "41")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV23")
 			(class "Default")
 			(node
@@ -15538,7 +16143,7 @@
 			)
 		)
 		(net
-			(code "39")
+			(code "42")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV31")
 			(class "Default")
 			(node
@@ -15553,7 +16158,7 @@
 			)
 		)
 		(net
-			(code "40")
+			(code "43")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV32")
 			(class "Default")
 			(node
@@ -15568,7 +16173,7 @@
 			)
 		)
 		(net
-			(code "41")
+			(code "44")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV33")
 			(class "Default")
 			(node
@@ -15594,7 +16199,7 @@
 			)
 		)
 		(net
-			(code "42")
+			(code "45")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV41")
 			(class "Default")
 			(node
@@ -15609,7 +16214,7 @@
 			)
 		)
 		(net
-			(code "43")
+			(code "46")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV42")
 			(class "Default")
 			(node
@@ -15624,7 +16229,7 @@
 			)
 		)
 		(net
-			(code "44")
+			(code "47")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV43")
 			(class "Default")
 			(node
@@ -15650,7 +16255,7 @@
 			)
 		)
 		(net
-			(code "45")
+			(code "48")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV51")
 			(class "Default")
 			(node
@@ -15665,7 +16270,7 @@
 			)
 		)
 		(net
-			(code "46")
+			(code "49")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV52")
 			(class "Default")
 			(node
@@ -15680,7 +16285,7 @@
 			)
 		)
 		(net
-			(code "47")
+			(code "50")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/DV53")
 			(class "Default")
 			(node
@@ -15706,7 +16311,7 @@
 			)
 		)
 		(net
-			(code "48")
+			(code "51")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA0N")
 			(class "Default")
 			(node
@@ -15732,7 +16337,7 @@
 			)
 		)
 		(net
-			(code "49")
+			(code "52")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA0P")
 			(class "Default")
 			(node
@@ -15758,7 +16363,7 @@
 			)
 		)
 		(net
-			(code "50")
+			(code "53")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA1N")
 			(class "Default")
 			(node
@@ -15784,7 +16389,7 @@
 			)
 		)
 		(net
-			(code "51")
+			(code "54")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA1P")
 			(class "Default")
 			(node
@@ -15810,7 +16415,7 @@
 			)
 		)
 		(net
-			(code "52")
+			(code "55")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA2N")
 			(class "Default")
 			(node
@@ -15836,7 +16441,7 @@
 			)
 		)
 		(net
-			(code "53")
+			(code "56")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA2P")
 			(class "Default")
 			(node
@@ -15862,7 +16467,7 @@
 			)
 		)
 		(net
-			(code "54")
+			(code "57")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA3N")
 			(class "Default")
 			(node
@@ -15888,7 +16493,7 @@
 			)
 		)
 		(net
-			(code "55")
+			(code "58")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/IA3P")
 			(class "Default")
 			(node
@@ -15914,7 +16519,7 @@
 			)
 		)
 		(net
-			(code "56")
+			(code "59")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IC1")
 			(class "Default")
 			(node
@@ -15939,7 +16544,7 @@
 			)
 		)
 		(net
-			(code "57")
+			(code "60")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IC2")
 			(class "Default")
 			(node
@@ -15964,7 +16569,7 @@
 			)
 		)
 		(net
-			(code "58")
+			(code "61")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IL1")
 			(class "Default")
 			(node
@@ -15989,7 +16594,7 @@
 			)
 		)
 		(net
-			(code "59")
+			(code "62")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/I_IL2")
 			(class "Default")
 			(node
@@ -16014,7 +16619,7 @@
 			)
 		)
 		(net
-			(code "60")
+			(code "63")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS0N")
 			(class "Default")
 			(node
@@ -16030,7 +16635,7 @@
 			)
 		)
 		(net
-			(code "61")
+			(code "64")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS0P")
 			(class "Default")
 			(node
@@ -16046,7 +16651,7 @@
 			)
 		)
 		(net
-			(code "62")
+			(code "65")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS1N")
 			(class "Default")
 			(node
@@ -16062,7 +16667,7 @@
 			)
 		)
 		(net
-			(code "63")
+			(code "66")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS1P")
 			(class "Default")
 			(node
@@ -16078,7 +16683,7 @@
 			)
 		)
 		(net
-			(code "64")
+			(code "67")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS2N")
 			(class "Default")
 			(node
@@ -16094,7 +16699,7 @@
 			)
 		)
 		(net
-			(code "65")
+			(code "68")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS2P")
 			(class "Default")
 			(node
@@ -16110,7 +16715,7 @@
 			)
 		)
 		(net
-			(code "66")
+			(code "69")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS3N")
 			(class "Default")
 			(node
@@ -16126,7 +16731,7 @@
 			)
 		)
 		(net
-			(code "67")
+			(code "70")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/KS3P")
 			(class "Default")
 			(node
@@ -16142,7 +16747,7 @@
 			)
 		)
 		(net
-			(code "68")
+			(code "71")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MID")
 			(class "Default")
 			(node
@@ -16209,7 +16814,7 @@
 			)
 		)
 		(net
-			(code "69")
+			(code "72")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MID_DIV")
 			(class "Default")
 			(node
@@ -16235,7 +16840,7 @@
 			)
 		)
 		(net
-			(code "70")
+			(code "73")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MID_FB")
 			(class "Default")
 			(node
@@ -16256,7 +16861,7 @@
 			)
 		)
 		(net
-			(code "71")
+			(code "74")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MUXO1")
 			(class "Default")
 			(node
@@ -16273,7 +16878,7 @@
 			)
 		)
 		(net
-			(code "72")
+			(code "75")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MUXO2")
 			(class "Default")
 			(node
@@ -16290,7 +16895,7 @@
 			)
 		)
 		(net
-			(code "73")
+			(code "76")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IC1")
 			(class "Default")
 			(node
@@ -16311,7 +16916,7 @@
 			)
 		)
 		(net
-			(code "74")
+			(code "77")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IC2")
 			(class "Default")
 			(node
@@ -16332,7 +16937,7 @@
 			)
 		)
 		(net
-			(code "75")
+			(code "78")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IL1")
 			(class "Default")
 			(node
@@ -16353,7 +16958,7 @@
 			)
 		)
 		(net
-			(code "76")
+			(code "79")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_IL2")
 			(class "Default")
 			(node
@@ -16374,7 +16979,7 @@
 			)
 		)
 		(net
-			(code "77")
+			(code "80")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VA")
 			(class "Default")
 			(node
@@ -16390,7 +16995,7 @@
 			)
 		)
 		(net
-			(code "78")
+			(code "81")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VR1")
 			(class "Default")
 			(node
@@ -16406,7 +17011,7 @@
 			)
 		)
 		(net
-			(code "79")
+			(code "82")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VR2")
 			(class "Default")
 			(node
@@ -16422,7 +17027,7 @@
 			)
 		)
 		(net
-			(code "80")
+			(code "83")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VS")
 			(class "Default")
 			(node
@@ -16438,7 +17043,7 @@
 			)
 		)
 		(net
-			(code "81")
+			(code "84")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VU1")
 			(class "Default")
 			(node
@@ -16454,7 +17059,7 @@
 			)
 		)
 		(net
-			(code "82")
+			(code "85")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/MX_VU2")
 			(class "Default")
 			(node
@@ -16470,7 +17075,7 @@
 			)
 		)
 		(net
-			(code "83")
+			(code "86")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/SDOL1")
 			(class "Default")
 			(node
@@ -16486,7 +17091,7 @@
 			)
 		)
 		(net
-			(code "84")
+			(code "87")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/SDOL2")
 			(class "Default")
 			(node
@@ -16502,7 +17107,7 @@
 			)
 		)
 		(net
-			(code "85")
+			(code "88")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/SPARE_O")
 			(class "Default")
 			(node
@@ -16518,7 +17123,7 @@
 			)
 		)
 		(net
-			(code "86")
+			(code "89")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/VREF")
 			(class "Default")
 			(node
@@ -16561,7 +17166,7 @@
 			)
 		)
 		(net
-			(code "87")
+			(code "90")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VA")
 			(class "Default")
 			(node
@@ -16582,7 +17187,7 @@
 			)
 		)
 		(net
-			(code "88")
+			(code "91")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VR1")
 			(class "Default")
 			(node
@@ -16603,7 +17208,7 @@
 			)
 		)
 		(net
-			(code "89")
+			(code "92")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VR2")
 			(class "Default")
 			(node
@@ -16624,7 +17229,7 @@
 			)
 		)
 		(net
-			(code "90")
+			(code "93")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VS")
 			(class "Default")
 			(node
@@ -16645,7 +17250,7 @@
 			)
 		)
 		(net
-			(code "91")
+			(code "94")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VU1")
 			(class "Default")
 			(node
@@ -16666,7 +17271,7 @@
 			)
 		)
 		(net
-			(code "92")
+			(code "95")
 			(name "/04 Shunt amplifiers, dividers, 2 x TMUX1308 + ADS7056, REF3030/V_VU2")
 			(class "Default")
 			(node
@@ -16687,7 +17292,7 @@
 			)
 		)
 		(net
-			(code "93")
+			(code "96")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HVP_A")
 			(class "Default")
 			(node
@@ -16713,7 +17318,7 @@
 			)
 		)
 		(net
-			(code "94")
+			(code "97")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HVP_N")
 			(class "Default")
 			(node
@@ -16746,7 +17351,7 @@
 			)
 		)
 		(net
-			(code "95")
+			(code "98")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HVP_P")
 			(class "Default")
 			(node
@@ -16768,7 +17373,7 @@
 			)
 		)
 		(net
-			(code "96")
+			(code "99")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/HV_PERMIT_STAT")
 			(class "Default")
 			(node
@@ -16784,7 +17389,7 @@
 			)
 		)
 		(net
-			(code "97")
+			(code "100")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/PERMIT_E")
 			(class "Default")
 			(node
@@ -16804,7 +17409,7 @@
 			)
 		)
 		(net
-			(code "98")
+			(code "101")
 			(name "/05 J1 40-pin (W17), HV_PERMIT status (W16), link supplies/PERMIT_F")
 			(class "Default")
 			(node
@@ -16824,7 +17429,7 @@
 			)
 		)
 		(net
-			(code "99")
+			(code "102")
 			(name "ADC_CS")
 			(class "Default")
 			(node
@@ -16852,7 +17457,7 @@
 			)
 		)
 		(net
-			(code "100")
+			(code "103")
 			(name "ADC_SCK")
 			(class "Default")
 			(node
@@ -16885,7 +17490,7 @@
 			)
 		)
 		(net
-			(code "101")
+			(code "104")
 			(name "ADC_SCK_RET")
 			(class "Default")
 			(node
@@ -16901,7 +17506,7 @@
 			)
 		)
 		(net
-			(code "102")
+			(code "105")
 			(name "ADC_SDO1")
 			(class "Default")
 			(node
@@ -16917,7 +17522,7 @@
 			)
 		)
 		(net
-			(code "103")
+			(code "106")
 			(name "ADC_SDO2")
 			(class "Default")
 			(node
@@ -16933,7 +17538,7 @@
 			)
 		)
 		(net
-			(code "104")
+			(code "107")
 			(name "B_P")
 			(class "Default")
 			(node
@@ -16980,7 +17585,7 @@
 			)
 		)
 		(net
-			(code "105")
+			(code "108")
 			(name "GH1")
 			(class "Default")
 			(node
@@ -17011,7 +17616,7 @@
 			)
 		)
 		(net
-			(code "106")
+			(code "109")
 			(name "GH2")
 			(class "Default")
 			(node
@@ -17042,7 +17647,7 @@
 			)
 		)
 		(net
-			(code "107")
+			(code "110")
 			(name "GL1")
 			(class "Default")
 			(node
@@ -17073,7 +17678,7 @@
 			)
 		)
 		(net
-			(code "108")
+			(code "111")
 			(name "GL2")
 			(class "Default")
 			(node
@@ -17104,7 +17709,7 @@
 			)
 		)
 		(net
-			(code "109")
+			(code "112")
 			(name "GND")
 			(class "Default")
 			(node
@@ -17589,7 +18194,7 @@
 			)
 		)
 		(net
-			(code "110")
+			(code "113")
 			(name "GND_STAR")
 			(class "Default")
 			(node
@@ -17663,7 +18268,7 @@
 			)
 		)
 		(net
-			(code "111")
+			(code "114")
 			(name "HV_ENABLE")
 			(class "Default")
 			(node
@@ -17703,7 +18308,7 @@
 			)
 		)
 		(net
-			(code "112")
+			(code "115")
 			(name "IC1")
 			(class "Default")
 			(node
@@ -17729,7 +18334,7 @@
 			)
 		)
 		(net
-			(code "113")
+			(code "116")
 			(name "IC2")
 			(class "Default")
 			(node
@@ -17755,7 +18360,7 @@
 			)
 		)
 		(net
-			(code "114")
+			(code "117")
 			(name "IS1")
 			(class "Default")
 			(node
@@ -17787,7 +18392,7 @@
 			)
 		)
 		(net
-			(code "115")
+			(code "118")
 			(name "IS2")
 			(class "Default")
 			(node
@@ -17819,7 +18424,7 @@
 			)
 		)
 		(net
-			(code "116")
+			(code "119")
 			(name "MUX_A0")
 			(class "Default")
 			(node
@@ -17847,7 +18452,7 @@
 			)
 		)
 		(net
-			(code "117")
+			(code "120")
 			(name "MUX_A1")
 			(class "Default")
 			(node
@@ -17875,7 +18480,7 @@
 			)
 		)
 		(net
-			(code "118")
+			(code "121")
 			(name "MUX_A2")
 			(class "Default")
 			(node
@@ -17903,7 +18508,7 @@
 			)
 		)
 		(net
-			(code "119")
+			(code "122")
 			(name "PGND")
 			(class "Default")
 			(node
@@ -17958,6 +18563,16 @@
 			)
 			(node
 				(ref "C315")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C317")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C319")
 				(pin "2")
 				(pintype "passive")
 			)
@@ -18035,6 +18650,11 @@
 				(pintype "passive")
 			)
 			(node
+				(ref "R320")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
 				(ref "U302")
 				(pin "5")
 				(pinfunction "GND2_5")
@@ -18046,9 +18666,15 @@
 				(pinfunction "GND2_5")
 				(pintype "power_in")
 			)
+			(node
+				(ref "U305")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "power_in")
+			)
 		)
 		(net
-			(code "120")
+			(code "123")
 			(name "PWM_H1")
 			(class "Default")
 			(node
@@ -18070,7 +18696,7 @@
 			)
 		)
 		(net
-			(code "121")
+			(code "124")
 			(name "PWM_H2")
 			(class "Default")
 			(node
@@ -18092,7 +18718,7 @@
 			)
 		)
 		(net
-			(code "122")
+			(code "125")
 			(name "PWM_L1")
 			(class "Default")
 			(node
@@ -18114,7 +18740,7 @@
 			)
 		)
 		(net
-			(code "123")
+			(code "126")
 			(name "PWM_L2")
 			(class "Default")
 			(node
@@ -18136,7 +18762,7 @@
 			)
 		)
 		(net
-			(code "124")
+			(code "127")
 			(name "SW1")
 			(class "Default")
 			(node
@@ -18185,7 +18811,7 @@
 			)
 		)
 		(net
-			(code "125")
+			(code "128")
 			(name "SW2")
 			(class "Default")
 			(node
@@ -18234,7 +18860,7 @@
 			)
 		)
 		(net
-			(code "126")
+			(code "129")
 			(name "UC1")
 			(class "Default")
 			(node
@@ -18266,7 +18892,7 @@
 			)
 		)
 		(net
-			(code "127")
+			(code "130")
 			(name "UC2")
 			(class "Default")
 			(node
@@ -18298,7 +18924,7 @@
 			)
 		)
 		(net
-			(code "128")
+			(code "131")
 			(name "UIN")
 			(class "Default")
 			(node
@@ -18356,7 +18982,7 @@
 			)
 		)
 		(net
-			(code "129")
+			(code "132")
 			(name "V_ANODE")
 			(class "Default")
 			(node
@@ -18393,7 +19019,7 @@
 			)
 		)
 		(net
-			(code "130")
+			(code "133")
 			(name "V_SCREEN")
 			(class "Default")
 			(node
@@ -18430,7 +19056,7 @@
 			)
 		)
 		(net
-			(code "131")
+			(code "134")
 			(name "unconnected-(J1-Pin_1-Pad1)")
 			(class "Default")
 			(node
@@ -18441,7 +19067,7 @@
 			)
 		)
 		(net
-			(code "132")
+			(code "135")
 			(name "unconnected-(J1-Pin_3-Pad3)")
 			(class "Default")
 			(node
@@ -18452,7 +19078,7 @@
 			)
 		)
 		(net
-			(code "133")
+			(code "136")
 			(name "unconnected-(J1-Pin_5-Pad5)")
 			(class "Default")
 			(node
@@ -18463,7 +19089,7 @@
 			)
 		)
 		(net
-			(code "134")
+			(code "137")
 			(name "unconnected-(J1-Pin_7-Pad7)")
 			(class "Default")
 			(node
@@ -18474,7 +19100,7 @@
 			)
 		)
 		(net
-			(code "135")
+			(code "138")
 			(name "unconnected-(J1-Pin_8-Pad8)")
 			(class "Default")
 			(node
@@ -18485,7 +19111,7 @@
 			)
 		)
 		(net
-			(code "136")
+			(code "139")
 			(name "unconnected-(J1-Pin_9-Pad9)")
 			(class "Default")
 			(node
@@ -18496,7 +19122,7 @@
 			)
 		)
 		(net
-			(code "137")
+			(code "140")
 			(name "unconnected-(J1-Pin_10-Pad10)")
 			(class "Default")
 			(node
@@ -18507,7 +19133,7 @@
 			)
 		)
 		(net
-			(code "138")
+			(code "141")
 			(name "unconnected-(J1-Pin_21-Pad21)")
 			(class "Default")
 			(node
@@ -18518,7 +19144,7 @@
 			)
 		)
 		(net
-			(code "139")
+			(code "142")
 			(name "unconnected-(J1-Pin_23-Pad23)")
 			(class "Default")
 			(node
@@ -18529,7 +19155,7 @@
 			)
 		)
 		(net
-			(code "140")
+			(code "143")
 			(name "unconnected-(J1-Pin_24-Pad24)")
 			(class "Default")
 			(node
@@ -18540,7 +19166,7 @@
 			)
 		)
 		(net
-			(code "141")
+			(code "144")
 			(name "unconnected-(J1-Pin_25-Pad25)")
 			(class "Default")
 			(node
@@ -18551,7 +19177,7 @@
 			)
 		)
 		(net
-			(code "142")
+			(code "145")
 			(name "unconnected-(J1-Pin_26-Pad26)")
 			(class "Default")
 			(node
@@ -18562,7 +19188,7 @@
 			)
 		)
 		(net
-			(code "143")
+			(code "146")
 			(name "unconnected-(J1-Pin_27-Pad27)")
 			(class "Default")
 			(node
@@ -18573,7 +19199,7 @@
 			)
 		)
 		(net
-			(code "144")
+			(code "147")
 			(name "unconnected-(J1-Pin_28-Pad28)")
 			(class "Default")
 			(node
@@ -18584,7 +19210,7 @@
 			)
 		)
 		(net
-			(code "145")
+			(code "148")
 			(name "unconnected-(U407-NC-Pad7)")
 			(class "Default")
 			(node
@@ -18595,7 +19221,7 @@
 			)
 		)
 		(net
-			(code "146")
+			(code "149")
 			(name "unconnected-(U410-NC-Pad7)")
 			(class "Default")
 			(node
@@ -18606,7 +19232,7 @@
 			)
 		)
 		(net
-			(code "147")
+			(code "150")
 			(name "unconnected-(U502-NC-Pad1)")
 			(class "Default")
 			(node
