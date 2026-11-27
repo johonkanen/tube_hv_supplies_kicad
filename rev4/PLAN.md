@@ -27,6 +27,7 @@ an L-shaped 192 cm² outline) and is kept as history only. Goal: a board close t
 | D17 | **No NTC channels**: device temperature is not measured; mux channel 6 is tied to GND like channel 7 (zero-code check). The loss check puts Tj at ≤ 98 °C worst case, set by the wall temperature (user, 2026-11-25) |
 | D18 | **Si8271DB (12 V UVLO grade) with a 15 V gate-drive supply**: VDRV = 15.1 V from an LM2731X boost on the link's +12 V (sheet 03). The 12 V grade turns on at 11.0 / 12.2 / 13.5 V (min / typ / max) and off at 9.6 / 10.8 / 12.1 V (Si827x datasheet Rev 0.5), so the bare 12 V link (about 11 V on the bootstrap) would not start it. With VDRV the high sides get about 14.2 V (0.7 V over the worst-case turn-on); the IGBTs are now driven near their 15 V datasheet condition (closes O3) (user, 2026-11-25) |
 | D19 | **Link supply budgets raised** (user, 2026-11-25): HV supplies +12 V **40 mA** (was 25 mA; 30 mA typ / 39 mA max with the VDRV boost) and 3V3 **60 mA** (was 30 mA; 51 mA typ / 60 mA max with the Si8271 input sides). To be written into ICD section 3 through the section 13 change (section 7); the control board's TMR-1212 (2 W) has the capacity |
+| D20 | **W17 uses the rev4 pinout** (section 4 / 8 table: FPGA-driven MUX_A0-2, two SDO, shared CS / SCLK, returned SCLK, HV_ENABLE on pad 38 with the HV-side pull-down), not IF-2.3 (user, 2026-11-27). The control board's 3V3 for W17 comes from a 12 → 3.3 V buck instead of its LM1117 (user, 2026-11-27, the control board's design). Proposal for the coordinating session: `rev4/docs/icd_proposal_if-2.4.md` |
 
 ## 2. Block list
 
@@ -54,9 +55,9 @@ an L-shaped 192 cm² outline) and is kept as history only. Goal: a board close t
   A 4 mΩ 0508 (v2) has its corner near 640 kHz and reads di/dt spikes, not current.
 - 4-terminal shunt or net-ties at the pads; the sense pair as a tight differential pair to the amplifier,
   which sits next to the shunt.
-- OPA2836 (205 MHz GBW, rail-to-rail output, 3.3 V) as a difference amplifier, gain 7.5, resistors of a few hundred Ω to 1 kΩ,
+- OPA2836 (205 MHz GBW, rail-to-rail output, 3.3 V) as a difference amplifier, gain 6.25 (240 Ω / 1.5 kΩ, 0.1 %; schematic sheet 04),
   closed loop at least about 10 MHz; settles to 1 % within about 0.5 µs of a switching edge.
-- Scaling 50 mΩ x 7.5 = 0.375 V/A around 1.5 V: **±4 A into 0-3 V**. Offset binary: zero current = mid-code.
+- Scaling 50 mΩ x 6.25 = 0.3125 V/A around 1.5 V: **±4 A into 0.25-2.75 V** (headroom to the rails). Offset binary: zero current = mid-code.
 - Signs: the low-side shunt carries the inductor current through the whole off-interval, negative in
   forward flow (diode), positive in reverse flow (IGBT); the FPGA inverts it. Reverse flow needs true
   synchronous drive (low side gated on during the off-interval).
@@ -138,6 +139,9 @@ MKP1848C55050JK2 32 x 11 x 21 mm (section 9); 100 µH Bourns SRR1260 12.5 x 12.5
 | O7 | The ADC SCLK rate over the control board's isolators | 10 MHz plain, 20 MHz or the returned clock if the gap channels are wanted every period |
 
 ## 7. Interface changes (tube_amplifier_kicad docs/interfaces.md, section 13)
+
+Drafted as **IF-2.4** in `rev4/docs/icd_proposal_if-2.4.md` (2026-11-27) for the user's review, then for the
+coordinating session (ICD section 13: board sessions propose, the coordinating session edits).
 
 - Section 8: HV_PERMIT is no longer a hardware gate (SAFE-6 wording); no fault latch, no hardware trips;
   HV_ENABLE stays as the driver enable with its pull-down (fail-safe state: card off → HV off).
